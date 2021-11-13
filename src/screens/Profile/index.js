@@ -12,12 +12,8 @@ import { bids } from "../../mocks/bids";
 import { isStepDivisible } from "react-range/lib/utils";
 
 const navLinks = [
-  "On Sale",
   "Collectibles",
   "Created",
-  "Likes",
-  "Following",
-  "Followers",
 ];
 
 const socials = [
@@ -29,10 +25,10 @@ const socials = [
     title: "instagram",
     url: "https://www.instagram.com/ui8net/",
   },
-  {
-    title: "facebook",
-    url: "https://www.facebook.com/ui8.net/",
-  },
+  // {
+  //   title: "facebook",
+  //   url: "https://www.facebook.com/ui8.net/",
+  // },
 ];
 
 const following = [
