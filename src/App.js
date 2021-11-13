@@ -31,6 +31,8 @@ function App() {
 			onAuthStateChanged(auth, (user) => {
 				if (user) {
 					dispatch(UserDataActions.login(user.toJSON()))
+				} else {
+					dispatch(UserDataActions.logout())
 				}
 			})
 		}
