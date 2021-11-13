@@ -1,12 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import cn from 'classnames'
 import styles from './Theme.module.sass'
 import useDarkMode from 'use-dark-mode'
 
-const Theme = ({ className, setDark } = { setDark: false }) => {
+const Theme = ({ className }) => {
 	const darkMode = useDarkMode(false)
-
-	// useEffect(() => {})
 
 	return (
 		<label className={cn(styles.theme, { [styles.theme]: className === 'theme' }, { [styles.themeBig]: className === 'theme-big' })}>
