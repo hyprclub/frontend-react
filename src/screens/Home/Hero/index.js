@@ -7,49 +7,50 @@ import Icon from "../../../components/Icon";
 import Player from "../../../components/Player";
 import Modal from "../../../components/Modal";
 import Connect from "../../../components/Connect";
-// import Bid from "../../../components/Bid";
+import Bid from "../../../components/Bid";
 
-const items = [
-  {
-    title: "the creator network®",
-    creator: "Enrico Cole",
-    currency: "1.00 ETH",
-    price: "$3,618.36",
-    avatar: "/images/content/avatar-creator.jpg",
-    image: "/images/content/video-preview.jpg",
-    image2x: "/images/content/video-preview@2x.jpg",
-  },
-  {
-    title: "Marco carrillo®",
-    creator: "Enrico Cole",
-    currency: "2.00 ETH",
-    price: "$2,477.92",
-    avatar: "/images/content/avatar-creator.jpg",
-    image: "/images/content/video-preview.jpg",
-    image2x: "/images/content/video-preview@2x.jpg",
-  },
-  {
-    title: "the creator network®",
-    creator: "Enrico Cole",
-    currency: "1.00 ETH",
-    price: "$3,618.36",
-    avatar: "/images/content/avatar-creator.jpg",
-    image: "/images/content/video-preview.jpg",
-    image2x: "/images/content/video-preview@2x.jpg",
-  },
-  {
-    title: "Marco carrillo®",
-    creator: "Enrico Cole",
-    currency: "2.00 ETH",
-    price: "$2,477.92",
-    avatar: "/images/content/avatar-creator.jpg",
-    image: "/images/content/video-preview.jpg",
-    image2x: "/images/content/video-preview@2x.jpg",
-  },
-];
+// const items = [
+//   {
+//     title: "the creator network®",
+//     creator: "Enrico Cole",
+//     currency: "1.00 ETH",
+//     price: "$3,618.36",
+//     avatar: "/images/content/avatar-creator.jpg",
+//     image: "/images/content/video-preview.jpg",
+//     image2x: "/images/content/video-preview@2x.jpg",
+//   },
+//   {
+//     title: "Marco carrillo®",
+//     creator: "Enrico Cole",
+//     currency: "2.00 ETH",
+//     price: "$2,477.92",
+//     avatar: "/images/content/avatar-creator.jpg",
+//     image: "/images/content/video-preview.jpg",
+//     image2x: "/images/content/video-preview@2x.jpg",
+//   },
+//   {
+//     title: "the creator network®",
+//     creator: "Enrico Cole",
+//     currency: "1.00 ETH",
+//     price: "$3,618.36",
+//     avatar: "/images/content/avatar-creator.jpg",
+//     image: "/images/content/video-preview.jpg",
+//     image2x: "/images/content/video-preview@2x.jpg",
+//   },
+//   {
+//     title: "Marco carrillo®",
+//     creator: "Enrico Cole",
+//     currency: "2.00 ETH",
+//     price: "$2,477.92",
+//     avatar: "/images/content/avatar-creator.jpg",
+//     image: "/images/content/video-preview.jpg",
+//     image2x: "/images/content/video-preview@2x.jpg",
+//   },
+// ];
 
 const SlickArrow = ({ currentSlide, slideCount, children, ...props }) => (
-  <button {...props}>{children}</button>
+ <></>
+  // <button {...props}>{children}</button>
 );
 
 const Hero = () => {
@@ -88,7 +89,7 @@ const Hero = () => {
               Start your search
             </Link>
           </div>
-          <div className={styles.wrapper}>
+          {/* <div className={styles.wrapper}>
             <Slider className="creative-slider" {...settings}>
               {items.map((x, index) => (
                 <div className={styles.slide} key={index}>
@@ -155,7 +156,7 @@ const Hero = () => {
                 </div>
               ))}
             </Slider>
-          </div>
+          </div> */}
         </div>
       </div>
       <Modal

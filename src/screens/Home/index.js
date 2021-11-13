@@ -11,12 +11,13 @@ const Home = () => {
   return (
     <>
       <Hero />
+    {/* <div>hello</div> */}
       <Selection />
-      <Popular />
-      <HotBid classSection="section" />
+      {/* <Popular /> */}
+      {/* <HotBid classSection="section" /> */}
       <Collections />
       <Discover />
-      <Description />
+      {/* <Description /> */}
     </>
   );
 };
