@@ -1,5 +1,13 @@
 @import ../../../styles/helpers
 
+[class^="section"]
+    padding: 84px 0 !important
+    +x
+        padding: 56px 0
+    +m
+        padding: 16px 0
+
+
 .section
     overflow: hidden
     // @media only screen and (max-width: 1339px)
@@ -85,3 +93,6 @@
                 fill: $neutrals8
     &:not(:last-child)
         margin-bottom: 40px
+
+.head
+    margin-bottom: 48px
