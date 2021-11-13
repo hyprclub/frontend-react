@@ -4,14 +4,14 @@ import cn from "classnames";
 import styles from "./Header.module.sass";
 import Icon from "../Icon";
 import Image from "../Image";
-import Notification from "./Notification";
+// import Notification from "./Notification";
 import User from "./User";
 
 const nav = [
-  {
-    url: "/search01",
-    title: "Discover",
-  },
+  // {
+  //   url: "/search01",
+  //   title: "Discover",
+  // },
   {
     url: "/faq",
     title: "How it work",
@@ -58,7 +58,7 @@ const Headers = () => {
               </Link>
             ))}
           </nav>
-          <form
+          {/* <form
             className={styles.search}
             action=""
             onSubmit={() => handleSubmit()}
@@ -75,7 +75,7 @@ const Headers = () => {
             <button className={styles.result}>
               <Icon name="search" size="20" />
             </button>
-          </form>
+          </form> */}
           <Link
             className={cn("button-small", styles.button)}
             to="/upload-variants"
@@ -83,7 +83,7 @@ const Headers = () => {
             Upload
           </Link>
         </div>
-        <Notification className={styles.notification} />
+        {/* <Notification className={styles.notification} /> */}
         <Link
           className={cn("button-small", styles.button)}
           to="/upload-variants"
