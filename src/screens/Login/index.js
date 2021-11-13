@@ -10,7 +10,7 @@ const breadcrumbs = [
 		url: '/',
 	},
 	{
-		title: 'Upload Item',
+		title: 'Login',
 	},
 ]
 
@@ -36,7 +36,7 @@ const Login = () => {
 			<div className={cn('section-pt80', styles.section)}>
 				<div className={cn('container', styles.container)}>
 					<div className={styles.top}>
-						<h1 className={cn('h2', styles.title)}>Upload item</h1>
+						<h1 className={cn('h2', styles.title)}>Login</h1>
 						<div className={styles.info}>
 							Choose <span>“Single”</span> if you want your collectible to be one of a kind or <span>“Multiple”</span> if you want to
 							sell one collectible multiple times
