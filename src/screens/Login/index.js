@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import cn from 'classnames'
 import styles from './Login.module.sass'
 import Control from '../../components/Control'
 import TextInput from '../../components/TextInput'
-
+import { useHistory } from 'react-router'
 import { firebaseApp } from '../../firebaseConfig'
 
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { onAuthStateChanged, getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 
 const breadcrumbs = [
 	{
@@ -33,6 +33,19 @@ const Login = () => {
 			console.error(err)
 		}
 	}
+
+	const { push } = useHistory()
+
+	useEffect(() => {
+		const auth = getAuth()
+
+		onAuthStateChanged(auth, (user) => {
+			if (user) {
+				push('/')
+			}
+		})
+	}, [push])
+
 	return (
 		<div className={styles.page}>
 			<Control className={styles.control} item={breadcrumbs} />
