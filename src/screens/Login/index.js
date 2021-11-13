@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import cn from 'classnames'
 import styles from './Login.module.sass'
 import Control from '../../components/Control'
+import TextInput from '../../components/TextInput'
 
 const breadcrumbs = [
 	{
@@ -14,20 +15,14 @@ const breadcrumbs = [
 	},
 ]
 
-const items = [
-	{
-		url: '/upload-details',
-		buttonText: 'Create Single',
-		image: '/images/content/upload-pic-1.jpg',
-		image2x: '/images/content/upload-pic-1@2x.jpg',
-	},
-	{
-		url: '/upload-details',
-		buttonText: 'Create Multiple',
-		image: '/images/content/upload-pic-2.jpg',
-		image2x: '/images/content/upload-pic-2@2x.jpg',
-	},
-]
+// const items = [
+// 	{
+// 		url: '/upload-details',
+// 		buttonText: 'Create Single',
+// 		image: '/images/content/upload-pic-1.jpg',
+// 		image2x: '/images/content/upload-pic-1@2x.jpg',
+// 	},
+// ]
 
 const Login = () => {
 	return (
@@ -37,22 +32,43 @@ const Login = () => {
 				<div className={cn('container', styles.container)}>
 					<div className={styles.top}>
 						<h1 className={cn('h2', styles.title)}>Login</h1>
-						<div className={styles.info}>
-							Choose <span>“Single”</span> if you want your collectible to be one of a kind or <span>“Multiple”</span> if you want to
-							sell one collectible multiple times
-						</div>
+						Become a part of the social revolution.
+						{/* <div className={styles.info}> */}
+						{/* sell one collectible multiple times */}
+						{/* </div> */}
 					</div>
 					<div className={styles.list}>
-						{items.map((x, index) => (
-							<div className={styles.item} key={index}>
-								<div className={styles.preview}>
-									<img srcSet={`${x.image2x} 2x`} src={x.image} alt='Upload' />
-								</div>
-								<Link className={cn('button-stroke', styles.button)} to={x.url}>
-									{x.buttonText}
+						<div className={styles.item}>
+							<form>
+								<TextInput
+									className={styles.field}
+									label='Email Address'
+									name='email'
+									type='email'
+									placeholder='Enter your display name'
+									required
+								/>
+
+								<TextInput
+									className={styles.field}
+									label='Password'
+									name='password'
+									type='password'
+									placeholder='Enter your password'
+									required
+								/>
+
+								<Link
+									onClick={(e) => {
+										e.preventDefault()
+									}}
+									className={cn('button-stroke', styles.button)}
+									to={'#'}
+								>
+									Login
 								</Link>
-							</div>
-						))}
+							</form>
+						</div>
 					</div>
 					<div className={styles.note}>We do not own your private keys and cannot access your funds without your confirmation.</div>
 				</div>
