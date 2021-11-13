@@ -30,7 +30,7 @@ function App() {
 
 			onAuthStateChanged(auth, (user) => {
 				if (user) {
-					dispatch(UserDataActions.login())
+					dispatch(UserDataActions.login(user.toJSON()))
 				}
 			})
 		}

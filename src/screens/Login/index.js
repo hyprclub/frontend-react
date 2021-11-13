@@ -21,6 +21,7 @@ const breadcrumbs = [
 
 const Login = () => {
 	const loggedIn = useSelector((state) => state.UserData.loggedIn)
+	const UserData = useSelector((state) => state.UserData)
 	const [data, setData] = useState({ email: '', password: '' })
 	function updateState(e) {
 		setData((state) => ({ ...state, [e.target.name]: e.target.value }))
@@ -36,6 +37,7 @@ const Login = () => {
 	}
 	const { push } = useHistory()
 	useEffect(() => {
+		console.log(UserData)
 		if (loggedIn) {
 			push('/')
 		}
