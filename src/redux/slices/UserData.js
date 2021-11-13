@@ -15,6 +15,9 @@ export const userDataSlice = createSlice({
 			state.uid = payload?.uid
 			state.email = payload?.email
 		},
+		logout: (state) => {
+			state = initialState
+		},
 	},
 })
 
