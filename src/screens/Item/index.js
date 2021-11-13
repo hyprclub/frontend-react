@@ -5,7 +5,7 @@ import Users from "./Users";
 import Control from "./Control";
 import Options from "./Options";
 
-const navLinks = ["Info", "Owners", "History", "Bids"];
+const navLinks = ["Info", "Owners"];
 
 const categories = [
   {
@@ -20,15 +20,15 @@ const categories = [
 
 const users = [
   {
-    name: "Raquel Will",
+    name: "Bennett university",
     position: "Owner",
-    avatar: "/images/content/avatar-2.jpg",
-    reward: "/images/content/reward-1.svg",
+    avatar: "/images/content/2.png",
+    // reward: "/images/content/2.png",
   },
   {
-    name: "Selina Mayert",
+    name: "Hypr Club",
     position: "Creator",
-    avatar: "/images/content/avatar-1.jpg",
+    avatar: "/images/content/1.png",
   },
 ];
 
@@ -61,18 +61,18 @@ const Item = () => {
                 alt="Item"
               />
             </div>
-            <Options className={styles.options} />
+            {/* <Options className={styles.options} /> */}
           </div>
           <div className={styles.details}>
             <h1 className={cn("h3", styles.title)}>The amazing art</h1>
             <div className={styles.cost}>
               <div className={cn("status-stroke-green", styles.price)}>
-                2.5 ETH
+                1000 INR
               </div>
-              <div className={cn("status-stroke-black", styles.price)}>
+              {/* <div className={cn("status-stroke-black", styles.price)}>
                 $4,429.87
-              </div>
-              <div className={styles.counter}>10 in stock</div>
+              </div> */}
+              <div className={styles.counter}>100 in stock</div>
             </div>
             <div className={styles.info}>
               This NFT Card will give you Access to Special Airdrops. To learn
@@ -100,7 +100,11 @@ const Item = () => {
               ))}
             </div>
             <Users className={styles.users} items={users} />
-            <Control className={styles.control} />
+            <div className={styles.buttonFlex}>
+              <div className={styles.button1}><a class="button-small Header_button__2u-UY" href="/upload-variants">Claim Now</a></div>
+              <div className={styles.button1}><a class="button-small Header_button__2u-UY" href="/upload-variants">Certificate</a></div>
+            </div>
+            {/* <Control className={styles.control} /> */}
           </div>
         </div>
       </div>
