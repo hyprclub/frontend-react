@@ -14,8 +14,28 @@ import ProfileEdit from './screens/ProfileEdit'
 import Login from './screens/Login'
 import Item from './screens/Item'
 import PageList from './screens/PageList'
+import { useEffect } from 'react'
+import { firebaseApp } from './firebaseConfig'
+import { getAuth, onAuthStateChanged } from '@firebase/auth'
+import { UserDataActions } from './redux/slices/UserData'
+import { useDispatch } from 'react-redux'
+import { Logout } from './Logout'
 
 function App() {
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		if (dispatch) {
+			const auth = getAuth()
+
+			onAuthStateChanged(auth, (user) => {
+				if (user) {
+					dispatch(UserDataActions.login())
+				}
+			})
+		}
+	}, [dispatch])
+
 	return (
 		<Router>
 			<Switch>
@@ -28,6 +48,9 @@ function App() {
 						</Page>
 					)}
 				/>
+				<Route exact path='/logout'>
+					<Logout></Logout>
+				</Route>
 				<Route
 					exact
 					path='/upload-variants'

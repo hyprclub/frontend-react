@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import cn from 'classnames'
 import styles from './Login.module.sass'
 import Control from '../../components/Control'
@@ -7,7 +6,8 @@ import TextInput from '../../components/TextInput'
 import { useHistory } from 'react-router'
 import { firebaseApp } from '../../firebaseConfig'
 
-import { onAuthStateChanged, getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { useSelector } from 'react-redux'
 
 const breadcrumbs = [
 	{
@@ -20,6 +20,7 @@ const breadcrumbs = [
 ]
 
 const Login = () => {
+	const loggedIn = useSelector((state) => state.UserData.loggedIn)
 	const [data, setData] = useState({ email: '', password: '' })
 	function updateState(e) {
 		setData((state) => ({ ...state, [e.target.name]: e.target.value }))
@@ -33,18 +34,12 @@ const Login = () => {
 			console.error(err)
 		}
 	}
-
 	const { push } = useHistory()
-
 	useEffect(() => {
-		const auth = getAuth()
-
-		onAuthStateChanged(auth, (user) => {
-			if (user) {
-				push('/')
-			}
-		})
-	}, [push])
+		if (loggedIn) {
+			push('/')
+		}
+	}, [loggedIn, push])
 
 	return (
 		<div className={styles.page}>
