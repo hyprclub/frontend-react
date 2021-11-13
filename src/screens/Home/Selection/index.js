@@ -73,8 +73,8 @@ const users = [
 
 const Selection = () => {
   return (
-    <div className={cn("section-pb", styles.section)}>
-      <div className={cn("container", styles.container)}>
+    <div className={styles.section}>
+      {/* <div className={cn("container", styles.container)}>
         <div className={styles.row}>
           <div className={styles.col}>
             {items.map(
@@ -174,7 +174,7 @@ const Selection = () => {
             <Icon name="arrow-next" size="10" />
           </Link>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
