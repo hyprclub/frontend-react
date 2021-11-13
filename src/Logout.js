@@ -12,10 +12,12 @@ export function Logout() {
 			.then(() => {
 				dispatch(UserDataActions.logout())
 				push('/')
+				window?.location.reload()
 			})
 			.catch(() => {
 				dispatch(UserDataActions.logout())
 				push('/')
+				window?.location.reload()
 			})
 	}, [push, dispatch])
 	return <></>
