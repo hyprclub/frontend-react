@@ -23,10 +23,10 @@ const User = ({ className, item }) => {
         </div>
         <div className={styles.name}>Enrico Cole</div>
         <div className={styles.code}>
-          <div className={styles.number}>0xc4c16a645...b21a</div>
-          <button className={styles.copy}>
+          {/* <div className={styles.number}>0xc4c16a645...b21a</div> */}
+          {/* <button className={styles.copy}>
             <Icon name="copy" size="16" />
-          </button>
+          </button> */}
         </div>
         <div className={styles.info}>
           A wholesome farm owner in Montana. Upcoming gallery solo show in
@@ -38,12 +38,12 @@ const User = ({ className, item }) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Icon name="globe" size="16" />
-          <span>https://ui8.net</span>
+          {/* <Icon name="globe" size="16" /> */}
+          {/* <span>https://ui8.net</span> */}
         </a>
         <div className={styles.control}>
           <div className={styles.btns}>
-            <button
+            {/* <button
               className={cn(
                 "button button-small",
                 { [styles.active]: visible },
@@ -53,8 +53,25 @@ const User = ({ className, item }) => {
             >
               <span>Follow</span>
               <span>Unfollow</span>
-            </button>
-            <button
+            </button> */}
+            {/* <button
+              className={cn(
+                "button-circle-stroke button-small",
+                { [styles.active]: visibleShare },
+                styles.button
+              )}
+              onClick={() => setVisibleShare(!visibleShare)}
+            >
+              <Icon name="share" size="20" />
+            </button> */}
+            {/* <button
+              className={cn("button-circle-stroke button-small", styles.button)}
+              onClick={() => setVisibleModalReport(true)}
+            >
+              <Icon name="report" size="20" />
+            </button> */}
+          </div>
+          <button
               className={cn(
                 "button-circle-stroke button-small",
                 { [styles.active]: visibleShare },
@@ -64,15 +81,9 @@ const User = ({ className, item }) => {
             >
               <Icon name="share" size="20" />
             </button>
-            <button
-              className={cn("button-circle-stroke button-small", styles.button)}
-              onClick={() => setVisibleModalReport(true)}
-            >
-              <Icon name="report" size="20" />
-            </button>
-          </div>
           <div className={cn(styles.box, { [styles.active]: visibleShare })}>
             <div className={styles.stage}>Share link to this page</div>
+            
             <div className={styles.share}>
               <TwitterShareButton
                 className={styles.direction}
@@ -86,12 +97,14 @@ const User = ({ className, item }) => {
                 className={styles.direction}
                 url={shareUrlFacebook}
               >
-                <span>
+                {/* <span>
                   <Icon name="facebook" size="20" />
-                </span>
+                </span> */}
               </FacebookShareButton>
             </div>
+            
           </div>
+          
         </div>
         <div className={styles.socials}>
           {item.map((x, index) => (
@@ -106,7 +119,7 @@ const User = ({ className, item }) => {
             </a>
           ))}
         </div>
-        <div className={styles.note}>Member since Mar 15, 2021</div>
+        {/* <div className={styles.note}>Member since Mar 15, 2021</div> */}
       </div>
       <Modal
         visible={visibleModalReport}
