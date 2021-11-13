@@ -1,3 +1,4 @@
+import { getAuth, signOut } from '@firebase/auth'
 import { initializeApp } from 'firebase/app'
 
 const firebaseConfig = {
@@ -11,3 +12,8 @@ const firebaseConfig = {
 }
 
 export const firebaseApp = initializeApp(firebaseConfig)
+
+export const logOut = async () => {
+	const auth = getAuth()
+	await signOut(auth)
+}

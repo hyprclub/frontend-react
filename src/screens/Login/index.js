@@ -1,9 +1,13 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
 import cn from 'classnames'
 import styles from './Login.module.sass'
 import Control from '../../components/Control'
 import TextInput from '../../components/TextInput'
+import { useHistory } from 'react-router'
+import { firebaseApp } from '../../firebaseConfig'
+
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { useSelector } from 'react-redux'
 
 const breadcrumbs = [
 	{
@@ -15,16 +19,28 @@ const breadcrumbs = [
 	},
 ]
 
-// const items = [
-// 	{
-// 		url: '/upload-details',
-// 		buttonText: 'Create Single',
-// 		image: '/images/content/upload-pic-1.jpg',
-// 		image2x: '/images/content/upload-pic-1@2x.jpg',
-// 	},
-// ]
-
 const Login = () => {
+	const loggedIn = useSelector((state) => state.UserData.loggedIn)
+	const [data, setData] = useState({ email: '', password: '' })
+	function updateState(e) {
+		setData((state) => ({ ...state, [e.target.name]: e.target.value }))
+	}
+	const handleSubmit = async () => {
+		try {
+			const auth = getAuth()
+			const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password)
+			console.log({ data, userCredential })
+		} catch (err) {
+			console.error(err)
+		}
+	}
+	const { push } = useHistory()
+	useEffect(() => {
+		if (loggedIn) {
+			push('/')
+		}
+	}, [loggedIn, push])
+
 	return (
 		<div className={styles.page}>
 			<Control className={styles.control} item={breadcrumbs} />
@@ -39,17 +55,29 @@ const Login = () => {
 					</div>
 					<div className={styles.list}>
 						<div className={styles.item}>
-							<form>
+							<form
+								onSubmit={(e) => {
+									e.preventDefault()
+									handleSubmit()
+								}}
+							>
 								<TextInput
+									onChange={(e) => {
+										updateState(e)
+									}}
 									className={styles.field}
+									value={data.email}
 									label='Email Address'
 									name='email'
 									type='email'
-									placeholder='Enter your display name'
+									placeholder='Enter your email'
 									required
 								/>
 
 								<TextInput
+									onChange={(e) => {
+										updateState(e)
+									}}
 									className={styles.field}
 									label='Password'
 									name='password'
@@ -57,16 +85,16 @@ const Login = () => {
 									placeholder='Enter your password'
 									required
 								/>
-
-								<Link
-									onClick={(e) => {
-										e.preventDefault()
-									}}
-									className={cn('button-stroke', styles.button)}
-									to={'#'}
-								>
-									Login
-								</Link>
+								<input className={cn('button-stroke', styles.button)} type='submit' value='Login' />
+								{/* <Link
+										onClick={(e) => {
+											e.preventDefault()
+										}}
+										to={'#'}
+									>
+										Login
+									</Link> */}
+								{/* </input> */}
 							</form>
 						</div>
 					</div>
