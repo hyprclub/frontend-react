@@ -58,7 +58,7 @@ const Footers = () => {
 							<a className="icons" href="https://www.facebook.com/hyprclub" target="_blank">
 								<img class="icons" src="/facebook.png" /> </a>
 							<a className="icons" href="https://www.linkedin.com/company/hyprclub/ " target="_blank"><img class="icons"
-								src="/linkedin.png" /> </a>
+								src="/linkdin.jpeg" /> </a>
 							<a className="icons" href="https://twitter.com/hyprclub" target="_blank"><img class="icons"
 								src="/twitter.png" /> </a>
 						</div>
@@ -87,10 +87,10 @@ const Footers = () => {
 					</div>
 				</div>
 				<div className={styles.foot}>
-					<div className={styles.copyright}>Copyright © 2021 UI8 LLC. All rights reserved</div>
-					<div className={styles.note}>
+					<div className={styles.copyright}>© 2021 HyprClub, Made with ❤️in India</div>
+					{/* <div className={styles.note}>
 						We use cookies for better service. <a href='/#'>Accept</a>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</footer>
