@@ -38,15 +38,16 @@ const User = ({ className }) => {
 			<div className={cn(styles.user, className)}>
 				<div className={styles.head} onClick={() => setVisible(!visible)}>
 					<div className={styles.avatar}>
-						<img src='/images/content/avatar-user.jpg' alt='Avatar' />
+						<img src={UserData.profileDP || '/images/content/avatar-big.jpg'} alt='Avatar' />
 					</div>
 					<div className={styles.wallet}>
-						7.00698 <span className={styles.currency}>ETH</span>
+						{UserData.name}
+						 {/* <span className={styles.currency}>ETH</span> */}
 					</div>
 				</div>
 				{visible && (
 					<div className={styles.body}>
-						<div className={styles.name}>Enrico Cole</div>
+						<div className={styles.name}>{UserData.name}</div>
 						<div className={styles.code}>
 							<div className={styles.number}>{UserData.email}</div>
 							<button className={styles.copy}>
@@ -66,17 +67,17 @@ const User = ({ className }) => {
 							<button className={cn('button-stroke button-small', styles.button)}>Manage fun on Coinbase</button>
 						</div> */}
 						<div className={styles.menu}>
-							{items.map((x, index) =>
+							{items.map((x,UserData, index) =>
 								x.url ? (
 									x.url.startsWith('http') ? (
-										<a className={styles.item} href={x.url} rel='noopener noreferrer' key={index}>
+										<a className={styles.item} href={UserData.instagram} rel='noopener noreferrer' key={index}>
 											<div className={styles.icon}>
 												<Icon name={x.icon} size='20' />
 											</div>
 											<div className={styles.text}>{x.title}</div>
 										</a>
 									) : (
-										<Link className={styles.item} to={x.url} onClick={() => setVisible(!visible)} key={index}>
+										<Link className={styles.item} to={UserData.twitter} onClick={() => setVisible(!visible)} key={index}>
 											<div className={styles.icon}>
 												<Icon name={x.icon} size='20' />
 											</div>

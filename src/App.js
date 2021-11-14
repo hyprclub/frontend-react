@@ -56,18 +56,22 @@ function App() {
 				const db = getFirestore();
 				try {
 					getDoc(doc(db,"users",uid)).then((docSnap) =>{
-						console.log(docSnap.data());
+						if(docSnap.exists()){
+							dispatch(UserDataActions.updateUserDetails(docSnap.data()))
+						}
+						else{
+							console.log("no data");
+						}
 
 					})
 				}catch (e) {
 					console.error(e);
 				}
 
-				// await
 			}
 		}
 		run()
-	}, [loggedIn,uid])
+	}, [loggedIn,uid,dispatch])
 
 	useEffect(() => {
 		const run = async () => {
@@ -77,19 +81,15 @@ function App() {
 				
 				
 				try {
-						const storagePFref = ref(
-              storage,
-                   "users/" + uid + "/profile.jpg"
+					const storagePFref = ref(
+              			storage,
+                   		"users/" + uid + "/profile.jpg"
                     );
-					getDownloadURL(ref(storagePFref))
-					.then((downloadURL)=>{
-						console.log(downloadURL)
-					})
 
-					
-					
-				} catch (error) {
-					
+					const url = await getDownloadURL(ref(storagePFref))
+					dispatch(UserDataActions.updateUserDP({profileDP:url}))
+				} catch (err) {
+					console.error(err)
 				}
 				
 				
@@ -98,7 +98,7 @@ function App() {
 			}
 		}
 		run()
-	}, [loggedIn,uid])
+	}, [loggedIn,uid,dispatch])
 
 	return (
 		<Router>

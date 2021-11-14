@@ -21,16 +21,16 @@ const User = ({ className, item }) => {
 		<>
 			<div className={cn(styles.user, className)}>
 				<div className={styles.avatar}>
-					<img src='/images/content/avatar-big.jpg' alt='Avatar' />
+					<img src={UserData.profileDP || '/images/content/avatar-big.jpg'} alt='Avatar' />
 				</div>
-				<div className={styles.name}>Enrico Cole</div>
+				<div className={styles.name}>{UserData.name}</div>
 				<div className={styles.code}>
 					<div className={styles.number}>{UserData.email}</div>
 					<button className={styles.copy}>
 						<Icon name='copy' size='16' />
 					</button>
 				</div>
-				<div className={styles.info}>A wholesome farm owner in Montana. Upcoming gallery solo show in Germany</div>
+				<div className={styles.info}>{UserData.bio}</div>
 				<a className={styles.site} href='https://ui8.net' target='_blank' rel='noopener noreferrer'>
 					{/* <Icon name="globe" size="16" /> */}
 					{/* <span>https://ui8.net</span> */}
