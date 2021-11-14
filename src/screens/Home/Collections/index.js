@@ -97,7 +97,7 @@ const Collections = () => {
                     ))}
                   </div>
                   <div className={styles.subtitle}>{x.title}</div>
-                  <div className={styles.line}>
+                  {/* <div className={styles.line}>
                     <div className={styles.user}>
                       <div className={styles.avatar}>
                         <img src={x.avatar} alt="Avatar" />
@@ -109,7 +109,7 @@ const Collections = () => {
                     <div className={cn("status-stroke-black", styles.counter)}>
                       <span>{x.counter}</span> items
                     </div>
-                  </div>
+                  </div> */}
                 </Link>
               ))}
             </Slider>
