@@ -17,14 +17,23 @@ import PageList from './screens/PageList'
 import { useEffect } from 'react'
 import { firebaseApp } from './firebaseConfig'
 import { getAuth, onAuthStateChanged } from '@firebase/auth'
-import { UserDataActions } from './redux/slices/UserData'
+import UserData, { UserDataActions } from './redux/slices/UserData'
 import { useDispatch, useSelector } from 'react-redux'
 import { Logout } from './Logout'
+import { getDoc,
+	doc,
+	getFirestore} from "firebase/firestore"
+import {
+	getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
 
 function App() {
 	const dispatch = useDispatch()
 
-	const loggedIn = useSelector((state) => state.UserData.loggedIn)
+	const {loggedIn,uid} = useSelector((state) => state.UserData)
 
 	useEffect(() => {
 		if (dispatch) {
@@ -42,12 +51,54 @@ function App() {
 
 	useEffect(() => {
 		const run = async () => {
-			if (true) {
+			if (loggedIn && uid) {
+				const auth = getAuth();
+				const db = getFirestore();
+				try {
+					getDoc(doc(db,"users",uid)).then((docSnap) =>{
+						console.log(docSnap.data());
+
+					})
+				}catch (e) {
+					console.error(e);
+				}
+
 				// await
 			}
 		}
 		run()
-	}, [loggedIn])
+	}, [loggedIn,uid])
+
+	useEffect(() => {
+		const run = async () => {
+			if (loggedIn && uid) {
+				const auth = getAuth();
+				const storage = getStorage();
+				
+				
+				try {
+						const storagePFref = ref(
+              storage,
+                   "users/" + uid + "/profile.jpg"
+                    );
+					getDownloadURL(ref(storagePFref))
+					.then((downloadURL)=>{
+						console.log(downloadURL)
+					})
+
+					
+					
+				} catch (error) {
+					
+				}
+				
+				
+
+				// await
+			}
+		}
+		run()
+	}, [loggedIn,uid])
 
 	return (
 		<Router>
