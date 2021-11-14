@@ -70,14 +70,14 @@ const User = ({ className }) => {
 							{items.map((x,UserData, index) =>
 								x.url ? (
 									x.url.startsWith('http') ? (
-										<a className={styles.item} href={UserData.instagram} rel='noopener noreferrer' key={index}>
+										<a className={styles.item} href={x.url} rel='noopener noreferrer' key={index}>
 											<div className={styles.icon}>
 												<Icon name={x.icon} size='20' />
 											</div>
 											<div className={styles.text}>{x.title}</div>
 										</a>
 									) : (
-										<Link className={styles.item} to={UserData.twitter} onClick={() => setVisible(!visible)} key={index}>
+										<Link className={styles.item} to={x.url} onClick={() => setVisible(!visible)} key={index}>
 											<div className={styles.icon}>
 												<Icon name={x.icon} size='20' />
 											</div>
