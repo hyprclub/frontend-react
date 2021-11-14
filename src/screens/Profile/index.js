@@ -6,12 +6,15 @@ import Icon from '../../components/Icon'
 import User from './User'
 import Items from './Items'
 import Followers from './Followers'
+import { useSelector } from 'react-redux'
 
 // data
 import { bids } from '../../mocks/bids'
 import { isStepDivisible } from 'react-range/lib/utils'
 
 const navLinks = ['Collectibles', 'Created']
+
+// const UserData = useSelector((state) => state.UserData)
 
 const socials = [
 	{
@@ -177,6 +180,23 @@ const followers = [
 const Profile = () => {
 	const [activeIndex, setActiveIndex] = useState(0)
 	const [visible, setVisible] = useState(false)
+	const UserData = useSelector((state) => state.UserData)
+	const [socialState,setSocialState] = useState(socials)
+
+	React.useEffect(()=>{
+		if(UserData){
+			setSocialState([
+				{
+					title: 'twitter',
+					url: UserData.twitter,
+				},
+				{
+					title: 'instagram',
+					url: UserData.instagram,
+				},
+			])
+		}
+	},[UserData])
 
 	return (
 		<div className={styles.profile}>
@@ -212,7 +232,7 @@ const Profile = () => {
 			</div>
 			<div className={styles.body}>
 				<div className={cn('container', styles.container)}>
-					<User className={styles.user} item={socials} />
+					<User className={styles.user} item={socialState} />
 					<div className={styles.wrapper}>
 						<div className={styles.nav}>
 							{navLinks.map((x, index) => (
