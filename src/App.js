@@ -18,11 +18,13 @@ import { useEffect } from 'react'
 import { firebaseApp } from './firebaseConfig'
 import { getAuth, onAuthStateChanged } from '@firebase/auth'
 import { UserDataActions } from './redux/slices/UserData'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Logout } from './Logout'
 
 function App() {
 	const dispatch = useDispatch()
+
+	const loggedIn = useSelector((state) => state.UserData.loggedIn)
 
 	useEffect(() => {
 		if (dispatch) {
@@ -37,6 +39,15 @@ function App() {
 			})
 		}
 	}, [dispatch])
+
+	useEffect(() => {
+		const run = async () => {
+			if (true) {
+				// await
+			}
+		}
+		run()
+	}, [loggedIn])
 
 	return (
 		<Router>
