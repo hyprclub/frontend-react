@@ -75,9 +75,7 @@ const Headers = () => {
 					</Link>
 				</div>
 				{/* <Notification className={styles.notification} /> */}
-				<Link className={cn('button-small', styles.button)} to='/upload-variants'>
-					Upload
-				</Link>
+
 				{/* <Link
           className={cn("button-stroke button-small", styles.button)}
           to="/connect-wallet"
@@ -87,6 +85,9 @@ const Headers = () => {
 				{loggedIn && <User className={styles.user} />}
 				{loggedIn === false && (
 					<>
+						<Link className={cn('button-small', styles.button)} to='/upload-variants'>
+							Sign Up
+						</Link>
 						<Link className={cn('button-small', styles.button)} to='/login'>
 							Login
 						</Link>
