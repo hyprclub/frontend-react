@@ -10,7 +10,10 @@ const Card = ({ className, item }) => {
   return (
     <div className={cn(styles.card, className)}>
       <div className={styles.preview}>
-        <img srcSet={`${item.image2x} 2x`} src={item.image} alt="Card" />
+        <div>
+
+        <img  className={styles.imagehover} srcSet={`${item.image2x} 2x`} src={item.image} alt="Card" />
+        </div>
         <div className={styles.control}>
           <div
             className={cn(
@@ -20,12 +23,12 @@ const Card = ({ className, item }) => {
           >
             {item.categoryText}
           </div>
-          <button
+          {/* <button
             className={cn(styles.favorite, { [styles.active]: visible })}
             onClick={() => setVisible(!visible)}
           >
             <Icon name="heart" size="20" />
-          </button>
+          </button> */}
           <button className={cn("button-small", styles.button)}>
             <span>Claim Now</span>
             <Icon name="scatter-up" size="16" />
@@ -39,13 +42,13 @@ const Card = ({ className, item }) => {
             <div className={styles.price}>{item.price}</div>
           </div>
           <div className={styles.line}>
-            {/* <div className={styles.users}>
+            <div className={styles.users}>
               {item.users.map((x, index) => (
                 <div className={styles.avatar} key={index}>
                   <img src={x.avatar} alt="Avatar" />
                 </div>
               ))}
-            </div> */}
+            </div>
             <div className={styles.counter}>{item.counter}</div>
           </div>
         </div>
