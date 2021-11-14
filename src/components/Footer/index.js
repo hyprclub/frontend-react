@@ -9,14 +9,14 @@ import Theme from '../Theme'
 
 const items = [
 	{
-		title: 'Crypter.',
+		title: 'Hypr',
 		menu: [
 			{
-				title: 'Discover',
+				title: 'Marketplace',
 				url: '/search01',
 			},
 			{
-				title: 'Connect wallet',
+				title: 'Drops',
 				url: '/connect-wallet',
 			},
 		],
@@ -29,7 +29,7 @@ const items = [
 				url: '/faq',
 			},
 			{
-				title: 'Create item',
+				title: 'About Us',
 				url: '/upload-variants',
 			},
 		],
@@ -51,9 +51,19 @@ const Footers = () => {
 						<Link className={styles.logo} to='/'>
 							<Image className={styles.pic} src='/images/logo-dark.png' srcDark='/images/logo-light.png' alt='Fitness Pro' />
 						</Link>
-						<div className={styles.info}>The New Creative Economy.</div>
+						<div className={styles.info}>The Next social Revolution.</div>
+						<div className={styles.logo1}>
+							<a className="icons" href="https://www.instagram.com/hyprclub/" target="_blank">
+								<img class="icons" src="/instagram.png" /> </a>
+							<a className="icons" href="https://www.facebook.com/hyprclub" target="_blank">
+								<img class="icons" src="/facebook.png" /> </a>
+							<a className="icons" href="https://www.linkedin.com/company/hyprclub/ " target="_blank"><img class="icons"
+								src="/linkedin.png" /> </a>
+							<a className="icons" href="https://twitter.com/hyprclub" target="_blank"><img class="icons"
+								src="/twitter.png" /> </a>
+						</div>
+						<div className={styles.details}>Dark theme</div>
 						<div className={styles.version}>
-							<div className={styles.details}>Dark theme</div>
 							<Theme setDark={true} className='theme-big' />
 						</div>
 					</div>
