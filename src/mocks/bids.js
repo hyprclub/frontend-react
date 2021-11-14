@@ -1,8 +1,8 @@
 export const bids = [
   {
     title: "Amazing digital art",
-    price: "2.45 ETH",
-    highestBid: "0.001 ETH",
+    price: "1000 INR",
+    highestBid: "0.001 INR",
     counter: "3 in stock",
     bid: 'New bid <span role="img" aria-label="fire">🔥</span>',
     image: "/images/content/card-pic-1.jpg",
@@ -24,7 +24,7 @@ export const bids = [
   },
   {
     title: "Ribbon Hunter",
-    price: "2.45 ETH",
+    price: "2000 INR",
     highestBid: "0.001 ETH",
     counter: "3 in stock",
     bid: 'New bid <span role="img" aria-label="fire">🔥</span>',
