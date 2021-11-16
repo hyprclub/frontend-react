@@ -84,7 +84,7 @@ const Signup = () => {
                                         }}
                                         className={styles.field}
                                         value={data.name}
-                                        label='Usewr Name'
+                                        label='User Name'
                                         name='Name'
                                         type='text'
                                         placeholder='Enter your email'
@@ -108,7 +108,7 @@ const Signup = () => {
                                         }}
                                         className={styles.field}
                                         value={data.name}
-                                        label='User Name'
+                                        label='Phone Number'
                                         name='Name'
                                         type='number'
                                         placeholder='Enter your Phone number'
