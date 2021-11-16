@@ -107,8 +107,8 @@ const Item = () => {
             </div>
             <Users className={styles.users} items={users} />
             <div className={styles.buttonFlex}>
-              <div className={styles.button1}><a class="button-small Header_button__2u-UY" href="/upload-variants">Claim Now</a></div>
-              <div className={styles.button1}><a class="button-small Header_button__2u-UY" href="/upload-variants">Certificate</a></div>
+              <div className={styles.button1}><a class="button-small" href="/upload-variants">Claim Now</a></div>
+              <div className={styles.button1}><a class="button-small" href="/upload-variants">Certificate</a></div>
             </div>
             {/* <Control className={styles.control} /> */}
           </div>
