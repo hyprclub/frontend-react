@@ -177,12 +177,11 @@ const Signup = () => {
                                    
                                 </div>
                                         {/* <div>  <input  className={cn('button-stroke', styles.button)} type='submit' value='Login With Google' /></div> */}
-                                        <div className={cn('button-stroke', styles.button)}> <img class="icons mr-3"
-								src="/google.png" /> <button type="submit">Sign up with Google</button></div>
                                 <div className={styles.signBut}>
                                     <div><input className={cn('button-stroke', styles.button,)} type='submit' value='Sign Up' /></div>
                                 </div>
                             </form>
+                                        <div className={cn('button-stroke', styles.button)}> <img class="icons mr-3" src="/google.png" /> <button type="submit">Sign up with Google</button></div>
                             {/* </div> */}
                         </div>
                         <div className={styles.note}>We do not own your private keys and cannot access your funds without your confirmation.</div>
