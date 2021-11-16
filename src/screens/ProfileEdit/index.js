@@ -1,4 +1,4 @@
-import React ,{useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import cn from 'classnames'
 import styles from './ProfileEdit.module.sass'
@@ -8,15 +8,17 @@ import TextArea from '../../components/TextArea'
 import Icon from '../../components/Icon'
 import { useSelector } from 'react-redux'
 import { firebaseApp } from '../../firebaseConfig'
-import {doc,
-  updateDoc,
-  getFirestore,} from 'firebase/firestore'
-  import {
-	  	getStorage,
-  		ref,
- 		uploadBytesResumable,
-  		getDownloadURL,
-  } from 'firebase/storage'
+import {
+	doc,
+	updateDoc,
+	getFirestore,
+} from 'firebase/firestore'
+import {
+	getStorage,
+	ref,
+	uploadBytesResumable,
+	getDownloadURL,
+} from 'firebase/storage'
 
 const breadcrumbs = [
 	{
@@ -34,34 +36,34 @@ const breadcrumbs = [
 const ProfileEdit = () => {
 	// const UserData = useSelector((state) => state.UserData)
 	// const [socialState,setSocialState] = useState(socials)
-	const [data, setData] = useState({ name : '' , email: '' })
+	const [data, setData] = useState({ name: '', email: '' })
 	const UserData = useSelector((state) => state.UserData)
 	const [input, setInput] = useState('')
 	function updateState(e) {
 		setData((state) => ({ ...state, [e.target.name]: e.target.value }))
 	}
-	const updateUserProfile= async() => {
+	const updateUserProfile = async () => {
 		try {
-			const db  = getFirestore();
+			const db = getFirestore();
 			const storage = getStorage();
 			const storagePFref = ref(
-    				storage,
-   					 "users/" + UserData.uid + "/profile.jpg"
-                 );
-			await updateDoc(doc(db , "users" ,UserData.uid),{
-				 Name: data.name,
-                 Emailid: data.email,
-                 Phone: data.phone,
-                 Bio: data.bio,
-                 Portfolio: data.portfolio,
-                //  Instagram: userpfInstagram,
-   				 Instagram: data.instagram,
+				storage,
+				"users/" + UserData.uid + "/profile.jpg"
+			);
+			await updateDoc(doc(db, "users", UserData.uid), {
+				Name: data.name,
+				Emailid: data.email,
+				Phone: data.phone,
+				Bio: data.bio,
+				Portfolio: data.portfolio,
+				//  Instagram: userpfInstagram,
+				Instagram: data.instagram,
 			});
-	
+
 		} catch (error) {
 			console.error(error)
-			}
-	
+		}
+
 	}
 
 	return (
@@ -93,9 +95,9 @@ const ProfileEdit = () => {
 										<button className={cn('button-stroke button-small', styles.button)}>Upload</button>
 										<input className={styles.load} onChange={(e) => {
 											e.preventDefault()
-									     }}
-										 name = 'userdp'
-										 type='file' />
+										}}
+											name='userdp'
+											type='file' />
 									</div>
 								</div>
 							</div>
@@ -106,11 +108,11 @@ const ProfileEdit = () => {
 									<div className={styles.category}>Account info</div>
 									<div className={styles.fieldset}>
 										<TextInput
-										onChange={(e) => {
-											updateState(e)
-									     }}
+											onChange={(e) => {
+												updateState(e)
+											}}
 											className={styles.field}
-											defaultValue = {UserData.name}
+											defaultValue={UserData.name}
 											label='Name'
 											name='name'
 											type='text'
@@ -118,24 +120,24 @@ const ProfileEdit = () => {
 											required
 										/>
 										<TextInput
-										onChange={(e) => {
-											updateState(e)
-									     }}
+											onChange={(e) => {
+												updateState(e)
+											}}
 											className={styles.field}
-											defaultValue = {UserData.email}
+											defaultValue={UserData.email}
 											label='Email'
 											name='email'
 											type='text'
 											placeholder='Enter your Email Address'
-											disabled ="true"
+											disabled="true"
 											required
 										/>
 										<TextInput
-										onChange={(e) => {
-											updateState(e)
-									     }}
+											onChange={(e) => {
+												updateState(e)
+											}}
 											className={styles.field}
-											defaultValue = {UserData.phoneno}
+											defaultValue={UserData.phoneno}
 											label='Phone Number'
 											name='phone'
 											type='text'
@@ -143,11 +145,11 @@ const ProfileEdit = () => {
 											required
 										/>
 										<TextArea
-										onChange={(e) => {
-											updateState(e)
-									     }}
+											onChange={(e) => {
+												updateState(e)
+											}}
 											className={styles.field}
-											defaultValue = {UserData.bio}
+											defaultValue={UserData.bio}
 											label='Bio'
 											name='bio'
 											placeholder='About yourselt in a few words'
@@ -159,31 +161,45 @@ const ProfileEdit = () => {
 									<div className={styles.category}>Social</div>
 									<div className={styles.fieldset}>
 										<TextInput
-										onChange={(e) => {
-											updateState(e)
-									     }}
+											onChange={(e) => {
+												updateState(e)
+											}}
 											className={styles.field}
-											defaultValue = {UserData.portfolio}
+											defaultValue={UserData.portfolio}
 											label='Portfolio or website'
 											name='portfolio'
 											type='text'
 											placeholder='Enter URL'
-											
+
 										/>
 										<div className={styles.box}>
+											<div className="mb-4">
 											<TextInput
-											onChange={(e) => {
-											updateState(e)
-									     }}
+												onChange={(e) => {
+													updateState(e)
+												}}
 												className={styles.field}
-												defaultValue = {UserData.instagram}
+												defaultValue={UserData.instagram}
+												label='Twitter'
+												name='twitter'
+												type='text'
+												placeholder='twitter.com/username'
+
+											/>
+											</div>
+										</div>
+										<div className={styles.box}>
+											<TextInput
+												onChange={(e) => {
+													updateState(e)
+												}}
+												className={styles.field}
+												defaultValue={UserData.instagram}
 												label='Instagram'
 												name='instagram'
 												type='text'
 												placeholder='instagram.com/username'
-											
 											/>
-											
 										</div>
 									</div>
 								</div>
@@ -194,8 +210,8 @@ const ProfileEdit = () => {
 							<div className={styles.btns}>
 								<button onClick={(e) => {
 									e.preventDefault()
-										updateUserProfile()
-									     }} className={cn('button', styles.button)}>Update Profile</button>
+									updateUserProfile()
+								}} className={cn('button', styles.button)}>Update Profile</button>
 								<button className={styles.clear}>
 									<Icon name='circle-close' size='24' />
 									Clear all
