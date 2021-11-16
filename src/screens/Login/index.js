@@ -126,7 +126,7 @@ const Login = () => {
 							</form>
 							
 							<div className={cn('button-stroke', styles.button)}> <img class="icons mr-3" src="/google.png" /> <button
-							 type="submit"
+							 className={styles.button2} type="submit"
 							  onClick = {(e) => {
 								 e.preventDefault()
 								 googlesignin(e)
