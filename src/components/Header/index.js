@@ -85,7 +85,7 @@ const Headers = () => {
 				{loggedIn && <User className={styles.user} />}
 				{loggedIn === false && (
 					<>
-						<Link className={cn('button-small', styles.button)} to='/upload-variants'>
+						<Link className={cn('button-small', styles.button)} to='/signup'>
 							Sign Up
 						</Link>
 						<Link className={cn('button-small', styles.button)} to='/login'>

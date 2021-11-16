@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './styles/app.sass'
 import Page from './components/Page'
 import Home from './screens/Home'
-import UploadVariants from './screens/UploadVariants'
 import UploadDetails from './screens/UploadDetails'
 import ConnectWallet from './screens/ConnectWallet'
 import Faq from './screens/Faq'
@@ -12,6 +11,7 @@ import Search02 from './screens/Search02'
 import Profile from './screens/Profile'
 import ProfileEdit from './screens/ProfileEdit'
 import Login from './screens/Login'
+import Signup from './screens/SignUp'
 import Item from './screens/Item'
 import PageList from './screens/PageList'
 import { useEffect } from 'react'
@@ -131,10 +131,10 @@ function App() {
 				</Route>
 				<Route
 					exact
-					path='/upload-variants'
+					path='/signup'
 					render={() => (
 						<Page>
-							<UploadVariants />
+							<Signup/>
 						</Page>
 					)}
 				/>
