@@ -17,6 +17,7 @@ const initialState = {
 	profileDP : undefined
 
 
+
 }
 
 export const userDataSlice = createSlice({
@@ -41,6 +42,7 @@ export const userDataSlice = createSlice({
 			state.username = payload?.Username
 			state.phoneno = payload?.Phone
 			state.portfolio = payload?.Portfolio
+			state.nftidtoken = payload?.NFTidtoken
 		},
 		updateUserDP : (state , {payload}) => {
 			state.profileDP = payload?.profileDP

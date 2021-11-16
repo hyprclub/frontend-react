@@ -4,6 +4,10 @@ import styles from "./Item.module.sass";
 import Users from "./Users";
 import Control from "./Control";
 import Options from "./Options";
+import { getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL} from "firebase/storage";
 
 const navLinks = ["Info", "Owners"];
 
@@ -34,6 +38,8 @@ const users = [
 
 const Item = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+
+  
 
   return (
     <>
