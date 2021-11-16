@@ -5,7 +5,14 @@ import Control from '../../components/Control'
 import TextInput from '../../components/TextInput'
 // import { firebaseApp } from '../../firebaseConfig'
 import { useHistory } from 'react-router'
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import {  getAuth,
+  createUserWithEmailAndPassword
+  ,GoogleAuthProvider,signInWithPopup } from 'firebase/auth'
+import {
+    getFirestore,
+    setDoc,
+    doc
+} from 'firebase/firestore'
 import { useSelector } from 'react-redux'
 
 const breadcrumbs = [
@@ -20,22 +27,61 @@ const breadcrumbs = [
 const Signup = () => {
     const loggedIn = useSelector((state) => state.UserData.loggedIn)
     const UserData = useSelector((state) => state.UserData)
-    const [data, setData] = useState({ email: '', password: '' })
+    const [data, setData] = useState({email :'' , password : '' , name : '' ,username :'' , phone :''})
     function updateState(e) {
-        // setData((state) => ({ ...state, [e.target.name]: e.target.value }))
+        setData((state) => ({ ...state, [e.target.name]: e.target.value }))
+
+
     }
     const handleSubmit = async () => {
-        // try {
-        //     const auth = getAuth()
-        //     const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password)
-        //     const user = userCredential.user;
-        //     const emailVerified = user.emailVerified;
+        try {
+            const auth = getAuth();
+            const db = getFirestore();
+            const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password)
+            const user = userCredential.user;
+            const emailVerified = user.emailVerified;
+            const uid = user.uid;
+            const data1 = await setDoc(doc(db,"users",uid),{
+                Name: data.name,
+                Emailid: data.email,
+                Phone: data.phone,
+                Username: data.username,
+                UserID: uid,
+                admin : false ,
+                creator : false,
+                Bio : "",
+                Instagram : "",
+                Portfolio : "",
+                Twitter : ""
+            })
 
-        //     console.log({ data, userCredential })
-        // } catch (err) {
-        //     console.error(err)
-        // }
+            console.log({ data, userCredential })
+        } catch (err) {
+            console.error(err)
+        }
     }
+    const googlesignin = async () =>{
+		const db = getFirestore();
+
+		const googleprovider = new GoogleAuthProvider();
+		const auth = getAuth();
+		const google = await signInWithPopup(auth, googleprovider);
+		const credential = GoogleAuthProvider.credentialFromResult(google);
+		const user = google.user;
+     	const email = user.email;
+        const name = user.displayName;
+		const uid =user.uid;
+
+		setDoc(doc(db, "users", uid), {
+       				 Emailid: email,
+        			 Name: name,
+       				 UserID: uid,
+       			 
+
+      });
+		
+
+	}
     const { push } = useHistory()
     useEffect(() => {
         console.log(UserData)
@@ -77,9 +123,9 @@ const Signup = () => {
                                                     className={styles.field}
                                                     value={data.name}
                                                     label='Name'
-                                                    name='Name'
+                                                    name='name'
                                                     type='text'
-                                                    placeholder='Enter your email'
+                                                    placeholder='Enter your Full Name'
                                                     required
                                                 />
                                             </div>
@@ -91,11 +137,10 @@ const Signup = () => {
                                                         updateState(e)
                                                     }}
                                                     className={styles.field}
-                                                    value={data.name}
                                                     label='User Name'
-                                                    name='Name'
+                                                    name='username'
                                                     type='text'
-                                                    placeholder='Enter your email'
+                                                    placeholder='Enter your Username'
                                                     required
                                                 />
                                             </div>
@@ -108,7 +153,6 @@ const Signup = () => {
                                                         updateState(e)
                                                     }}
                                                     className={styles.field}
-                                                    value={data.email}
                                                     label='Email Address'
                                                     name='email'
                                                     type='email'
@@ -124,10 +168,9 @@ const Signup = () => {
                                                         updateState(e)
                                                     }}
                                                     className={styles.field}
-                                                    value={data.name}
                                                     label='Phone Number'
-                                                    name='Name'
-                                                    type='number'
+                                                    name='phone'
+                                                    type='text'
                                                     placeholder='Enter your Phone number'
                                                     required
                                                 /></div>
@@ -157,7 +200,7 @@ const Signup = () => {
                                                     }}
                                                     className={styles.field}
                                                     label='Confirm Password'
-                                                    name='Confirm Password'
+                                                    name='cpassword'
                                                     type='password'
                                                     placeholder='Re-Enter your password'
                                                     required
@@ -178,10 +221,21 @@ const Signup = () => {
                                 </div>
                                         {/* <div>  <input  className={cn('button-stroke', styles.button)} type='submit' value='Login With Google' /></div> */}
                                 <div className={styles.signBut}>
-                                    <div><input className={cn('button-stroke', styles.button,)} type='submit' value='Sign Up' /></div>
+                                    <div><input className={cn('button-stroke', styles.button,)} 
+                                     type='submit'
+                                      value='Sign Up'
+                                       onClick = {(e) => {
+								 e.preventDefault()
+								 handleSubmit(e)
+							 }} /></div>
                                 </div>
                             </form>
-                                        <div className={cn('button-stroke', styles.button)}> <img class="icons mr-3" src="/google.png" /> <button type="submit">Sign up with Google</button></div>
+                                        <div className={cn('button-stroke', styles.button)}> <img class="icons mr-3" src="/google.png" /> <button 
+                                        type="submit"
+                                         onClick = {(e) => {
+								 e.preventDefault()
+								 googlesignin(e)
+							 }}>Sign up with Google</button></div>
                             {/* </div> */}
                         </div>
                         <div className={styles.note}>We do not own your private keys and cannot access your funds without your confirmation.</div>

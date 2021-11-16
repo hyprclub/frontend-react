@@ -5,7 +5,8 @@ import Control from '../../components/Control'
 import TextInput from '../../components/TextInput'
 import { useHistory } from 'react-router'
 import { firebaseApp } from '../../firebaseConfig'
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup,} from 'firebase/auth'
+import { getFirestore , setDoc , doc } from 'firebase/firestore'
 import { useSelector } from 'react-redux'
 
 const breadcrumbs = [
@@ -24,6 +25,28 @@ const Login = () => {
 	const [data, setData] = useState({ email: '', password: '' })
 	function updateState(e) {
 		setData((state) => ({ ...state, [e.target.name]: e.target.value }))
+	}
+	const googlesignin = async () =>{
+		const db = getFirestore();
+
+		const googleprovider = new GoogleAuthProvider();
+		const auth = getAuth();
+		const google = await signInWithPopup(auth, googleprovider);
+		const credential = GoogleAuthProvider.credentialFromResult(google);
+		const user = google.user;
+     	const email = user.email;
+        const name = user.displayName;
+		const uid =user.uid;
+
+		setDoc(doc(db, "users", uid), {
+       				 Emailid: email,
+        			Name: name,
+       				 UserID: uid,
+       			 
+
+      });
+		
+
 	}
 	const handleSubmit = async () => {
 		try {
@@ -102,7 +125,15 @@ const Login = () => {
 								{/* </input> */}
 							</form>
 							
-							<div className={cn('button-stroke', styles.button)}> <img class="icons mr-3" src="/google.png" /> <button type="submit">Sign up with Google</button></div>
+							<div className={cn('button-stroke', styles.button)}> <img class="icons mr-3" src="/google.png" /> <button
+							 type="submit"
+							  onClick = {(e) => {
+								 e.preventDefault()
+								 googlesignin(e)
+							 }}
+							 >Sign up with Google</button></div>
+			
+
 						</div>
 					</div>
 					<div className={styles.note}>We do not own your private keys and cannot access your funds without your confirmation.</div>

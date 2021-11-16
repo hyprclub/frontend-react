@@ -34,9 +34,9 @@ const breadcrumbs = [
 const ProfileEdit = () => {
 	// const UserData = useSelector((state) => state.UserData)
 	// const [socialState,setSocialState] = useState(socials)
-	const [data, setData] = useState({ name : '' , email: '' })
+	const [data, setData] = useState({ name : '' , email: '' , username : '', phoneno : '', instagram: '',bio : ''})
 	const UserData = useSelector((state) => state.UserData)
-	const [input, setInput] = useState('')
+
 	function updateState(e) {
 		setData((state) => ({ ...state, [e.target.name]: e.target.value }))
 	}
@@ -140,6 +140,18 @@ const ProfileEdit = () => {
 											name='phone'
 											type='text'
 											placeholder='Enter your Phone Number'
+											required
+										/>
+										<TextInput
+										onChange={(e) => {
+											updateState(e)
+									     }}
+											className={styles.field}
+											defaultValue = {UserData.username}
+											label='Username'
+											name='username'
+											type='text'
+											placeholder='Enter your username'
 											required
 										/>
 										<TextArea
