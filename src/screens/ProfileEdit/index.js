@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{useEffect, useState} from 'react'
 import { Link } from 'react-router-dom'
 import cn from 'classnames'
 import styles from './ProfileEdit.module.sass'
@@ -6,6 +6,17 @@ import Control from '../../components/Control'
 import TextInput from '../../components/TextInput'
 import TextArea from '../../components/TextArea'
 import Icon from '../../components/Icon'
+import { useSelector } from 'react-redux'
+import { firebaseApp } from '../../firebaseConfig'
+import {doc,
+  updateDoc,
+  getFirestore,} from 'firebase/firestore'
+  import {
+	  	getStorage,
+  		ref,
+ 		uploadBytesResumable,
+  		getDownloadURL,
+  } from 'firebase/storage'
 
 const breadcrumbs = [
 	{
@@ -17,7 +28,42 @@ const breadcrumbs = [
 	},
 ]
 
+
+
+
 const ProfileEdit = () => {
+	// const UserData = useSelector((state) => state.UserData)
+	// const [socialState,setSocialState] = useState(socials)
+	const [data, setData] = useState({ name : '' , email: '' })
+	const UserData = useSelector((state) => state.UserData)
+	const [input, setInput] = useState('')
+	function updateState(e) {
+		setData((state) => ({ ...state, [e.target.name]: e.target.value }))
+	}
+	const updateUserProfile= async() => {
+		try {
+			const db  = getFirestore();
+			const storage = getStorage();
+			const storagePFref = ref(
+    				storage,
+   					 "users/" + UserData.uid + "/profile.jpg"
+                 );
+			await updateDoc(doc(db , "users" ,UserData.uid),{
+				 Name: data.name,
+                 Emailid: data.email,
+                 Phone: data.phone,
+                 Bio: data.bio,
+                 Portfolio: data.portfolio,
+                //  Instagram: userpfInstagram,
+   				 Instagram: data.instagram,
+			});
+	
+		} catch (error) {
+			console.error(error)
+			}
+	
+	}
+
 	return (
 		<div className={styles.page}>
 			<Control className={styles.control} item={breadcrumbs} />
@@ -33,7 +79,7 @@ const ProfileEdit = () => {
 						<div className={styles.col}>
 							<div className={styles.user}>
 								<div className={styles.avatar}>
-									<img src='/images/content/avatar-1.jpg' alt='Avatar' />
+									<img src={UserData.profileDP || '/images/content/avatar-big.jpg'} alt='Avatar' />
 								</div>
 								<div className={styles.details}>
 									<div className={styles.stage}>Profile photo</div>
@@ -45,7 +91,11 @@ const ProfileEdit = () => {
 									</div>
 									<div className={styles.file}>
 										<button className={cn('button-stroke button-small', styles.button)}>Upload</button>
-										<input className={styles.load} type='file' />
+										<input className={styles.load} onChange={(e) => {
+											e.preventDefault()
+									     }}
+										 name = 'userdp'
+										 type='file' />
 									</div>
 								</div>
 							</div>
@@ -56,25 +106,50 @@ const ProfileEdit = () => {
 									<div className={styles.category}>Account info</div>
 									<div className={styles.fieldset}>
 										<TextInput
+										onChange={(e) => {
+											updateState(e)
+									     }}
 											className={styles.field}
-											label='display name'
-											name='Name'
+											defaultValue = {UserData.name}
+											label='Name'
+											name='name'
 											type='text'
-											placeholder='Enter your display name'
+											placeholder='Enter your Name'
 											required
 										/>
 										<TextInput
+										onChange={(e) => {
+											updateState(e)
+									     }}
 											className={styles.field}
-											label='Custom url'
-											name='Url'
+											defaultValue = {UserData.email}
+											label='Email'
+											name='email'
 											type='text'
-											placeholder='ui8.net/Your custom URL'
+											placeholder='Enter your Email Address'
+											disabled ="true"
+											required
+										/>
+										<TextInput
+										onChange={(e) => {
+											updateState(e)
+									     }}
+											className={styles.field}
+											defaultValue = {UserData.phoneno}
+											label='Phone Number'
+											name='phone'
+											type='text'
+											placeholder='Enter your Phone Number'
 											required
 										/>
 										<TextArea
+										onChange={(e) => {
+											updateState(e)
+									     }}
 											className={styles.field}
+											defaultValue = {UserData.bio}
 											label='Bio'
-											name='Bio'
+											name='bio'
 											placeholder='About yourselt in a few words'
 											required='required'
 										/>
@@ -84,36 +159,43 @@ const ProfileEdit = () => {
 									<div className={styles.category}>Social</div>
 									<div className={styles.fieldset}>
 										<TextInput
+										onChange={(e) => {
+											updateState(e)
+									     }}
 											className={styles.field}
-											label='portfolio or website'
-											name='Portfolio'
+											defaultValue = {UserData.portfolio}
+											label='Portfolio or website'
+											name='portfolio'
 											type='text'
 											placeholder='Enter URL'
-											required
+											
 										/>
 										<div className={styles.box}>
 											<TextInput
+											onChange={(e) => {
+											updateState(e)
+									     }}
 												className={styles.field}
-												label='twitter'
-												name='Twitter'
+												defaultValue = {UserData.instagram}
+												label='Instagram'
+												name='instagram'
 												type='text'
-												placeholder='@twitter username'
-												required
+												placeholder='instagram.com/username'
+											
 											/>
-											<button className={cn('button-stroke button-small', styles.button)}>Verify account</button>
+											
 										</div>
 									</div>
-									<button className={cn('button-stroke button-small', styles.button)}>
-										<Icon name='plus-circle' size='16' />
-										<span>Add more social account</span>
-									</button>
 								</div>
 							</div>
 							<div className={styles.note}>
 								To update your settings you should sign message through your wallet. Click 'Update profile' then sign the message
 							</div>
 							<div className={styles.btns}>
-								<button className={cn('button', styles.button)}>Update Profile</button>
+								<button onClick={(e) => {
+									e.preventDefault()
+										updateUserProfile()
+									     }} className={cn('button', styles.button)}>Update Profile</button>
 								<button className={styles.clear}>
 									<Icon name='circle-close' size='24' />
 									Clear all

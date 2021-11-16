@@ -14,22 +14,7 @@ import { isStepDivisible } from 'react-range/lib/utils'
 
 const navLinks = ['Collectibles', 'Created']
 
-// const UserData = useSelector((state) => state.UserData)
 
-const socials = [
-	{
-		title: 'twitter',
-		url: 'https://twitter.com/ui8',
-	},
-	{
-		title: 'instagram',
-		url: 'https://www.instagram.com/ui8net/',
-	},
-	// {
-	//   title: "facebook",
-	//   url: "https://www.facebook.com/ui8.net/",
-	// },
-]
 
 const following = [
 	{
@@ -175,6 +160,20 @@ const followers = [
 			'/images/content/follower-pic-4.jpg',
 		],
 	},
+]
+const socials = [
+	{
+		title: 'twitter',
+		url: 'https://twitter.com/ui8',
+	},
+	{
+		title: 'instagram',
+		url: 'https://www.instagram.com/ui8net/',
+	},
+	// {
+	//   title: "facebook",
+	//   url: "https://www.facebook.com/ui8.net/",
+	// },
 ]
 
 const Profile = () => {

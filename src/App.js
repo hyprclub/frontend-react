@@ -30,6 +30,8 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 
+import axios from 'axios';
+
 function App() {
 	const dispatch = useDispatch()
 
@@ -99,6 +101,18 @@ function App() {
 		}
 		run()
 	}, [loggedIn,uid,dispatch])
+	useEffect(() =>{
+		if(loggedIn){
+			const run  = async () =>{
+			const nftdata =  await axios.get('https://raw.githubusercontent.com/aniketbiprojit/cdn/master/test_metadata.json'); 
+			console.log(nftdata);
+		}
+		run()
+		}
+		
+	}, [loggedIn])
+
+		
 
 	return (
 		<Router>

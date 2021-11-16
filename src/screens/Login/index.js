@@ -30,6 +30,9 @@ const Login = () => {
 		try {
 			const auth = getAuth()
 			const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password)
+			const user = userCredential.user;
+			const emailVerified = user.emailVerified;
+			
 			console.log({ data, userCredential })
 		} catch (err) {
 			console.error(err)
@@ -39,7 +42,8 @@ const Login = () => {
 	useEffect(() => {
 		console.log(UserData)
 		if (loggedIn) {
-			push('/')
+				push('/')
+			
 		}
 	}, [loggedIn, push])
 
