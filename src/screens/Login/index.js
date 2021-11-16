@@ -5,7 +5,6 @@ import Control from '../../components/Control'
 import TextInput from '../../components/TextInput'
 import { useHistory } from 'react-router'
 import { firebaseApp } from '../../firebaseConfig'
-
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { useSelector } from 'react-redux'
 
@@ -102,6 +101,7 @@ const Login = () => {
 									</Link> */}
 								{/* </input> */}
 							</form>
+							<input className={cn('button-stroke', styles.button)} type='submit' value='Login With Google' />
 						</div>
 					</div>
 					<div className={styles.note}>We do not own your private keys and cannot access your funds without your confirmation.</div>
