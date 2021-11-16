@@ -67,104 +67,104 @@ const Signup = () => {
                                 }}
                             >
                                 <div className={styles.ks}>
-                                <div className="row">
-                                    <div class="col-xl-6 col-lg-6 col-md-6">
-                                        <div className="ml-5">
-                                            <TextInput
-                                                onChange={(e) => {
-                                                    updateState(e)
-                                                }}
-                                                className={styles.field}
-                                                value={data.name}
-                                                label='Name'
-                                                name='Name'
-                                                type='text'
-                                                placeholder='Enter your email'
-                                                required
-                                            />
+                                    <div className="row">
+                                        <div class="col-xl-6 col-lg-6 col-md-6">
+                                            <div>
+                                                <TextInput
+                                                    onChange={(e) => {
+                                                        updateState(e)
+                                                    }}
+                                                    className={styles.field}
+                                                    value={data.name}
+                                                    label='Name'
+                                                    name='Name'
+                                                    type='text'
+                                                    placeholder='Enter your email'
+                                                    required
+                                                />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-6">
-                                        <div className="mr-5">
-                                            <TextInput
-                                                onChange={(e) => {
-                                                    updateState(e)
-                                                }}
-                                                className={styles.field}
-                                                value={data.name}
-                                                label='User Name'
-                                                name='Name'
-                                                type='text'
-                                                placeholder='Enter your email'
-                                                required
-                                            />
+                                        <div class="col-xl-6 col-lg-6 col-md-6">
+                                            <div >
+                                                <TextInput
+                                                    onChange={(e) => {
+                                                        updateState(e)
+                                                    }}
+                                                    className={styles.field}
+                                                    value={data.name}
+                                                    label='User Name'
+                                                    name='Name'
+                                                    type='text'
+                                                    placeholder='Enter your email'
+                                                    required
+                                                />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-6">
-                                        <div className="ml-5">
+                                        <div class="col-xl-6 col-lg-6 col-md-6">
+                                            <div>
 
-                                            <TextInput
-                                                onChange={(e) => {
-                                                    updateState(e)
-                                                }}
-                                                className={styles.field}
-                                                value={data.email}
-                                                label='Email Address'
-                                                name='email'
-                                                type='email'
-                                                placeholder='Enter your email'
-                                                required />
+                                                <TextInput
+                                                    onChange={(e) => {
+                                                        updateState(e)
+                                                    }}
+                                                    className={styles.field}
+                                                    value={data.email}
+                                                    label='Email Address'
+                                                    name='email'
+                                                    type='email'
+                                                    placeholder='Enter your email'
+                                                    required />
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-6">
-                                        <div className="mr-5">
+                                        <div class="col-xl-6 col-lg-6 col-md-6">
+                                            <div>
 
-                                            <TextInput
-                                                onChange={(e) => {
-                                                    updateState(e)
-                                                }}
-                                                className={styles.field}
-                                                value={data.name}
-                                                label='Phone Number'
-                                                name='Name'
-                                                type='number'
-                                                placeholder='Enter your Phone number'
-                                                required
-                                            /></div>
-                                    </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-6">
-                                        <div className="ml-5">
-
-                                            <TextInput
-                                                onChange={(e) => {
-                                                    updateState(e)
-                                                }}
-                                                className={styles.field}
-                                                label='Password'
-                                                name='password'
-                                                type='password'
-                                                placeholder='Enter your password'
-                                                required
-                                            />
+                                                <TextInput
+                                                    onChange={(e) => {
+                                                        updateState(e)
+                                                    }}
+                                                    className={styles.field}
+                                                    value={data.name}
+                                                    label='Phone Number'
+                                                    name='Name'
+                                                    type='number'
+                                                    placeholder='Enter your Phone number'
+                                                    required
+                                                /></div>
                                         </div>
-                                    </div>
-                                    <div class="col-xl-6 col-lg-6 col-md-6">
-                                        <div className="mr-5">
+                                        <div class="col-xl-6 col-lg-6 col-md-6">
+                                            <div>
 
-                                            <TextInput
-                                                onChange={(e) => {
-                                                    updateState(e)
-                                                }}
-                                                className={styles.field}
-                                                label='Confirm Password'
-                                                name='Confirm Password'
-                                                type='password'
-                                                placeholder='Re-Enter your password'
-                                                required
-                                            />
+                                                <TextInput
+                                                    onChange={(e) => {
+                                                        updateState(e)
+                                                    }}
+                                                    className={styles.field}
+                                                    label='Password'
+                                                    name='password'
+                                                    type='password'
+                                                    placeholder='Enter your password'
+                                                    required
+                                                />
+                                            </div>
                                         </div>
-                                    </div>
-                                    {/* <Link
+                                        <div class="col-xl-6 col-lg-6 col-md-6">
+                                            <div>
+
+                                                <TextInput
+                                                    onChange={(e) => {
+                                                        updateState(e)
+                                                    }}
+                                                    className={styles.field}
+                                                    label='Confirm Password'
+                                                    name='Confirm Password'
+                                                    type='password'
+                                                    placeholder='Re-Enter your password'
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
+                                        {/* <Link
 										onClick={(e) => {
                                             e.preventDefault()
 										}}
@@ -172,12 +172,16 @@ const Signup = () => {
                                         >
 										Login
 									</Link> */}
-                                    {/* </input> */}
-                                </div>
-                                </div>
-                                    <div className={styles.signBut}>
-                                        <input className={cn('button-stroke', styles.button)} type='submit' value='Sign Up' />
+                                        {/* </input> */}
                                     </div>
+                                   
+                                </div>
+                                        {/* <div>  <input  className={cn('button-stroke', styles.button)} type='submit' value='Login With Google' /></div> */}
+                                        <div className={cn('button-stroke', styles.button)}> <img class="icons mr-3"
+								src="/google.png" /> <button type="submit">Sign up with Google</button></div>
+                                <div className={styles.signBut}>
+                                    <div><input className={cn('button-stroke', styles.button,)} type='submit' value='Sign Up' /></div>
+                                </div>
                             </form>
                             {/* </div> */}
                         </div>
