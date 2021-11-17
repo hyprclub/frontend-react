@@ -39,9 +39,11 @@ const Login = () => {
 		const uid =user.uid;
 
 		setDoc(doc(db, "users", uid), {
-       				 Emailid: email,
+       				Emailid: email,
         			Name: name,
-       				 UserID: uid,
+       				UserID: uid,
+					admin : false,
+                    creator : false
        			 
 
       });

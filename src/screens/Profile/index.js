@@ -176,18 +176,23 @@ const socials = [
 	// },
 ]
 
-const Profile = () => {
+const Profile = (props) => {
 	const [activeIndex, setActiveIndex] = useState(0)
 	const [visible, setVisible] = useState(false)
 	const UserData = useSelector((state) => state.UserData)
+
+	const [data, setData] = useState({ name : '' , email: '' , username : '', phoneno : '', instagram: '',bio : ''})
+
 	const [socialState,setSocialState] = useState(socials)
 
+	const [username, setUsername] = React.useState()
+
 	React.useEffect(()=>{
-		if(UserData){
+		if(UserData) {
 			setSocialState([
 				{
 					title: 'twitter',
-					url: UserData.twitter,
+					url:  UserData.twitter,
 				},
 				{
 					title: 'instagram',
@@ -196,6 +201,13 @@ const Profile = () => {
 			])
 		}
 	},[UserData])
+
+	React.useEffect(()=>{
+		if(props && props.match && props.match.params){
+			const { match: {params:{ username }} } = props
+			setUsername(username)
+		}
+	},[props])
 
 	return (
 		<div className={styles.profile}>
@@ -231,7 +243,7 @@ const Profile = () => {
 			</div>
 			<div className={styles.body}>
 				<div className={cn('container', styles.container)}>
-					<User className={styles.user} item={socialState} />
+					<User isOwnProfile={username !== ''} className={styles.user} item={socialState} />
 					<div className={styles.wrapper}>
 						<div className={styles.nav}>
 							{navLinks.map((x, index) => (

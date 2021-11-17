@@ -22,6 +22,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Logout } from './Logout'
 import { getDoc,
 	doc,
+	getDocs,
+	collections,
 	getFirestore} from "firebase/firestore"
 import {
 	getStorage,
@@ -66,6 +68,10 @@ function App() {
 						}
 
 					})
+
+
+
+
 				}catch (e) {
 					console.error(e);
 				}
@@ -101,18 +107,20 @@ function App() {
 		}
 		run()
 	}, [loggedIn,uid,dispatch])
+	
 	useEffect(() =>{
 		if(loggedIn){
 			const run  = async () =>{
-			const nftdata =  await axios.get('https://raw.githubusercontent.com/aniketbiprojit/cdn/master/test_metadata.json'); 
+			const db = getFirestore();
+			
+
+			const nftdata =  await axios.get('https://raw.githubusercontent.com/hyprclub/cdn/main/1'); 
 			console.log(nftdata);
 		}
 		run()
 		}
 		
-	}, [loggedIn])
-
-		
+	}, [loggedIn])	
 
 	return (
 		<Router>
@@ -209,6 +217,12 @@ function App() {
 							<Profile />
 						</Page>
 					)}
+				/>
+				<Route
+					path='/profile/:username'
+					render={props=>(<Page>
+						<Profile {...props}/>
+					</Page>)}
 				/>
 				<Route
 					exact

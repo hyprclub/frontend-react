@@ -73,9 +73,11 @@ const Signup = () => {
 		const uid =user.uid;
 
 		setDoc(doc(db, "users", uid), {
-       				 Emailid: email,
-        			 Name: name,
-       				 UserID: uid,
+       				Emailid: email,
+        			Name: name,
+       				UserID: uid,
+                    admin : false,
+                    creator : false
        			 
 
       });

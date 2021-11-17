@@ -14,7 +14,8 @@ const initialState = {
 	portfolio : undefined,
 	admin : undefined,
 	creator :undefined,
-	profileDP : undefined
+	profileDP : undefined,
+	json : undefined
 
 
 
@@ -46,6 +47,9 @@ export const userDataSlice = createSlice({
 		},
 		updateUserDP : (state , {payload}) => {
 			state.profileDP = payload?.profileDP
+		},
+		nftData : (state , {payload}) => {
+			state.json = payload?.json
 		}
 	
 	},

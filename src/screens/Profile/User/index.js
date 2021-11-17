@@ -11,11 +11,23 @@ import { useSelector } from 'react-redux'
 const shareUrlFacebook = 'https://ui8.net'
 const shareUrlTwitter = 'https://ui8.net'
 
-const User = ({ className, item }) => {
+const User = ({ className, item, isOwnProfile }) => {
+
 	const [visible, setVisible] = useState(false)
 	const [visibleShare, setVisibleShare] = useState(false)
 	const [visibleModalReport, setVisibleModalReport] = useState(false)
 	const UserData = useSelector((state) => state.UserData)
+	const [data, setData] = useState({ name : '' , email: '' , username : '', phoneno : '', instagram: '',bio : ''})
+
+	React.useEffect(() => {
+		if(isOwnProfile) {
+			setData(UserData)
+		}
+		else {
+			// Fetch data
+			// set user data
+		}
+	}, [isOwnProfile])
 
 	return (
 		<>
@@ -25,7 +37,7 @@ const User = ({ className, item }) => {
 				</div>
 				<div className={styles.name}>{UserData.name}</div>
 				<div className={styles.code}>
-					<div className={styles.number}>{UserData.email}</div>
+					<div className={styles.number}>{UserData.username}</div>
 					<button className={styles.copy}>
 						<Icon name='copy' size='16' />
 					</button>
