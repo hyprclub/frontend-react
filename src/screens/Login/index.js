@@ -5,14 +5,11 @@ import Control from '../../components/Control'
 import TextInput from '../../components/TextInput'
 import { useHistory } from 'react-router'
 import { firebaseApp } from '../../firebaseConfig'
-<<<<<<< HEAD
 import { Button, Modal } from 'react-bootstrap';
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, } from 'firebase/auth'
 import { getFirestore, setDoc, doc } from 'firebase/firestore'
-=======
-import { getAuth, signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup,sendPasswordResetEmail} from 'firebase/auth'
-import { getFirestore , setDoc , doc } from 'firebase/firestore'
->>>>>>> 025760bb8b3af34cd0ffb4f534684190d62ae7e3
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail } from 'firebase/auth'
+import { getFirestore, setDoc, doc } from 'firebase/firestore'
 import { useSelector } from 'react-redux'
 
 const breadcrumbs = [
@@ -33,10 +30,10 @@ const Login = () => {
 		setData((state) => ({ ...state, [e.target.name]: e.target.value }))
 	}
 	const [show, setShow] = useState(false);
-    const [error , setError] = useState({error:''});
-    var error1;
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+	const [error, setError] = useState({ error: '' });
+	var error1;
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
 	const googlesignin = async () => {
 		const db = getFirestore();
 
@@ -62,10 +59,9 @@ const Login = () => {
 
 	}
 
-	const forgotPassword = async () =>{
+	const forgotPassword = async () => {
 		const auth = getAuth();
 		try {
-<<<<<<< HEAD
 			const auth = getAuth()
 			const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password)
 			const user = userCredential.user;
@@ -74,47 +70,42 @@ const Login = () => {
 			console.log({ data, userCredential })
 		} catch (err) {
 			setError('Invalid');
-            handleShow()
+			handleShow()
 			console.error(err)
-=======
-			const promise = await sendPasswordResetEmail(auth,data.email)
+			const promise = await sendPasswordResetEmail(auth, data.email)
 			console.log("Email Sent!")
 
-		} catch (err) {
-			console.error(err.code)
->>>>>>> 025760bb8b3af34cd0ffb4f534684190d62ae7e3
-		}
-		
-
-
+		// } catch (err) {
+		// 	console.error(err.code)
+		// }
 	}
 	const handleSubmit = async () => {
-		
-           if( data.email == "" ||  data.password == ""){
-                console.error("Some error Occured");
-            }
-            else{
-                try {
-						const auth = getAuth()
-						const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password)
-						const user = userCredential.user;
-						const emailVerified = user.emailVerified;
-                     
-                    
-                } catch (err) {
-            
-                         if(err.code == "auth/wrong-password"){
-                                console.error("Invalid Password");
-                                 }
-                         if(err.code == "auth/user-not-found"){
 
-                                 console.error("Account Doesn't exists");
-                                }
-                            console.error(err.code)
-                    
-                }
-                               
-            }
+		if (data.email == "" || data.password == "") {
+			console.error("Some error Occured");
+		}
+		else {
+			try {
+				const auth = getAuth()
+				const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password)
+				const user = userCredential.user;
+				const emailVerified = user.emailVerified;
+
+
+			} catch (err) {
+
+				if (err.code == "auth/wrong-password") {
+					console.error("Invalid Password");
+				}
+				if (err.code == "auth/user-not-found") {
+
+					console.error("Account Doesn't exists");
+				}
+				console.error(err.code)
+
+			}
+
+		}
 	}
 	const { push } = useHistory()
 	useEffect(() => {
@@ -133,7 +124,7 @@ const Login = () => {
 					<div className={styles.top}>
 						<h1 className={cn('h2', styles.title)}>Login</h1>
 						Become a part of the social revolution.
-						
+
 					</div>
 					<div className={styles.list}>
 						<div className={styles.item}>
@@ -166,15 +157,13 @@ const Login = () => {
 									onChange={(e) => {
 										updateState(e)
 									}}
-									onBlur={(e)=>{
-										if(e.target.value == ""){
+									onBlur={(e) => {
+										if (e.target.value == "") {
 											console.log("Enter Email To proceed")
 										}
 									}}
 									className={styles.field}
-<<<<<<< HEAD
 									id="validationCustom01"
-=======
 									value={data.email}
 									label='Email Address'
 									name='email'
@@ -187,13 +176,12 @@ const Login = () => {
 									onChange={(e) => {
 										updateState(e)
 									}}
-									onBlur={(e)=>{
-										if(e.target.value == ""){
+									onBlur={(e) => {
+										if (e.target.value == "") {
 											console.log("Enter password To proceed")
 										}
 									}}
 									className={styles.field}
->>>>>>> 025760bb8b3af34cd0ffb4f534684190d62ae7e3
 									label='Password'
 									name='password'
 									type='password'
@@ -212,7 +200,6 @@ const Login = () => {
 									</Link> */}
 								{/* </input> */}
 							</form>
-<<<<<<< HEAD
 							<a className={cn(styles.link)} >Forgot Password</a>
 
 							<Button className={cn('button-stroke', styles.button)}><div> <img class="icons mr-3" src="/google.png" /> <button
@@ -222,26 +209,21 @@ const Login = () => {
 									googlesignin(e)
 								}}
 							>Sign up with Google</button></div></Button>
-
-=======
 							<a className={cn(styles.link)} onClick={(e) => {
-								if(data.email == ""){
+								if (data.email == "") {
 									console.error("Please Enter  email");
-								}else{
+								} else {
 									forgotPassword(e)
-								}											
-									     }}  >Forgot Password?</a>
-							
-							<div className={cn('button-stroke', styles.button)}> <img class="icons mr-3" src="/google.png" /> <button
-							 className={styles.button2} type="submit"
-							  onClick = {(e) => {
-								 e.preventDefault()
-								 googlesignin(e)
-							 }}
-							 >Sign up with Google</button></div>
-			
->>>>>>> 025760bb8b3af34cd0ffb4f534684190d62ae7e3
+								}
+							}}  >Forgot Password?</a>
 
+							<div className={cn('button-stroke', styles.button)}> <img class="icons mr-3" src="/google.png" /> <button
+								className={styles.button2} type="submit"
+								onClick={(e) => {
+									e.preventDefault()
+									googlesignin(e)
+								}}
+							>Sign up with Google</button></div>
 						</div>
 					</div>
 					<div className={styles.note}>We do not own your private keys and cannot access your funds without your confirmation.</div>
