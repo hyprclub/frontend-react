@@ -3,12 +3,15 @@ import cn from 'classnames'
 import styles from './Signup.module.sass'
 import Control from '../../components/Control'
 import TextInput from '../../components/TextInput'
+import { Button, Modal } from 'react-bootstrap';
 // import { firebaseApp } from '../../firebaseConfig'
 import { useHistory } from 'react-router'
-import {  getAuth,
-  createUserWithEmailAndPassword
-  ,GoogleAuthProvider
-  ,signInWithPopup } from 'firebase/auth'
+import {
+    getAuth,
+    createUserWithEmailAndPassword
+    , GoogleAuthProvider
+    , signInWithPopup
+} from 'firebase/auth'
 import {
     getFirestore,
     setDoc,
@@ -31,116 +34,130 @@ const breadcrumbs = [
 const Signup = () => {
     const loggedIn = useSelector((state) => state.UserData.loggedIn)
     const UserData = useSelector((state) => state.UserData)
-    const [data, setData] = useState({email :'' , password : '' ,cpassword : '', name : '' ,username :'' , phone :''})
+    const [data, setData] = useState({ email: '', password: '', cpassword: '', name: '', username: '', phone: '' })
     function updateState(e) {
 
         setData((state) => ({ ...state, [e.target.name]: e.target.value }))
-
     }
+    const [show, setShow] = useState(false);
+    const [error , setError] = useState({error:''});
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     const handleSubmit = async () => {
-        
 
-            const auth = getAuth();
-            const db = getFirestore();
 
-            if(data.password != data.cpassword){
-                console.error("password do not match");
-            }
-            else if(data.phone.length>10 || data.phone.length <10){
-                console.error("Invalid Phone Number")
-            }
-            else if(data.phone == "" || data.email == "" || data.username == "" || data.name =="" || data.cpassword == ""){
-                console.error("Some error Occured");
-            }
+        const auth = getAuth();
+        const db = getFirestore();
 
-            else{
-                try {
-                     const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password)
-                                const user = userCredential.user;
-                                const emailVerified = user.emailVerified;
-                                const uid = user.uid;
-                                //   await setDoc(doc(db,"users",uid,"NFT","Owned","Jsons"),{
-
-                                //   });
-
-                                   await setDoc(doc(db,"users",uid),{
-
-                                        Name: data.name,
-                                        Emailid: data.email,
-                                        Phone: data.phone,
-                                        Username: data.username,
-                                        UserID: uid,
-                                        admin : false ,
-                                        creator : false,
-                                        Bio : "",
-                                        Instagram : "",
-                                        Portfolio : "",
-                                        Twitter : ""
-                                        })
-
-                                        console.log({ data, userCredential })
-                    
-                } catch (err) {
-                    console.error(err.code)
+        if (data.password != data.cpassword) {
+            console.error("password do not match");
+            // handleShow
             
-                         if(err.code == "auth/invalid-email"){
-                                console.error("Please Enter a valid Email");
-                                 }
-                         if(err.code == "auth/email-already-in-use"){
+            handleShow()
+            setError('Password do not match');
+        }
+        else if (data.phone.length > 10 || data.phone.length < 10) {
+            console.error("Invalid Phone Number")
+            setError('Invalid Phone Number');
+            handleShow()
+        }
+        else if (data.phone == "" || data.email == "" || data.username == "" || data.name == "" || data.cpassword == "") {
+            console.error("Some error Occured");
+            setError('Some error Occured');
+            handleShow()
+        }
 
-                                 console.error("Account Exists");
-                                }
-                        if(err.code == "auth/invalid-password"){
-                                    console.error("Password must be atleast 6 characters")
-                                 }
-                        if(err.code == "auth/weak-password"){
-                                console.error("Please choose a Strong Password")
-                                 }
-                            console.error(err.code)
-                    
+        else {
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password)
+                const user = userCredential.user;
+                const emailVerified = user.emailVerified;
+                const uid = user.uid;
+
+                await setDoc(doc(db, "users", uid), {
+
+                    Name: data.name,
+                    Emailid: data.email,
+                    Phone: data.phone,
+                    Username: data.username,
+                    UserID: uid,
+                    admin: false,
+                    creator: false,
+                    Bio: "",
+                    Instagram: "",
+                    Portfolio: "",
+                    Twitter: ""
+                })
+
+                console.log({ data, userCredential })
+
+            } catch (err) {
+                console.error(err.code)
+
+                if (err.code == "auth/invalid-email") {
+                    console.error("Please Enter a valid Email");
+                    setError('Please Enter a valid Email');
+                    handleShow()
                 }
-                               
+                if (err.code == "auth/email-already-in-use") {
+
+                    console.error("Account Exists");
+                    setError('Account Exists');
+                    handleShow()
+                }
+                if (err.code == "auth/invalid-password") {
+                    console.error("Password must be atleast 6 characters");
+                    setError('Password must be atleast 6 characters');
+                    handleShow()
+                }
+                if (err.code == "auth/weak-password") {
+                    console.error("Please choose a Strong Password");
+                    setError('Please choose a Strong Password');
+                    handleShow()
+                }
+                console.error(err.code)
+
             }
+
+        }
     }
-    const googlesignin = async () =>{
-		const db = getFirestore();
+    const googlesignin = async () => {
+        const db = getFirestore();
 
         try {
             const googleprovider = new GoogleAuthProvider();
-		    const auth = getAuth();
-		    const google = await signInWithPopup(auth, googleprovider);
-		    const credential = GoogleAuthProvider.credentialFromResult(google);
-		    const user = google.user;
-     	    const email = user.email;
+            const auth = getAuth();
+            const google = await signInWithPopup(auth, googleprovider);
+            const credential = GoogleAuthProvider.credentialFromResult(google);
+            const user = google.user;
+            const email = user.email;
             const name = user.displayName;
-		    const uid =user.uid;
+            const uid = user.uid;
 
-		setDoc(doc(db, "users", uid), {
-       				Emailid: email,
-        			Name: name,
-       				UserID: uid,
-                    admin : false,
-                    creator : false
-       			 
+            setDoc(doc(db, "users", uid), {
+                Emailid: email,
+                Name: name,
+                UserID: uid,
+                admin: false,
+                creator: false
 
-      });
-            
+
+            });
+
         } catch (error) {
+            // if(error.code ="auth/popup-closed-by-user"){
+            //     handleShow()
+            //     setError('Log-In Cancelled');
+            // }
+            console.log(error.code);
 
-            switch (error.code) {
-                case "auth/popup-closed-by-user":
-                    console.error("Sign-Up Cancelled"); 
-                    break;
-                default:
-                    break;
-            }
-            
         }
 
-		
-		
 
-	}
+
+
+    }
     const { push } = useHistory()
     useEffect(() => {
         console.log(UserData)
@@ -165,13 +182,13 @@ const Signup = () => {
                         </div>
                         {/* <div className="row"> */}
                         <div className={styles.item}>
-                            <form
-                                onSubmit={(e) => {
-                                    e.preventDefault()
-                                    handleSubmit()
-                                }}
-                            >
-                                <div className={styles.ks}>
+                            <div className={styles.ks}>
+                                <form className="needs-validation" novalidate
+                                    onSubmit={(e) => {
+                                        e.preventDefault()
+                                        handleSubmit()
+                                    }}
+                                >
                                     <div className="row">
                                         <div class="col-xl-6 col-lg-6 col-md-6">
                                             <div>
@@ -179,13 +196,14 @@ const Signup = () => {
                                                     onChange={(e) => {
                                                         updateState(e)
                                                     }}
-                                                    onBlur ={(ev)=>{
-                                                        if(ev.target.value == ""){
+                                                    onBlur={(ev) => {
+                                                        if (ev.target.value == "") {
                                                             console.log("Please Enter Your Name")
                                                         }
                                                     }}
                                                     className={styles.field}
                                                     value={data.name}
+                                                    id="validationCustomUsername"
                                                     label='Name'
                                                     name='name'
                                                     type='text'
@@ -200,13 +218,14 @@ const Signup = () => {
                                                     onChange={(e) => {
                                                         updateState(e)
                                                     }}
-                                                    onBlur ={(ev)=>{
-                                                        if(ev.target.value == ""){
+                                                    onBlur={(ev) => {
+                                                        if (ev.target.value == "") {
                                                             console.log("Please Enter Your Username")
                                                         }
                                                     }}
                                                     className={styles.field}
                                                     label='User Name'
+                                                    id="validationCustom02"
                                                     name='username'
                                                     type='text'
                                                     placeholder='Enter your Username'
@@ -221,8 +240,8 @@ const Signup = () => {
                                                     onChange={(e) => {
                                                         updateState(e)
                                                     }}
-                                                    onBlur ={(ev)=>{
-                                                        if(ev.target.value == ""){
+                                                    onBlur={(ev) => {
+                                                        if (ev.target.value == "") {
                                                             console.log("Please Enter Email Address")
                                                         }
                                                     }}
@@ -230,6 +249,7 @@ const Signup = () => {
                                                     label='Email Address'
                                                     name='email'
                                                     type='email'
+                                                    id="validationCustom03"
                                                     placeholder='Enter your email'
                                                     required />
                                             </div>
@@ -241,14 +261,15 @@ const Signup = () => {
                                                     onChange={(e) => {
                                                         updateState(e)
                                                     }}
-                                                    onBlur ={(ev)=>{
-                                                        if(ev.target.value == ""){
+                                                    onBlur={(ev) => {
+                                                        if (ev.target.value == "") {
                                                             console.log("Please Enter Phone Number")
                                                         }
                                                     }}
                                                     className={styles.field}
                                                     label='Phone Number'
                                                     name='phone'
+                                                    id="validationCustom04"
                                                     type='text'
                                                     placeholder='Enter your Phone number'
                                                     required
@@ -261,8 +282,8 @@ const Signup = () => {
                                                     onChange={(e) => {
                                                         updateState(e)
                                                     }}
-                                                    onBlur ={(ev)=>{
-                                                        if(ev.target.value == ""){
+                                                    onBlur={(ev) => {
+                                                        if (ev.target.value == "") {
                                                             console.log("Password can't be Empty")
                                                         }
                                                     }}
@@ -270,6 +291,7 @@ const Signup = () => {
                                                     label='Password'
                                                     name='password'
                                                     type='password'
+                                                    id="validationCustom05"
                                                     placeholder='Enter your password'
                                                     required
                                                 />
@@ -282,56 +304,83 @@ const Signup = () => {
                                                     onChange={(e) => {
                                                         updateState(e)
                                                     }}
-                                                    onBlur ={(ev)=>{
-                                                        if(ev.target.value == ""){
+                                                    onBlur={(ev) => {
+                                                        if (ev.target.value == "") {
                                                             console.log("Please Re-Enter Password")
                                                         }
                                                     }}
                                                     className={styles.field}
                                                     label='Confirm Password'
                                                     name='cpassword'
+                                                    // id="validationCustom01"
                                                     type='password'
                                                     placeholder='Re-Enter your password'
                                                     required
                                                 />
                                             </div>
                                         </div>
-                                        {/* <Link
-										onClick={(e) => {
-                                            e.preventDefault()
-										}}
-										to={'#'}
-                                        >
-										Login
-									</Link> */}
-                                        {/* </input> */}
+
                                     </div>
-                                   
-                                </div>
-                                        {/* <div>  <input  className={cn('button-stroke', styles.button)} type='submit' value='Login With Google' /></div> */}
-                                <div className={styles.signBut}>
-                                    <div><input className={cn('button-stroke', styles.button,)} 
-                                     type='submit'
-                                     id ="submitbtn"
-                                      value='Sign Up'
-                                       onClick = {(e) => {
-								 e.preventDefault()
-								 handleSubmit(e)
-							 }} /></div>
-                                </div>
-                            </form>
-                                        <div className={cn('button-stroke', styles.button)}> <img class="icons mr-3" src="/google.png" /> <button 
-                                        className={styles.button2} type="submit"
-                                         onClick = {(e) => {
-								 e.preventDefault()
-								 googlesignin(e)
-							 }}>Sign up with Google</button></div>
+                                    <Button  className={cn('button-stroke', styles.button, "btn")}><input
+                                        type='submit' value='Sign Up'
+                                    /></Button>
+                                    <Modal
+                                        show={show}
+                                        onHide={handleClose}
+                                        backdrop="static"
+                                        keyboard={false}
+                                    >
+                                        <Modal.Header closeButton>
+                                            <Modal.Title>Notification</Modal.Title>
+                                        </Modal.Header>
+                                        <Modal.Body>    
+                                            {error}
+                                        </Modal.Body>
+                                        <Modal.Footer>
+                                            <Button variant="secondary" onClick={handleClose}>
+                                                Close
+                                            </Button>
+                                            {/* <Button variant="primary">Understood</Button> */}
+                                        </Modal.Footer>
+                                    </Modal>
+                                </form>
+                            </div>
+                            <div className={cn('button-stroke', styles.button)}> <img class="icons mr-3" src="/google.png" /> <button
+                                className={styles.button2} type="submit"
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    googlesignin(e)
+                                }}>Sign up with Google</button></div>
                             {/* </div> */}
                         </div>
                         <div className={styles.note}>We do not own your private keys and cannot access your funds without your confirmation.</div>
                     </div>
                 </div>
             </div>
+            {/* <Button variant="primary" onClick={handleShow}>
+                Launch static backdrop modal
+            </Button> */}
+
+            {/* <Modal
+                show={show}
+                onHide={handleClose}
+                backdrop="static"
+                keyboard={false}
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>Modal title</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    I will not close if you click outside me. Don't even try to press
+                    escape key.
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="primary">Understood</Button>
+                </Modal.Footer>
+            </Modal> */}
         </>
     );
 }

@@ -6,7 +6,7 @@ import TextInput from '../../components/TextInput'
 import { useHistory } from 'react-router'
 import { firebaseApp } from '../../firebaseConfig'
 import { Button, Modal } from 'react-bootstrap';
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail } from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, } from 'firebase/auth'
 import { getFirestore, setDoc, doc } from 'firebase/firestore'
 import { useSelector } from 'react-redux'
 
@@ -28,9 +28,10 @@ const Login = () => {
 		setData((state) => ({ ...state, [e.target.name]: e.target.value }))
 	}
 	const [show, setShow] = useState(false);
-	const [error, setError] = useState({ error: '' });
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
+    const [error , setError] = useState({error:''});
+    var error1;
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 	const googlesignin = async () => {
 		const db = getFirestore();
 
@@ -55,55 +56,18 @@ const Login = () => {
 
 
 	}
-
-	const forgotPassword = async () => {
-		const auth = getAuth();
-		try {
-		    const promise = await sendPasswordResetEmail(auth, data.email)
-			console.log("Email Sent!");
-			
-			setError('Mail Sent')
-		} catch (err) {
-			
-			setError('Some Error Occured')
-			if (err.code == "auth/missing-email") {
-					handleShow()
-					setError('Please Enter Email Address');
-					console.error("Invalid Password");
-				}
-			console.error(err)
-			
-	}
-	}
 	const handleSubmit = async () => {
+		try {
+			const auth = getAuth()
+			const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password)
+			const user = userCredential.user;
+			const emailVerified = user.emailVerified;
 
-		if (data.email == "" || data.password == "") {
-			console.error("Some error Occured");
-		}
-		else {
-			try {
-				const auth = getAuth()
-				const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password)
-				const user = userCredential.user;
-				const emailVerified = user.emailVerified;
-
-
-			} catch (err) {
-
-				if (err.code == "auth/wrong-password") {
-					handleShow()
-					setError('Invalid Password');
-					console.error("Invalid Password");
-				}
-				else if (err.code == "auth/user-not-found") {
-					handleShow()
-					setError("Account Doesn't exists")
-					console.error("Account Doesn't exists");
-				}
-				console.error(err.code)
-
-			}
-
+			console.log({ data, userCredential })
+		} catch (err) {
+			setError('Invalid');
+            handleShow()
+			console.error(err)
 		}
 	}
 	const { push } = useHistory()
@@ -114,6 +78,7 @@ const Login = () => {
 
 		}
 	}, [loggedIn, push])
+
 	return (
 		<div className={styles.page}>
 			<Control className={styles.control} item={breadcrumbs} />
@@ -122,7 +87,7 @@ const Login = () => {
 					<div className={styles.top}>
 						<h1 className={cn('h2', styles.title)}>Login</h1>
 						Become a part of the social revolution.
-
+						
 					</div>
 					<div className={styles.list}>
 						<div className={styles.item}>
@@ -134,12 +99,12 @@ const Login = () => {
 							>
 								{/* <label for="validationCustom01">First name</label> */}
 								<div>
-									{/* <TextInput
+									<TextInput
 										onChange={(e) => {
 											updateState(e)
 										}}
 										className={styles.field}
-										// id="validationCustom01"
+										id="validationCustom01"
 										value={data.email}
 										name='email'
 										label="Email"
@@ -149,46 +114,21 @@ const Login = () => {
 									/>
 									{/* <div class="invalid-feedback">
 										Please choose a username.
-									</div> */} 
+									</div> */}
 								</div>
 								<TextInput
 									onChange={(e) => {
 										updateState(e)
 									}}
-									onBlur={(e) => {
-										if (e.target.value == "") {
-											console.log("Enter Email To proceed")
-										}
-									}}
 									className={styles.field}
 									id="validationCustom01"
-									value={data.email}
-									label='Email Address'
-									name='email'
-									type='email'
-									placeholder='Enter your email'
-									required
-								/>
-
-								<TextInput
-									onChange={(e) => {
-										updateState(e)
-									}}
-									onBlur={(e) => {
-										if (e.target.value == "") {
-											console.log("Enter password To proceed")
-										}
-									}}
-									className={styles.field}
 									label='Password'
 									name='password'
 									type='password'
 									placeholder='Enter your password'
 									required
 								/>
-								<Button className={cn('button-stroke', styles.button)}><input
-
-								 type='submit' value='Login' /></Button>
+								<Button className={cn('button-stroke', styles.button)}><input type='submit' value='Login' /></Button>
 
 								{/* <Link
 										onClick={(e) => {
@@ -200,12 +140,7 @@ const Login = () => {
 									</Link> */}
 								{/* </input> */}
 							</form>
-							<a className={cn(styles.link)}
-							onClick={(e) => {
-											forgotPassword(e)
-										}}>
-										Forgot Password?
-										</a>
+							<a className={cn(styles.link)} >Forgot Password</a>
 
 							<Button className={cn('button-stroke', styles.button)}><div> <img class="icons mr-3" src="/google.png" /> <button
 								className={styles.button2} type="submit"
@@ -214,26 +149,7 @@ const Login = () => {
 									googlesignin(e)
 								}}
 							>Sign up with Google</button></div></Button>
-							{/* <a className={cn(styles.link)} onClick={(e) => {
-								if (data.email == "") {
-									console.error("Please Enter  email");
-								} else {
-									forgotPassword(e)
-								}
-							}}  >Forgot Password?</a> */}
 
-							{/* <div className={cn('button-stroke', styles.button)}> <img class="icons mr-3" src="/google.png" /> <button
-								className={styles.button2} type="submit"
-								onClick={(e) => {
-									e.preventDefault()
-									googlesignin(e)
-								}}
-							>Sign up with Google</button></div> */}
-						</div>
-					</div>
-					<div className={styles.note}>We do not own your private keys and cannot access your funds without your confirmation.</div>
-				</div>
-			</div>
 			<Modal
 				show={show}
 				onHide={handleClose}
@@ -244,6 +160,7 @@ const Login = () => {
 					<Modal.Title>Error</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
+
 					{error}
 				</Modal.Body>
 				<Modal.Footer>
@@ -253,10 +170,15 @@ const Login = () => {
 					{/* <Button variant="primary">Understood</Button> */}
 				</Modal.Footer>
 			</Modal>
+
+						</div>
+					</div>
+					<div className={styles.note}>We do not own your private keys and cannot access your funds without your confirmation.</div>
+				</div>
+			</div>
 		</div>
 
 	)
 }
-
 
 export default Login
