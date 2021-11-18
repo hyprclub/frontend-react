@@ -58,19 +58,12 @@ const Login = () => {
 	}
 	const handleSubmit = async () => {
 		try {
-<<<<<<< HEAD
 			const auth = getAuth()
 			const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password)
 			const user = userCredential.user;
 			const emailVerified = user.emailVerified;
 
 			console.log({ data, userCredential })
-=======
-		    const promise = await sendPasswordResetEmail(auth, data.email)
-			console.log("Email Sent!");
-			handleShow()
-			setError('Mail Sent')
->>>>>>> 6ed7490b19b5718ddba680b5b18e9d4bc9050928
 		} catch (err) {
 			setError('Invalid');
             handleShow()
