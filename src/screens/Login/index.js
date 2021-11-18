@@ -6,8 +6,6 @@ import TextInput from '../../components/TextInput'
 import { useHistory } from 'react-router'
 import { firebaseApp } from '../../firebaseConfig'
 import { Button, Modal } from 'react-bootstrap';
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, } from 'firebase/auth'
-import { getFirestore, setDoc, doc } from 'firebase/firestore'
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail } from 'firebase/auth'
 import { getFirestore, setDoc, doc } from 'firebase/firestore'
 import { useSelector } from 'react-redux'
@@ -31,7 +29,6 @@ const Login = () => {
 	}
 	const [show, setShow] = useState(false);
 	const [error, setError] = useState({ error: '' });
-	var error1;
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 	const googlesignin = async () => {
@@ -62,22 +59,21 @@ const Login = () => {
 	const forgotPassword = async () => {
 		const auth = getAuth();
 		try {
-			const auth = getAuth()
-			const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password)
-			const user = userCredential.user;
-			const emailVerified = user.emailVerified;
-
-			console.log({ data, userCredential })
+		    const promise = await sendPasswordResetEmail(auth, data.email)
+			console.log("Email Sent!");
+			
+			setError('Mail Sent')
 		} catch (err) {
-			setError('Invalid');
-			handleShow()
+			
+			setError('Some Error Occured')
+			if (err.code == "auth/missing-email") {
+					handleShow()
+					setError('Please Enter Email Address');
+					console.error("Invalid Password");
+				}
 			console.error(err)
-			const promise = await sendPasswordResetEmail(auth, data.email)
-			console.log("Email Sent!")
-
-		// } catch (err) {
-		// 	console.error(err.code)
-		// }
+			
+	}
 	}
 	const handleSubmit = async () => {
 
@@ -95,10 +91,13 @@ const Login = () => {
 			} catch (err) {
 
 				if (err.code == "auth/wrong-password") {
+					handleShow()
+					setError('Invalid Password');
 					console.error("Invalid Password");
 				}
-				if (err.code == "auth/user-not-found") {
-
+				else if (err.code == "auth/user-not-found") {
+					handleShow()
+					setError("Account Doesn't exists")
 					console.error("Account Doesn't exists");
 				}
 				console.error(err.code)
@@ -115,7 +114,6 @@ const Login = () => {
 
 		}
 	}, [loggedIn, push])
-
 	return (
 		<div className={styles.page}>
 			<Control className={styles.control} item={breadcrumbs} />
@@ -136,12 +134,12 @@ const Login = () => {
 							>
 								{/* <label for="validationCustom01">First name</label> */}
 								<div>
-									<TextInput
+									{/* <TextInput
 										onChange={(e) => {
 											updateState(e)
 										}}
 										className={styles.field}
-										id="validationCustom01"
+										// id="validationCustom01"
 										value={data.email}
 										name='email'
 										label="Email"
@@ -151,7 +149,7 @@ const Login = () => {
 									/>
 									{/* <div class="invalid-feedback">
 										Please choose a username.
-									</div> */}
+									</div> */} 
 								</div>
 								<TextInput
 									onChange={(e) => {
@@ -188,7 +186,9 @@ const Login = () => {
 									placeholder='Enter your password'
 									required
 								/>
-								<Button className={cn('button-stroke', styles.button)}><input type='submit' value='Login' /></Button>
+								<Button className={cn('button-stroke', styles.button)}><input
+
+								 type='submit' value='Login' /></Button>
 
 								{/* <Link
 										onClick={(e) => {
@@ -200,7 +200,12 @@ const Login = () => {
 									</Link> */}
 								{/* </input> */}
 							</form>
-							<a className={cn(styles.link)} >Forgot Password</a>
+							<a className={cn(styles.link)}
+							onClick={(e) => {
+											forgotPassword(e)
+										}}>
+										Forgot Password?
+										</a>
 
 							<Button className={cn('button-stroke', styles.button)}><div> <img class="icons mr-3" src="/google.png" /> <button
 								className={styles.button2} type="submit"
@@ -209,21 +214,21 @@ const Login = () => {
 									googlesignin(e)
 								}}
 							>Sign up with Google</button></div></Button>
-							<a className={cn(styles.link)} onClick={(e) => {
+							{/* <a className={cn(styles.link)} onClick={(e) => {
 								if (data.email == "") {
 									console.error("Please Enter  email");
 								} else {
 									forgotPassword(e)
 								}
-							}}  >Forgot Password?</a>
+							}}  >Forgot Password?</a> */}
 
-							<div className={cn('button-stroke', styles.button)}> <img class="icons mr-3" src="/google.png" /> <button
+							{/* <div className={cn('button-stroke', styles.button)}> <img class="icons mr-3" src="/google.png" /> <button
 								className={styles.button2} type="submit"
 								onClick={(e) => {
 									e.preventDefault()
 									googlesignin(e)
 								}}
-							>Sign up with Google</button></div>
+							>Sign up with Google</button></div> */}
 						</div>
 					</div>
 					<div className={styles.note}>We do not own your private keys and cannot access your funds without your confirmation.</div>
@@ -239,7 +244,6 @@ const Login = () => {
 					<Modal.Title>Error</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-
 					{error}
 				</Modal.Body>
 				<Modal.Footer>
@@ -253,5 +257,6 @@ const Login = () => {
 
 	)
 }
+
 
 export default Login

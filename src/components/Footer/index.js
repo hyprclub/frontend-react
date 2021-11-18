@@ -6,6 +6,14 @@ import Group from './Group'
 import Image from '../Image'
 import Form from '../Form'
 import Theme from '../Theme'
+import {
+    getFirestore,
+    setDoc,
+    getDocs,
+    doc,
+    collection,
+    getDoc
+} from 'firebase/firestore'
 
 const items = [
 	{
@@ -39,8 +47,8 @@ const items = [
 const Footers = () => {
 	const [email, setEmail] = useState('')
 
-	const handleSubmit = (e) => {
-		alert()
+	const handleSubmit = async (e) => {
+		console.log(email)
 	}
 
 	return (
@@ -79,7 +87,12 @@ const Footers = () => {
 							className={styles.form}
 							value={email}
 							setValue={setEmail}
-							onSubmit={() => handleSubmit()}
+							
+							onSubmit={(e) => {
+								handleSubmit()
+							e.preventDefault()
+
+							}}
 							placeholder='Enter your email'
 							type='email'
 							name='email'
