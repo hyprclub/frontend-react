@@ -10,18 +10,25 @@
     align-items: center
     justify-content: center
 .button
+    width: auto !important
     margin-top: 1rem !important
+    background-color: $white !important
+    text-decoration: none !important
+    // color: $white !important
+    border-radius: 40px !important
+    // border-color: $blue !important
+    margin-top: 1rem !important
+    +dark
+        input
+            color: $white !important
+        color: $white !important
+        background-color: $black !important
 
 .button2
     text-decoration: none
     +dark
         color: $white
-        // box-shadow: 0 0 0 2px $neutrals3 inset
-        // color: $neutrals8
-        // svg
-        //     fill: $neutrals8
-        // &:hover
-        //     box-shadow: 0 0 0 2px $blue inset
+
 .link
     display: flex
     align-items: left

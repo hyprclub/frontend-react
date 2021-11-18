@@ -11,7 +11,6 @@ const Card = ({ className, item }) => {
     <div className={cn(styles.card, className)}>
       <div className={styles.preview}>
         <div>
-
         <img  className={styles.imagehover} srcSet={`${item.image2x} 2x`} src={item.image} alt="Card" />
         </div>
         <div className={styles.control}>

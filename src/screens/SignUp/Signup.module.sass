@@ -6,7 +6,20 @@
         max-width: 896px
 
 .button
+    background-color: $white !important
+    text-decoration: none !important
+    border-radius: 40px !important
+    border-color: $blue !important
     margin-top: 1rem !important
+    // +dark
+    //     &:hover
+    //         background-color: $blue
+    +dark
+        input
+            color: $white !important
+        color: $white !important
+        background-color: $black !important
+        
 
 
 .field
@@ -16,7 +29,9 @@
     border: none
     text-decoration: none
     +dark
-        color: $white
+        color: $white !important
+        // &:hover
+        //     border-color: $blue !important
 .signBut
     display: flex
     align-items: center
@@ -34,7 +49,7 @@
     margin-bottom: 16px
 
 .info
-    color: $neutrals4
+    color: $neutrals4 
     span
         color: $neutrals2
         +dark

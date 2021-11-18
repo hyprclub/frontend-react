@@ -5,8 +5,9 @@ import Control from '../../components/Control'
 import TextInput from '../../components/TextInput'
 import { useHistory } from 'react-router'
 import { firebaseApp } from '../../firebaseConfig'
-import { getAuth, signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup,} from 'firebase/auth'
-import { getFirestore , setDoc , doc } from 'firebase/firestore'
+import { Button, Modal } from 'react-bootstrap';
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, } from 'firebase/auth'
+import { getFirestore, setDoc, doc } from 'firebase/firestore'
 import { useSelector } from 'react-redux'
 
 const breadcrumbs = [
@@ -26,7 +27,12 @@ const Login = () => {
 	function updateState(e) {
 		setData((state) => ({ ...state, [e.target.name]: e.target.value }))
 	}
-	const googlesignin = async () =>{
+	const [show, setShow] = useState(false);
+    const [error , setError] = useState({error:''});
+    var error1;
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+	const googlesignin = async () => {
 		const db = getFirestore();
 
 		const googleprovider = new GoogleAuthProvider();
@@ -34,20 +40,20 @@ const Login = () => {
 		const google = await signInWithPopup(auth, googleprovider);
 		const credential = GoogleAuthProvider.credentialFromResult(google);
 		const user = google.user;
-     	const email = user.email;
-        const name = user.displayName;
-		const uid =user.uid;
+		const email = user.email;
+		const name = user.displayName;
+		const uid = user.uid;
 
 		setDoc(doc(db, "users", uid), {
-       				Emailid: email,
-        			Name: name,
-       				UserID: uid,
-					admin : false,
-                    creator : false
-       			 
+			Emailid: email,
+			Name: name,
+			UserID: uid,
+			admin: false,
+			creator: false
 
-      });
-		
+
+		});
+
 
 	}
 	const handleSubmit = async () => {
@@ -56,9 +62,11 @@ const Login = () => {
 			const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password)
 			const user = userCredential.user;
 			const emailVerified = user.emailVerified;
-			
+
 			console.log({ data, userCredential })
 		} catch (err) {
+			setError('Invalid');
+            handleShow()
 			console.error(err)
 		}
 	}
@@ -66,8 +74,8 @@ const Login = () => {
 	useEffect(() => {
 		console.log(UserData)
 		if (loggedIn) {
-				push('/')
-			
+			push('/')
+
 		}
 	}, [loggedIn, push])
 
@@ -79,44 +87,49 @@ const Login = () => {
 					<div className={styles.top}>
 						<h1 className={cn('h2', styles.title)}>Login</h1>
 						Become a part of the social revolution.
-						{/* <div className={styles.info}> */}
-						{/* sell one collectible multiple times */}
-						{/* </div> */}
+						
 					</div>
 					<div className={styles.list}>
 						<div className={styles.item}>
-							<form
+							<form className="needs-validation" novalidate
 								onSubmit={(e) => {
 									e.preventDefault()
 									handleSubmit()
 								}}
 							>
+								{/* <label for="validationCustom01">First name</label> */}
+								<div>
+									<TextInput
+										onChange={(e) => {
+											updateState(e)
+										}}
+										className={styles.field}
+										id="validationCustom01"
+										value={data.email}
+										name='email'
+										label="Email"
+										type='email'
+										placeholder='Enter your email'
+										required
+									/>
+									{/* <div class="invalid-feedback">
+										Please choose a username.
+									</div> */}
+								</div>
 								<TextInput
 									onChange={(e) => {
 										updateState(e)
 									}}
 									className={styles.field}
-									value={data.email}
-									label='Email Address'
-									name='email'
-									type='email'
-									placeholder='Enter your email'
-									required
-								/>
-
-								<TextInput
-									onChange={(e) => {
-										updateState(e)
-									}}
-									className={styles.field}
+									id="validationCustom01"
 									label='Password'
 									name='password'
 									type='password'
 									placeholder='Enter your password'
 									required
 								/>
-								<input className={cn('button-stroke', styles.button)} type='submit' value='Login' />
-								
+								<Button className={cn('button-stroke', styles.button)}><input type='submit' value='Login' /></Button>
+
 								{/* <Link
 										onClick={(e) => {
 											e.preventDefault()
@@ -128,22 +141,43 @@ const Login = () => {
 								{/* </input> */}
 							</form>
 							<a className={cn(styles.link)} >Forgot Password</a>
-							
-							<div className={cn('button-stroke', styles.button)}> <img class="icons mr-3" src="/google.png" /> <button
-							 className={styles.button2} type="submit"
-							  onClick = {(e) => {
-								 e.preventDefault()
-								 googlesignin(e)
-							 }}
-							 >Sign up with Google</button></div>
-			
+
+							<Button className={cn('button-stroke', styles.button)}><div> <img class="icons mr-3" src="/google.png" /> <button
+								className={styles.button2} type="submit"
+								onClick={(e) => {
+									e.preventDefault()
+									googlesignin(e)
+								}}
+							>Sign up with Google</button></div></Button>
+
 
 						</div>
 					</div>
 					<div className={styles.note}>We do not own your private keys and cannot access your funds without your confirmation.</div>
 				</div>
 			</div>
+			<Modal
+				show={show}
+				onHide={handleClose}
+				backdrop="static"
+				keyboard={false}
+			>
+				<Modal.Header closeButton>
+					<Modal.Title>Error</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+
+					{error}
+				</Modal.Body>
+				<Modal.Footer>
+					<Button variant="secondary" onClick={handleClose}>
+						Close
+					</Button>
+					{/* <Button variant="primary">Understood</Button> */}
+				</Modal.Footer>
+			</Modal>
 		</div>
+
 	)
 }
 
