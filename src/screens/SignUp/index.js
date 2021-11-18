@@ -44,7 +44,7 @@ const Signup = () => {
 
     }
     const [show, setShow] = useState(false);
-    const [error , setError] = useState({error:''});
+    const [error, setError] = useState({ error: '' });
     var error1;
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -70,8 +70,6 @@ const Signup = () => {
             setError('Some error Occured');
             handleShow()
         }
-
-<<<<<<< HEAD
         else {
             try {
                 const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password)
@@ -114,309 +112,307 @@ const Signup = () => {
                     console.error("Password must be atleast 6 characters");
                     setError('Password must be atleast 6 characters');
                     handleShow()
-=======
-            else{
-                try {
-                     const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password)
-                                const user = userCredential.user;
-                                const emailVerified = user.emailVerified;
-                                const uid = user.uid;
-                                //   await setDoc(doc(db,"users",uid,"NFT","Owned","Jsons"),{
+                else {
+                      try {
+                        const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password)
+                        const user = userCredential.user;
+                        const emailVerified = user.emailVerified;
+                        const uid = user.uid;
+                        //   await setDoc(doc(db,"users",uid,"NFT","Owned","Jsons"),{
 
-                                //   });
+                        //   });
 
-                                   await setDoc(doc(db,"users",uid),{
+                        await setDoc(doc(db, "users", uid), {
 
-                                        Name: data.name,
-                                        Emailid: data.email,
-                                        Phone: data.phone,
-                                        Username: data.username,
-                                        UserID: uid,
-                                        admin : false ,
-                                        creator : false,
-                                        Bio : "",
-                                        Instagram : "",
-                                        Portfolio : "",
-                                        Twitter : ""
-                                        })
+                            Name: data.name,
+                            Emailid: data.email,
+                            Phone: data.phone,
+                            Username: data.username,
+                            UserID: uid,
+                            admin: false,
+                            creator: false,
+                            Bio: "",
+                            Instagram: "",
+                            Portfolio: "",
+                            Twitter: ""
+                        })
 
-                                        console.log({ data, userCredential })
-                    
-                } catch (err) {
+                        console.log({ data, userCredential })
+
+                    } catch (err) {
+                        console.error(err.code)
+
+                        if (err.code == "auth/invalid-email") {
+                            console.error("Please Enter a valid Email");
+                        }
+                        if (err.code == "auth/email-already-in-use") {
+
+                            console.error("Account Exists");
+                        }
+                        if (err.code == "auth/invalid-password") {
+                            console.error("Password must be atleast 6 characters")
+                        }
+                        if (err.code == "auth/weak-password") {
+                            console.error("Please choose a Strong Password")
+                        }
+                        console.error(err.code)
+
+                    }
+                    if (err.code == "auth/weak-password") {
+                        console.error("Please choose a Strong Password");
+                        setError('Please choose a Strong Password');
+                        handleShow()
+                    }
                     console.error(err.code)
-            
-                         if(err.code == "auth/invalid-email"){
-                                console.error("Please Enter a valid Email");
-                                 }
-                         if(err.code == "auth/email-already-in-use"){
 
-                                 console.error("Account Exists");
-                                }
-                        if(err.code == "auth/invalid-password"){
-                                    console.error("Password must be atleast 6 characters")
-                                 }
-                        if(err.code == "auth/weak-password"){
-                                console.error("Please choose a Strong Password")
-                                 }
-                            console.error(err.code)
-                    
->>>>>>> 025760bb8b3af34cd0ffb4f534684190d62ae7e3
                 }
-                if (err.code == "auth/weak-password") {
-                    console.error("Please choose a Strong Password");
-                    setError('Please choose a Strong Password');
-                    handleShow()
+
+            }
+        }
+        const googlesignin = async () => {
+            const db = getFirestore();
+
+            try {
+                const googleprovider = new GoogleAuthProvider();
+                const auth = getAuth();
+                const google = await signInWithPopup(auth, googleprovider);
+                const credential = GoogleAuthProvider.credentialFromResult(google);
+                const user = google.user;
+                const email = user.email;
+                const name = user.displayName;
+                const uid = user.uid;
+
+                setDoc(doc(db, "users", uid), {
+                    Emailid: email,
+                    Name: name,
+                    UserID: uid,
+                    admin: false,
+                    creator: false
+
+
+                });
+
+            } catch (error) {
+
+                switch (error.code) {
+                    case "auth/popup-closed-by-user":
+                        console.error("Sign-Up Cancelled");
+                        break;
+                    default:
+                        break;
                 }
-                console.error(err.code)
 
             }
 
+
+
+
         }
-    }
-    const googlesignin = async () => {
-        const db = getFirestore();
+        const { push } = useHistory()
+        useEffect(() => {
+            console.log(UserData)
+            if (loggedIn) {
+                push('/')
 
-        try {
-            const googleprovider = new GoogleAuthProvider();
-            const auth = getAuth();
-            const google = await signInWithPopup(auth, googleprovider);
-            const credential = GoogleAuthProvider.credentialFromResult(google);
-            const user = google.user;
-            const email = user.email;
-            const name = user.displayName;
-            const uid = user.uid;
-
-            setDoc(doc(db, "users", uid), {
-                Emailid: email,
-                Name: name,
-                UserID: uid,
-                admin: false,
-                creator: false
-
-
-            });
-
-        } catch (error) {
-
-            switch (error.code) {
-                case "auth/popup-closed-by-user":
-                    console.error("Sign-Up Cancelled");
-                    break;
-                default:
-                    break;
             }
+        }, [loggedIn, push])
 
-        }
-
-
-
-
-    }
-    const { push } = useHistory()
-    useEffect(() => {
-        console.log(UserData)
-        if (loggedIn) {
-            push('/')
-
-        }
-    }, [loggedIn, push])
-
-    return (
-        <>
-            <div className={styles.page}>
-                <Control className={styles.control} item={breadcrumbs} />
-                <div className={cn('section-pt80', styles.section)}>
-                    <div className={cn('container-fluid', styles.container)}>
-                        <div className={styles.top}>
-                            <h1 className={cn('h2', styles.title)}>Create an Account</h1>
-                            Become a part of the social revolution.
-                            {/* <div className={styles.info}> */}
-                            {/* sell one collectible multiple times */}
-                            {/* </div> */}
-                        </div>
-                        {/* <div className="row"> */}
-                        <div className={styles.item}>
-                            <div className={styles.ks}>
-                                <form className="needs-validation" novalidate
-                                    onSubmit={(e) => {
-                                        e.preventDefault()
-                                        handleSubmit()
-                                    }}
-                                >
-                                    <div className="row">
-                                        <div class="col-xl-6 col-lg-6 col-md-6">
-                                            <div>
-                                                <TextInput
-                                                    onChange={(e) => {
-                                                        updateState(e)
-                                                    }}
-                                                    onBlur={(ev) => {
-                                                        if (ev.target.value == "") {
-                                                            console.log("Please Enter Your Name")
-                                                        }
-                                                    }}
-                                                    className={styles.field}
-                                                    value={data.name}
-                                                    id="validationCustomUsername"
-                                                    label='Name'
-                                                    name='name'
-                                                    type='text'
-                                                    placeholder='Enter your Full Name'
-                                                    required
-                                                />
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-6">
-                                            <div >
-                                                <TextInput
-                                                    onChange={(e) => {
-                                                        updateState(e)
-                                                    }}
-                                                    onBlur={(ev) => {
-                                                        if (ev.target.value == "") {
-                                                            console.log("Please Enter Your Username")
-                                                        }
-                                                    }}
-                                                    className={styles.field}
-                                                    label='User Name'
-                                                    id="validationCustom02"
-                                                    name='username'
-                                                    type='text'
-                                                    placeholder='Enter your Username'
-                                                    required
-                                                />
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-6">
-                                            <div>
-
-                                                <TextInput
-                                                    onChange={(e) => {
-                                                        updateState(e)
-                                                    }}
-                                                    onBlur={(ev) => {
-                                                        if (ev.target.value == "") {
-                                                            console.log("Please Enter Email Address")
-                                                        }
-                                                    }}
-                                                    className={styles.field}
-                                                    label='Email Address'
-                                                    name='email'
-                                                    type='email'
-                                                    id="validationCustom03"
-                                                    placeholder='Enter your email'
-                                                    required />
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-6">
-                                            <div>
-
-                                                <TextInput
-                                                    onChange={(e) => {
-                                                        updateState(e)
-                                                    }}
-                                                    onBlur={(ev) => {
-                                                        if (ev.target.value == "") {
-                                                            console.log("Please Enter Phone Number")
-                                                        }
-                                                    }}
-                                                    className={styles.field}
-                                                    label='Phone Number'
-                                                    name='phone'
-                                                    id="validationCustom04"
-                                                    type='text'
-                                                    placeholder='Enter your Phone number'
-                                                    required
-                                                /></div>
-                                        </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-6">
-                                            <div>
-
-                                                <TextInput
-                                                    onChange={(e) => {
-                                                        updateState(e)
-                                                    }}
-                                                    onBlur={(ev) => {
-                                                        if (ev.target.value == "") {
-                                                            console.log("Password can't be Empty")
-                                                        }
-                                                    }}
-                                                    className={styles.field}
-                                                    label='Password'
-                                                    name='password'
-                                                    type='password'
-                                                    id="validationCustom05"
-                                                    placeholder='Enter your password'
-                                                    required
-                                                />
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-6 col-lg-6 col-md-6">
-                                            <div>
-
-                                                <TextInput
-                                                    onChange={(e) => {
-                                                        updateState(e)
-                                                    }}
-                                                    onBlur={(ev) => {
-                                                        if (ev.target.value == "") {
-                                                            console.log("Please Re-Enter Password")
-                                                        }
-                                                    }}
-                                                    className={styles.field}
-                                                    label='Confirm Password'
-                                                    name='cpassword'
-                                                    // id="validationCustom01"
-                                                    type='password'
-                                                    placeholder='Re-Enter your password'
-                                                    required
-                                                />
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <Button  className={cn('button-stroke', styles.button, "btn")}><input
-                                        type='submit' value='Sign Up'
-                                    /></Button>
-                                    <Modal
-                                        show={show}
-                                        onHide={handleClose}
-                                        backdrop="static"
-                                        keyboard={false}
-                                    >
-                                        <Modal.Header closeButton>
-                                            <Modal.Title>Error</Modal.Title>
-                                        </Modal.Header>
-                                        <Modal.Body>
-                                            
-                                            {error}
-                                        </Modal.Body>
-                                        <Modal.Footer>
-                                            <Button variant="secondary" onClick={handleClose}>
-                                                Close
-                                            </Button>
-                                            {/* <Button variant="primary">Understood</Button> */}
-                                        </Modal.Footer>
-                                    </Modal>
-                                </form>
+        return (
+            <>
+                <div className={styles.page}>
+                    <Control className={styles.control} item={breadcrumbs} />
+                    <div className={cn('section-pt80', styles.section)}>
+                        <div className={cn('container-fluid', styles.container)}>
+                            <div className={styles.top}>
+                                <h1 className={cn('h2', styles.title)}>Create an Account</h1>
+                                Become a part of the social revolution.
+                                {/* <div className={styles.info}> */}
+                                {/* sell one collectible multiple times */}
+                                {/* </div> */}
                             </div>
-                            <div className={cn('button-stroke', styles.button)}> <img class="icons mr-3" src="/google.png" /> <button
-                                className={styles.button2} type="submit"
-                                onClick={(e) => {
-                                    e.preventDefault()
-                                    googlesignin(e)
-                                }}>Sign up with Google</button></div>
-                            {/* </div> */}
+                            {/* <div className="row"> */}
+                            <div className={styles.item}>
+                                <div className={styles.ks}>
+                                    <form className="needs-validation" novalidate
+                                        onSubmit={(e) => {
+                                            e.preventDefault()
+                                            handleSubmit()
+                                        }}
+                                    >
+                                        <div className="row">
+                                            <div class="col-xl-6 col-lg-6 col-md-6">
+                                                <div>
+                                                    <TextInput
+                                                        onChange={(e) => {
+                                                            updateState(e)
+                                                        }}
+                                                        onBlur={(ev) => {
+                                                            if (ev.target.value == "") {
+                                                                console.log("Please Enter Your Name")
+                                                            }
+                                                        }}
+                                                        className={styles.field}
+                                                        value={data.name}
+                                                        id="validationCustomUsername"
+                                                        label='Name'
+                                                        name='name'
+                                                        type='text'
+                                                        placeholder='Enter your Full Name'
+                                                        required
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6">
+                                                <div >
+                                                    <TextInput
+                                                        onChange={(e) => {
+                                                            updateState(e)
+                                                        }}
+                                                        onBlur={(ev) => {
+                                                            if (ev.target.value == "") {
+                                                                console.log("Please Enter Your Username")
+                                                            }
+                                                        }}
+                                                        className={styles.field}
+                                                        label='User Name'
+                                                        id="validationCustom02"
+                                                        name='username'
+                                                        type='text'
+                                                        placeholder='Enter your Username'
+                                                        required
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6">
+                                                <div>
+
+                                                    <TextInput
+                                                        onChange={(e) => {
+                                                            updateState(e)
+                                                        }}
+                                                        onBlur={(ev) => {
+                                                            if (ev.target.value == "") {
+                                                                console.log("Please Enter Email Address")
+                                                            }
+                                                        }}
+                                                        className={styles.field}
+                                                        label='Email Address'
+                                                        name='email'
+                                                        type='email'
+                                                        id="validationCustom03"
+                                                        placeholder='Enter your email'
+                                                        required />
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6">
+                                                <div>
+
+                                                    <TextInput
+                                                        onChange={(e) => {
+                                                            updateState(e)
+                                                        }}
+                                                        onBlur={(ev) => {
+                                                            if (ev.target.value == "") {
+                                                                console.log("Please Enter Phone Number")
+                                                            }
+                                                        }}
+                                                        className={styles.field}
+                                                        label='Phone Number'
+                                                        name='phone'
+                                                        id="validationCustom04"
+                                                        type='text'
+                                                        placeholder='Enter your Phone number'
+                                                        required
+                                                    /></div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6">
+                                                <div>
+
+                                                    <TextInput
+                                                        onChange={(e) => {
+                                                            updateState(e)
+                                                        }}
+                                                        onBlur={(ev) => {
+                                                            if (ev.target.value == "") {
+                                                                console.log("Password can't be Empty")
+                                                            }
+                                                        }}
+                                                        className={styles.field}
+                                                        label='Password'
+                                                        name='password'
+                                                        type='password'
+                                                        id="validationCustom05"
+                                                        placeholder='Enter your password'
+                                                        required
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6">
+                                                <div>
+
+                                                    <TextInput
+                                                        onChange={(e) => {
+                                                            updateState(e)
+                                                        }}
+                                                        onBlur={(ev) => {
+                                                            if (ev.target.value == "") {
+                                                                console.log("Please Re-Enter Password")
+                                                            }
+                                                        }}
+                                                        className={styles.field}
+                                                        label='Confirm Password'
+                                                        name='cpassword'
+                                                        // id="validationCustom01"
+                                                        type='password'
+                                                        placeholder='Re-Enter your password'
+                                                        required
+                                                    />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <Button className={cn('button-stroke', styles.button, "btn")}><input
+                                            type='submit' value='Sign Up'
+                                        /></Button>
+                                        <Modal
+                                            show={show}
+                                            onHide={handleClose}
+                                            backdrop="static"
+                                            keyboard={false}
+                                        >
+                                            <Modal.Header closeButton>
+                                                <Modal.Title>Error</Modal.Title>
+                                            </Modal.Header>
+                                            <Modal.Body>
+
+                                                {error}
+                                            </Modal.Body>
+                                            <Modal.Footer>
+                                                <Button variant="secondary" onClick={handleClose}>
+                                                    Close
+                                                </Button>
+                                                {/* <Button variant="primary">Understood</Button> */}
+                                            </Modal.Footer>
+                                        </Modal>
+                                    </form>
+                                </div>
+                                <div className={cn('button-stroke', styles.button)}> <img class="icons mr-3" src="/google.png" /> <button
+                                    className={styles.button2} type="submit"
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        googlesignin(e)
+                                    }}>Sign up with Google</button></div>
+                                {/* </div> */}
+                            </div>
+                            <div className={styles.note}>We do not own your private keys and cannot access your funds without your confirmation.</div>
                         </div>
-                        <div className={styles.note}>We do not own your private keys and cannot access your funds without your confirmation.</div>
                     </div>
                 </div>
-            </div>
-            {/* <Button variant="primary" onClick={handleShow}>
+                {/* <Button variant="primary" onClick={handleShow}>
                 Launch static backdrop modal
             </Button> */}
 
-            {/* <Modal
+                {/* <Modal
                 show={show}
                 onHide={handleClose}
                 backdrop="static"
@@ -436,7 +432,7 @@ const Signup = () => {
                     <Button variant="primary">Understood</Button>
                 </Modal.Footer>
             </Modal> */}
-        </>
-    );
-}
-export default Signup
+            </>
+        );
+    }
+    export default Signup
