@@ -35,10 +35,6 @@ const Signup = () => {
     function updateState(e) {
 
         setData((state) => ({ ...state, [e.target.name]: e.target.value }))
-
-
-
-
     }
     const handleSubmit = async () => {
         try {
