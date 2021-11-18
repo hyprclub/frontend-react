@@ -35,9 +35,13 @@ const Signup = () => {
     function updateState(e) {
 
         setData((state) => ({ ...state, [e.target.name]: e.target.value }))
+
+
+
+
     }
     const handleSubmit = async () => {
-        try {
+        
 
             const auth = getAuth();
             const db = getFirestore();
@@ -53,11 +57,14 @@ const Signup = () => {
             }
 
             else{
-                                const userCredential =  createUserWithEmailAndPassword(auth, data.email, data.password)
+                try {
+                     const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password)
                                 const user = userCredential.user;
                                 const emailVerified = user.emailVerified;
                                 const uid = user.uid;
-                                   setDoc(doc(db,"users",uid),{
+
+                                   await setDoc(doc(db,"users",uid),{
+
                                         Name: data.name,
                                         Emailid: data.email,
                                         Phone: data.phone,
@@ -72,48 +79,41 @@ const Signup = () => {
                                         })
 
                                         console.log({ data, userCredential })
-
-                         
-                     
-                 
-
-
+                    
+                } catch (err) {
+                    console.error(err.code)
             
+                         if(err.code == "auth/invalid-email"){
+                                console.error("Please Enter a valid Email");
+                                 }
+                         if(err.code == "auth/email-already-in-use"){
 
-            
-
+                                 console.error("Account Exists");
+                                }
+                        if(err.code == "auth/invalid-password"){
+                                    console.error("Password must be atleast 6 characters")
+                                 }
+                        if(err.code == "auth/weak-password"){
+                                console.error("Please choose a Strong Password")
+                                 }
+                            console.error(err.code)
+                    
+                }
+                               
             }
-           
-        } catch (err) {
-            console.error(err.code)
-            
-            if(err.code == "auth/invalid-email"){
-                console.log("Please Enter a valid Email");
-            }
-            if(err.code == "auth/email-already-in-use"){
-
-                console.log("Account Exists");
-            }
-            if(err.code == "auth/invalid-password"){
-                console.log("Password must be atleast 6 characters")
-            }
-            if(err.code == "auth/weak-password"){
-                console.log("Please choose a Strong Password")
-            }
-            console.error(err.code)
-        }
     }
     const googlesignin = async () =>{
 		const db = getFirestore();
 
-		const googleprovider = new GoogleAuthProvider();
-		const auth = getAuth();
-		const google = await signInWithPopup(auth, googleprovider);
-		const credential = GoogleAuthProvider.credentialFromResult(google);
-		const user = google.user;
-     	const email = user.email;
-        const name = user.displayName;
-		const uid =user.uid;
+        try {
+            const googleprovider = new GoogleAuthProvider();
+		    const auth = getAuth();
+		    const google = await signInWithPopup(auth, googleprovider);
+		    const credential = GoogleAuthProvider.credentialFromResult(google);
+		    const user = google.user;
+     	    const email = user.email;
+            const name = user.displayName;
+		    const uid =user.uid;
 
 		setDoc(doc(db, "users", uid), {
        				Emailid: email,
@@ -124,6 +124,20 @@ const Signup = () => {
        			 
 
       });
+            
+        } catch (error) {
+
+            switch (error.code) {
+                case "auth/popup-closed-by-user":
+                    console.error("Sign-Up Cancelled"); 
+                    break;
+                default:
+                    break;
+            }
+            
+        }
+
+		
 		
 
 	}
@@ -298,6 +312,7 @@ const Signup = () => {
                                 <div className={styles.signBut}>
                                     <div><input className={cn('button-stroke', styles.button,)} 
                                      type='submit'
+                                     id ="submitbtn"
                                       value='Sign Up'
                                        onClick = {(e) => {
 								 e.preventDefault()

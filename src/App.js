@@ -142,11 +142,19 @@ function App() {
 			const db = getFirestore();
 			getDocs(collection(db,"users",uid,"NFT","Owned","Jsons")).then((querySnapshot)=>{
 				querySnapshot.forEach((docSnap)=>{
-					const nftjson = docSnap.data().json;
+
+					if(docSnap.exists()){
+						const nftjson = docSnap.data().json;
 					axios.get(nftjson).then(resps =>{
 						console.log(resps.data)
 						 dispatch(UserDataActions.userNftData({json: resps.data}))
 					})
+
+					}
+					else{
+						console.log("no user nft");
+					}
+					
 				})
 
 			})

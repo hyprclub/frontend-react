@@ -193,13 +193,13 @@ const Profile = (props) => {
 	const bids =[
 		
 	{
-    title: UserData.json.name,
+    title:  "nothing",
     price: "2.45 ETH",
     highestBid: "0.001 ETH",
     counter: "3 in stock",
     bid: 'New bid <span role="img" aria-label="fire">🔥</span>',
     // image: UserData.json.image,
-    image2x: UserData.json.image,
+    image2x: "/images/content/avatar-1.jpg",
     category: "green",
     categoryText: "purchasing !",
     url: "/",
