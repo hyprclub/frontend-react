@@ -7,6 +7,7 @@ import User from './User'
 import Items from './Items'
 import Followers from './Followers'
 import { useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 // data
 // import { bids } from '../../mocks/bids'
@@ -188,6 +189,17 @@ const Profile = (props) => {
 	const [socialState,setSocialState] = useState(socials)
 
 	const [username, setUsername] = React.useState()
+	const { push } = useHistory()
+	const loggedIn = useSelector((state) => state.UserData.loggedIn)
+
+	React.useEffect(()=>{
+		if(loggedIn){
+
+		}else{
+			push('/')
+		}
+
+	},[loggedIn,push])
 
 
 	const bids =[

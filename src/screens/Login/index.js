@@ -5,7 +5,7 @@ import Control from '../../components/Control'
 import TextInput from '../../components/TextInput'
 import { useHistory } from 'react-router'
 import { firebaseApp } from '../../firebaseConfig'
-import { getAuth, signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup,} from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup,sendPasswordResetEmail} from 'firebase/auth'
 import { getFirestore , setDoc , doc } from 'firebase/firestore'
 import { useSelector } from 'react-redux'
 
@@ -50,17 +50,47 @@ const Login = () => {
 		
 
 	}
-	const handleSubmit = async () => {
+
+	const forgotPassword = async () =>{
+		const auth = getAuth();
 		try {
-			const auth = getAuth()
-			const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password)
-			const user = userCredential.user;
-			const emailVerified = user.emailVerified;
-			
-			console.log({ data, userCredential })
+			const promise = await sendPasswordResetEmail(auth,data.email)
+			console.log("Email Sent!")
+
 		} catch (err) {
-			console.error(err)
+			console.error(err.code)
 		}
+		
+
+
+	}
+	const handleSubmit = async () => {
+		
+           if( data.email == "" ||  data.password == ""){
+                console.error("Some error Occured");
+            }
+            else{
+                try {
+						const auth = getAuth()
+						const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password)
+						const user = userCredential.user;
+						const emailVerified = user.emailVerified;
+                     
+                    
+                } catch (err) {
+            
+                         if(err.code == "auth/wrong-password"){
+                                console.error("Invalid Password");
+                                 }
+                         if(err.code == "auth/user-not-found"){
+
+                                 console.error("Account Doesn't exists");
+                                }
+                            console.error(err.code)
+                    
+                }
+                               
+            }
 	}
 	const { push } = useHistory()
 	useEffect(() => {
@@ -95,6 +125,11 @@ const Login = () => {
 									onChange={(e) => {
 										updateState(e)
 									}}
+									onBlur={(e)=>{
+										if(e.target.value == ""){
+											console.log("Enter Email To proceed")
+										}
+									}}
 									className={styles.field}
 									value={data.email}
 									label='Email Address'
@@ -107,6 +142,11 @@ const Login = () => {
 								<TextInput
 									onChange={(e) => {
 										updateState(e)
+									}}
+									onBlur={(e)=>{
+										if(e.target.value == ""){
+											console.log("Enter password To proceed")
+										}
 									}}
 									className={styles.field}
 									label='Password'
@@ -127,7 +167,13 @@ const Login = () => {
 									</Link> */}
 								{/* </input> */}
 							</form>
-							<a className={cn(styles.link)} >Forgot Password</a>
+							<a className={cn(styles.link)} onClick={(e) => {
+								if(data.email == ""){
+									console.error("Please Enter  email");
+								}else{
+									forgotPassword(e)
+								}											
+									     }}  >Forgot Password?</a>
 							
 							<div className={cn('button-stroke', styles.button)}> <img class="icons mr-3" src="/google.png" /> <button
 							 className={styles.button2} type="submit"

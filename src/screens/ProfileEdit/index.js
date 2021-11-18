@@ -8,6 +8,7 @@ import TextArea from '../../components/TextArea'
 import Icon from '../../components/Icon'
 import { useSelector } from 'react-redux'
 import { firebaseApp } from '../../firebaseConfig'
+import { useHistory } from 'react-router-dom'
 import {doc,
   updateDoc,
   getFirestore,} from 'firebase/firestore'
@@ -37,6 +38,16 @@ const ProfileEdit = () => {
 	const [data, setData] = useState({ name : '' , email: '' , username : '', phoneno : '', instagram: '',bio : ''})
 	const UserData = useSelector((state) => state.UserData)
 	const [image, setImage] = useState(null)
+	const loggedIn = useSelector((state) => state.UserData.loggedIn)
+	const { push } = useHistory()
+	React.useEffect(()=>{
+		if(loggedIn){
+
+		}else{
+			push('/')
+		}
+
+	},[loggedIn,push])
 
 	function updateState(e) {
 		setData((state) => ({ ...state, [e.target.name]: e.target.value }))

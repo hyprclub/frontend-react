@@ -16,7 +16,7 @@ import Item from './screens/Item'
 import PageList from './screens/PageList'
 import { useEffect } from 'react'
 import { firebaseApp } from './firebaseConfig'
-import { getAuth, onAuthStateChanged } from '@firebase/auth'
+import { getAuth, onAuthStateChanged, sendEmailVerification  } from '@firebase/auth'
 import UserData, { UserDataActions } from './redux/slices/UserData'
 import { useDispatch, useSelector } from 'react-redux'
 import { Logout } from './Logout'
@@ -45,7 +45,20 @@ function App() {
 
 			onAuthStateChanged(auth, (user) => {
 				if (user) {
-					dispatch(UserDataActions.login(user.toJSON()))
+					if(user.emailVerified){
+						dispatch(UserDataActions.login(user.toJSON()))
+					}
+					else{
+						try {
+							console.log("Please Verify Email address. Verification has been sent to you. Please Verify to continue");
+							const verfificationmail =  sendEmailVerification(user);
+
+						} catch (error) {
+							console.log(error.code);
+						}
+					}
+					
+					
 				} else {
 					dispatch(UserDataActions.logout())
 				}
@@ -61,6 +74,13 @@ function App() {
 				try {
 					getDoc(doc(db,"users",uid)).then((docSnap) =>{
 						if(docSnap.exists()){
+							if(docSnap.data().admin){
+								console.log("true");
+
+							}
+							else{
+								console.log("false");
+							}
 							dispatch(UserDataActions.updateUserDetails(docSnap.data()))
 						}
 						else{
@@ -108,33 +128,32 @@ function App() {
 		run()
 	}, [loggedIn,uid,dispatch])
 	
-// 	useEffect(() =>{
-// 		if(loggedIn){
-// 			const run  = async () =>{
-// 			const db = getFirestore();
-// 			 getDocs(collection(db,"NFT's")).then((querySnapshot)=>{
-// 				querySnapshot.forEach((docSnapID) =>{
-// 					getDoc(doc(db,"NFT's",docSnapID.id)).then((docSnapshot)=>{
-// 						// console.log(docSnapshot.data().json)
-// 						const nftjson = docSnapshot.data().json;
-// 						axios.get(nftjson).then(resp => {
-// 							console.log(resp.data)
-//                         dispatch(UserDataActions.nftData({json: resp.data}))
+	useEffect(() =>{
+			const run  = async () =>{
+			const db = getFirestore();
+			 getDocs(collection(db,"NFT's")).then((querySnapshot)=>{
+				querySnapshot.forEach((docSnapID) =>{
+					getDoc(doc(db,"NFT's",docSnapID.id)).then((docSnapshot)=>{
+						// console.log(docSnapshot.data().json)
+						const nftjson = docSnapshot.data().json;
+						axios.get(nftjson).then(resp => {
+							console.log(resp.data)
+                        // dispatch(UserDataActions.nftData({json: resp.data}))
 						
-// 					})
+					})
 					
-// 				})
-// 			})
+				})
+			})
 
 			
-// });
+});
 
 				
-// 		}
-// 		run()
-// 		}
+		}
+		run()
 		
-// 	}, [loggedIn,dispatch])	
+		
+	}, [dispatch])	
 
 	useEffect(() =>{
 		if(loggedIn && uid){

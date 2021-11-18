@@ -62,6 +62,9 @@ const Signup = () => {
                                 const user = userCredential.user;
                                 const emailVerified = user.emailVerified;
                                 const uid = user.uid;
+                                //   await setDoc(doc(db,"users",uid,"NFT","Owned","Jsons"),{
+
+                                //   });
 
                                    await setDoc(doc(db,"users",uid),{
 
