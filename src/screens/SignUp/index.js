@@ -71,6 +71,7 @@ const Signup = () => {
             handleShow()
         }
 
+<<<<<<< HEAD
         else {
             try {
                 const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password)
@@ -113,6 +114,53 @@ const Signup = () => {
                     console.error("Password must be atleast 6 characters");
                     setError('Password must be atleast 6 characters');
                     handleShow()
+=======
+            else{
+                try {
+                     const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password)
+                                const user = userCredential.user;
+                                const emailVerified = user.emailVerified;
+                                const uid = user.uid;
+                                //   await setDoc(doc(db,"users",uid,"NFT","Owned","Jsons"),{
+
+                                //   });
+
+                                   await setDoc(doc(db,"users",uid),{
+
+                                        Name: data.name,
+                                        Emailid: data.email,
+                                        Phone: data.phone,
+                                        Username: data.username,
+                                        UserID: uid,
+                                        admin : false ,
+                                        creator : false,
+                                        Bio : "",
+                                        Instagram : "",
+                                        Portfolio : "",
+                                        Twitter : ""
+                                        })
+
+                                        console.log({ data, userCredential })
+                    
+                } catch (err) {
+                    console.error(err.code)
+            
+                         if(err.code == "auth/invalid-email"){
+                                console.error("Please Enter a valid Email");
+                                 }
+                         if(err.code == "auth/email-already-in-use"){
+
+                                 console.error("Account Exists");
+                                }
+                        if(err.code == "auth/invalid-password"){
+                                    console.error("Password must be atleast 6 characters")
+                                 }
+                        if(err.code == "auth/weak-password"){
+                                console.error("Please choose a Strong Password")
+                                 }
+                            console.error(err.code)
+                    
+>>>>>>> 025760bb8b3af34cd0ffb4f534684190d62ae7e3
                 }
                 if (err.code == "auth/weak-password") {
                     console.error("Please choose a Strong Password");
