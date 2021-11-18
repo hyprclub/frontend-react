@@ -42,26 +42,21 @@ const Signup = () => {
     }
     const handleSubmit = async () => {
         try {
-            
+
             const auth = getAuth();
             const db = getFirestore();
 
             if(data.password != data.cpassword){
-                console.log("password do not match");
+                console.error("password do not match");
             }
-            if(data.phone.length>10 || data.phone.length <10){
-                console.log("Invalid Phone Number")
+            else if(data.phone.length>10 || data.phone.length <10){
+                console.error("Invalid Phone Number")
+            }
+            else if(data.phone == "" || data.email == "" || data.username == "" || data.name =="" || data.cpassword == ""){
+                console.error("Some error Occured");
             }
 
             else{
-                
-
-                 await getDocs(collection(db,"usernames")).then((querySnapshot)=>{
-                     querySnapshot.forEach((docSnap)=>{
-                         if(docSnap.id == data.username){
-
-
-                         }else{
                                 const userCredential =  createUserWithEmailAndPassword(auth, data.email, data.password)
                                 const user = userCredential.user;
                                 const emailVerified = user.emailVerified;
@@ -80,29 +75,22 @@ const Signup = () => {
                                         Twitter : ""
                                         })
 
-                         }
-                     })
-                 })
+                                        console.log({ data, userCredential })
+
+                         
+                     
+                 
 
 
             
 
-            // console.log({ data, userCredential })
+            
 
             }
            
         } catch (err) {
             console.error(err.code)
-            // switch (err.code)) {
-            //     case "auth/invalid-email":
-            //         error = "Please Enter a Valid Email Address";
-            //         break;
-            //     case "auth/email-already-in-use":
-            //         error = ""
             
-            //     default:
-            //         break;
-            // }
             if(err.code == "auth/invalid-email"){
                 console.log("Please Enter a valid Email");
             }
@@ -116,6 +104,7 @@ const Signup = () => {
             if(err.code == "auth/weak-password"){
                 console.log("Please choose a Strong Password")
             }
+            console.error(err.code)
         }
     }
     const googlesignin = async () =>{
