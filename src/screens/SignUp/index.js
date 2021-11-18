@@ -42,7 +42,7 @@ const Signup = () => {
     }
     const handleSubmit = async () => {
         try {
-            const error;
+            
             const auth = getAuth();
             const db = getFirestore();
 

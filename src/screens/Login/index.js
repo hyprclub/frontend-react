@@ -116,7 +116,6 @@ const Login = () => {
 									required
 								/>
 								<input className={cn('button-stroke', styles.button)} type='submit' value='Login' />
-								<a  >Forgot Password</a>
 								
 								{/* <Link
 										onClick={(e) => {
@@ -128,6 +127,7 @@ const Login = () => {
 									</Link> */}
 								{/* </input> */}
 							</form>
+							<a className={cn(styles.link)} >Forgot Password</a>
 							
 							<div className={cn('button-stroke', styles.button)}> <img class="icons mr-3" src="/google.png" /> <button
 							 className={styles.button2} type="submit"
