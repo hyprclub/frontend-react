@@ -5,6 +5,9 @@ import Card from "../../../components/Card";
 import Loader from "../../../components/Loader";
 
 const Items = ({ className, items }) => {
+  
+
+
   return (
     <div className={cn(styles.items, className)}>
       <div className={styles.list}>

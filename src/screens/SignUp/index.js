@@ -7,11 +7,15 @@ import TextInput from '../../components/TextInput'
 import { useHistory } from 'react-router'
 import {  getAuth,
   createUserWithEmailAndPassword
-  ,GoogleAuthProvider,signInWithPopup } from 'firebase/auth'
+  ,GoogleAuthProvider
+  ,signInWithPopup } from 'firebase/auth'
 import {
     getFirestore,
     setDoc,
-    doc
+    getDocs,
+    doc,
+    collection,
+    getDoc
 } from 'firebase/firestore'
 import { useSelector } from 'react-redux'
 
@@ -21,43 +25,97 @@ const breadcrumbs = [
         url: '/',
     },
     {
-        title: 'Login',
+        title: 'Signup',
     },
 ]
 const Signup = () => {
     const loggedIn = useSelector((state) => state.UserData.loggedIn)
     const UserData = useSelector((state) => state.UserData)
-    const [data, setData] = useState({email :'' , password : '' , name : '' ,username :'' , phone :''})
+    const [data, setData] = useState({email :'' , password : '' ,cpassword : '', name : '' ,username :'' , phone :''})
     function updateState(e) {
+
         setData((state) => ({ ...state, [e.target.name]: e.target.value }))
+
+
 
 
     }
     const handleSubmit = async () => {
         try {
+            const error;
             const auth = getAuth();
             const db = getFirestore();
-            const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password)
-            const user = userCredential.user;
-            const emailVerified = user.emailVerified;
-            const uid = user.uid;
-            const data1 = await setDoc(doc(db,"users",uid),{
-                Name: data.name,
-                Emailid: data.email,
-                Phone: data.phone,
-                Username: data.username,
-                UserID: uid,
-                admin : false ,
-                creator : false,
-                Bio : "",
-                Instagram : "",
-                Portfolio : "",
-                Twitter : ""
-            })
 
-            console.log({ data, userCredential })
+            if(data.password != data.cpassword){
+                console.log("password do not match");
+            }
+            if(data.phone.length>10 || data.phone.length <10){
+                console.log("Invalid Phone Number")
+            }
+
+            else{
+                
+
+                 await getDocs(collection(db,"usernames")).then((querySnapshot)=>{
+                     querySnapshot.forEach((docSnap)=>{
+                         if(docSnap.id == data.username){
+
+
+                         }else{
+                                const userCredential =  createUserWithEmailAndPassword(auth, data.email, data.password)
+                                const user = userCredential.user;
+                                const emailVerified = user.emailVerified;
+                                const uid = user.uid;
+                                   setDoc(doc(db,"users",uid),{
+                                        Name: data.name,
+                                        Emailid: data.email,
+                                        Phone: data.phone,
+                                        Username: data.username,
+                                        UserID: uid,
+                                        admin : false ,
+                                        creator : false,
+                                        Bio : "",
+                                        Instagram : "",
+                                        Portfolio : "",
+                                        Twitter : ""
+                                        })
+
+                         }
+                     })
+                 })
+
+
+            
+
+            // console.log({ data, userCredential })
+
+            }
+           
         } catch (err) {
-            console.error(err)
+            console.error(err.code)
+            // switch (err.code)) {
+            //     case "auth/invalid-email":
+            //         error = "Please Enter a Valid Email Address";
+            //         break;
+            //     case "auth/email-already-in-use":
+            //         error = ""
+            
+            //     default:
+            //         break;
+            // }
+            if(err.code == "auth/invalid-email"){
+                console.log("Please Enter a valid Email");
+            }
+            if(err.code == "auth/email-already-in-use"){
+
+                console.log("Account Exists");
+            }
+            if(err.code == "auth/invalid-password"){
+                console.log("Password must be atleast 6 characters")
+            }
+            if(err.code == "auth/weak-password"){
+                console.log("Please choose a Strong Password")
+            }
         }
     }
     const googlesignin = async () =>{
@@ -122,6 +180,11 @@ const Signup = () => {
                                                     onChange={(e) => {
                                                         updateState(e)
                                                     }}
+                                                    onBlur ={(ev)=>{
+                                                        if(ev.target.value == ""){
+                                                            console.log("Please Enter Your Name")
+                                                        }
+                                                    }}
                                                     className={styles.field}
                                                     value={data.name}
                                                     label='Name'
@@ -137,6 +200,11 @@ const Signup = () => {
                                                 <TextInput
                                                     onChange={(e) => {
                                                         updateState(e)
+                                                    }}
+                                                    onBlur ={(ev)=>{
+                                                        if(ev.target.value == ""){
+                                                            console.log("Please Enter Your Username")
+                                                        }
                                                     }}
                                                     className={styles.field}
                                                     label='User Name'
@@ -154,6 +222,11 @@ const Signup = () => {
                                                     onChange={(e) => {
                                                         updateState(e)
                                                     }}
+                                                    onBlur ={(ev)=>{
+                                                        if(ev.target.value == ""){
+                                                            console.log("Please Enter Email Address")
+                                                        }
+                                                    }}
                                                     className={styles.field}
                                                     label='Email Address'
                                                     name='email'
@@ -168,6 +241,11 @@ const Signup = () => {
                                                 <TextInput
                                                     onChange={(e) => {
                                                         updateState(e)
+                                                    }}
+                                                    onBlur ={(ev)=>{
+                                                        if(ev.target.value == ""){
+                                                            console.log("Please Enter Phone Number")
+                                                        }
                                                     }}
                                                     className={styles.field}
                                                     label='Phone Number'
@@ -184,6 +262,11 @@ const Signup = () => {
                                                     onChange={(e) => {
                                                         updateState(e)
                                                     }}
+                                                    onBlur ={(ev)=>{
+                                                        if(ev.target.value == ""){
+                                                            console.log("Password can't be Empty")
+                                                        }
+                                                    }}
                                                     className={styles.field}
                                                     label='Password'
                                                     name='password'
@@ -199,6 +282,11 @@ const Signup = () => {
                                                 <TextInput
                                                     onChange={(e) => {
                                                         updateState(e)
+                                                    }}
+                                                    onBlur ={(ev)=>{
+                                                        if(ev.target.value == ""){
+                                                            console.log("Please Re-Enter Password")
+                                                        }
                                                     }}
                                                     className={styles.field}
                                                     label='Confirm Password'

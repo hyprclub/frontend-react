@@ -23,7 +23,7 @@ import { Logout } from './Logout'
 import { getDoc,
 	doc,
 	getDocs,
-	collections,
+	collection,
 	getFirestore} from "firebase/firestore"
 import {
 	getStorage,
@@ -108,19 +108,54 @@ function App() {
 		run()
 	}, [loggedIn,uid,dispatch])
 	
+// 	useEffect(() =>{
+// 		if(loggedIn){
+// 			const run  = async () =>{
+// 			const db = getFirestore();
+// 			 getDocs(collection(db,"NFT's")).then((querySnapshot)=>{
+// 				querySnapshot.forEach((docSnapID) =>{
+// 					getDoc(doc(db,"NFT's",docSnapID.id)).then((docSnapshot)=>{
+// 						// console.log(docSnapshot.data().json)
+// 						const nftjson = docSnapshot.data().json;
+// 						axios.get(nftjson).then(resp => {
+// 							console.log(resp.data)
+//                         dispatch(UserDataActions.nftData({json: resp.data}))
+						
+// 					})
+					
+// 				})
+// 			})
+
+			
+// });
+
+				
+// 		}
+// 		run()
+// 		}
+		
+// 	}, [loggedIn,dispatch])	
+
 	useEffect(() =>{
-		if(loggedIn){
+		if(loggedIn && uid){
 			const run  = async () =>{
 			const db = getFirestore();
-			
+			getDocs(collection(db,"users",uid,"NFT","Owned","Jsons")).then((querySnapshot)=>{
+				querySnapshot.forEach((docSnap)=>{
+					const nftjson = docSnap.data().json;
+					axios.get(nftjson).then(resps =>{
+						console.log(resps.data)
+						 dispatch(UserDataActions.userNftData({json: resps.data}))
+					})
+				})
 
-			const nftdata =  await axios.get('https://raw.githubusercontent.com/hyprclub/cdn/main/1'); 
-			console.log(nftdata);
+			})
+				
 		}
 		run()
 		}
 		
-	}, [loggedIn])	
+	}, [loggedIn,uid,dispatch])	
 
 	return (
 		<Router>

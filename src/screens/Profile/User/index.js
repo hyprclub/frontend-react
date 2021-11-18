@@ -29,6 +29,8 @@ const User = ({ className, item, isOwnProfile }) => {
 		}
 	}, [isOwnProfile])
 
+	
+
 	return (
 		<>
 			<div className={cn(styles.user, className)}>

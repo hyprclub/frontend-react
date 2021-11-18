@@ -116,6 +116,8 @@ const Login = () => {
 									required
 								/>
 								<input className={cn('button-stroke', styles.button)} type='submit' value='Login' />
+								<a  >Forgot Password</a>
+								
 								{/* <Link
 										onClick={(e) => {
 											e.preventDefault()

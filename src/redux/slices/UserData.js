@@ -48,7 +48,7 @@ export const userDataSlice = createSlice({
 		updateUserDP : (state , {payload}) => {
 			state.profileDP = payload?.profileDP
 		},
-		nftData : (state , {payload}) => {
+		userNftData : (state , {payload}) => {
 			state.json = payload?.json
 		}
 	

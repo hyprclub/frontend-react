@@ -221,10 +221,10 @@ const ProfileEdit = () => {
 											}}
 												className={styles.field}
 												defaultValue = {data.instagram}
-												label='Instagram'
+												label='Instagram Username'
 												name='instagram'
 												type='text'
-												placeholder='instagram.com/username'
+												placeholder='Enter your Instagram Username'
 											
 											/>
 											

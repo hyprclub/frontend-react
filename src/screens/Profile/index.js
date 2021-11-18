@@ -9,7 +9,7 @@ import Followers from './Followers'
 import { useSelector } from 'react-redux'
 
 // data
-import { bids } from '../../mocks/bids'
+// import { bids } from '../../mocks/bids'
 import { isStepDivisible } from 'react-range/lib/utils'
 
 const navLinks = ['Collectibles', 'Created']
@@ -176,6 +176,8 @@ const socials = [
 	// },
 ]
 
+
+
 const Profile = (props) => {
 	const [activeIndex, setActiveIndex] = useState(0)
 	const [visible, setVisible] = useState(false)
@@ -187,6 +189,31 @@ const Profile = (props) => {
 
 	const [username, setUsername] = React.useState()
 
+
+	const bids =[
+		
+	{
+    title: UserData.json.name,
+    price: "2.45 ETH",
+    highestBid: "0.001 ETH",
+    counter: "3 in stock",
+    bid: 'New bid <span role="img" aria-label="fire">🔥</span>',
+    // image: UserData.json.image,
+    image2x: UserData.json.image,
+    category: "green",
+    categoryText: "purchasing !",
+    url: "/",
+    users: [
+      {
+        avatar: "/images/content/avatar-1.jpg",
+      },
+      {
+        avatar: "/images/content/avatar-4.jpg",
+      },
+    ],
+  }
+]
+
 	React.useEffect(()=>{
 		if(UserData) {
 			setSocialState([
@@ -196,7 +223,7 @@ const Profile = (props) => {
 				},
 				{
 					title: 'instagram',
-					url: UserData.instagram,
+					url: "https://www.instagram.com/" + UserData.instagram,
 				},
 			])
 		}
@@ -219,17 +246,17 @@ const Profile = (props) => {
 			>
 				<div className={cn('container', styles.container)}>
 					<div className={styles.btns}>
-						<button className={cn('button-stroke button-small', styles.button)} onClick={() => setVisible(true)}>
+						{/* <button className={cn('button-stroke button-small', styles.button)} onClick={() => setVisible(true)}>
 							<span>Edit cover photo</span>
 							<Icon name='edit' size='16' />
-						</button>
+						</button> */}
 						<Link className={cn('button-stroke button-small', styles.button)} to='profile-edit'>
 							<span>Edit profile</span>
 							<Icon name='image' size='16' />
 						</Link>
 					</div>
 					<div className={styles.file}>
-						<input type='file' />
+						{/* <input type='file' />
 						<div className={styles.wrap}>
 							<Icon name='upload-file' size='48' />
 							<div className={styles.info}>Drag and drop your photo here</div>
@@ -237,7 +264,7 @@ const Profile = (props) => {
 						</div>
 						<button className={cn('button-small', styles.button)} onClick={() => setVisible(false)}>
 							Save photo
-						</button>
+						</button> */}
 					</div>
 				</div>
 			</div>
@@ -260,12 +287,12 @@ const Profile = (props) => {
 						</div>
 						<div className={styles.group}>
 							<div className={styles.item}>
-								{activeIndex === 0 && <Items class={styles.items} items={bids.slice(0, 3)} />}
-								{activeIndex === 1 && <Items class={styles.items} items={bids.slice(0, 6)} />}
+								{activeIndex === 0 && <Items class={styles.items} items={bids.slice(0, 7)} />}
+								{/* {activeIndex === 1 && <Items class={styles.items} items={bids.slice(0, 6)} />}
 								{activeIndex === 2 && <Items class={styles.items} items={bids.slice(0, 2)} />}
 								{activeIndex === 3 && <Items class={styles.items} items={bids.slice(0, 3)} />}
 								{activeIndex === 4 && <Followers className={styles.followers} items={following} />}
-								{activeIndex === 5 && <Followers className={styles.followers} items={followers} />}
+								{activeIndex === 5 && <Followers className={styles.followers} items={followers} />} */}
 							</div>
 						</div>
 					</div>

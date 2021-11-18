@@ -58,7 +58,7 @@ const Footers = () => {
 							<a className="icons" href="https://www.facebook.com/hyprclub" target="_blank">
 								<img class="icons" src="/facebook.png" /> </a>
 							<a className="icons" href="https://www.linkedin.com/company/hyprclub/ " target="_blank"><img class="icons"
-								src="/linkdin.jpeg" /> </a>
+								src="/linkedin.png" /> </a>
 							<a className="icons" href="https://twitter.com/hyprclub" target="_blank"><img class="icons"
 								src="/twitter.png" /> </a>
 						</div>
