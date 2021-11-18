@@ -61,7 +61,7 @@ const Login = () => {
 		try {
 		    const promise = await sendPasswordResetEmail(auth, data.email)
 			console.log("Email Sent!");
-			
+			handleShow()
 			setError('Mail Sent')
 		} catch (err) {
 			
@@ -241,7 +241,7 @@ const Login = () => {
 				keyboard={false}
 			>
 				<Modal.Header closeButton>
-					<Modal.Title>Error</Modal.Title>
+					<Modal.Title>Notification</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 					{error}
