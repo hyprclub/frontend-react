@@ -6,7 +6,7 @@ import TextInput from '../../components/TextInput'
 import { useHistory } from 'react-router'
 import { firebaseApp } from '../../firebaseConfig'
 import { Button, Modal } from 'react-bootstrap';
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, } from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail } from 'firebase/auth'
 import { getFirestore, setDoc, doc } from 'firebase/firestore'
 import { useSelector } from 'react-redux'
 
@@ -29,7 +29,7 @@ const Login = () => {
 	}
 	const [show, setShow] = useState(false);
     const [error , setError] = useState({error:''});
-    var error1;
+
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 	const googlesignin = async () => {
@@ -56,6 +56,32 @@ const Login = () => {
 
 
 	}
+	const forgotpassword = async () =>{
+		try{
+			const auth = getAuth();
+			await sendPasswordResetEmail(auth,data.email);
+			console.log("Mail Sent");
+			// handleShow()
+			// setError("Forgot Password Mail Sent!");
+		}catch(error){
+			console.log(error.code);
+
+			if(error.code == "auth/missing-email"){
+				handleShow()
+				setError('Please Enter Email Address');
+			}
+			else{
+				handleShow()
+				setError('Some Error Occured');
+			}
+			
+
+			// handleShow()
+			// setError("Some Error Occured");
+				
+			
+		}
+	}
 	const handleSubmit = async () => {
 		try {
 			const auth = getAuth()
@@ -65,7 +91,7 @@ const Login = () => {
 
 			console.log({ data, userCredential })
 		} catch (err) {
-			setError('Invalid');
+			setError('Invalid Credential');
             handleShow()
 			console.error(err)
 		}
@@ -140,7 +166,12 @@ const Login = () => {
 									</Link> */}
 								{/* </input> */}
 							</form>
-							<a className={cn(styles.link)} >Forgot Password</a>
+							<a className={cn(styles.link)} 
+							onClick={(e) =>{
+			
+								forgotpassword(e)
+							}}
+							>Forgot Password?</a>
 
 							<Button className={cn('button-stroke', styles.button)}><div> <img class="icons mr-3" src="/google.png" /> <button
 								className={styles.button2} type="submit"
