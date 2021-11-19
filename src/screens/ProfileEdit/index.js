@@ -7,6 +7,7 @@ import TextInput from '../../components/TextInput'
 import TextArea from '../../components/TextArea'
 import Icon from '../../components/Icon'
 import { useSelector } from 'react-redux'
+import { Button, Modal } from 'react-bootstrap';
 import { firebaseApp } from '../../firebaseConfig'
 import { useHistory } from 'react-router-dom'
 import {doc,
@@ -40,6 +41,10 @@ const ProfileEdit = () => {
 	const [image, setImage] = useState(null)
 	const loggedIn = useSelector((state) => state.UserData.loggedIn)
 	const { push } = useHistory()
+	const [show, setShow] = useState(false);
+    const [error , setError] = useState({error:''});
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 	React.useEffect(()=>{
 		if(loggedIn){
 
@@ -255,6 +260,26 @@ const ProfileEdit = () => {
 									<Icon name='circle-close' size='24' />
 									Clear all
 								</button>
+								<Modal
+				show={show}
+				onHide={handleClose}
+				backdrop="static"
+				keyboard={false}
+			>
+				<Modal.Header closeButton>
+					<Modal.Title>Notification</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+
+					{error}
+				</Modal.Body>
+				<Modal.Footer>
+					<Button variant="secondary" onClick={handleClose}>
+						Close
+					</Button>
+					{/* <Button variant="primary">Understood</Button> */}
+				</Modal.Footer>
+			</Modal>
 							</div>
 						</div>
 					</div>
