@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import cn from "classnames";
 import styles from "./Item.module.sass";
 import Users from "./Users";
 import Control from "./Control";
 import Options from "./Options";
-import { getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL} from "firebase/storage";
+import { getDoc, doc, getFirestore } from "@firebase/firestore";
+import axios from "axios";
 
 const navLinks = ["Info", "Owners"];
 
@@ -36,10 +34,34 @@ const users = [
   },
 ];
 
-const Item = () => {
+const Item = (props) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [data, setData] = useState({ name: "", image: "", description: "" });
 
-  
+  React.useEffect(async () => {
+    if (props) {
+      const nftToken = new URLSearchParams(props?.location?.search).get(
+        "idToken"
+      );
+      console.log({ nftToken });
+      try {
+        const db = getFirestore();
+        const nftData = await getDoc(doc(db, "NFT's", nftToken));
+        console.log(nftData);
+        axios
+          .get(nftData.data().json)
+          .then((reps) => {
+            // console.log(reps.data);
+            setData(reps.data);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }, [props, setData]);
 
   return (
     <>
@@ -61,16 +83,12 @@ const Item = () => {
                   </div>
                 ))}
               </div>
-              <img
-                srcSet="/images/content/item-pic@2x.jpg 2x"
-                src="/images/content/item-pic.jpg"
-                alt="Item"
-              />
+              <img srcSet={`${data.image} 2x`} src={data.image} alt="Item" />
             </div>
             {/* <Options className={styles.options} /> */}
           </div>
           <div className={styles.details}>
-            <h1 className={cn("h3", styles.title)}>The amazing art</h1>
+            <h1 className={cn("h3", styles.title)}>{data.name}</h1>
             <div className={styles.cost}>
               <div className={cn("status-stroke-green", styles.price)}>
                 1000 INR
@@ -80,17 +98,7 @@ const Item = () => {
               </div> */}
               <div className={styles.counter}>100 in stock</div>
             </div>
-            <div className={styles.info}>
-              This NFT Card will give you Access to Special Airdrops. To learn
-              more about UI8 please visit{" "}
-              <a
-                href="https://ui8.net"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                https://ui8.net
-              </a>
-            </div>
+            <div className={styles.info}>{data.description}</div>
             <div className={styles.nav}>
               {navLinks.map((x, index) => (
                 <button
@@ -107,8 +115,16 @@ const Item = () => {
             </div>
             <Users className={styles.users} items={users} />
             <div className={styles.buttonFlex}>
-              <div className={styles.button1}><a class="button-small" href="/upload-variants">Claim Now</a></div>
-              <div className={styles.button1}><a class="button-small" href="/upload-variants">Certificate</a></div>
+              <div className={styles.button1}>
+                <a className="button-small" href="/upload-variants">
+                  Claim Now
+                </a>
+              </div>
+              <div className={styles.button1}>
+                <a className="button-small" href="/upload-variants">
+                  Certificate
+                </a>
+              </div>
             </div>
             {/* <Control className={styles.control} /> */}
           </div>

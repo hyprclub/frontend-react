@@ -3,15 +3,67 @@ import cn from "classnames";
 import { Link } from "react-router-dom";
 import styles from "./Card.module.sass";
 import Icon from "../Icon";
+import { useHistory } from "react-router-dom";
 
-const Card = ({ className, item }) => {
+import axios from "axios";
+import {
+  getDoc,
+  doc,
+  where,
+  getDocs,
+  collection,
+  getFirestore,
+  query,
+} from "firebase/firestore";
+
+const Card = ({ className, item: itemFromProps }) => {
   const [visible, setVisible] = useState(false);
+  const [item, setItem] = useState({});
+  const { push } = useHistory();
+
+  React.useEffect(() => {
+    const run = async () => {
+      try {
+        const db = getFirestore();
+        if (itemFromProps) {
+          console.log({ itemFromProps });
+          const docsnap = await getDoc(doc(db, "NFT's", itemFromProps));
+
+          if (docsnap.exists()) {
+            axios
+              .get(docsnap.data().json)
+              .then((resps) => {
+                console.log(resps.data);
+                // dispatch(UserDataActions.userNftData({ json: resps.data }));
+                setItem(resps.data);
+              })
+              .catch((error) => {
+                console.error({ error });
+              });
+          }
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    run();
+  }, [setItem, itemFromProps]);
+  const openItem = async (e) => {
+    if (itemFromProps) {
+      push("/item?idToken=" + itemFromProps);
+    }
+  };
 
   return (
     <div className={cn(styles.card, className)}>
       <div className={styles.preview}>
         <div>
-        <img  className={styles.imagehover} srcSet={`${item.image2x} 2x`} src={item.image} alt="Card" />
+          <img
+            className={styles.imagehover}
+            srcSet={`${item.image} 2x`}
+            src={item.image}
+            alt="Card"
+          />
         </div>
         <div className={styles.control}>
           <div
@@ -28,7 +80,12 @@ const Card = ({ className, item }) => {
           >
             <Icon name="heart" size="20" />
           </button> */}
-          <button className={cn("button-small", styles.button)}>
+          <button
+            onClick={(e) => {
+              openItem(e);
+            }}
+            className={cn("button-small", styles.button)}
+          >
             <span>Claim Now</span>
             <Icon name="scatter-up" size="16" />
           </button>
@@ -37,12 +94,12 @@ const Card = ({ className, item }) => {
       <Link className={styles.link} to={item.url}>
         <div className={styles.body}>
           <div className={styles.line}>
-            <div className={styles.title}>{item.title}</div>
+            <div className={styles.title}>{item.name}</div>
             <div className={styles.price}>{item.price}</div>
           </div>
           <div className={styles.line}>
             <div className={styles.users}>
-              {item.users.map((x, index) => (
+              {item?.users?.map((x, index) => (
                 <div className={styles.avatar} key={index}>
                   <img src={x.avatar} alt="Avatar" />
                 </div>
