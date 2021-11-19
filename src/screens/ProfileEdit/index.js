@@ -7,6 +7,7 @@ import TextInput from "../../components/TextInput";
 import TextArea from "../../components/TextArea";
 import Icon from "../../components/Icon";
 import { useSelector } from "react-redux";
+import { Button, Modal } from "react-bootstrap";
 import { firebaseApp } from "../../firebaseConfig";
 import { useHistory } from "react-router-dom";
 import { doc, updateDoc, getFirestore } from "firebase/firestore";
@@ -42,8 +43,12 @@ const ProfileEdit = () => {
   const [image, setImage] = useState(null);
   const loggedIn = useSelector((state) => state.UserData.loggedIn);
   const { push } = useHistory();
+  const [show, setShow] = useState(false);
+  const [error, setError] = useState({ error: "" });
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   React.useEffect(() => {
-    if (loggedIn !== undefined) {
+    if (loggedIn) {
     } else {
       push("/");
     }
@@ -53,6 +58,7 @@ const ProfileEdit = () => {
     setData((state) => ({ ...state, [e.target.name]: e.target.value }));
     console.log({ data });
   }
+
   const onImageChange = async (e) => {
     if (e.target.files && e.target.files[0]) {
       setImage(URL.createObjectURL(e.target.files[0]));
@@ -92,12 +98,22 @@ const ProfileEdit = () => {
         Portfolio: data.portfolio,
         Instagram: data.instagram,
       });
-
-      window?.location.reload();
+      handleShow();
+      setError("Profile Updated");
+      console.log("Profile Updated");
+      // window?.location.reload();
     } catch (error) {
-      console.error(error);
+      // console.error(error);
+      handleShow();
+      setError("Some error Occured");
     }
   };
+
+  useEffect(() => {
+    if (UserData) {
+      setData(UserData);
+    }
+  }, [UserData]);
 
   useEffect(() => {
     if (UserData) {
@@ -274,6 +290,23 @@ const ProfileEdit = () => {
                   <Icon name="circle-close" size="24" />
                   Clear all
                 </button>
+                <Modal
+                  show={show}
+                  onHide={handleClose}
+                  backdrop="static"
+                  keyboard={false}
+                >
+                  <Modal.Header closeButton>
+                    <Modal.Title>Notification</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>{error}</Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                      Close
+                    </Button>
+                    {/* <Button variant="primary">Understood</Button> */}
+                  </Modal.Footer>
+                </Modal>
               </div>
             </div>
           </div>
@@ -282,5 +315,4 @@ const ProfileEdit = () => {
     </div>
   );
 };
-
 export default ProfileEdit;

@@ -12,7 +12,6 @@ const Items = ({ className, items }) => {
           <Card className={styles.card} item={x} key={index} />
         ))}
       </div>
-      <Loader className={styles.loader} />
     </div>
   );
 };
