@@ -48,7 +48,7 @@ const ProfileEdit = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   React.useEffect(() => {
-    if (loggedIn) {
+    if (loggedIn != undefined) {
     } else {
       push("/");
     }
@@ -75,7 +75,9 @@ const ProfileEdit = () => {
           storagePFref,
           e.target.files[0]
         );
-        window?.location.reload();
+        handleShow();
+        setError("Profile Image Updated");
+        // window?.location.reload();
       } catch (error) {
         console.error(error);
       }
@@ -84,11 +86,6 @@ const ProfileEdit = () => {
   const updateUserProfile = async () => {
     try {
       const db = getFirestore();
-      const storage = getStorage();
-      const storagePFref = ref(
-        storage,
-        "users/" + UserData.uid + "/profile.jpg"
-      );
       await updateDoc(doc(db, "users", UserData.uid), {
         Name: data.name,
         Emailid: data.email,
@@ -98,10 +95,10 @@ const ProfileEdit = () => {
         Portfolio: data.portfolio,
         Instagram: data.instagram,
       });
-      handleShow();
+      handleShow(true);
       setError("Profile Updated");
       console.log("Profile Updated");
-      // window?.location.reload();
+      window?.location.reload();
     } catch (error) {
       // console.error(error);
       handleShow();

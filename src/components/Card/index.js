@@ -48,6 +48,7 @@ const Card = ({ className, item: itemFromProps }) => {
     };
     run();
   }, [setItem, itemFromProps]);
+
   const openItem = async (e) => {
     if (itemFromProps) {
       push("/item?idToken=" + itemFromProps);

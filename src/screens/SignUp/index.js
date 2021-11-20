@@ -12,6 +12,9 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   sendEmailVerification,
+  sendSignInLinkToEmail,
+  isSignInWithEmailLink,
+  signInWithEmailLink,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -86,14 +89,9 @@ const Signup = () => {
         const emailVerified = user.emailVerified;
         const uid = user.uid;
 
-        // if(user.emailVerified == false){
-        //     handleShow()
-        //     setError('Email Verification Sent Please Verify Email to Continue');
-        // }
-
-        // await setDoc(doc(db, "users", "NFT", "JSON"), {
-        //   json: "",
-        // });
+        await setDoc(doc(db, "users", "NFT", "JSON"), {
+          json: "",
+        });
 
         await setDoc(doc(db, "users", uid), {
           Name: data.name,
@@ -165,7 +163,66 @@ const Signup = () => {
       console.log(error.code);
     }
   };
+
+  //   const passwordLessSignIn = async (e) => {
+  //     const auth = getAuth();
+
+  //     try {
+  //       const actionCodeSettings = {
+  //         // URL you want to redirect back to. The domain (www.example.com) for this
+  //         // URL must be in the authorized domains list in the Firebase Console.
+  //         url: window.location.href,
+  //         // This must be true.
+  //         handleCodeInApp: true,
+  //       };
+  //       signInWithEmailLink(auth, data.email, actionCodeSettings)
+  //         .then((result) => {
+  //           console.log("Mail Sent");
+  //         })
+  //         .catch((error) => {
+  //           console.log(error);
+  //         });
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+
   const { push } = useHistory();
+  useEffect(() => {
+    const auth = getAuth();
+    if (isSignInWithEmailLink(auth, window.location.href)) {
+      let email = window.localStorage.getItem("emailForSignIn");
+      if (!email) {
+        // User opened the link on a different device. To prevent session fixation
+        // attacks, ask the user to provide the associated email again. For example:
+        email = window.prompt("Please provide your email for confirmation");
+        signInWithEmailLink(auth, email, window.location.href)
+          .then((result) => {
+            const db = getFirestore();
+            const user = result.user;
+            const uid = user.uid;
+            window.localStorage.removeItem("emailForSignIn");
+
+            //     setDoc(doc(db, "users", uid), {
+            //       Name: data.name,
+            //       Emailid: data.email,
+            //       Phone: data.phone,
+            //       Username: data.username,
+            //       UserID: uid,
+            //       admin: false,
+            //       creator: false,
+            //       Bio: "",
+            //       Instagram: "",
+            //       Portfolio: "",
+            //       Twitter: "",
+            //     });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    }
+  }, []);
   useEffect(() => {
     console.log(UserData);
     if (loggedIn) {
@@ -362,6 +419,22 @@ const Signup = () => {
                   Sign up with Google
                 </button>
               </div>
+              <div className={cn("button-stroke", styles.button)}>
+                {" "}
+                {/* <img className="icons mr-3" src="/google.png" />{" "} */}
+                <button
+                  className={styles.button2}
+                  type="submit"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    // googlesignin(e);
+                    // passwordLessSignIn(e);
+                  }}
+                >
+                  Password Less Sign-In
+                </button>
+              </div>
+
               {/* </div> */}
             </div>
             <div className={styles.note}>
