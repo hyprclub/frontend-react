@@ -164,28 +164,30 @@ const Signup = () => {
     }
   };
 
-  //   const passwordLessSignIn = async (e) => {
-  //     const auth = getAuth();
+  const passwordLessSignIn = async (e) => {
+    const auth = getAuth();
+    const actionCodeSettings = {
+      // URL you want to redirect back to. The domain (www.example.com) for this
+      // URL must be in the authorized domains list in the Firebase Console.
+      url: "http://localhost:3000/signup",
+      // This must be true.
+      handleCodeInApp: true,
+    };
 
-  //     try {
-  //       const actionCodeSettings = {
-  //         // URL you want to redirect back to. The domain (www.example.com) for this
-  //         // URL must be in the authorized domains list in the Firebase Console.
-  //         url: window.location.href,
-  //         // This must be true.
-  //         handleCodeInApp: true,
-  //       };
-  //       signInWithEmailLink(auth, data.email, actionCodeSettings)
-  //         .then((result) => {
-  //           console.log("Mail Sent");
-  //         })
-  //         .catch((error) => {
-  //           console.log(error);
-  //         });
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
+    try {
+      await sendSignInLinkToEmail(auth, data.email, actionCodeSettings)
+        .then((result) => {
+          console.log(result);
+          console.log(window.location.href);
+          console.log("Mail Sent");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const { push } = useHistory();
   useEffect(() => {
@@ -203,19 +205,19 @@ const Signup = () => {
             const uid = user.uid;
             window.localStorage.removeItem("emailForSignIn");
 
-            //     setDoc(doc(db, "users", uid), {
-            //       Name: data.name,
-            //       Emailid: data.email,
-            //       Phone: data.phone,
-            //       Username: data.username,
-            //       UserID: uid,
-            //       admin: false,
-            //       creator: false,
-            //       Bio: "",
-            //       Instagram: "",
-            //       Portfolio: "",
-            //       Twitter: "",
-            //     });
+            setDoc(doc(db, "users", uid), {
+              Name: data.name,
+              Emailid: data.email,
+              Phone: data.phone,
+              Username: data.username,
+              UserID: uid,
+              admin: false,
+              creator: false,
+              Bio: "",
+              Instagram: "",
+              Portfolio: "",
+              Twitter: "",
+            });
           })
           .catch((error) => {
             console.log(error);
@@ -428,7 +430,7 @@ const Signup = () => {
                   onClick={(e) => {
                     e.preventDefault();
                     // googlesignin(e);
-                    // passwordLessSignIn(e);
+                    passwordLessSignIn(e);
                   }}
                 >
                   Password Less Sign-In
