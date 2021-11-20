@@ -61,7 +61,7 @@ const Card = ({ className, item: itemFromProps }) => {
         <div>
           <img
             className={styles.imagehover}
-            srcSet={`${item.image} 2x`}
+            srcSet={`${item.image} `}
             src={item.image}
             alt="Card"
           />
