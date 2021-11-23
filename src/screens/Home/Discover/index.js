@@ -4,10 +4,8 @@ import styles from "./Discover.module.sass";
 import { Range, getTrackBackground } from "react-range";
 import Slider from "react-slick";
 import Icon from "../../../components/Icon";
-import Items from "../../../screens/Profile/Items";
 import Card from "../../../components/Card";
 import Dropdown from "../../../components/Dropdown";
-import { useSelector } from "react-redux";
 
 // data
 import { bids } from "../../../mocks/bids";
@@ -32,7 +30,6 @@ const Discover = () => {
   const [likes, setLikes] = useState(likesOptions[0]);
   const [creator, setCreator] = useState(creatorOptions[0]);
   const [sorting, setSorting] = useState(sortingOptions[0]);
-   const UserData = useSelector((state) => state.UserData);
 
   const [values, setValues] = useState([5]);
 
@@ -70,8 +67,6 @@ const Discover = () => {
       },
     ],
   };
-
-
 
   return (
     <div className={cn("section", styles.section)}>
@@ -231,10 +226,9 @@ const Discover = () => {
             className={cn("discover-slider", styles.slider)}
             {...settings}
           >
-            {<Items
-                    className={styles.items}
-                    items={UserData.nftIdsLogOut.slice(0, 10)}
-                  />}
+            {bids.map((x, index) => (
+              <Card className={styles.card} item={x} key={index} />
+            ))}
           </Slider>
         </div>
         <div className={styles.btns}>
