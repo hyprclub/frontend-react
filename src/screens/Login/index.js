@@ -186,21 +186,21 @@ const Login = () => {
 								}}
 							>Password-Less Sign In</button></div></Button>
 
-			<Modal
+			<Modal 
 				show={show}
 				onHide={handleClose}
 				backdrop="static"
 				keyboard={false}
 			>
-				<Modal.Header closeButton>
-					<Modal.Title>Notification</Modal.Title>
+				<Modal.Header closeButton className={styles.mymodal} >
+					<Modal.Title >Notification</Modal.Title>
 				</Modal.Header>
-				<Modal.Body>
+				<Modal.Body className={styles.mymodal2}>
 
 					{error}
 				</Modal.Body>
 				<Modal.Footer>
-					<Button variant="secondary" onClick={handleClose}>
+					<Button variant="secondary" className={styles.mymodal} onClick={handleClose}>
 						Close
 					</Button>
 					{/* <Button variant="primary">Understood</Button> */}

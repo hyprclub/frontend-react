@@ -396,12 +396,12 @@ const Signup = () => {
                     backdrop="static"
                     keyboard={false}
                   >
-                    <Modal.Header closeButton>
+                    <Modal.Header closeButton className={styles.mymodal}>
                       <Modal.Title>Notification</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>{error}</Modal.Body>
+                    <Modal.Body className={styles.mymodal2}>{error}</Modal.Body>
                     <Modal.Footer>
-                      <Button variant="secondary" onClick={handleClose}>
+                      <Button className={styles.mymodal} variant="secondary" onClick={handleClose}>
                         Close
                       </Button>
                       {/* <Button variant="primary">Understood</Button> */}
