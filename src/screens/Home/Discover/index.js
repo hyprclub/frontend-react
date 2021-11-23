@@ -77,7 +77,7 @@ const Discover = () => {
     <div className={cn("section", styles.section)}>
       <div className={cn("container", styles.container)}>
         <h3 className={cn("h3", styles.title)}>Discover</h3>
-        <div className={styles.top}>
+        {/* <div className={styles.top}>
           <div className={styles.dropdown}>
             <Dropdown
               className={styles.dropdown}
@@ -117,7 +117,7 @@ const Discover = () => {
               <Icon name="close" size="10" />
             </div>
           </button>
-        </div>
+        </div> */}
         <div className={cn(styles.filters, { [styles.active]: visible })}>
           <div className={styles.sorting}>
             <div className={styles.cell}>

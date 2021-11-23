@@ -2,9 +2,9 @@
 
 .card
     display: flex
+    // width: 80px 
+    height: 500px !important 
     flex-direction: column 
-    height: 252px
-    width: 252px
     &:hover
         .control
             visibility: visible
@@ -12,20 +12,15 @@
 
 .preview
     position: relative
-    border-radius: 16px
+    border-radius: 8px
     overflow: hidden
     & > img
         width: 100%
-    img
-        // &:hover
-        //     -webkit-transform: scale(1.1)
-        //     transform: scale(1.1)    
-            // transition-delay: 0.3s
 
     
-// .imagehover
-//     -webkit-transform: scale(1.1)
-//     transform: scale(1.1)
+.imagehover
+    width: 100% !important
+    height: 60% !important
 
 .control
     position: absolute
@@ -115,7 +110,7 @@
     display: flex
     align-items: flex-start
     &:first-child
-        margin-bottom: 12px
+        margin-bottom: 0px
     &:nth-child(2)
         margin-top: auto
 
