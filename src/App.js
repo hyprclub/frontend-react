@@ -118,6 +118,33 @@ function App() {
     run();
   }, [loggedIn, uid, dispatch]);
 
+    useEffect(() => {
+    const run = async () => {
+      const db = getFirestore();
+        try {
+          // const q = query(
+          //   collection(db, "NFT's"),
+          //   where("OwnerUid", "==", uid)
+          // );
+          // const nftQuerySnapshot = await getDocs(q);
+          const nftQuerySnapshot = await getDocs(collection(db,"NFT's"));
+
+          const nftIdsLogOut = [];
+          nftQuerySnapshot.forEach((elem) => {
+            nftIdsLogOut.push(elem.id);
+            console.log(nftIdsLogOut);
+          });
+          
+          dispatch(UserDataActions.nftDataId({ nftIdsLogOut }));
+        } catch (err) {
+          console.error(err);
+        }
+
+      
+    };
+    run();
+  }, [ dispatch]);
+
   useEffect(() => {
     const run = async () => {
       const db = getFirestore();
