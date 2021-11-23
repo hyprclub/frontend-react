@@ -8,8 +8,8 @@ import { FacebookShareButton, TwitterShareButton } from 'react-share'
 import { useSelector } from 'react-redux'
 // import { isStepDivisible } from "react-range/lib/utils";
 
-const shareUrlFacebook = 'https://ui8.net'
-const shareUrlTwitter = 'https://ui8.net'
+const shareUrlFacebook = ''
+const shareUrlTwitter = ''
 
 const User = ({ className, item, isOwnProfile }) => {
 
