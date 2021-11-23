@@ -15,7 +15,7 @@ const ComingSoon = () => {
                 </div>
                 <div className="row">
                     <div className="col-xl-6 col-lg-6 col-md-6">
-                        <div>
+                        <div className={styles.js}>
                         <div className={styles.dd}><img className="img-fluid" src="/membership.png" /></div>
                         <div >Creators can now offer memberships to their audience.</div>
                         <div className={styles.text2}>With different Tier levels, each member can get perks customized by their favorite creator.</div>
@@ -24,7 +24,7 @@ const ComingSoon = () => {
                     <div className="col-xl-6 col-lg-6 col-md-6">
                         <img className="img-fluid" src="/Group5.png" />
                         <div className={styles.imgcom}><img className="img-fluid" src="/Group11.png" /></div>
-                        <div className={styles.imgcom}><img className="img-fluid" src="/Group4.png" /></div>
+                        {/* <div className={styles.imgcom}><img className="img-fluid" src="/Group4.png" /></div> */}
                     </div>
                     <div className="col-xl-6 col-lg-6 col-md-6">
                         <img className="img-fluid" src="/addtocart.png" />
