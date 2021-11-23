@@ -48,7 +48,14 @@ const Footers = () => {
   const [email, setEmail] = useState("");
 
   const handleSubmit = async (e) => {
-    console.log(email);
+    const db = getFirestore();
+    await setDoc(doc(db,"Newsletter",email),{
+      
+    }).then((result)=>{
+      console.log("Thank You For Subscribing for our newsletter");
+    }).catch((err) =>{
+      console.error(err);
+    })
   };
 
   return (
@@ -127,7 +134,7 @@ const Footers = () => {
         </div>
         <div className={styles.foot}>
           <div className={styles.copyright}>
-            © 2021 HyprClub, Made with ❤️in India
+            © 2021 HyprClub, Made with ❤️ in India
           </div>
           {/* <div className={styles.note}>
 						We use cookies for better service. <a href='/#'>Accept</a>
