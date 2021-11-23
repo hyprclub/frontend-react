@@ -77,7 +77,7 @@ const ProfileEdit = () => {
         );
         handleShow();
         setError("Profile Image Updated");
-        window?.location.reload();
+        // window?.location.reload();
       } catch (error) {
         console.error(error);
       }
@@ -275,7 +275,7 @@ const ProfileEdit = () => {
                         onChange={(e) => {
                           updateState(e);
                         }}
-                        className={styles.field}
+                        className={styles.field,styles.field2}
                         defaultValue={data.twitter}
                         label="Twitter Username"
                         name="twitter"
@@ -310,12 +310,12 @@ const ProfileEdit = () => {
                   backdrop="static"
                   keyboard={false}
                 >
-                  <Modal.Header closeButton>
+                  <Modal.Header closeButton className={styles.mymodal}>
                     <Modal.Title>Notification</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>{error}</Modal.Body>
+                  </Modal.Header >
+                  <Modal.Body className={styles.mymodal2}>{error}</Modal.Body>
                   <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button className={styles.mymodal} variant="secondary" onClick={handleClose}>
                       Close
                     </Button>
                     {/* <Button variant="primary">Understood</Button> */}
