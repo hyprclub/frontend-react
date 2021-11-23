@@ -17,6 +17,7 @@ const initialState = {
   profileDP: undefined,
   json: undefined,
   nftIds: [],
+  nftIdsLogOut : []
 };
 
 export const userDataSlice = createSlice({
@@ -47,6 +48,9 @@ export const userDataSlice = createSlice({
     nftData: (state, { payload }) => {
       state.nftIds = payload?.nftIds;
     },
+    nftDataId : (state, {payload}) => {
+      state.nftIdsLogOut = payload?.nftIdsLogOut
+    }
   },
 });
 
