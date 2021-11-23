@@ -28,7 +28,7 @@ const Login = () => {
 		setData((state) => ({ ...state, [e.target.name]: e.target.value }))
 	}
 	const [show, setShow] = useState(false);
-    const [error , setError] = useState({error:''});
+    const [error , setError] = useState('');
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -59,10 +59,11 @@ const Login = () => {
 	const forgotpassword = async () =>{
 		try{
 			const auth = getAuth();
-			await sendPasswordResetEmail(auth,data.email);
-			console.log("Mail Sent");
-			// handleShow()
-			// setError("Forgot Password Mail Sent!");
+			await sendPasswordResetEmail(auth,data.email).then((result)=>{
+				handleShow()
+				setError("E-Mail Sent!");
+			})
+			
 		}catch(error){
 			console.log(error.code);
 
@@ -72,13 +73,8 @@ const Login = () => {
 			}
 			else{
 				handleShow()
-				setError('Some Error Occured');
+				setError('Some Error Occured'); 
 			}
-			
-
-			// handleShow()
-			// setError("Some Error Occured");
-				
 			
 		}
 	}
@@ -180,6 +176,15 @@ const Login = () => {
 									googlesignin(e)
 								}}
 							>Sign up with Google</button></div></Button>
+							<div></div>
+
+							<Button className={cn('button-stroke', styles.button)}><div><button
+								className={styles.button2} type="submit"
+								onClick={(e) => {
+									e.preventDefault()
+									push('/passwordless')
+								}}
+							>Password-Less Sign In</button></div></Button>
 
 			<Modal
 				show={show}

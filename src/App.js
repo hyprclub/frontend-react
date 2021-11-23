@@ -12,6 +12,7 @@ import Profile from "./screens/Profile";
 import ProfileEdit from "./screens/ProfileEdit";
 import Login from "./screens/Login";
 import Signup from "./screens/SignUp";
+import Passwordless from "./screens/Email-Entry";
 import Item from "./screens/Item";
 import PageList from "./screens/PageList";
 import { useEffect } from "react";
@@ -220,6 +221,15 @@ function App() {
           render={() => (
             <Page>
               <Signup />
+            </Page>
+          )}
+        />
+        <Route
+          exact
+          path="/passwordless"
+          render={() => (
+            <Page>
+              <Passwordless/>
             </Page>
           )}
         />

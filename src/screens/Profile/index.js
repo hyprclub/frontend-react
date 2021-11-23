@@ -221,11 +221,11 @@ const Profile = (props) => {
       setSocialState([
         {
           title: "twitter",
-          url: UserData.twitter,
+          url: "https://twitter.com/" + UserData.twitter,
         },
         {
           title: "instagram",
-          url: "https://www.instagram.com/" + UserData.instagram,
+          url: "https://www.instagram.com/" + UserData.instagram +"/",
         },
       ]);
     }
