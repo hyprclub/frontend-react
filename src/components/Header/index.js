@@ -17,10 +17,10 @@ const nav = [
 		url: '/faq',
 		title: 'How it work',
 	},
-	{
-		url: '/item',
-		title: 'Create item',
-	},
+	// {
+	// 	url: '/item',
+	// 	title: 'Create item',
+	// },
 	{
 		url: '/profile',
 		title: 'Profile',
@@ -70,8 +70,11 @@ const Headers = () => {
               <Icon name="search" size="20" />
             </button>
           </form> */}
-					<Link className={cn('button-small', styles.button)} to='/upload-variants'>
-						Upload
+					<Link className={cn('button-small', styles.button)} to='/signup'>
+						Sign Up
+					</Link>
+					<Link className={cn('button-small', styles.button)} to='/login'>
+						Login
 					</Link>
 				</div>
 				{/* <Notification className={styles.notification} /> */}
