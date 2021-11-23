@@ -143,36 +143,6 @@ function App() {
     };
     run();
   }, [loggedIn, uid, dispatch]);
-
-  // useEffect(() =>{
-  // 	if(loggedIn && uid){
-  // 		const run  = async () =>{
-  // 		const db = getFirestore();
-  // 		getDocs(collection(db,"users",uid,"NFT","Owned","Jsons")).then((querySnapshot)=>{
-  // 			querySnapshot.forEach((docSnap)=>{
-
-  // 				if(docSnap.exists()){
-  // 					const nftjson = docSnap.data().json;
-  // 				axios.get(nftjson).then(resps =>{
-  // 					console.log(resps.data)
-  // 					 dispatch(UserDataActions.userNftData({json: resps.data}))
-  // 				})
-
-  // 				}
-  // 				else{
-  // 					console.log("no user nft");
-  // 				}
-
-  // 			})
-
-  // 		})
-
-  // 	}
-  // 	run()
-  // 	}
-
-  // }, [loggedIn,uid,dispatch])
-
   return (
     <Router>
       <Switch>

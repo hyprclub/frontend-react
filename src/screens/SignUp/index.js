@@ -50,21 +50,23 @@ const Signup = () => {
     setData((state) => ({ ...state, [e.target.name]: e.target.value }));
   }
   const [show, setShow] = useState(false);
-  const [error, setError] = useState({ error: "" });
+  const [error, setError] = useState('');
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const handleSubmit = async () => {
     const auth = getAuth();
     const db = getFirestore();
+    const phonevalid = "(0|91)?[7-9][0-9]{9}";
 
     if (data.password != data.cpassword) {
       console.error("password do not match");
       // handleShow
+      // if((data.phoneno).match(phonevalid)){
 
       handleShow();
       setError("Password do not match");
-    } else if (data.phone.length > 10 || data.phone.length < 10) {
+    } else if (((data.phoneno).match(phonevalid)) == false) {
       console.error("Invalid Phone Number");
       setError("Invalid Phone Number");
       handleShow();
