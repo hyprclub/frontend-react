@@ -86,7 +86,7 @@ const ProfileEdit = () => {
   const updateUserProfile = async () => {
     try {
       const db = getFirestore();
-      const phonevalid ="/^\d{10}$/";
+      const phonevalid ="(0|91)?[7-9][0-9]{9}";
       if((data.phoneno).match(phonevalid)){
         
      const updateStatus= await updateDoc(doc(db, "users", UserData.uid), {
