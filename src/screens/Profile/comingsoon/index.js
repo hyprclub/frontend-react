@@ -41,6 +41,10 @@ const ComingSoon = () => {
                         <img className="img-fluid" src="/sayhanksbox.png" />
                     </div>
                 </div>
+                <div className={styles.sse}>
+                    <img className="img-fluid" src="/joinhypr.png" />
+                </div>
+                <iframe className={styles.video} id="ytplayer" type="text/html" height="600px" width="100%" height="auto" src="https://www.youtube.com/embed/NzzeUjSrDvY?rel=0" frameborder="0" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>
             </div>
         </div>
     )
