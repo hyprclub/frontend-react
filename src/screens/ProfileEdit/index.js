@@ -77,7 +77,7 @@ const ProfileEdit = () => {
         );
         handleShow();
         setError("Profile Image Updated");
-        // window?.location.reload();
+        window?.location.reload();
       } catch (error) {
         console.error(error);
       }
