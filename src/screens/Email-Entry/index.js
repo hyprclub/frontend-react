@@ -6,7 +6,9 @@ import TextInput from '../../components/TextInput'
 import { useHistory } from 'react-router'
 import { firebaseApp } from '../../firebaseConfig'
 import { Button, Modal } from 'react-bootstrap';
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail } from 'firebase/auth'
+import { getAuth,sendPasswordResetEmail ,  sendSignInLinkToEmail,
+  isSignInWithEmailLink,
+  signInWithEmailLink, } from 'firebase/auth'
 import { getFirestore, setDoc, doc } from 'firebase/firestore'
 import { useSelector } from 'react-redux'
 
@@ -16,11 +18,11 @@ const breadcrumbs = [
 		url: '/',
 	},
 	{
-		title: 'Login',
+		title: 'Password Less Sign In',
 	},
 ]
 
-const Login = () => {
+const Passwordless = () => {
 	const loggedIn = useSelector((state) => state.UserData.loggedIn)
 	const UserData = useSelector((state) => state.UserData)
 	const [data, setData] = useState({ email: '', password: '' })
@@ -32,67 +34,71 @@ const Login = () => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-	const googlesignin = async () => {
-		const db = getFirestore();
-
-		const googleprovider = new GoogleAuthProvider();
-		const auth = getAuth();
-		const google = await signInWithPopup(auth, googleprovider);
-		const credential = GoogleAuthProvider.credentialFromResult(google);
-		const user = google.user;
-		const email = user.email;
-		const name = user.displayName;
-		const uid = user.uid;
-
-		setDoc(doc(db, "users", uid), {
-			Emailid: email,
-			Name: name,
-			UserID: uid,
-			admin: false,
-			creator: false
-
-
-		});
-
-
-	}
-	const forgotpassword = async () =>{
-		try{
-			const auth = getAuth();
-			await sendPasswordResetEmail(auth,data.email).then((result)=>{
-				handleShow()
-				setError("E-Mail Sent!");
-			})
-			
-		}catch(error){
-			console.log(error.code);
-
-			if(error.code == "auth/missing-email"){
-				handleShow()
-				setError('Please Enter Email Address');
-			}
-			else{
-				handleShow()
-				setError('Some Error Occured'); 
-			}
-			
-		}
-	}
 	const handleSubmit = async () => {
-		try {
-			const auth = getAuth()
-			const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password)
-			const user = userCredential.user;
-			const emailVerified = user.emailVerified;
-
-			console.log({ data, userCredential })
-		} catch (err) {
-			setError('Invalid Credential');
-            handleShow()
-			console.error(err)
-		}
+		 const auth = getAuth();
+    const actionCodeSettings = {
+      // URL you want to redirect back to. The domain (www.example.com) for this
+      // URL must be in the authorized domains list in the Firebase Console.
+      url: window.location.href,
+      // This must be true.
+      handleCodeInApp: true,
+    };
+		 try {
+      await sendSignInLinkToEmail(auth, data.email, actionCodeSettings)
+        .then((result) => {
+          console.log(result);
+          console.log(window.location.href);
+          handleShow()
+		  setError('E-Mail Sent!');
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } catch (error) {
+      console.error(error);
+    }
 	}
 	const { push } = useHistory()
+ useEffect(() => {
+    const auth = getAuth();
+    if (isSignInWithEmailLink(auth, window.location.href)) {
+      let email = window.localStorage.getItem("emailForSignIn");
+      if (!email) {
+        // User opened the link on a different device. To prevent session fixation
+        // attacks, ask the user to provide the associated email again. For example:
+        email = window.prompt("Please provide your email for confirmation");
+        signInWithEmailLink(auth, email, window.location.href)
+          .then((result) => {
+            const db = getFirestore();
+            const user = result.user;
+            const uid = user.uid;
+			if(user.exist()){
+				console.log("exists")
+			}else{
+				setDoc(doc(db, "users", uid), {
+              Name: "",
+              Emailid: "",
+              Phone: "",
+              Username: "",
+              UserID: uid,
+              admin: false,
+              creator: false,
+              Bio: "",
+              Instagram: "",
+              Portfolio: "",
+              Twitter: "",
+            });
+				
+			}
+			
+            window.localStorage.removeItem("emailForSignIn");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    }
+  }, []);
 	useEffect(() => {
 		console.log(UserData)
 		if (loggedIn) {
@@ -107,7 +113,7 @@ const Login = () => {
 			<div className={cn('section-pt80', styles.section)}>
 				<div className={cn('container', styles.container)}>
 					<div className={styles.top}>
-						<h1 className={cn('h2', styles.title)}>Login</h1>
+						<h1 className={cn('h2', styles.title)}>Password Less Sign-In</h1>
 						Become a part of the social revolution.
 						
 					</div>
@@ -138,19 +144,7 @@ const Login = () => {
 										Please choose a username.
 									</div> */}
 								</div>
-								<TextInput
-									onChange={(e) => {
-										updateState(e)
-									}}
-									className={styles.field}
-									id="validationCustom01"
-									label='Password'
-									name='password'
-									type='password'
-									placeholder='Enter your password'
-									required
-								/>
-								<Button className={cn('button-stroke', styles.button)}><input type='submit' value='Login' /></Button>
+								<Button className={cn('button-stroke', styles.button)}><input type='submit' value='Sent Sign-In Email.' /></Button>
 
 								{/* <Link
 										onClick={(e) => {
@@ -162,29 +156,6 @@ const Login = () => {
 									</Link> */}
 								{/* </input> */}
 							</form>
-							<a className={cn(styles.link)} 
-							onClick={(e) =>{
-			
-								forgotpassword(e)
-							}}
-							>Forgot Password?</a>
-
-							<Button className={cn('button-stroke', styles.button)}><div> <img class="icons mr-3" src="/google.png" /> <button
-								className={styles.button2} type="submit"
-								onClick={(e) => {
-									e.preventDefault()
-									googlesignin(e)
-								}}
-							>Sign up with Google</button></div></Button>
-							<div></div>
-
-							<Button className={cn('button-stroke', styles.button)}><div><button
-								className={styles.button2} type="submit"
-								onClick={(e) => {
-									e.preventDefault()
-									push('/passwordless')
-								}}
-							>Password-Less Sign In</button></div></Button>
 
 			<Modal
 				show={show}
@@ -217,4 +188,4 @@ const Login = () => {
 	)
 }
 
-export default Login
+export default Passwordless

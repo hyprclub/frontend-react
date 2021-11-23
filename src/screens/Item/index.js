@@ -4,6 +4,8 @@ import styles from "./Item.module.sass";
 import Users from "./Users";
 import Control from "./Control";
 import Options from "./Options";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { getDoc, doc, getFirestore } from "@firebase/firestore";
 import axios from "axios";
 
@@ -36,7 +38,15 @@ const users = [
 
 const Item = (props) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  
+  const { push } = useHistory();
+
+  const loggedIn = useSelector((state) => state.UserData.loggedIn);
+
+  
   const [data, setData] = useState({ name: "", image: "", description: "" });
+
+  
 
   React.useEffect(async () => {
     if (props) {
@@ -62,6 +72,13 @@ const Item = (props) => {
       }
     }
   }, [props, setData]);
+
+   React.useEffect(() => {
+    if (loggedIn !== undefined && loggedIn) {
+    } else {
+      push("/login");
+    }
+  }, [loggedIn, push]);
 
   return (
     <>

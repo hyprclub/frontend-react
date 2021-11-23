@@ -44,7 +44,7 @@ const ProfileEdit = () => {
   const loggedIn = useSelector((state) => state.UserData.loggedIn);
   const { push } = useHistory();
   const [show, setShow] = useState(false);
-  const [error, setError] = useState({ error: "" });
+  const [error, setError] = useState('');
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   React.useEffect(() => {
@@ -86,7 +86,10 @@ const ProfileEdit = () => {
   const updateUserProfile = async () => {
     try {
       const db = getFirestore();
-      await updateDoc(doc(db, "users", UserData.uid), {
+      const phonevalid ="/^\d{10}$/";
+      if((data.phoneno).match(phonevalid)){
+        
+     const updateStatus= await updateDoc(doc(db, "users", UserData.uid), {
         Name: data.name,
         Emailid: data.email,
         Username: data.username,
@@ -94,23 +97,25 @@ const ProfileEdit = () => {
         Bio: data.bio,
         Portfolio: data.portfolio,
         Instagram: data.instagram,
+        Twitter: data.twitter,
       });
-      handleShow(true);
+
+
+      handleShow();
       setError("Profile Updated");
-      console.log("Profile Updated");
       window?.location.reload();
+      }
+      else{
+        handleShow()
+        setError("Please Enter a valid Phone Number")
+      }
+
     } catch (error) {
-      // console.error(error);
+      console.error(error);
       handleShow();
       setError("Some error Occured");
     }
   };
-
-  useEffect(() => {
-    if (UserData) {
-      setData(UserData);
-    }
-  }, [UserData]);
 
   useEffect(() => {
     if (UserData) {
@@ -209,7 +214,7 @@ const ProfileEdit = () => {
                       className={styles.field}
                       defaultValue={data.phoneno}
                       label="Phone Number"
-                      name="phone"
+                      name="phoneno"
                       type="text"
                       placeholder="Enter your Phone Number"
                       required
@@ -264,6 +269,18 @@ const ProfileEdit = () => {
                         name="instagram"
                         type="text"
                         placeholder="Enter your Instagram Username"
+                      />
+                      <div> </div>
+                      <TextInput
+                        onChange={(e) => {
+                          updateState(e);
+                        }}
+                        className={styles.field}
+                        defaultValue={data.twitter}
+                        label="Twitter Username"
+                        name="twitter"
+                        type="text"
+                        placeholder="Enter your Twitter Username"
                       />
                     </div>
                   </div>
