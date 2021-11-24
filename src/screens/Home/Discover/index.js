@@ -234,6 +234,7 @@ const Discover = () => {
             {<Items
                     className={styles.items}
                     items={UserData.nftIdsLogOut.slice(0, 10)}
+                    buttonclass = {true}
                   />}
           </Slider>
         </div>

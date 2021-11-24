@@ -7,6 +7,12 @@ import Options from "./Options";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getDoc, doc, getFirestore } from "@firebase/firestore";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
 import axios from "axios";
 
 const navLinks = ["Info", "Owners"];
@@ -22,19 +28,7 @@ const categories = [
   },
 ];
 
-const users = [
-  {
-    name: "Bennett university",
-    position: "Owner",
-    avatar: "/images/content/2.png",
-    // reward: "/images/content/2.png",
-  },
-  {
-    name: "Hypr Club",
-    position: "Creator",
-    avatar: "/images/content/1.png",
-  },
-];
+
 
 const Item = (props) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -45,24 +39,31 @@ const Item = (props) => {
 
   
   const [data, setData] = useState({ name: "", image: "", description: "" });
+  const [owner,setOwner] = useState("")
+  const [ownerDp,setOwnerDp] = useState("")
 
-  
+
 
   React.useEffect(async () => {
     if (props) {
       const nftToken = new URLSearchParams(props?.location?.search).get(
         "idToken"
       );
-      console.log({ nftToken });
+      console.debug({ nftToken });
       try {
         const db = getFirestore();
+        const storage = getStorage();
         const nftData = await getDoc(doc(db, "NFT's", nftToken));
-        console.log(nftData);
+        console.debug(nftData);
         axios
           .get(nftData.data().json)
-          .then((reps) => {
-            // console.log(reps.data);
-            setData(reps.data);
+          .then(async (reps) => {
+                const storagePFref = ref(storage, "users/" + nftData.data().OwnerUid + "/profile.jpg");
+                const ownerData =await getDoc(doc(db,"users",nftData.data().OwnerUid));
+                const url = await getDownloadURL(ref(storagePFref));
+                setOwner(ownerData.data());
+                setOwnerDp(url)
+                setData(reps.data);
           })
           .catch((error) => {
             console.error(error);
@@ -71,7 +72,7 @@ const Item = (props) => {
         console.error(error);
       }
     }
-  }, [props, setData]);
+  }, [props, setData, setOwner,setOwnerDp]);
 
    React.useEffect(() => {
     if (loggedIn !== undefined && loggedIn) {
@@ -79,6 +80,25 @@ const Item = (props) => {
       push("/login");
     }
   }, [loggedIn, push]);
+
+  React.useEffect(()=>{
+    console.log({owner})
+  },[owner])
+
+  const users = [
+    {
+      name: owner?.Name,
+      position: "Owner",
+      avatar: ownerDp  || "/images/content/avatar-big.jpg",
+    },
+    {
+      name: "Hypr Club",
+      position: "Creator",
+      avatar: "/images/content/1.png",
+    },
+  ];
+
+  
 
   return (
     <>

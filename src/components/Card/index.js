@@ -16,6 +16,13 @@ import {
   query,
 } from "firebase/firestore";
 
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+
 const Card = ({ className, item: itemFromProps }) => {
   const [visible, setVisible] = useState(false);
   const [item, setItem] = useState({});
@@ -25,6 +32,7 @@ const Card = ({ className, item: itemFromProps }) => {
     const run = async () => {
       try {
         const db = getFirestore();
+        const storage = getStorage();
         if (itemFromProps) {
           console.log({ itemFromProps });
           const docsnap = await getDoc(doc(db, "NFT's", itemFromProps));
@@ -34,7 +42,6 @@ const Card = ({ className, item: itemFromProps }) => {
               .get(docsnap.data().json)
               .then((resps) => {
                 console.log(resps.data);
-                // dispatch(UserDataActions.userNftData({ json: resps.data }));
                 setItem(resps.data);
               })
               .catch((error) => {
@@ -42,7 +49,7 @@ const Card = ({ className, item: itemFromProps }) => {
               });
           }
         }
-      } catch (error) {
+      }catch (error) {
         console.error(error);
       }
     };
