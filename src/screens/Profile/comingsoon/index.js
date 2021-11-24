@@ -22,7 +22,7 @@ const ComingSoon = () => {
                 <div className="row">
                     <div className="col-xl-6 col-lg-6 col-md-12">
                         <div className={styles.js}>
-                            <div className={styles.dd}><Image className="img-fluid" src="/membership.png" srcDark="/membershipbutton.png" /></div>
+                            <div className={styles.dd}><Image className={cn("img-fluid",styles.edit)} src="/membership.png" srcDark="/membershipbutton.png" /></div>
                             <div className={styles.sty}>
                                 <div >Creators can now offer memberships to their audience.</div>
                                 <div className={styles.text2}>With different Tier levels, each member can get perks customized by their favorite creator.</div>
@@ -38,18 +38,18 @@ const ComingSoon = () => {
                         <Image className="img-fluid" src="/addtocart.png" srcDark="/addtocart1.png" />
                     </div>
                     <div className={cn("col-xl-6 col-lg-6 col-md-12", styles.creator)}>
-                        <Image className={cn("img-fluid", styles.creator)} src="/creator.png" srcDark="/buttoncreator.png"/>
+                        <Image className={cn("img-fluid", styles.creator,styles.edit)} src="/creator.png" srcDark="/buttoncreator.png"/>
                         <div className={styles.sty}>
                             <div>Purchase any merchandise or digital commodity that a creator is offering. </div>
                         </div>
                     </div>
                     <div className="col-xl-6 col-lg-6 col-md-12">
-                        <Image className={cn("img-fluid", styles.creator)} src="/saythanks.png" srcDark="/thanksbutton.png" />
+                        <Image className={cn("img-fluid", styles.creator,styles.edit)} src="/saythanks.png" srcDark="/thanksbutton.png" />
                         <div className={styles.sty}>
                             <div>Yes, just like SuperChat extend support to creators with cool customizations. </div>
                         </div>
                     </div>
-                    <div className="col-xl-6 col-lg-6 col-md-12">
+                    <div className={cn("col-xl-6 col-lg-6 col-md-12",styles.creator)}>
                         <img className="img-fluid" src="/saythanksbox.png" />
                     </div>
                 </div>

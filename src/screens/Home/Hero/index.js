@@ -8,7 +8,6 @@ import Player from "../../../components/Player";
 import Modal from "../../../components/Modal";
 import Connect from "../../../components/Connect";
 import Bid from "../../../components/Bid";
-
 // const items = [
 //   {
 //     title: "the creator network®",
@@ -85,7 +84,7 @@ const Hero = () => {
             <h2 className={cn("h3", styles.title)}>
               The new creative economy.
             </h2>
-            <Link className={cn("button-stroke", styles.button)} to="/search01">
+            <Link className={cn("button-stroke", styles.button)} to="./Discover">
               Start your search
             </Link>
           </div>

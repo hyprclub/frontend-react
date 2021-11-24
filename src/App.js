@@ -15,6 +15,7 @@ import Signup from "./screens/SignUp";
 import Passwordless from "./screens/Email-Entry";
 import Item from "./screens/Item";
 import PageList from "./screens/PageList";
+// import Discover from "./screens/Home/Discover";
 import { useEffect } from "react";
 import { firebaseApp } from "./firebaseConfig";
 import {
@@ -41,6 +42,7 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 import ComingSoon from "./screens/Profile/comingsoon";
+import Discover from "./screens/Home/Discover";
 
 function App() {
   const dispatch = useDispatch();
@@ -201,6 +203,15 @@ function App() {
           render={() => (
             <Page>
               <ComingSoon/>
+            </Page>
+          )}
+        />
+        <Route
+          exact
+          path="/Discover"
+          render={() => (
+            <Page>
+              <Discover/>
             </Page>
           )}
         />

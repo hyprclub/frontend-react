@@ -15,7 +15,7 @@ const Home = () => {
       <Selection />
       {/* <Popular /> */}
       {/* <HotBid classSection="section" /> */}
-      <Collections />
+      {/* <Collections /> */}
       <Discover />
       {/* <Description /> */}
     </>
