@@ -15,7 +15,7 @@ import Signup from "./screens/SignUp";
 import Passwordless from "./screens/Email-Entry";
 import Item from "./screens/Item";
 import PageList from "./screens/PageList";
-import Discover from "./screens/Home/Discover";
+// import Discover from "./screens/Home/Discover";
 import { useEffect } from "react";
 import { firebaseApp } from "./firebaseConfig";
 import {
