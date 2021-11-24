@@ -59,10 +59,13 @@ const Item = (props) => {
           .get(nftData.data().json)
           .then(async (reps) => {
                 const storagePFref = ref(storage, "users/" + nftData.data().OwnerUid + "/profile.jpg");
-                const ownerData =await getDoc(doc(db,"users",nftData.data().OwnerUid));
-                const url = await getDownloadURL(ref(storagePFref));
+                const ownerData = await getDoc(doc(db,"users",nftData.data().OwnerUid));
+                await getDownloadURL(ref(storagePFref)).then((url)=>{
+                  setOwnerDp(url);
+                }).catch((error) =>{
+                  console.error(error);
+                })
                 setOwner(ownerData.data());
-                setOwnerDp(url)
                 setData(reps.data);
           })
           .catch((error) => {

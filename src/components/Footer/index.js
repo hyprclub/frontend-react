@@ -38,7 +38,7 @@ const items = [
       },
       {
         title: "About Us",
-        url: "/upload-variants",
+        url: "/comingsoon",
       },
     ],
   },

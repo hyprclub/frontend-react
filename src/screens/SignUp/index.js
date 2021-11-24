@@ -20,6 +20,8 @@ import {
   getFirestore,
   setDoc,
   getDocs,
+  query,
+  where,
   doc,
   collection,
   getDoc,
@@ -66,11 +68,13 @@ const Signup = () => {
 
       handleShow();
       setError("Password do not match");
-    } else if (((data.phoneno).match(phonevalid)) == false) {
-      console.error("Invalid Phone Number");
-      setError("Invalid Phone Number");
-      handleShow();
-    } else if (
+    } 
+    // else if (((data.phoneno).match(phonevalid)) == false) {
+    //   console.error("Invalid Phone Number");
+    //   setError("Invalid Phone Number");
+    //   handleShow();
+    // }
+     else if (
       data.phone == "" ||
       data.email == "" ||
       data.username == "" ||
@@ -82,34 +86,42 @@ const Signup = () => {
       handleShow();
     } else {
       try {
-        const userCredential = await createUserWithEmailAndPassword(
-          auth,
-          data.email,
-          data.password
-        );
-        const user = userCredential.user;
-        const emailVerified = user.emailVerified;
-        const uid = user.uid;
+         const querySnapshot = await getDocs(collection(db, "users"));
+         querySnapshot.forEach( async (document)=>{
+           if(document.data().Username == data.username){
+             handleShow()
+             setError("Username Already Taken");
+           }
+           else{
+              }
+            });
+                const userCredential = await createUserWithEmailAndPassword(
+                  auth,
+                  data.email,
+                  data.password
+                );
+                const user = userCredential.user;
+                const emailVerified = user.emailVerified;
+                const uid = user.uid;
 
-        await setDoc(doc(db, "users", "NFT", "JSON"), {
-          json: "",
-        });
+                await setDoc(doc(db, "users", "NFT", "JSON"), {
+                  json: "",
+                });
 
-        await setDoc(doc(db, "users", uid), {
-          Name: data.name,
-          Emailid: data.email,
-          Phone: data.phone,
-          Username: data.username,
-          UserID: uid,
-          admin: false,
-          creator: false,
-          Bio: "",
-          Instagram: "",
-          Portfolio: "",
-          Twitter: "",
-        });
-
-        console.log({ data, userCredential });
+                await setDoc(doc(db, "users", uid), {
+                  Name: data.name,
+                  Emailid: data.email,
+                  Phone: data.phone,
+                  Username: data.username,
+                  UserID: uid,
+                  admin: false,
+                  creator: false,
+                  Bio: "",
+                  Instagram: "",
+                  Portfolio: "",
+                  Twitter: "",
+                });
+                console.log({ data, userCredential });
       } catch (err) {
         console.error(err.code);
 
