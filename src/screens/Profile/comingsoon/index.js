@@ -60,6 +60,7 @@ const ComingSoon = () => {
                 <div className={styles.FlipCount}>
                     <FlipCountdown
                         hideYear
+                        hideMonth
                         // theme='light'
                         size='large'
                         monthTitle='Months'
@@ -67,7 +68,7 @@ const ComingSoon = () => {
                         hourTitle='Hours'
                         minuteTitle='Minutes'
                         secondTitle='Seconds'
-                        endAt={'2022-10-12 01:26:58'} />
+                        endAt={'2021-12-24 12:0:0'} />
                 </div>
             </div>
         </div>
