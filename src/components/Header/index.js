@@ -17,10 +17,10 @@ const nav = [
 		url: '/faq',
 		title: 'How it work',
 	},
-	// {
-	// 	url: '/item',
-	// 	title: 'Create item',
-	// },
+	{
+		url: '/comingsoon',
+		title: 'Coming soon',
+	},
 	{
 		url: '/profile',
 		title: 'Profile',

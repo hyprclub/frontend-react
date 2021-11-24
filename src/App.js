@@ -40,6 +40,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
+import ComingSoon from "./screens/Profile/comingsoon";
 
 function App() {
   const dispatch = useDispatch();
@@ -191,6 +192,15 @@ function App() {
           render={() => (
             <Page>
               <Signup />
+            </Page>
+          )}
+        />
+        <Route
+          exact
+          path="/comingsoon"
+          render={() => (
+            <Page>
+              <ComingSoon/>
             </Page>
           )}
         />
