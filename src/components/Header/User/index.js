@@ -38,7 +38,7 @@ const User = ({ className }) => {
 			<div className={cn(styles.user, className)}>
 				<div className={styles.head} onClick={() => setVisible(!visible)}>
 					<div className={styles.avatar}>
-						<img src={UserData.profileDP || '/images/content/avatar-big.jpg'} alt='Avatar' />
+						<img src={UserData?.profileDP || '/images/content/avatar-big.jpg'} alt='Avatar' />
 					</div>
 					<div className={styles.wallet}>
 						{UserData.name}
@@ -49,10 +49,10 @@ const User = ({ className }) => {
 					<div className={styles.body}>
 						<div className={styles.name}>{UserData.name}</div>
 						<div className={styles.code}>
-							<div className={styles.number}>{UserData.email}</div>
-							<button className={styles.copy}>
+							<div className={styles.number}>{UserData.username}</div>
+							{/* <button className={styles.copy}>
 								<Icon name='copy' size='16' />
-							</button>
+							</button> */}
 						</div>
 						{/* <div className={styles.wrap}>
 							<div className={styles.line}>
