@@ -20,12 +20,12 @@ const items = [
     title: "Hypr",
     menu: [
       {
-        title: "Marketplace",
-        url: "/search01",
+        title: "Discover",
+        url: "/Discover",
       },
       {
-        title: "Drops",
-        url: "/connect-wallet",
+        title: "Coming Soon",
+        url: "/comingsoon",
       },
     ],
   },
