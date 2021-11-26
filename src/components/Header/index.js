@@ -70,12 +70,24 @@ const Headers = () => {
               <Icon name="search" size="20" />
             </button>
           </form> */}
-					<Link className={cn('button-small', styles.button)} to='/signup'>
-						Sign Up
+					{loggedIn}
+				{loggedIn === false && (
+					<>
+						<Link className={cn('button-small', styles.button)} to='/signup'>
+							Sign Up
+						</Link>
+						<Link className={cn('button-small', styles.button)} to='/login'>
+							Log In
+						</Link>
+					</>
+				)}
+				{loggedIn && (
+					<>
+					<Link className={cn('button-small', styles.button)} to='/logout'>
+							Log out
 					</Link>
-					<Link className={cn('button-small', styles.button)} to='/login'>
-						Login
-					</Link>
+					</>
+				)}
 				</div>
 				{/* <Notification className={styles.notification} /> */}
 
@@ -92,7 +104,7 @@ const Headers = () => {
 							Sign Up
 						</Link>
 						<Link className={cn('button-small', styles.button)} to='/login'>
-							Login
+							Log In
 						</Link>
 					</>
 				)}
