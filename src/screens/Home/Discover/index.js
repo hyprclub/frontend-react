@@ -242,13 +242,16 @@ const Discover = () => {
           >
             {<Items
                     className={styles.items}
-                    items={UserData.nftIdsLogOut.slice(0, 10)}
+                    items={UserData.nftIdsLogOut.slice(0, sliceIntial)}
                     buttonclass = {true}
                   />}
           </Slider>
         </div>
         <div className={styles.btns}>
-          <button className={cn("button-stroke button-small", styles.button)}>
+          <button className={cn("button-stroke button-small", styles.button)}
+                  onClick={(e) => {
+                            IncreaseSlice(e)
+                          }}>
             <span>Load more</span>
           </button>
         </div>
