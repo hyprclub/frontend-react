@@ -37,10 +37,15 @@ const Discover = () => {
   const [values, setValues] = useState([5]);
 
   const [visible, setVisible] = useState(false);
+  const [sliceIntial , setSliceInitial] = useState(6);
 
   const STEP = 0.1;
   const MIN = 0.01;
   const MAX = 10;
+
+  const IncreaseSlice = () => {
+    setSliceInitial(sliceIntial+5);
+  }
 
   const settings = {
     infinite: true,
@@ -233,13 +238,17 @@ const Discover = () => {
           >
             {<Items
                     className={styles.items}
-                    items={UserData.nftIdsLogOut.slice(0, 10)}
+                    items={UserData.nftIdsLogOut.slice(0, sliceIntial)}
                     buttonclass = {true}
                   />}
           </Slider>
         </div>
         <div className={styles.btns}>
-          <button className={cn("button-stroke button-small", styles.button)}>
+          <button className={cn("button-stroke button-small", styles.button)}
+                  onClick={(e) => {
+                            IncreaseSlice(e)
+                          }}
+                  >
             <span>Load more</span>
           </button>
         </div>
