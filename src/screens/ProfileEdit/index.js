@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { Button, Modal } from "react-bootstrap";
 import { firebaseApp } from "../../firebaseConfig";
 import { useHistory } from "react-router-dom";
-import { doc, updateDoc, getFirestore } from "firebase/firestore";
+import { doc, updateDoc, getFirestore,getDocs,collection,where,query } from "firebase/firestore";
 import {
   getStorage,
   ref,
@@ -47,6 +47,7 @@ const ProfileEdit = () => {
   const [error, setError] = useState('');
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   React.useEffect(() => {
     if (loggedIn != undefined) {
     } else {
@@ -77,7 +78,7 @@ const ProfileEdit = () => {
         );
         handleShow();
         setError("Profile Image Updated");
-        // window?.location.reload();
+        window?.location.reload();
       } catch (error) {
         console.error(error);
       }
@@ -88,22 +89,28 @@ const ProfileEdit = () => {
       const db = getFirestore();
       const phonevalid ="(0|91)?[7-9][0-9]{9}";
       if((data.phoneno).match(phonevalid)){
-        
-     const updateStatus= await updateDoc(doc(db, "users", UserData.uid), {
-        Name: data.name,
-        Emailid: data.email,
-        Username: data.username,
-        Phone: data.phoneno,
-        Bio: data.bio,
-        Portfolio: data.portfolio,
-        Instagram: data.instagram,
-        Twitter: data.twitter,
-      });
+        const q = query(collection(db,"users"),where("Username" , "==", data.username));
 
-
-      handleShow();
-      setError("Profile Updated");
-      window?.location.reload();
+        const querySnapshot = await getDocs(q);
+        if(querySnapshot.size != 0 ){
+            handleShow()
+            setError("Username Taken");
+          }
+          else{
+            const updateStatus= await updateDoc(doc(db, "users", UserData.uid), {
+                        Name: data.name,
+                        Emailid: data.email,
+                        Username: data.username,
+                        Phone: data.phoneno,
+                        Bio: data.bio,
+                        Portfolio: data.portfolio,
+                        Instagram: data.instagram,
+                        Twitter: data.twitter,
+                           });
+                     handleShow();
+                     setError("Profile Updated");
+                    window?.location.reload();
+          }
       }
       else{
         handleShow()

@@ -35,6 +35,7 @@ const Login = () => {
 	const googlesignin = async () => {
 		const db = getFirestore();
 
+		try {
 		const googleprovider = new GoogleAuthProvider();
 		const auth = getAuth();
 		const google = await signInWithPopup(auth, googleprovider);
@@ -52,8 +53,13 @@ const Login = () => {
 			creator: false
 
 
-		});
-
+		});	
+		} catch (error) {
+			if(error.code ="auth/popup-closed-by-user"){
+         	 handleShow()
+         	 setError('Log-In Cancelled');
+     		 }
+		}
 
 	}
 	const forgotpassword = async () =>{

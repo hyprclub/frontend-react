@@ -16,14 +16,7 @@ import {
   isSignInWithEmailLink,
   signInWithEmailLink,
 } from "firebase/auth";
-import {
-  getFirestore,
-  setDoc,
-  getDocs,
-  doc,
-  collection,
-  getDoc,
-} from "firebase/firestore";
+import { doc, updateDoc, setDoc,getFirestore,getDocs,collection,where,query } from "firebase/firestore";
 import { useSelector } from "react-redux";
 
 const breadcrumbs = [
@@ -51,8 +44,52 @@ const Signup = () => {
   }
   const [show, setShow] = useState(false);
   const [error, setError] = useState('');
+  const [usernameStatus, setUsernameStatus] = useState(true);
+  const [phonenumStatus, setPhonenumStatus] = useState(true);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+ 
+
+  const checkPhonenum = (ev) =>{
+    if(ev.target.value == ''){
+      setPhonenumStatus(true);
+      handleShow()
+      setError("Please Enter Phone Number");
+    }else{
+      const phoneValidString = "(0|91)?[7-9][0-9]{9}";
+      if((ev.target.value).match(phoneValidString)){
+        setPhonenumStatus(false);
+      }else{
+        setPhonenumStatus(true);
+      }
+    }
+  };
+
+
+  const checkUsername = async (ev) =>{
+    
+    
+      if(ev.target.value == ""){
+        setUsernameStatus(false);
+        handleShow()
+        setError("Please Enter Username");
+      }
+      else{
+        try {
+          const db = getFirestore();
+         const q = query(collection(db, "users"), where("Username", "==", ev.target.value));
+         const querySnapshot = await getDocs(q);
+        if(querySnapshot.size != 0 ){
+             setUsernameStatus(true);
+          }
+          else{
+            setUsernameStatus(false);
+          }
+          } catch (error) {
+            console.log(error)
+        }       
+      }
+  };
 
   const handleSubmit = async () => {
     const auth = getAuth();
@@ -66,11 +103,12 @@ const Signup = () => {
 
       handleShow();
       setError("Password do not match");
-    } else if (((data.phoneno).match(phonevalid)) == false) {
-      console.error("Invalid Phone Number");
+    } 
+    else if (phonenumStatus == true) {
       setError("Invalid Phone Number");
       handleShow();
-    } else if (
+    }
+     else if (
       data.phone == "" ||
       data.email == "" ||
       data.username == "" ||
@@ -80,36 +118,42 @@ const Signup = () => {
       console.error("Some error Occured");
       setError("Some error Occured");
       handleShow();
-    } else {
+    } 
+    else if(usernameStatus == true){
+      setError("Please use different Username");
+      handleShow()
+    }
+    else {
       try {
-        const userCredential = await createUserWithEmailAndPassword(
-          auth,
-          data.email,
-          data.password
-        );
-        const user = userCredential.user;
-        const emailVerified = user.emailVerified;
-        const uid = user.uid;
+        // const q = query(collection(db, "users"), where("Username", "==", ev.target.value));
+        // const querySnapshot = await getDocs(q);
+                const userCredential = await createUserWithEmailAndPassword(
+                  auth,
+                  data.email,
+                  data.password
+                );
+                const user = userCredential.user;
+                const emailVerified = user.emailVerified;
+                const uid = user.uid;
 
-        await setDoc(doc(db, "users", "NFT", "JSON"), {
-          json: "",
-        });
+                await setDoc(doc(db, "users", "NFT", "JSON"), {
+                  json: "",
+                });
 
-        await setDoc(doc(db, "users", uid), {
-          Name: data.name,
-          Emailid: data.email,
-          Phone: data.phone,
-          Username: data.username,
-          UserID: uid,
-          admin: false,
-          creator: false,
-          Bio: "",
-          Instagram: "",
-          Portfolio: "",
-          Twitter: "",
-        });
-
-        console.log({ data, userCredential });
+                await setDoc(doc(db, "users", uid), {
+                  Name: data.name,
+                  Emailid: data.email,
+                  Phone: data.phone,
+                  Username: data.username,
+                  UserID: uid,
+                  admin: false,
+                  creator: false,
+                  Bio: "",
+                  Instagram: "",
+                  Portfolio: "",
+                  Twitter: "",
+                });
+                console.log({ data, userCredential });            
       } catch (err) {
         console.error(err.code);
 
@@ -158,36 +202,11 @@ const Signup = () => {
         creator: false,
       });
     } catch (error) {
-      // if(error.code ="auth/popup-closed-by-user"){
-      //     handleShow()
-      //     setError('Log-In Cancelled');
-      // }
+      if(error.code ="auth/popup-closed-by-user"){
+          handleShow()
+          setError('Log-In Cancelled');
+      }
       console.log(error.code);
-    }
-  };
-
-  const passwordLessSignIn = async (e) => {
-    const auth = getAuth();
-    const actionCodeSettings = {
-      // URL you want to redirect back to. The domain (www.example.com) for this
-      // URL must be in the authorized domains list in the Firebase Console.
-      url: "http://localhost:3000/signup",
-      // This must be true.
-      handleCodeInApp: true,
-    };
-
-    try {
-      await sendSignInLinkToEmail(auth, data.email, actionCodeSettings)
-        .then((result) => {
-          console.log(result);
-          console.log(window.location.href);
-          console.log("Mail Sent");
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    } catch (error) {
-      console.error(error);
     }
   };
 
@@ -227,6 +246,7 @@ const Signup = () => {
       }
     }
   }, []);
+
   useEffect(() => {
     console.log(UserData);
     if (loggedIn) {
@@ -288,9 +308,7 @@ const Signup = () => {
                             updateState(e);
                           }}
                           onBlur={(ev) => {
-                            if (ev.target.value == "") {
-                              console.log("Please Enter Your Username");
-                            }
+                            checkUsername(ev);
                           }}
                           className={styles.field}
                           label="User Name"
@@ -330,9 +348,7 @@ const Signup = () => {
                             updateState(e);
                           }}
                           onBlur={(ev) => {
-                            if (ev.target.value == "") {
-                              console.log("Please Enter Phone Number");
-                            }
+                            checkPhonenum(ev)
                           }}
                           className={styles.field}
                           label="Phone Number"
@@ -402,7 +418,7 @@ const Signup = () => {
                     <Modal.Body className={styles.mymodal2}>{error}</Modal.Body>
                     <Modal.Footer>
                       <Button className={styles.mymodal} variant="secondary" onClick={handleClose}>
-                        Close
+                        Ok
                       </Button>
                       {/* <Button variant="primary">Understood</Button> */}
                     </Modal.Footer>
@@ -421,21 +437,6 @@ const Signup = () => {
                   }}
                 >
                   Sign up with Google
-                </button>
-              </div>
-              <div className={cn("button-stroke", styles.button)}>
-                {" "}
-                {/* <img className="icons mr-3" src="/google.png" />{" "} */}
-                <button
-                  className={styles.button2}
-                  type="submit"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    // googlesignin(e);
-                    passwordLessSignIn(e);
-                  }}
-                >
-                  Password Less Sign-In
                 </button>
               </div>
 

@@ -59,46 +59,46 @@ const Passwordless = () => {
     }
 	}
 	const { push } = useHistory()
- useEffect(() => {
-    const auth = getAuth();
-    if (isSignInWithEmailLink(auth, window.location.href)) {
-      let email = window.localStorage.getItem("emailForSignIn");
-      if (!email) {
-        // User opened the link on a different device. To prevent session fixation
-        // attacks, ask the user to provide the associated email again. For example:
-        email = window.prompt("Please provide your email for confirmation");
-        signInWithEmailLink(auth, email, window.location.href)
-          .then((result) => {
-            const db = getFirestore();
-            const user = result.user;
-            const uid = user.uid;
-			if(user.exist()){
-				console.log("exists")
-			}else{
-				setDoc(doc(db, "users", uid), {
-              Name: "",
-              Emailid: "",
-              Phone: "",
-              Username: "",
-              UserID: uid,
-              admin: false,
-              creator: false,
-              Bio: "",
-              Instagram: "",
-              Portfolio: "",
-              Twitter: "",
-            });
+	useEffect(() => {
+		const auth = getAuth();
+		if (isSignInWithEmailLink(auth, window.location.href)) {
+		let email = window.localStorage.getItem("emailForSignIn");
+		if (!email) {
+			// User opened the link on a different device. To prevent session fixation
+			// attacks, ask the user to provide the associated email again. For example:
+			email = window.prompt("Please provide your email for confirmation");
+			signInWithEmailLink(auth, email, window.location.href)
+			.then((result) => {
+				const db = getFirestore();
+				const user = result.user;
+				const uid = user.uid;
+				if(user.exist()){
+					console.log("exists")
+				}else{
+					setDoc(doc(db, "users", uid), {
+				Name: "",
+				Emailid: "",
+				Phone: "",
+				Username: "",
+				UserID: uid,
+				admin: false,
+				creator: false,
+				Bio: "",
+				Instagram: "",
+				Portfolio: "",
+				Twitter: "",
+				});
+					
+				}
 				
-			}
-			
-            window.localStorage.removeItem("emailForSignIn");
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-    }
-  }, []);
+				window.localStorage.removeItem("emailForSignIn");
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+		}
+		}
+	}, []);
 	useEffect(() => {
 		console.log(UserData)
 		if (loggedIn) {
