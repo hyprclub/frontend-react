@@ -68,8 +68,8 @@ const Card = ({ className, item: itemFromProps }) => {
         <div>
           <img
             className={styles.imagehover}
-            srcSet=  {`${item.image} `}
-            src={item.image}
+            srcSet=  {`${item.image || "/images/bg-card.png"} `}
+            src={item.image || "/images/bg-card.png" }
             alt="Card"
           />
         </div>
