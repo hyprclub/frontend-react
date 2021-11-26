@@ -90,6 +90,8 @@ const Discover = () => {
 
       <ClipLoader color={color} loading={loading} size={150} />
     </div> */}
+    <div className ="container">
+    
     <ClipLoader color={color} loading={loading} size={150} />
       <div className={cn("section", styles.section)}>
         <div className={cn("container", styles.container)}>
@@ -223,6 +225,7 @@ const Discover = () => {
             <span>Load more</span>
           </button>
         </div>
+      </div>
       </div>
     </>
   );
