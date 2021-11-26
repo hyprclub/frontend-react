@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { Button, Modal } from "react-bootstrap";
 import { firebaseApp } from "../../firebaseConfig";
 import { useHistory } from "react-router-dom";
-import { doc, updateDoc, getFirestore } from "firebase/firestore";
+import { doc, updateDoc, getFirestore,getDocs,collection,where,query } from "firebase/firestore";
 import {
   getStorage,
   ref,
@@ -47,6 +47,7 @@ const ProfileEdit = () => {
   const [error, setError] = useState('');
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  
   React.useEffect(() => {
     if (loggedIn != undefined) {
     } else {
@@ -88,22 +89,53 @@ const ProfileEdit = () => {
       const db = getFirestore();
       const phonevalid ="(0|91)?[7-9][0-9]{9}";
       if((data.phoneno).match(phonevalid)){
+        const q = query(collection(db,"users"),where("Username" , "==", data.username));
+
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach( async (docsnap)=>{
+          // console.log(docsnap.id + " => " + docsnap.data())
+          // console.log(docsnap.data())
+          if(docsnap.data().Username == data.username){
+            console.log("Username Exists");
+          }
+          else{
+                      
+          }
+        })
+        const updateStatus= await updateDoc(doc(db, "users", UserData.uid), {
+                        Name: data.name,
+                        Emailid: data.email,
+                        Username: data.username,
+                        Phone: data.phoneno,
+                        Bio: data.bio,
+                        Portfolio: data.portfolio,
+                        Instagram: data.instagram,
+                        Twitter: data.twitter,
+                           });
+
+
+                     handleShow();
+                     setError("Profile Updated");
+                    window?.location.reload();
+        // if(querySnapshot){
+        //   console.log("Username exits");
+        // }
+        // else{
+        //   console.log("allwow username edit");
+        // }
+        // querySnapshot.forEach(async (documentUsername)=>{
+        //   if(documentUsername.data().Username != data.username){
+        //     console.log(documentUsername.data().Username)
+        //     handleShow()
+        //     setError('Username already taken')
+        //   }
+        //   else{
+        //   }
+        // });
+      //    console.log("hello")
+    
         
-     const updateStatus= await updateDoc(doc(db, "users", UserData.uid), {
-        Name: data.name,
-        Emailid: data.email,
-        Username: data.username,
-        Phone: data.phoneno,
-        Bio: data.bio,
-        Portfolio: data.portfolio,
-        Instagram: data.instagram,
-        Twitter: data.twitter,
-      });
-
-
-      handleShow();
-      setError("Profile Updated");
-      window?.location.reload();
+     
       }
       else{
         handleShow()

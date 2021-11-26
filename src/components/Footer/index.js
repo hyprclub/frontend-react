@@ -136,12 +136,12 @@ const Footers = () => {
           <div className={styles.copyright}>
             © 2021 HyprClub, Made with ❤️ in India
           </div>
-          <div className={styles.copyright}>
+          {/* <div className={styles.copyright}>
             Terms and Conditions*
-          </div>
-          {/* <div className={styles.note}>
-						We use cookies for better service. <a href='/#'>Accept</a>
-					</div> */}
+          </div> */}
+          <div className={styles.copyright}>
+						<a target="_blank" href='https://firebasestorage.googleapis.com/v0/b/hypr-development.appspot.com/o/Documents%2Ftermandcond%2Ftnc.pdf?alt=media&token=01abf26a-b4c8-402f-bf13-5caf74615250'>Terms and Conditions </a>
+					</div>
         </div>
       </div>
     </footer>
