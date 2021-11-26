@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import cn from "classnames";
 import styles from "./Discover.module.sass";
 import { Range, getTrackBackground } from "react-range";
@@ -8,7 +8,7 @@ import Items from "../../../screens/Profile/Items";
 import Card from "../../../components/Card";
 import Dropdown from "../../../components/Dropdown";
 import { useSelector } from "react-redux";
-
+// import ClipLoader from "react-spinners/ClipLoader";
 // data
 import { bids } from "../../../mocks/bids";
 
@@ -26,13 +26,16 @@ const SlickArrow = ({ currentSlide, slideCount, children, ...props }) => (
 );
 
 const Discover = () => {
+  let [loading, setLoading] = useState(false);
+  let [color, setColor] = useState("#ffffff");
+  // const { loading, setloading } = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [date, setDate] = useState(dateOptions[0]);
   const [price, setPrice] = useState(priceOptions[0]);
   const [likes, setLikes] = useState(likesOptions[0]);
   const [creator, setCreator] = useState(creatorOptions[0]);
   const [sorting, setSorting] = useState(sortingOptions[0]);
-   const UserData = useSelector((state) => state.UserData);
+  const UserData = useSelector((state) => state.UserData);
 
   const [values, setValues] = useState([5]);
 
@@ -79,6 +82,7 @@ const Discover = () => {
 
 
   return (
+    
     <div className={cn("section", styles.section)}>
       <div className={cn("container", styles.container)}>
         <h3 className={cn("h3", styles.title)}>Discover</h3>
@@ -238,17 +242,13 @@ const Discover = () => {
           >
             {<Items
                     className={styles.items}
-                    items={UserData.nftIdsLogOut.slice(0, sliceIntial)}
+                    items={UserData.nftIdsLogOut.slice(0, 10)}
                     buttonclass = {true}
                   />}
           </Slider>
         </div>
         <div className={styles.btns}>
-          <button className={cn("button-stroke button-small", styles.button)}
-                  onClick={(e) => {
-                            IncreaseSlice(e)
-                          }}
-                  >
+          <button className={cn("button-stroke button-small", styles.button)}>
             <span>Load more</span>
           </button>
         </div>
