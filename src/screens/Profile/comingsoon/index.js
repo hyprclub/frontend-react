@@ -4,9 +4,13 @@ import cn from 'classnames'
 import FlipCountdown from '@rumess/react-flip-countdown';
 import Image from './Image'
 import image from "./gradient.png"
+import 'aos/dist/aos.css';
+import Aos from 'aos';
 
 const ComingSoon = () => {
-
+    useEffect(() => {
+        Aos.init({duration: 2000})
+    },[]);
     return (
         <div className={styles.cont}>
 
@@ -20,7 +24,7 @@ const ComingSoon = () => {
                     <div className={styles.lowcont}>Bigger and better. More features,<br></br> more rewards more Hypr.</div>
                 </div>
                 <div className="row">
-                    <div className="col-xl-6 col-lg-6 col-md-12">
+                    <div data-aos="fade-right" className="col-xl-6 col-lg-6 col-md-12">
                         <div className={styles.js}>
                             <div className={styles.dd}><Image className={cn("img-fluid",styles.edit)} src="/membership.png" srcDark="/membershipbutton.png" /></div>
                             <div className={styles.sty}>
@@ -29,34 +33,34 @@ const ComingSoon = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-xl-6 col-lg-6 col-md-12">
+                    <div data-aos="fade-left" className="col-xl-6 col-lg-6 col-md-12">
                         <Image className="img-fluid" src="/Group51.png" srcDark="/Group51.png" />
                         <div className={styles.imgcom}><Image className="img-fluid" src="/Group111.png" srcDark="/Group111.png" /></div>
                         {/* <div className={styles.imgcom}><img className="img-fluid" src="/Group4.png" /></div> */}
                     </div>
-                    <div className="col-xl-6 col-lg-6 col-md-12">
+                    <div data-aos="fade-right" className="col-xl-6 col-lg-6 col-md-12">
                         <Image className="img-fluid" src="/addtocart.png" srcDark="/addtocart1.png" />
                     </div>
-                    <div className={cn("col-xl-6 col-lg-6 col-md-12", styles.creator)}>
+                    <div data-aos="fade-left" className={cn("col-xl-6 col-lg-6 col-md-12", styles.creator)}>
                         <Image className={cn("img-fluid", styles.creator,styles.edit)} src="/creator.png" srcDark="/buttoncreator.png"/>
                         <div className={styles.sty}>
                             <div>Purchase any merchandise or digital commodity that a creator is offering. </div>
                         </div>
                     </div>
-                    <div className="col-xl-6 col-lg-6 col-md-12">
+                    <div data-aos="fade-right" className="col-xl-6 col-lg-6 col-md-12">
                         <Image className={cn("img-fluid", styles.creator,styles.edit)} src="/saythanks.png" srcDark="/thanksbutton.png" />
                         <div className={styles.sty}>
                             <div>Yes, just like SuperChat extend support to creators with cool customizations. </div>
                         </div>
                     </div>
-                    <div className={cn("col-xl-6 col-lg-6 col-md-12",styles.creator)}>
+                    <div data-aos="fade-left" className={cn("col-xl-6 col-lg-6 col-md-12",styles.creator)}>
                         <img className="img-fluid" src="/saythanksbox.png" />
                     </div>
                 </div>
-                <div className={styles.sse}>
+                <div data-aos="fade-left" className={styles.sse}>
                     <Image className="img-fluid" src="/joinhypr.png" srcDark="/joinhypr1.png" />
                 </div>
-                <iframe className={styles.video} id="ytplayer" type="text/html" height="600px" width="100%" height="auto" src="https://www.youtube.com/embed/NzzeUjSrDvY?rel=0" frameborder="0" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>
+                <iframe data-aos="fade-right" className={styles.video} id="ytplayer" type="text/html" height="600px" width="100%" height="auto" src="https://www.youtube.com/embed/NzzeUjSrDvY?rel=0" frameborder="0" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>
                 <div className={styles.FlipCount}>
                     <FlipCountdown
                         hideYear
