@@ -63,6 +63,10 @@ const Footers = () => {
       console.error(err);
     })
   };
+  const [show, setShow] = useState(false);
+	const [error, setError] = useState('');
+  const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
 
   return (
     <footer className={`${styles.footer} dark`}>
@@ -137,6 +141,7 @@ const Footers = () => {
               name="email"
             />
           </div>
+         
         </div>
         <div className={styles.foot}>
           <div className={styles.copyright}>
@@ -167,6 +172,26 @@ const Footers = () => {
                     </Modal.Footer>
                   </Modal>
       </div>
+      <Modal
+								show={show}
+								onHide={handleClose}
+								backdrop="static"
+								keyboard={false}
+							>
+								<Modal.Header closeButton className={styles.mymodal} >
+									<Modal.Title >Notification</Modal.Title>
+								</Modal.Header>
+								<Modal.Body className={styles.mymodal2}>
+                  hello
+									{/* {error} */}
+								</Modal.Body>
+								<Modal.Footer>
+									<Button variant="secondary" className={styles.mymodal} onClick={handleClose}>
+										Close
+									</Button>
+									{/* <Button variant="primary">Understood</Button> */}
+								</Modal.Footer>
+							</Modal>
     </footer>
   );
 };
