@@ -41,8 +41,11 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
+
+import Howitworks from "./screens/How";
 import ComingSoon from "./screens/Profile/comingsoon";
 import Discover from "./screens/Home/Discover";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -215,6 +218,15 @@ function App() {
             </Page>
           )}
         />
+         <Route
+          exact
+          path="/howitworks"
+          render={() => (
+            <Page>
+              <Howitworks/>
+            </Page>
+          )}
+        />
         <Route
           exact
           path="/passwordless"
@@ -224,6 +236,15 @@ function App() {
             </Page>
           )}
         />
+         {/* <Route
+          exact
+          path="/howitworks"
+          render={() => (
+            <Page>
+              <howitworks/>
+            </Page>
+          )}
+        /> */}
         <Route
           exact
           path="/login"

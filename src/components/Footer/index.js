@@ -38,8 +38,8 @@ const items = [
         url: "/faq",
       },
       {
-        title: "About Us",
-        url: "/comingsoon",
+        title: "How it works",
+        url: "/Howitworks",
       },
     ],
   },
@@ -54,15 +54,15 @@ const Footers = () => {
 
   const handleSubmit = async (e) => {
     const db = getFirestore();
-    await setDoc(doc(db,"Newsletter",email),{
-      
-    }).then((result)=>{
-      handleShow()
-      setError("Thank you for subscribing to our newsletter")
-    }).catch((err) =>{
+    await setDoc(doc(db, "Newsletter", email), {
+
+    }).then((result) => {
+      console.log("Thank You For Subscribing for our newsletter");
+    }).catch((err) => {
       console.error(err);
     })
   };
+
   return (
     <footer className={`${styles.footer} dark`}>
       <div className={cn("container", styles.container)}>
@@ -136,7 +136,7 @@ const Footers = () => {
               name="email"
             />
           </div>
-         
+
         </div>
         <div className={styles.foot}>
           <div className={styles.copyright}>
@@ -146,27 +146,30 @@ const Footers = () => {
             Terms and Conditions*
           </div> */}
           <div className={styles.copyright}>
-						<a target="_blank" href='https://firebasestorage.googleapis.com/v0/b/hypr-development.appspot.com/o/Documents%2Ftermandcond%2Ftnc.pdf?alt=media&token=01abf26a-b4c8-402f-bf13-5caf74615250'>Terms and Conditions </a>
-					</div>
+            <a target="_blank" href='https://firebasestorage.googleapis.com/v0/b/hypr-development.appspot.com/o/Documents%2Ftermandcond%2Ftnc.pdf?alt=media&token=01abf26a-b4c8-402f-bf13-5caf74615250'>Terms and Conditions </a>
+          </div>
         </div>
-        <Modal
-                    show={show}
-                    onHide={handleClose}
-                    backdrop="static"
-                    keyboard={false}
-                  >
-                    <Modal.Header closeButton className={styles.mymodal}>
-                      <Modal.Title>Notification</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body className={styles.mymodal2}>{error}</Modal.Body>
-                    <Modal.Footer>
-                      <Button className={styles.mymodal} variant="secondary" onClick={handleClose}>
-                        Ok
-                      </Button>
-                      {/* <Button variant="primary">Understood</Button> */}
-                    </Modal.Footer>
-                  </Modal>
       </div>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton className={styles.mymodal} >
+          <Modal.Title >Notification</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className={styles.mymodal2}>
+          hello
+          {/* {error} */}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" className={styles.mymodal} onClick={handleClose}>
+            Close
+          </Button>
+          {/* <Button variant="primary">Understood</Button> */}
+        </Modal.Footer>
+      </Modal>
     </footer>
   );
 };

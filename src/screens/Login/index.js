@@ -28,60 +28,60 @@ const Login = () => {
 		setData((state) => ({ ...state, [e.target.name]: e.target.value }))
 	}
 	const [show, setShow] = useState(false);
-    const [error , setError] = useState('');
+	const [error, setError] = useState('');
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
 	const googlesignin = async () => {
 		const db = getFirestore();
 
 		try {
-		const googleprovider = new GoogleAuthProvider();
-		const auth = getAuth();
-		const google = await signInWithPopup(auth, googleprovider);
-		const credential = GoogleAuthProvider.credentialFromResult(google);
-		const user = google.user;
-		const email = user.email;
-		const name = user.displayName;
-		const uid = user.uid;
+			const googleprovider = new GoogleAuthProvider();
+			const auth = getAuth();
+			const google = await signInWithPopup(auth, googleprovider);
+			const credential = GoogleAuthProvider.credentialFromResult(google);
+			const user = google.user;
+			const email = user.email;
+			const name = user.displayName;
+			const uid = user.uid;
 
-		setDoc(doc(db, "users", uid), {
-			Emailid: email,
-			Name: name,
-			UserID: uid,
-			admin: false,
-			creator: false
+			setDoc(doc(db, "users", uid), {
+				Emailid: email,
+				Name: name,
+				UserID: uid,
+				admin: false,
+				creator: false
 
 
-		});	
+			});
 		} catch (error) {
-			if(error.code ="auth/popup-closed-by-user"){
-         	 handleShow()
-         	 setError('Log-In Cancelled');
-     		 }
+			if (error.code = "auth/popup-closed-by-user") {
+				handleShow()
+				setError('Log-In Cancelled');
+			}
 		}
 
 	}
-	const forgotpassword = async () =>{
-		try{
+	const forgotpassword = async () => {
+		try {
 			const auth = getAuth();
-			await sendPasswordResetEmail(auth,data.email).then((result)=>{
+			await sendPasswordResetEmail(auth, data.email).then((result) => {
 				handleShow()
 				setError("E-Mail Sent!");
 			})
-			
-		}catch(error){
+
+		} catch (error) {
 			console.log(error.code);
 
-			if(error.code == "auth/missing-email"){
+			if (error.code == "auth/missing-email") {
 				handleShow()
 				setError('Please Enter Email Address');
 			}
-			else{
+			else {
 				handleShow()
-				setError('Some Error Occured'); 
+				setError('Some Error Occured');
 			}
-			
+
 		}
 	}
 	const handleSubmit = async () => {
@@ -94,7 +94,7 @@ const Login = () => {
 			console.log({ data, userCredential })
 		} catch (err) {
 			setError('Invalid Credential');
-            handleShow()
+			handleShow()
 			console.error(err)
 		}
 	}
@@ -115,7 +115,7 @@ const Login = () => {
 					<div className={styles.top}>
 						<h1 className={cn('h2', styles.title)}>Login</h1>
 						Become a part of the social revolution.
-						
+
 					</div>
 					<div className={styles.list}>
 						<div className={styles.item}>
@@ -168,11 +168,11 @@ const Login = () => {
 									</Link> */}
 								{/* </input> */}
 							</form>
-							<a className={cn(styles.link)} 
-							onClick={(e) =>{
-			
-								forgotpassword(e)
-							}}
+							<a className={cn(styles.link)}
+								onClick={(e) => {
+
+									forgotpassword(e)
+								}}
 							>Forgot Password?</a>
 
 							<Button className={cn('button-stroke', styles.button)}><div> <img class="icons mr-3" src="/google.png" /> <button
@@ -192,26 +192,26 @@ const Login = () => {
 								}}
 							>Password-Less Sign In</button></div></Button>
 
-			<Modal 
-				show={show}
-				onHide={handleClose}
-				backdrop="static"
-				keyboard={false}
-			>
-				<Modal.Header closeButton className={styles.mymodal} >
-					<Modal.Title >Notification</Modal.Title>
-				</Modal.Header>
-				<Modal.Body className={styles.mymodal2}>
+							<Modal
+								show={show}
+								onHide={handleClose}
+								backdrop="static"
+								keyboard={false}
+							>
+								<Modal.Header closeButton className={styles.mymodal} >
+									<Modal.Title >Notification</Modal.Title>
+								</Modal.Header>
+								<Modal.Body className={styles.mymodal2}>
 
-					{error}
-				</Modal.Body>
-				<Modal.Footer>
-					<Button variant="secondary" className={styles.mymodal} onClick={handleClose}>
-						Close
-					</Button>
-					{/* <Button variant="primary">Understood</Button> */}
-				</Modal.Footer>
-			</Modal>
+									{error}
+								</Modal.Body>
+								<Modal.Footer>
+									<Button variant="secondary" className={styles.mymodal} onClick={handleClose}>
+										Close
+									</Button>
+									{/* <Button variant="primary">Understood</Button> */}
+								</Modal.Footer>
+							</Modal>
 
 						</div>
 					</div>
