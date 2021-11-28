@@ -68,9 +68,9 @@ function App() {
             dispatch(UserDataActions.login(user.toJSON()));
           } else {
             try {
-              // console.log(
-              //   "Please Verify Email address. Verification has been sent to you. Please Verify to continue"
-              // );
+              console.log(
+                "Please Verify Email address. Verification has been sent to you. Please Verify to continue"
+              );
               // handleShow();
               // setError( "Please Verify Email address. Verification has been sent to you. Please Verify to continue")
               const verfificationmail = sendEmailVerification(user);

@@ -30,10 +30,12 @@ const Passwordless = () => {
 		setData((state) => ({ ...state, [e.target.name]: e.target.value }))
 	}
 	const [show, setShow] = useState(false);
+	const [mailShow, setMailShow] = useState(false);
+	const handleMailClose = () => setShow(true);
     const [error , setError] = useState('');
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
 	const handleSubmit = async () => {
 		 const auth = getAuth();
     const actionCodeSettings = {
@@ -59,14 +61,27 @@ const Passwordless = () => {
     }
 	}
 	const { push } = useHistory()
-	useEffect(() => {
+
+	useEffect(()=>{
+		const auth = getAuth();
+
+		if (isSignInWithEmailLink(auth, window.location.href)) {
+			setMailShow(true)
+		}
+	},[])
+	
+	const handleLogin = async () => {
 		const auth = getAuth();
 		if (isSignInWithEmailLink(auth, window.location.href)) {
-		let email = window.localStorage.getItem("emailForSignIn");
+		let email 
+
+
 		if (!email) {
-			// User opened the link on a different device. To prevent session fixation
-			// attacks, ask the user to provide the associated email again. For example:
-			email = window.prompt("Please provide your email for confirmation");
+			// // User opened the link on a different device. To prevent session fixation
+			// // attacks, ask the user to provide the associated email again. For example:
+			// email = window.prompt("Please provide your email for confirmation");
+			
+			email = data.pemail;
 			signInWithEmailLink(auth, email, window.location.href)
 			.then((result) => {
 				const db = getFirestore();
@@ -98,12 +113,12 @@ const Passwordless = () => {
 			});
 		}
 		}
-	}, []);
+	};
+	
 	useEffect(() => {
 		console.log(UserData)
 		if (loggedIn) {
 			push('/')
-
 		}
 	}, [loggedIn, push])
 
@@ -144,7 +159,7 @@ const Passwordless = () => {
 										Please choose a username.
 									</div> */}
 								</div>
-								<Button className={cn('button-stroke', styles.button)}><input type='submit' value='Sent Sign-In Email.' /></Button>
+								<Button className={cn('button-stroke', styles.button)}><input type='submit' value='Claim NFT' /></Button>
 
 								{/* <Link
 										onClick={(e) => {
@@ -173,6 +188,38 @@ const Passwordless = () => {
 				<Modal.Footer>
 					<Button className={styles.mymodal} variant="secondary" onClick={handleClose}>
 						Close
+					</Button>
+					{/* <Button variant="primary">Understood</Button> */}
+				</Modal.Footer>
+			</Modal>
+			<Modal
+				show={mailShow}
+				onHide={handleMailClose}
+				backdrop="static"
+				keyboard={false}
+			>
+				<Modal.Header closeButton className={styles.mymodal}>
+					<Modal.Title>Enter Email</Modal.Title>
+				</Modal.Header>
+				<Modal.Body className={styles.mymodal2}>
+								<TextInput
+										onChange={(e) => {
+											updateState(e)
+										}}
+										className={styles.field}
+										id="validationCustom01"
+										value={data.pemail}
+										name='pemail'
+										label="Please provide your email for confirmation"
+										type='email'
+										placeholder='Enter your email'
+										required
+										autocomplete="true"
+									/>
+				</Modal.Body>
+				<Modal.Footer>
+					<Button className={styles.mymodal} variant="secondary" onClick={handleLogin}>
+						Login
 					</Button>
 					{/* <Button variant="primary">Understood</Button> */}
 				</Modal.Footer>

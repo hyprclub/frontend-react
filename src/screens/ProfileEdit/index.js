@@ -58,25 +58,35 @@ const ProfileEdit = () => {
 
   function updateState(e) {
     setData((state) => ({ ...state, [e.target.name]: e.target.value }));
+    
     console.log({ data });
   }
 
 const checkUsername = async (ev) =>{
       if(ev.target.value == ""){
-        setUsernameStatus(false);
+        setUsernameStatus(true);
         handleShow()
         setError("Please Enter Username");
       }
+      // else if(ev.target.value == data.username){
+      //   setUsernameStatus(false)
+      // }
       else{
         try {
           const db = getFirestore();
          const q = query(collection(db, "users"), where("Username", "==", ev.target.value));
          const querySnapshot = await getDocs(q);
-        if(querySnapshot.size != 0 ){
-             setUsernameStatus(true);
-          }
-          else{
+         console.log(querySnapshot)
+        if(querySnapshot.size === 0 ){
             setUsernameStatus(false);
+        }
+          else{
+             if(ev.target.value == data.username){
+               setUsernameStatus(false);
+             }
+             else{
+               setUsernameStatus(true);
+             }
           }
           } catch (error) {
             console.log(error)
@@ -109,10 +119,11 @@ const checkUsername = async (ev) =>{
     }
   };
   const updateUserProfile = async () => {
-    try {
+    try { 
       const db = getFirestore();
       const phonevalid ="(0|91)?[7-9][0-9]{9}";
       if((data.phoneno).match(phonevalid)){
+
         if(usernameStatus == true){
           handleShow()
           setError("Username Taken")
@@ -249,7 +260,9 @@ const checkUsername = async (ev) =>{
                     />
                     <TextInput
                       onChange={(e) => {
+                        
                         updateState(e);
+                        // checkUsername(e);
                       }}
                       onBlur = {(ev) =>{
                         checkUsername(ev)
@@ -324,16 +337,21 @@ const checkUsername = async (ev) =>{
                 <button
                   onClick={(e) => {
                     e.preventDefault();
+                    // checkUsername(e);
                     updateUserProfile();
                   }}
                   className={cn("button", styles.button)}
                 >
                   Update Profile
                 </button>
-                <button className={styles.clear}>
+                {/* <button 
+                onClick={(e) =>{
+                  clearText(e)
+                }}
+                className={styles.clear}>
                   <Icon name="circle-close" size="24" />
                   Clear all
-                </button>
+                </button> */}
                 <Modal
                   show={show}
                   onHide={handleClose}
