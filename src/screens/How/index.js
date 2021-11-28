@@ -39,7 +39,7 @@ const Howitworks = () => {
             </div>
             <div data-aos="fade-left" className={styles.sse}>
                 <Image className="img-fluid" src="/perkhead.png" srcDark="/joinhypr1.png" />
-                <div>Not just the NFT, with your claim you unlock a variety of free perks.</div>
+                <div className={styles.bottom}>Not just the NFT, with your claim you unlock <br></br>a variety of <b>free perks.</b></div>
             </div>
             <div className="row">
                 <div data-aos="fade-left" className="col-xl-6 col-lg-6 col-md-6">
@@ -59,6 +59,10 @@ const Howitworks = () => {
             </div>
             <div data-aos="fade-left" className="col-xl-12 col-lg-12 col-md-12">
                 <Image className="img-fluid" src="/hampers.png" srcDark="/joinhypr1.png"></Image>
+            </div>
+            <div data-aos="fade-left" className={cn("col-xl-12 col-lg-12 col-md-12", styles.perks)}>
+               <div className={styles.sty4}>Thats not all.<br></br>These perks are unlimited.</div>
+               <div>Continue to access Bennett University special perks that keep updating.</div>
             </div>
         </div>
         // </div>
