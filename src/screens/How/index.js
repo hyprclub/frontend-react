@@ -58,7 +58,7 @@ const Howitworks = () => {
                 </div>
             </div>
             <div data-aos="fade-left" className="col-xl-12 col-lg-12 col-md-12">
-                <Image className="img-fluid" src="/hampers.png" srcDark="/joinhypr1.png"></Image>
+                <Image className="img-fluid" src="/hampers1.png" srcDark="/joinhypr1.png"></Image>
             </div>
             <div data-aos="fade-left" className={cn("col-xl-12 col-lg-12 col-md-12", styles.perks)}>
                <div className={styles.sty4}>Thats not all.<br></br>These perks are unlimited.</div>
