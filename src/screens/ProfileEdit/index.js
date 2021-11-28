@@ -43,6 +43,7 @@ const ProfileEdit = () => {
   const [image, setImage] = useState(null);
   const loggedIn = useSelector((state) => state.UserData.loggedIn);
   const { push } = useHistory();
+  const [usernameStatus, setUsernameStatus] = useState(true);
   const [show, setShow] = useState(false);
   const [error, setError] = useState('');
   const handleClose = () => setShow(false);
@@ -59,6 +60,29 @@ const ProfileEdit = () => {
     setData((state) => ({ ...state, [e.target.name]: e.target.value }));
     console.log({ data });
   }
+
+const checkUsername = async (ev) =>{
+      if(ev.target.value == ""){
+        setUsernameStatus(false);
+        handleShow()
+        setError("Please Enter Username");
+      }
+      else{
+        try {
+          const db = getFirestore();
+         const q = query(collection(db, "users"), where("Username", "==", ev.target.value));
+         const querySnapshot = await getDocs(q);
+        if(querySnapshot.size != 0 ){
+             setUsernameStatus(true);
+          }
+          else{
+            setUsernameStatus(false);
+          }
+          } catch (error) {
+            console.log(error)
+        }       
+      }
+  };
 
   const onImageChange = async (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -89,14 +113,11 @@ const ProfileEdit = () => {
       const db = getFirestore();
       const phonevalid ="(0|91)?[7-9][0-9]{9}";
       if((data.phoneno).match(phonevalid)){
-        const q = query(collection(db,"users"),where("Username" , "==", data.username));
-
-        const querySnapshot = await getDocs(q);
-        if(querySnapshot.size != 0 ){
-            handleShow()
-            setError("Username Taken");
-          }
-          else{
+        if(usernameStatus == true){
+          handleShow()
+          setError("Username Taken")
+        }
+      else{
             const updateStatus= await updateDoc(doc(db, "users", UserData.uid), {
                         Name: data.name,
                         Emailid: data.email,
@@ -230,6 +251,9 @@ const ProfileEdit = () => {
                       onChange={(e) => {
                         updateState(e);
                       }}
+                      onBlur = {(ev) =>{
+                        checkUsername(ev)
+                      }}
                       className={styles.field}
                       defaultValue={data.username}
                       label="Username"
@@ -247,7 +271,6 @@ const ProfileEdit = () => {
                       label="Bio"
                       name="bio"
                       placeholder="About yourselt in a few words"
-                      required="required"
                     />
                   </div>
                 </div>

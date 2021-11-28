@@ -8,15 +8,17 @@ import Faq from "./screens/Faq";
 import Activity from "./screens/Activity";
 import Search01 from "./screens/Search01";
 import Search02 from "./screens/Search02";
+import styles from "./screens/SignUp/Signup.module.sass";
 import Profile from "./screens/Profile";
 import ProfileEdit from "./screens/ProfileEdit";
+import { Button, Modal } from 'react-bootstrap';
 import Login from "./screens/Login";
 import Signup from "./screens/SignUp";
 import Passwordless from "./screens/Email-Entry";
 import Item from "./screens/Item";
 import PageList from "./screens/PageList";
 // import Discover from "./screens/Home/Discover";
-import { useEffect } from "react";
+import { useEffect , useState,setShow} from "react";
 import { firebaseApp } from "./firebaseConfig";
 import {
   getAuth,
@@ -48,6 +50,10 @@ import Discover from "./screens/Home/Discover";
 
 
 function App() {
+     const [show, setShow] = useState(false);
+  const [error, setError] = useState('');
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const dispatch = useDispatch();
 
   const { loggedIn, uid } = useSelector((state) => state.UserData);
@@ -62,9 +68,11 @@ function App() {
             dispatch(UserDataActions.login(user.toJSON()));
           } else {
             try {
-              console.log(
-                "Please Verify Email address. Verification has been sent to you. Please Verify to continue"
-              );
+              // console.log(
+              //   "Please Verify Email address. Verification has been sent to you. Please Verify to continue"
+              // );
+              // handleShow();
+              // setError( "Please Verify Email address. Verification has been sent to you. Please Verify to continue")
               const verfificationmail = sendEmailVerification(user);
             } catch (error) {
               console.log(error.code);
@@ -176,7 +184,11 @@ function App() {
     };
     run();
   }, [loggedIn, uid, dispatch]);
+
+
+
   return (
+    
     <Router>
       <Switch>
         <Route
@@ -352,6 +364,23 @@ function App() {
             </Page>
           )}
         />
+          {/* <Modal
+                    show={show}
+                    onHide={handleClose}
+                    backdrop="static"
+                    keyboard={false}
+                  >
+                    <Modal.Header closeButton className={styles.mymodal}>
+                      <Modal.Title>Notification</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body className={styles.mymodal2}>{error}</Modal.Body>
+                    <Modal.Footer>
+                      <Button className={styles.mymodal} variant="secondary" onClick={handleClose}>
+                        Ok
+                      </Button>
+                      <Button variant="primary">Understood</Button>
+                    </Modal.Footer>
+                  </Modal> */}
       </Switch>
     </Router>
   );
