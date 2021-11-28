@@ -27,8 +27,8 @@ const SlickArrow = ({ currentSlide, slideCount, children, ...props }) => (
 
 const Discover = () => {
   let [loading, setLoading] = useState(true);
-  let [color, setColor] = useState("#ffffff");
-  // const { loading, setloading } = useState(false);
+  let [color, setColor] = useState("#F80764");
+
   const [activeIndex, setActiveIndex] = useState(0);
   const [date, setDate] = useState(dateOptions[0]);
   const [price, setPrice] = useState(priceOptions[0]);
@@ -48,7 +48,7 @@ const Discover = () => {
 
   const IncreaseSlice = () => {
     setSliceInitial(sliceIntial + 5);
-  }
+  };
 
   const settings = {
     infinite: true,
@@ -79,184 +79,154 @@ const Discover = () => {
     ],
   };
 
-
-
   return (
-    <div className={cn("section", styles.section)}>
-      <div className={cn("container", styles.container)}>
-        <h3 className={cn("h3", styles.title)}>Discover</h3>
-        {/* <div className={styles.top}>
-          <div className={styles.dropdown}>
-            <Dropdown
-              className={styles.dropdown}
-              value={date}
-              setValue={setDate}
-              options={dateOptions}
-            />
-          </div>
-          <div className={styles.nav}>
-            {navLinks.map((x, index) => (
-              <button
-                className={cn(styles.link, {
-                  [styles.active]: index === activeIndex,
-                })}
-                onClick={() => setActiveIndex(index)}
-                key={index}
-              >
-                {x}
-              </button>
-            ))}
-          </div>
-          <div className={cn("tablet-show", styles.dropdown)}>
-            <Dropdown
-              className={styles.dropdown}
-              value={sorting}
-              setValue={setSorting}
-              options={sortingOptions}
-            />
-          </div>
-          <button
-            className={cn(styles.filter, { [styles.active]: visible })}
-            onClick={() => setVisible(!visible)}
-          >
-            <div className={styles.text}>Filter</div>
-            <div className={styles.toggle}>
-              <Icon name="filter" size="18" />
-              <Icon name="close" size="10" />
-            </div>
-          </button>
-        </div> */}
-        <div className={cn(styles.filters, { [styles.active]: visible })}>
-          <div className={styles.sorting}>
-            <div className={styles.cell}>
-              <div className={styles.label}>Price</div>
-              <Dropdown
-                className={styles.dropdown}
-                value={price}
-                setValue={setPrice}
-                options={priceOptions}
-              />
-            </div>
-            <div className={styles.cell}>
-              <div className={styles.label}>likes</div>
-              <Dropdown
-                className={styles.dropdown}
-                value={likes}
-                setValue={setLikes}
-                options={likesOptions}
-              />
-            </div>
-            <div className={styles.cell}>
-              <div className={styles.label}>creator</div>
-              <Dropdown
-                className={styles.dropdown}
-                value={creator}
-                setValue={setCreator}
-                options={creatorOptions}
-              />
-            </div>
-            <div className={styles.cell}>
-              <div className={styles.label}>Price range</div>
-              <Range
-                values={values}
-                step={STEP}
-                min={MIN}
-                max={MAX}
-                onChange={(values) => setValues(values)}
-                renderTrack={({ props, children }) => (
-                  <div
-                    onMouseDown={props.onMouseDown}
-                    onTouchStart={props.onTouchStart}
-                    style={{
-                      ...props.style,
-                      height: "27px",
-                      display: "flex",
-                      width: "100%",
-                    }}
-                  >
-                    <div
-                      ref={props.ref}
-                      style={{
-                        height: "8px",
-                        width: "100%",
-                        borderRadius: "4px",
-                        background: getTrackBackground({
-                          values,
-                          colors: ["#ED0090", "#E6E8EC"],
-                          min: MIN,
-                          max: MAX,
-                        }),
-                        alignSelf: "center",
-                      }}
-                    >
-                      {children}
-                    </div>
+    <>
+      {/* <div className="sweet-loading">
+      <button onClick={() => setLoading(!loading)}>Toggle Loader</button>
+      <input value={color} onChange={(input) => setColor(input.target.value)} placeholder="Color of the loader" />
+      <ClipLoader color={color} loading={loading} size={150} />
+    </div> */}
+      <div className="container">
+        {/* <ClipLoader color={color} loading={loading} size={150} /> */}
+        <div className={cn("section", styles.section)}>
+          <div className={cn("container", styles.container)}>
+            <h3 className={cn("h3", styles.title)}>Discover</h3>
+            <div className={cn(styles.filters, { [styles.active]: visible })}>
+              <div className={styles.sorting}>
+                <div className={styles.cell}>
+                  <div className={styles.label}>Price</div>
+                  <Dropdown
+                    className={styles.dropdown}
+                    value={price}
+                    setValue={setPrice}
+                    options={priceOptions}
+                  />
+                </div>
+                <div className={styles.cell}>
+                  <div className={styles.label}>likes</div>
+                  <Dropdown
+                    className={styles.dropdown}
+                    value={likes}
+                    setValue={setLikes}
+                    options={likesOptions}
+                  />
+                </div>
+                <div className={styles.cell}>
+                  <div className={styles.label}>creator</div>
+                  <Dropdown
+                    className={styles.dropdown}
+                    value={creator}
+                    setValue={setCreator}
+                    options={creatorOptions}
+                  />
+                </div>
+                <div className={styles.cell}>
+                  <div className={styles.label}>Price range</div>
+                  <Range
+                    values={values}
+                    step={STEP}
+                    min={MIN}
+                    max={MAX}
+                    onChange={(values) => setValues(values)}
+                    renderTrack={({ props, children }) => (
+                      <div
+                        onMouseDown={props.onMouseDown}
+                        onTouchStart={props.onTouchStart}
+                        style={{
+                          ...props.style,
+                          height: "27px",
+                          display: "flex",
+                          width: "100%",
+                        }}
+                      >
+                        <div
+                          ref={props.ref}
+                          style={{
+                            height: "8px",
+                            width: "100%",
+                            borderRadius: "4px",
+                            background: getTrackBackground({
+                              values,
+                              colors: ["#ED0090", "#E6E8EC"],
+                              min: MIN,
+                              max: MAX,
+                            }),
+                            alignSelf: "center",
+                          }}
+                        >
+                          {children}
+                        </div>
+                      </div>
+                    )}
+                    renderThumb={({ props, isDragged }) => (
+                      <div
+                        {...props}
+                        style={{
+                          ...props.style,
+                          height: "24px",
+                          width: "24px",
+                          borderRadius: "50%",
+                          backgroundColor: "#ED0090",
+                          border: "4px solid #FCFCFD",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <div
+                          style={{
+                            position: "absolute",
+                            top: "-33px",
+                            color: "#fff",
+                            fontWeight: "600",
+                            fontSize: "14px",
+                            lineHeight: "18px",
+                            fontFamily: "Poppins",
+                            padding: "4px 8px",
+                            borderRadius: "8px",
+                            backgroundColor: "#141416",
+                          }}
+                        >
+                          {values[0].toFixed(1)}
+                        </div>
+                      </div>
+                    )}
+                  />
+                  <div className={styles.scale}>
+                    <div className={styles.number}>0.01 ETH</div>
+                    <div className={styles.number}>10 ETH</div>
                   </div>
-                )}
-                renderThumb={({ props, isDragged }) => (
-                  <div
-                    {...props}
-                    style={{
-                      ...props.style,
-                      height: "24px",
-                      width: "24px",
-                      borderRadius: "50%",
-                      backgroundColor: "#ED0090",
-                      border: "4px solid #FCFCFD",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: "-33px",
-                        color: "#fff",
-                        fontWeight: "600",
-                        fontSize: "14px",
-                        lineHeight: "18px",
-                        fontFamily: "Poppins",
-                        padding: "4px 8px",
-                        borderRadius: "8px",
-                        backgroundColor: "#141416",
-                      }}
-                    >
-                      {values[0].toFixed(1)}
-                    </div>
-                  </div>
-                )}
-              />
-              <div className={styles.scale}>
-                <div className={styles.number}>0.01 ETH</div>
-                <div className={styles.number}>10 ETH</div>
+                </div>
               </div>
             </div>
           </div>
+          <div className={styles.list}>
+            <Slider
+              className={cn("discover-slider", styles.slider)}
+              {...settings}
+            >
+              {
+                <Items
+                  className={styles.items}
+                  items={UserData.nftIdsLogOut.slice(0, sliceIntial)}
+                  buttonclass={true}
+                />
+              }
+            </Slider>
+          </div>
+          <div className={styles.btns}>
+            <button
+              className={cn("button-stroke button-small", styles.button)}
+              onClick={(e) => {
+                IncreaseSlice(e);
+              }}
+            >
+              <span>Load more</span>
+            </button>
+          </div>
         </div>
       </div>
-      <div className={styles.list}>
-        <Slider
-          className={cn("discover-slider", styles.slider)}
-          {...settings}
-        >
-          {<Items
-            className={styles.items}
-            items={UserData.nftIdsLogOut.slice(0, sliceIntial)}
-            buttonclass={true}
-          />}
-        </Slider>
-      </div>
-      <div className={styles.btns}>
-        <button className={cn("button-stroke button-small", styles.button)}
-          onClick={(e) => {
-            IncreaseSlice(e)
-          }}
-        >
-          <span>Load more</span>
-        </button>
-      </div>
-    </div>
+    </>
   );
 };
 

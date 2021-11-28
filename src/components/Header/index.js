@@ -14,7 +14,7 @@ const nav = [
 	//   title: "Discover",
 	// },
 	{
-		url: '/faq',
+		url: '/Howitworks',
 		title: 'How it work',
 	},
 	{

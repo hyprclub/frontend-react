@@ -48,13 +48,13 @@ const ComingSoon = () => {
                         </div>
                     </div>
                     <div data-aos="fade-right" className="col-xl-6 col-lg-6 col-md-12">
-                        <Image className={cn("img-fluid", styles.creator,styles.edit)} src="/saythanks.png" srcDark="/thanksbutton.png" />
+                        <Image className={cn("img-fluid", styles.creator,styles.edit)} srcDark="/thanksbutton.png" src="/thanksbutton.png" />
                         <div className={styles.sty}>
                             <div>Yes, just like SuperChat extend support to creators with cool customizations. </div>
                         </div>
                     </div>
                     <div data-aos="fade-left" className={cn("col-xl-6 col-lg-6 col-md-12",styles.creator)}>
-                        <img className="img-fluid" src="/saythanksbox.png" />
+                        <img className="img-fluid" src="/saythanks.png" />
                     </div>
                 </div>
                 <div data-aos="fade-left" className={styles.sse}>

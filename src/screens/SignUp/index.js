@@ -16,7 +16,16 @@ import {
   isSignInWithEmailLink,
   signInWithEmailLink,
 } from "firebase/auth";
-import { doc, updateDoc, setDoc,getFirestore,getDocs,collection,where,query } from "firebase/firestore";
+import {
+  doc,
+  updateDoc,
+  setDoc,
+  getFirestore,
+  getDocs,
+  collection,
+  where,
+  query,
+} from "firebase/firestore";
 import { useSelector } from "react-redux";
 
 const breadcrumbs = [
@@ -43,52 +52,49 @@ const Signup = () => {
     setData((state) => ({ ...state, [e.target.name]: e.target.value }));
   }
   const [show, setShow] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [usernameStatus, setUsernameStatus] = useState(true);
   const [phonenumStatus, setPhonenumStatus] = useState(true);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
- 
 
-  const checkPhonenum = (ev) =>{
-    if(ev.target.value == ''){
+  const checkPhonenum = (ev) => {
+    if (ev.target.value == "") {
       setPhonenumStatus(true);
-      handleShow()
+      handleShow();
       setError("Please Enter Phone Number");
-    }else{
+    } else {
       const phoneValidString = "(0|91)?[7-9][0-9]{9}";
-      if((ev.target.value).match(phoneValidString)){
+      if (ev.target.value.match(phoneValidString)) {
         setPhonenumStatus(false);
-      }else{
+      } else {
         setPhonenumStatus(true);
       }
     }
   };
 
-
-  const checkUsername = async (ev) =>{
-    
-    
-      if(ev.target.value == ""){
-        setUsernameStatus(false);
-        handleShow()
-        setError("Please Enter Username");
+  const checkUsername = async (ev) => {
+    if (ev.target.value == "") {
+      setUsernameStatus(false);
+      handleShow();
+      setError("Please Enter Username");
+    } else {
+      try {
+        const db = getFirestore();
+        const q = query(
+          collection(db, "users"),
+          where("Username", "==", ev.target.value)
+        );
+        const querySnapshot = await getDocs(q);
+        if (querySnapshot.size != 0) {
+          setUsernameStatus(true);
+        } else {
+          setUsernameStatus(false);
+        }
+      } catch (error) {
+        console.log(error);
       }
-      else{
-        try {
-          const db = getFirestore();
-         const q = query(collection(db, "users"), where("Username", "==", ev.target.value));
-         const querySnapshot = await getDocs(q);
-        if(querySnapshot.size != 0 ){
-             setUsernameStatus(true);
-          }
-          else{
-            setUsernameStatus(false);
-          }
-          } catch (error) {
-            console.log(error)
-        }       
-      }
+    }
   };
 
   const handleSubmit = async () => {
@@ -103,12 +109,10 @@ const Signup = () => {
 
       handleShow();
       setError("Password do not match");
-    } 
-    else if (phonenumStatus == true) {
+    } else if (phonenumStatus == true) {
       setError("Invalid Phone Number");
       handleShow();
-    }
-     else if (
+    } else if (
       data.phone == "" ||
       data.email == "" ||
       data.username == "" ||
@@ -118,42 +122,39 @@ const Signup = () => {
       console.error("Some error Occured");
       setError("Some error Occured");
       handleShow();
-    } 
-    else if(usernameStatus == true){
+    } else if (usernameStatus == true) {
       setError("Please use different Username");
-      handleShow()
-    }
-    else {
+      handleShow();
+    } else {
       try {
         // const q = query(collection(db, "users"), where("Username", "==", ev.target.value));
         // const querySnapshot = await getDocs(q);
-                const userCredential = await createUserWithEmailAndPassword(
-                  auth,
-                  data.email,
-                  data.password
-                );
-                const user = userCredential.user;
-                const emailVerified = user.emailVerified;
-                const uid = user.uid;
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          data.email,
+          data.password
+        );
+        const user = userCredential.user;
+        const emailVerified = user.emailVerified;
+        const uid = user.uid;
+        await setDoc(doc(db, "users", "NFT", "JSON"), {
+          json: "",
+        });
 
-                await setDoc(doc(db, "users", "NFT", "JSON"), {
-                  json: "",
-                });
-
-                await setDoc(doc(db, "users", uid), {
-                  Name: data.name,
-                  Emailid: data.email,
-                  Phone: data.phone,
-                  Username: data.username,
-                  UserID: uid,
-                  admin: false,
-                  creator: false,
-                  Bio: "",
-                  Instagram: "",
-                  Portfolio: "",
-                  Twitter: "",
-                });
-                console.log({ data, userCredential });            
+        await setDoc(doc(db, "users", uid), {
+          Name: data.name,
+          Emailid: data.email,
+          Phone: data.phone,
+          Username: data.username,
+          UserID: uid,
+          admin: false,
+          creator: false,
+          Bio: "",
+          Instagram: "",
+          Portfolio: "",
+          Twitter: "",
+        });
+        console.log({ data, userCredential });
       } catch (err) {
         console.error(err.code);
 
@@ -202,9 +203,9 @@ const Signup = () => {
         creator: false,
       });
     } catch (error) {
-      if(error.code ="auth/popup-closed-by-user"){
-          handleShow()
-          setError('Log-In Cancelled');
+      if ((error.code = "auth/popup-closed-by-user")) {
+        handleShow();
+        setError("Log-In Cancelled");
       }
       console.log(error.code);
     }
@@ -348,7 +349,7 @@ const Signup = () => {
                             updateState(e);
                           }}
                           onBlur={(ev) => {
-                            checkPhonenum(ev)
+                            checkPhonenum(ev);
                           }}
                           className={styles.field}
                           label="Phone Number"
@@ -395,7 +396,7 @@ const Signup = () => {
                           className={styles.field}
                           label="Confirm Password"
                           name="cpassword"
-                          // id="validationCustom01"
+                          id="validationCustom06"
                           type="password"
                           placeholder="Re-Enter your password"
                           required
@@ -417,7 +418,11 @@ const Signup = () => {
                     </Modal.Header>
                     <Modal.Body className={styles.mymodal2}>{error}</Modal.Body>
                     <Modal.Footer>
-                      <Button className={styles.mymodal} variant="secondary" onClick={handleClose}>
+                      <Button
+                        className={styles.mymodal}
+                        variant="secondary"
+                        onClick={handleClose}
+                      >
                         Ok
                       </Button>
                       {/* <Button variant="primary">Understood</Button> */}

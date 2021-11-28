@@ -81,9 +81,9 @@ const Hero = () => {
             <div className={styles.stage}>
               Create, explore, & collect digital art NFTs.
             </div>
-            <h2 className={cn("h3", styles.title)}>
-              The new creative economy.
-            </h2>
+            <div className={cn("h3", styles.title)}>
+            The future of the creator <br></br> economy is here.
+            </div>
             <Link className={cn("button-stroke", styles.button)} to="./Discover">
               Start your search
             </Link>

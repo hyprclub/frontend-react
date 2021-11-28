@@ -247,7 +247,7 @@ const Profile = (props) => {
       <div
         className={cn(styles.head, { [styles.active]: visible })}
         style={{
-          backgroundImage: "url(/images/content/bg-profile.jpg)",
+          backgroundImage: "url(/images/content/bg-profile.png)",
         }}
       >
         <div className={cn("container", styles.container)}>

@@ -123,7 +123,7 @@ const Item = (props) => {
                   </div>
                 ))}
               </div>
-              <img srcSet={`${data.image} 2x`} src={data.image} alt="Item" />
+              <img srcSet={`${data.image || "/images/bg-card.png"} 2x`} src={data.image || "/images/bg-card.png"} alt="Item" />
             </div>
             {/* <Options className={styles.options} /> */}
           </div>
