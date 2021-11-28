@@ -28,21 +28,16 @@ const categories = [
   },
 ];
 
-
-
 const Item = (props) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  
+
   const { push } = useHistory();
 
   const loggedIn = useSelector((state) => state.UserData.loggedIn);
 
-  
   const [data, setData] = useState({ name: "", image: "", description: "" });
-  const [owner,setOwner] = useState("")
-  const [ownerDp,setOwnerDp] = useState("")
-
-
+  const [owner, setOwner] = useState("");
+  const [ownerDp, setOwnerDp] = useState("");
 
   React.useEffect(async () => {
     if (props) {
@@ -58,15 +53,22 @@ const Item = (props) => {
         axios
           .get(nftData.data().json)
           .then(async (reps) => {
-                const storagePFref = ref(storage, "users/" + nftData.data().OwnerUid + "/profile.jpg");
-                const ownerData = await getDoc(doc(db,"users",nftData.data().OwnerUid));
-                await getDownloadURL(ref(storagePFref)).then((url)=>{
-                  setOwnerDp(url);
-                }).catch((error) =>{
-                  console.error(error);
-                })
-                setOwner(ownerData.data());
-                setData(reps.data);
+            const storagePFref = ref(
+              storage,
+              "users/" + nftData.data().OwnerUid + "/profile.jpg"
+            );
+            const ownerData = await getDoc(
+              doc(db, "users", nftData.data().OwnerUid)
+            );
+            await getDownloadURL(ref(storagePFref))
+              .then((url) => {
+                setOwnerDp(url);
+              })
+              .catch((error) => {
+                console.error(error);
+              });
+            setOwner(ownerData.data());
+            setData(reps.data);
           })
           .catch((error) => {
             console.error(error);
@@ -75,24 +77,24 @@ const Item = (props) => {
         console.error(error);
       }
     }
-  }, [props, setData, setOwner,setOwnerDp]);
+  }, [props, setData, setOwner, setOwnerDp]);
 
-   React.useEffect(() => {
-    if (loggedIn !== undefined && loggedIn) {
-    } else {
-      push("/login");
-    }
-  }, [loggedIn, push]);
+  //  React.useEffect(() => {
+  //   if (loggedIn !== undefined && loggedIn) {
+  //   } else {
+  //     push("/login");
+  //   }
+  // }, [loggedIn, push]);
 
-  React.useEffect(()=>{
-    console.log({owner})
-  },[owner])
+  React.useEffect(() => {
+    console.log({ owner });
+  }, [owner]);
 
   const users = [
     {
       name: owner?.Name,
       position: "Owner",
-      avatar: ownerDp  || "/images/content/avatar-big.jpg",
+      avatar: ownerDp || "/images/content/avatar-big.jpg",
     },
     {
       name: "Hypr Club",
@@ -100,8 +102,6 @@ const Item = (props) => {
       avatar: "/images/content/1.png",
     },
   ];
-
-  
 
   return (
     <>
@@ -123,7 +123,11 @@ const Item = (props) => {
                   </div>
                 ))}
               </div>
-              <img srcSet={`${data.image || "/images/bg-card.png"} 2x`} src={data.image || "/images/bg-card.png"} alt="Item" />
+              <img
+                srcSet={`${data.image || "/images/bg-card.png"} 2x`}
+                src={data.image || "/images/bg-card.png"}
+                alt="Item"
+              />
             </div>
             {/* <Options className={styles.options} /> */}
           </div>
