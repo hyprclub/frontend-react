@@ -39,7 +39,7 @@ const Headers = () => {
         <Link
           className={styles.logo}
           onClick={() => {
-            setVisibleNav(!visibleNav);
+            setVisibleNav(false);
           }}
           to="/"
         >
