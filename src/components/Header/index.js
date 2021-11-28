@@ -36,7 +36,13 @@ const Headers = () => {
   return (
     <header className={styles.header}>
       <div className={cn("container", styles.container)}>
-        <Link className={styles.logo} to="/">
+        <Link
+          className={styles.logo}
+          onClick={() => {
+            setVisibleNav(!visibleNav);
+          }}
+          to="/"
+        >
           <Image
             className={styles.pic}
             src="/images/logo-dark.png"
