@@ -194,6 +194,8 @@ const Login = () => {
 
 							<Modal
 								show={show}
+								aria-labelledby="contained-modal-title-vcenter"
+								centered
 								onHide={handleClose}
 								backdrop="static"
 								keyboard={false}
