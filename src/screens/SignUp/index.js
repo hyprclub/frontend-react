@@ -394,7 +394,7 @@ const Signup = () => {
                           className={styles.field}
                           label="Confirm Password"
                           name="cpassword"
-                          // id="validationCustom01"
+                          id="validationCustom06"
                           type="password"
                           placeholder="Re-Enter your password"
                           required

@@ -99,6 +99,7 @@ const Login = () => {
 		}
 	}
 	const { push } = useHistory()
+
 	useEffect(() => {
 		console.log(UserData)
 		if (loggedIn) {

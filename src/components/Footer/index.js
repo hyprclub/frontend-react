@@ -57,7 +57,8 @@ const Footers = () => {
     await setDoc(doc(db, "Newsletter", email), {
 
     }).then((result) => {
-      console.log("Thank You For Subscribing for our newsletter");
+      handleShow()
+      setError('Thank You for Subscribing to our newsletter.')
     }).catch((err) => {
       console.error(err);
     })
@@ -160,8 +161,7 @@ const Footers = () => {
           <Modal.Title >Notification</Modal.Title>
         </Modal.Header>
         <Modal.Body className={styles.mymodal2}>
-          hello
-          {/* {error} */}
+          {error}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" className={styles.mymodal} onClick={handleClose}>
