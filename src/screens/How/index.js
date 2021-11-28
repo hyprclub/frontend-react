@@ -18,12 +18,12 @@ const Howitworks = () => {
                     <div data-aos="fade-left" className={cn("col-xl-7 col-lg-7 col-md-7", styles.start)}>
                         <Image className="img-fluid" src="/bennett.png" srcDark="/joinhypr1.png" />
                     </div>
-                    <div data-aos="fade-right" className="col-xl-5 col-lg-5 col-md-5">
-                        <div className={styles.sty}>
-                            <div>Unique NFTS,
+                    <div data-aos="fade-right" className={cn("col-xl-5 col-lg-5 col-md-5", styles.start2)}>
+                        <div >
+                            <div className={styles.sty}>Unique NFTS,
                                 For Our Very Unique Alumni.</div>
                         </div>
-                        <div>Idk some cool alumni wali line daal dete hai yaha pe. that drawing took me so long omg</div>
+                        <div className={styles.divlow}>Idk some cool alumni wali line daal dete hai yaha pe. that drawing took me so long omg</div>
                     </div>
                 </div>
                 <div className={cn("row", styles.gg)}>
@@ -31,7 +31,9 @@ const Howitworks = () => {
                         <Image className="img-fluid" src="/itemcard.png" srcDark="/addtocart1.png" />
                     </div>
                     <div data-aos="fade-left" className={cn("col-xl-7 col-lg-7 col-md-7", styles.creator)}>
-                        <div>Get started or something, jesus im so sleepy ye lines nahi daal rhi mai yaha, kal subha if you’d like we can make these edits. XD placeholder text so to badiya ye hai. sleep sleep.</div>
+                        <div className={styles.sty1}>Some text, matlab kuchh to cool line daaldo. Lorem ipsum dolor sit amet.</div>
+
+                        <div className={styles.sty3}>Get started or something, jesus im so sleepy ye lines nahi daal rhi mai yaha, kal subha if you’d like we can make these edits. XD placeholder text so to badiya ye hai. sleep sleep.</div>
                     </div>
                 </div>
             </div>
