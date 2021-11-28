@@ -11,14 +11,14 @@ import Search02 from "./screens/Search02";
 import styles from "./screens/SignUp/Signup.module.sass";
 import Profile from "./screens/Profile";
 import ProfileEdit from "./screens/ProfileEdit";
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal } from "react-bootstrap";
 import Login from "./screens/Login";
 import Signup from "./screens/SignUp";
 import Passwordless from "./screens/Email-Entry";
 import Item from "./screens/Item";
 import PageList from "./screens/PageList";
 // import Discover from "./screens/Home/Discover";
-import { useEffect , useState,setShow} from "react";
+import { useEffect, useState, setShow } from "react";
 import { firebaseApp } from "./firebaseConfig";
 import {
   getAuth,
@@ -48,10 +48,9 @@ import Howitworks from "./screens/How";
 import ComingSoon from "./screens/Profile/comingsoon";
 import Discover from "./screens/Home/Discover";
 
-
 function App() {
-     const [show, setShow] = useState(false);
-  const [error, setError] = useState('');
+  const [show, setShow] = useState(false);
+  const [error, setError] = useState("");
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const dispatch = useDispatch();
@@ -68,12 +67,20 @@ function App() {
             dispatch(UserDataActions.login(user.toJSON()));
           } else {
             try {
-              console.log(
-                "Please Verify Email address. Verification has been sent to you. Please Verify to continue"
-              );
+              // console.log(
+              //   "Please Verify Email address. Verification has been sent to you. Please Verify to continue"
+              // );
               // handleShow();
-              // setError( "Please Verify Email address. Verification has been sent to you. Please Verify to continue")
-              const verfificationmail = sendEmailVerification(user);
+              // setError(
+              //   " Verification has been sent to " +
+              //     user.email +
+              //     ". Please Verify to continue"
+              // );
+              sendEmailVerification(user).catch((error) => {
+                if (error.code == "auth/too-many-requests") {
+                  setError("Please Verify Email To continue");
+                }
+              });
             } catch (error) {
               console.log(error.code);
             }
@@ -132,32 +139,30 @@ function App() {
     run();
   }, [loggedIn, uid, dispatch]);
 
-    useEffect(() => {
+  useEffect(() => {
     const run = async () => {
       const db = getFirestore();
-        try {
-          // const q = query(
-          //   collection(db, "NFT's"),
-          //   where("OwnerUid", "==", uid)
-          // );
-          // const nftQuerySnapshot = await getDocs(q);
-          const nftQuerySnapshot = await getDocs(collection(db,"NFT's"));
+      try {
+        // const q = query(
+        //   collection(db, "NFT's"),
+        //   where("OwnerUid", "==", uid)
+        // );
+        // const nftQuerySnapshot = await getDocs(q);
+        const nftQuerySnapshot = await getDocs(collection(db, "NFT's"));
 
-          const nftIdsLogOut = [];
-          nftQuerySnapshot.forEach((elem) => {
-            nftIdsLogOut.push(elem.id);
-            console.log(nftIdsLogOut);
-          });
-          
-          dispatch(UserDataActions.nftDataId({ nftIdsLogOut }));
-        } catch (err) {
-          console.error(err);
-        }
+        const nftIdsLogOut = [];
+        nftQuerySnapshot.forEach((elem) => {
+          nftIdsLogOut.push(elem.id);
+          console.log(nftIdsLogOut);
+        });
 
-      
+        dispatch(UserDataActions.nftDataId({ nftIdsLogOut }));
+      } catch (err) {
+        console.error(err);
+      }
     };
     run();
-  }, [ dispatch]);
+  }, [dispatch]);
 
   useEffect(() => {
     const run = async () => {
@@ -185,12 +190,29 @@ function App() {
     run();
   }, [loggedIn, uid, dispatch]);
 
-
-
   return (
-    
     <Router>
       <Switch>
+        {/* <Modal
+          show={show}
+          onHide={handleClose}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header closeButton className={styles.mymodal}>
+            <Modal.Title>Notification</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className={styles.mymodal2}>{error}</Modal.Body>
+          <Modal.Footer>
+            <Button
+              className={styles.mymodal}
+              variant="secondary"
+              onClick={handleClose}
+            >
+              Ok
+            </Button>
+          </Modal.Footer>
+        </Modal> */}
         <Route
           exact
           path="/"
@@ -217,7 +239,7 @@ function App() {
           path="/comingsoon"
           render={() => (
             <Page>
-              <ComingSoon/>
+              <ComingSoon />
             </Page>
           )}
         />
@@ -226,16 +248,16 @@ function App() {
           path="/Discover"
           render={() => (
             <Page>
-              <Discover/>
+              <Discover />
             </Page>
           )}
         />
-         <Route
+        <Route
           exact
           path="/howitworks"
           render={() => (
             <Page>
-              <Howitworks/>
+              <Howitworks />
             </Page>
           )}
         />
@@ -244,11 +266,11 @@ function App() {
           path="/passwordless"
           render={() => (
             <Page>
-              <Passwordless/>
+              <Passwordless />
             </Page>
           )}
         />
-         {/* <Route
+        {/* <Route
           exact
           path="/howitworks"
           render={() => (
@@ -266,7 +288,7 @@ function App() {
             </Page>
           )}
         />
-        <Route
+        {/* <Route
           exact
           path="/upload-details"
           render={() => (
@@ -274,8 +296,8 @@ function App() {
               <UploadDetails />
             </Page>
           )}
-        />
-        <Route
+        /> */}
+        {/* <Route
           exact
           path="/connect-wallet"
           render={() => (
@@ -283,7 +305,7 @@ function App() {
               <ConnectWallet />
             </Page>
           )}
-        />
+        /> */}
         <Route
           exact
           path="/faq"
@@ -293,7 +315,7 @@ function App() {
             </Page>
           )}
         />
-        <Route
+        {/* <Route
           exact
           path="/activity"
           render={() => (
@@ -301,8 +323,8 @@ function App() {
               <Activity />
             </Page>
           )}
-        />
-        <Route
+        /> */}
+        {/* <Route
           exact
           path="/search01"
           render={() => (
@@ -310,8 +332,8 @@ function App() {
               <Search01 />
             </Page>
           )}
-        />
-        <Route
+        /> */}
+        {/* <Route
           exact
           path="/search02"
           render={() => (
@@ -319,7 +341,7 @@ function App() {
               <Search02 />
             </Page>
           )}
-        />
+        /> */}
         <Route
           exact
           path="/profile"
@@ -355,7 +377,7 @@ function App() {
             </Page>
           )}
         />
-        <Route
+        {/* <Route
           exact
           path="/pagelist"
           render={() => (
@@ -363,24 +385,7 @@ function App() {
               <PageList />
             </Page>
           )}
-        />
-          {/* <Modal
-                    show={show}
-                    onHide={handleClose}
-                    backdrop="static"
-                    keyboard={false}
-                  >
-                    <Modal.Header closeButton className={styles.mymodal}>
-                      <Modal.Title>Notification</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body className={styles.mymodal2}>{error}</Modal.Body>
-                    <Modal.Footer>
-                      <Button className={styles.mymodal} variant="secondary" onClick={handleClose}>
-                        Ok
-                      </Button>
-                      <Button variant="primary">Understood</Button>
-                    </Modal.Footer>
-                  </Modal> */}
+        /> */}
       </Switch>
     </Router>
   );

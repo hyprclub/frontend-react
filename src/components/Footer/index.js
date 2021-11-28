@@ -6,7 +6,7 @@ import Group from "./Group";
 import Image from "../Image";
 import Form from "../Form";
 import Theme from "../Theme";
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal } from "react-bootstrap";
 import {
   getFirestore,
   setDoc,
@@ -50,18 +50,18 @@ const Footers = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [show, setShow] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     const db = getFirestore();
-    await setDoc(doc(db, "Newsletter", email), {
-
-    }).then((result) => {
-      handleShow()
-      setError('Thank You for Subscribing to our newsletter.')
-    }).catch((err) => {
-      console.error(err);
-    })
+    await setDoc(doc(db, "Newsletter", email), {})
+      .then((result) => {
+        handleShow();
+        setError("Thank You for Subscribing to our newsletter.");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   return (
@@ -74,7 +74,7 @@ const Footers = () => {
                 className={styles.pic}
                 src="/images/logo-dark.png"
                 srcDark="/images/logo-light.png"
-                alt="Fitness Pro"
+                alt="HyprClub"
               />
             </Link>
             <div className={styles.info}>The Next social Revolution.</div>
@@ -137,7 +137,6 @@ const Footers = () => {
               name="email"
             />
           </div>
-
         </div>
         <div className={styles.foot}>
           <div className={styles.copyright}>
@@ -147,7 +146,12 @@ const Footers = () => {
             Terms and Conditions*
           </div> */}
           <div className={styles.copyright}>
-            <a target="_blank" href='https://firebasestorage.googleapis.com/v0/b/hypr-development.appspot.com/o/Documents%2Ftermandcond%2Ftnc.pdf?alt=media&token=01abf26a-b4c8-402f-bf13-5caf74615250'>Terms and Conditions </a>
+            <a
+              target="_blank"
+              href="https://firebasestorage.googleapis.com/v0/b/hypr-development.appspot.com/o/Documents%2Ftermandcond%2Ftnc.pdf?alt=media&token=01abf26a-b4c8-402f-bf13-5caf74615250"
+            >
+              Terms and Conditions{" "}
+            </a>
           </div>
         </div>
       </div>
@@ -157,14 +161,16 @@ const Footers = () => {
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header closeButton className={styles.mymodal} >
-          <Modal.Title >Notification</Modal.Title>
+        <Modal.Header closeButton className={styles.mymodal}>
+          <Modal.Title>Notification</Modal.Title>
         </Modal.Header>
-        <Modal.Body className={styles.mymodal2}>
-          {error}
-        </Modal.Body>
+        <Modal.Body className={styles.mymodal2}>{error}</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" className={styles.mymodal} onClick={handleClose}>
+          <Button
+            variant="secondary"
+            className={styles.mymodal}
+            onClick={handleClose}
+          >
             Close
           </Button>
           {/* <Button variant="primary">Understood</Button> */}
