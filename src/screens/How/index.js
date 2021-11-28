@@ -27,7 +27,7 @@ const Howitworks = () => {
                     </div>
                 </div>
                 <div className={cn("row", styles.gg)}>
-                    <div data-aos="fade-right" className="col-xl-5 col-lg-5 col-md-5">
+                    <div data-aos="fade-right" className={cn("col-xl-5 col-lg-5 col-md-5",styles.img1)}>
                         <Image className="img-fluid" src="/itemcard.png" srcDark="/addtocart1.png" />
                     </div>
                     <div data-aos="fade-left" className={cn("col-xl-7 col-lg-7 col-md-7", styles.creator)}>
@@ -58,7 +58,7 @@ const Howitworks = () => {
                 </div>
             </div>
             <div data-aos="fade-left" className="col-xl-12 col-lg-12 col-md-12">
-                <Image className="img-fluid" src="/hampers.png" srcDark="/joinhypr1.png"></Image>
+                <Image className="img-fluid" src="/hampers1.png" srcDark="/joinhypr1.png"></Image>
             </div>
             <div data-aos="fade-left" className={cn("col-xl-12 col-lg-12 col-md-12", styles.perks)}>
                <div className={styles.sty4}>Thats not all.<br></br>These perks are unlimited.</div>
