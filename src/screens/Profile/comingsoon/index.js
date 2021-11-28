@@ -54,7 +54,7 @@ const ComingSoon = () => {
                         </div>
                     </div>
                     <div data-aos="fade-left" className={cn("col-xl-6 col-lg-6 col-md-12",styles.creator)}>
-                        <img className="img-fluid" src="/saythanksbox.png" />
+                        <img className="img-fluid" src="/saythanks.png" />
                     </div>
                 </div>
                 <div data-aos="fade-left" className={styles.sse}>
