@@ -137,11 +137,11 @@ const Signup = () => {
         const user = userCredential.user;
         const emailVerified = user.emailVerified;
         const uid = user.uid;
-        await setDoc(doc(db, "users", "NFT", "JSON"), {
-          json: "",
-        });
+        // const nftData = await setDoc(doc(db, "users", "NFT", "JSON"), {
+        //   json: "",
+        // });
 
-        await setDoc(doc(db, "users", uid), {
+        const userData = await setDoc(doc(db, "users", uid), {
           Name: data.name,
           Emailid: data.email,
           Phone: data.phone,
@@ -156,7 +156,7 @@ const Signup = () => {
         });
         console.log({ data, userCredential });
       } catch (err) {
-        console.error(err.code);
+        console.error(err.code, err, "failed");
 
         if (err.code == "auth/invalid-email") {
           console.error("Please Enter a valid Email");
@@ -178,7 +178,8 @@ const Signup = () => {
           setError("Please choose a Strong Password");
           handleShow();
         }
-        console.error(err.code);
+        setError("Something went wrong");
+        handleShow();
       }
     }
   };
@@ -199,6 +200,7 @@ const Signup = () => {
         Emailid: email,
         Name: name,
         UserID: uid,
+        Username: email,
         admin: false,
         creator: false,
       });
@@ -248,12 +250,12 @@ const Signup = () => {
     }
   }, []);
 
-  useEffect(() => {
-    console.log(UserData);
-    if (loggedIn) {
-      push("/");
-    }
-  }, [loggedIn, push]);
+  // useEffect(() => {
+  //   console.log(UserData);
+  //   if (loggedIn) {
+  //     push("/");
+  //   }
+  // }, [loggedIn, push]);
 
   return (
     <>

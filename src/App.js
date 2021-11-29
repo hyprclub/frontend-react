@@ -70,12 +70,12 @@ function App() {
               // console.log(
               //   "Please Verify Email address. Verification has been sent to you. Please Verify to continue"
               // );
-              // handleShow();
-              // setError(
-              //   " Verification has been sent to " +
-              //     user.email +
-              //     ". Please Verify to continue"
-              // );
+              handleShow();
+              setError(
+                " Verification has been sent to " +
+                  user.email +
+                  ". Please Verify to continue"
+              );
               sendEmailVerification(user).catch((error) => {
                 if (error.code == "auth/too-many-requests") {
                   setError("Please Verify Email To continue");
@@ -192,27 +192,27 @@ function App() {
 
   return (
     <Router>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton className={styles.mymodal}>
+          <Modal.Title>Notification</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className={styles.mymodal2}>{error}</Modal.Body>
+        <Modal.Footer>
+          <Button
+            className={styles.mymodal}
+            variant="secondary"
+            onClick={handleClose}
+          >
+            Ok
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <Switch>
-        {/* <Modal
-          show={show}
-          onHide={handleClose}
-          backdrop="static"
-          keyboard={false}
-        >
-          <Modal.Header closeButton className={styles.mymodal}>
-            <Modal.Title>Notification</Modal.Title>
-          </Modal.Header>
-          <Modal.Body className={styles.mymodal2}>{error}</Modal.Body>
-          <Modal.Footer>
-            <Button
-              className={styles.mymodal}
-              variant="secondary"
-              onClick={handleClose}
-            >
-              Ok
-            </Button>
-          </Modal.Footer>
-        </Modal> */}
         <Route
           exact
           path="/"
