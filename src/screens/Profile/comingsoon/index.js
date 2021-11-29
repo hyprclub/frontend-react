@@ -44,13 +44,13 @@ const ComingSoon = () => {
                             <div>Purchase any merchandise or digital commodity that a creator is offering. </div>
                         </div>
                     </div>
-                    <div data-aos="fade-right" className="col-xl-6 col-lg-6 col-md-6">
+                    <div data-aos="fade-right" className={cn("col-xl-6 col-lg-6 col-md-6",styles.margin)}>
                         <Image className="img-fluid" src="/addtocart.png" srcDark="/addtocart1.png" />
                     </div>
                     <div data-aos="fade-left" className={cn("col-xl-6 col-lg-6 col-md-6", styles.creator2)}>
                         <Image className={cn("img-fluid", styles.creator,styles.edit)} src="/creator.png" srcDark="/buttoncreator.png"/>
                         <div className={styles.sty}>
-                            <div>Purchase any merchandise or digital commodity that a creator is offering. </div>
+                            <div className={styles.space}>Purchase any merchandise or digital <br></br>commodity that a creator is offering. </div>
                         </div>
                     </div>
                     <div data-aos="fade-right" className="col-xl-6 col-lg-6 col-md-6">
