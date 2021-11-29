@@ -90,7 +90,7 @@ const Discover = () => {
 
       <ClipLoader color={color} loading={loading} size={150} />
     </div> */}
-    <ClipLoader color={color} loading={loading} size={150} />
+    {/* <ClipLoader color={color} loading={loading} size={150} /> */}
       <div className={cn("section", styles.section)}>
         <div className={cn("container", styles.container)}>
           <h3 className={cn("h3", styles.title)}>Discover</h3>
