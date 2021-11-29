@@ -6,6 +6,7 @@ import Image from './Image'
 // import image from "./gradient.png"
 import 'aos/dist/aos.css';
 import Aos from 'aos';
+import { Link } from "react-router-dom";
 
 const Howitworks = () => {
     useEffect(() => {
@@ -27,7 +28,7 @@ const Howitworks = () => {
                     </div>
                 </div>
                 <div className={cn("row", styles.gg)}>
-                    <div data-aos="fade-right" className={cn("col-xl-5 col-lg-5 col-md-5",styles.img1)}>
+                    <div data-aos="fade-right" className={cn("col-xl-5 col-lg-5 col-md-5", styles.img)}>
                         <Image className="img-fluid" src="/itemcard.png" srcDark="/addtocart1.png" />
                     </div>
                     <div data-aos="fade-left" className={cn("col-xl-7 col-lg-7 col-md-7", styles.creator)}>
@@ -61,11 +62,26 @@ const Howitworks = () => {
                 <Image className="img-fluid" src="/hampers1.png" srcDark="/joinhypr1.png"></Image>
             </div>
             <div data-aos="fade-left" className={cn("col-xl-12 col-lg-12 col-md-12", styles.perks)}>
-               <div className={styles.sty4}>Thats not all.<br></br>These perks are unlimited.</div>
-               <div>Continue to access Bennett University special perks that keep updating.</div>
+                <div className={styles.sty4}>Thats not all.<br></br>These perks are unlimited.</div>
+                <div>Continue to access Bennett University special perks that keep updating.</div>
+            </div>
+            {/* <div data-aos="fade-left">
+                <div className= {styles.Getstart}>
+               <div className={styles.sty5}>Feeling ready to bring <br></br>something idk im brain ded</div>
+               <div>brthrs pls i just wanna die, sign up karlo aur nft dekh ke khush raho</div>
+               </div>
+            </div> */}
+            <div className="row">
+                <div data-aos="fade-left" className={cn("col-xl-12 col-lg-12 col-md-12", styles.creator1)}>
+                    <div className={styles.sty6}>Feeling ready to bring<br></br> something idk im brain ded</div>
+                    <div className={styles.sty3}>brthrs pls i just wanna die, sign up karlo aur <br></br> nft dekh ke khush raho</div>
+                    <div><Link className={cn("button-stroke", styles.button)} to="./passwordless">
+              Get Started
+            </Link></div>
+            <Image className="img-fluid" src="/bennett2.png" srcDark="/joinhypr1.png" />
+                </div>
             </div>
         </div>
-        // </div>
     )
 }
 

@@ -20,40 +20,46 @@ const ComingSoon = () => {
                     <Image className="img-fluid" src="/header.png" srcDark="/header1.png" />
                 </div>
                 <div className={styles.sse}>
-                    <Image className="img-fluid" src="/presenting.png" srcDark="/presenting1.png" />
+                    <Image className={cn("img-fluid",styles.size1)} src="/presenting.png" srcDark="/presenting1.png" />
                     <div className={styles.lowcont}>Bigger and better. More features,<br></br> more rewards more Hypr.</div>
                 </div>
                 <div className="row">
-                    <div data-aos="fade-right" className="col-xl-6 col-lg-6 col-md-12">
+                    <div data-aos="fade-right" className="col-xl-6 col-lg-6 col-md-6">
                         <div className={styles.js}>
-                            <div className={styles.dd}><Image className={cn("img-fluid",styles.edit)} src="/membership.png" srcDark="/membershipbutton.png" /></div>
+                            <div className={styles.dd}><Image className={cn("img-fluid",styles.edit,styles.creator)} src="/membership.png" srcDark="/membershipbutton.png" /></div>
                             <div className={styles.sty}>
                                 <div >Creators can now offer memberships to their audience.</div>
                                 <div className={styles.text2}>With different Tier levels, each member can get perks customized by their favorite creator.</div>
                             </div>
                         </div>
                     </div>
-                    <div data-aos="fade-left" className="col-xl-6 col-lg-6 col-md-12">
-                        <Image className="img-fluid" src="/Group51.png" srcDark="/Group51.png" />
+                    <div data-aos="fade-left" className="col-xl-6 col-lg-6 col-md-6">
+                        <Image  className={cn("img-fluid",styles.imgcom)} src="/Group51.png" srcDark="/Group51.png" />
                         <div className={styles.imgcom}><Image className="img-fluid" src="/Group111.png" srcDark="/Group111.png" /></div>
                         {/* <div className={styles.imgcom}><img className="img-fluid" src="/Group4.png" /></div> */}
                     </div>
-                    <div data-aos="fade-right" className="col-xl-6 col-lg-6 col-md-12">
-                        <Image className="img-fluid" src="/addtocart.png" srcDark="/addtocart1.png" />
-                    </div>
-                    <div data-aos="fade-left" className={cn("col-xl-6 col-lg-6 col-md-12", styles.creator)}>
+                    <div data-aos="fade-left" className={cn("col-xl-6 col-lg-6 col-md-6", styles.creator1)}>
                         <Image className={cn("img-fluid", styles.creator,styles.edit)} src="/creator.png" srcDark="/buttoncreator.png"/>
                         <div className={styles.sty}>
                             <div>Purchase any merchandise or digital commodity that a creator is offering. </div>
                         </div>
                     </div>
-                    <div data-aos="fade-right" className="col-xl-6 col-lg-6 col-md-12">
+                    <div data-aos="fade-right" className="col-xl-6 col-lg-6 col-md-6">
+                        <Image className="img-fluid" src="/addtocart.png" srcDark="/addtocart1.png" />
+                    </div>
+                    <div data-aos="fade-left" className={cn("col-xl-6 col-lg-6 col-md-6", styles.creator2)}>
+                        <Image className={cn("img-fluid", styles.creator,styles.edit)} src="/creator.png" srcDark="/buttoncreator.png"/>
+                        <div className={styles.sty}>
+                            <div>Purchase any merchandise or digital commodity that a creator is offering. </div>
+                        </div>
+                    </div>
+                    <div data-aos="fade-right" className="col-xl-6 col-lg-6 col-md-6">
                         <Image className={cn("img-fluid", styles.creator,styles.edit)} srcDark="/thanksbutton.png" src="/thanksbutton.png" />
                         <div className={styles.sty}>
                             <div>Yes, just like SuperChat extend support to creators with cool customizations. </div>
                         </div>
                     </div>
-                    <div data-aos="fade-left" className={cn("col-xl-6 col-lg-6 col-md-12",styles.creator)}>
+                    <div data-aos="fade-left" className={cn("col-xl-6 col-lg-6 col-md-6",styles.creator)}>
                         <img className="img-fluid" src="/saythanks.png" />
                     </div>
                 </div>
