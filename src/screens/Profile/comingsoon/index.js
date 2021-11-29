@@ -33,7 +33,7 @@ const ComingSoon = () => {
                             </div>
                         </div>
                     </div>
-                    <div data-aos="fade-left" className="col-xl-6 col-lg-6 col-md-6">
+                    <div data-aos="fade-left" className={cn("col-xl-6 col-lg-6 col-md-6",styles.left)}>
                         <Image  className={cn("img-fluid",styles.imgcom)} src="/Group51.png" srcDark="/Group51.png" />
                         <div className={styles.imgcom}><Image className="img-fluid" src="/Group111.png" srcDark="/Group111.png" /></div>
                         {/* <div className={styles.imgcom}><img className="img-fluid" src="/Group4.png" /></div> */}
@@ -54,7 +54,7 @@ const ComingSoon = () => {
                         </div>
                     </div>
                     <div data-aos="fade-right" className="col-xl-6 col-lg-6 col-md-6">
-                        <Image className={cn("img-fluid", styles.creator,styles.edit)} srcDark="/thanksbutton.png" src="/thanksbutton.png" />
+                        <Image className={cn("img-fluid", styles.creator,styles.edit)} srcDark="/thanksbutton.png" src="/saythanksbutton.png" />
                         <div className={styles.sty}>
                             <div>Yes, just like SuperChat extend support to creators with cool customizations. </div>
                         </div>
@@ -67,7 +67,7 @@ const ComingSoon = () => {
                     <Image className="img-fluid" src="/joinhypr.png" srcDark="/joinhypr1.png" />
                 </div>
                 <iframe data-aos="fade-right" className={styles.video} id="ytplayer" type="text/html" height="600px" width="100%" height="auto" src="https://www.youtube.com/embed/NzzeUjSrDvY?rel=0" frameborder="0" allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen" msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>
-                <div className={styles.FlipCount}>
+                {/* <div className={styles.FlipCount}>
                     <FlipCountdown
                         hideYear
                         hideMonth
@@ -79,7 +79,7 @@ const ComingSoon = () => {
                         minuteTitle='Minutes'
                         secondTitle='Seconds'
                         endAt={'2021-12-24 12:0:0'} />
-                </div>
+                </div> */}
             </div>
         </div>
     )
