@@ -10,7 +10,15 @@ import { useSelector } from "react-redux";
 import { Button, Modal } from "react-bootstrap";
 import { firebaseApp } from "../../firebaseConfig";
 import { useHistory } from "react-router-dom";
-import { doc, updateDoc, getFirestore,getDocs,collection,where,query } from "firebase/firestore";
+import {
+  doc,
+  updateDoc,
+  getFirestore,
+  getDocs,
+  collection,
+  where,
+  query,
+} from "firebase/firestore";
 import {
   getStorage,
   ref,
@@ -45,12 +53,12 @@ const ProfileEdit = () => {
   const { push } = useHistory();
   const [usernameStatus, setUsernameStatus] = useState(true);
   const [show, setShow] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   React.useEffect(() => {
-    if (loggedIn != undefined) {
+    if (loggedIn) {
     } else {
       push("/");
     }
@@ -58,40 +66,43 @@ const ProfileEdit = () => {
 
   function updateState(e) {
     setData((state) => ({ ...state, [e.target.name]: e.target.value }));
-    
-    console.log({ data });
   }
 
-const checkUsername = async (ev) =>{
-      if(ev.target.value == ""){
-        setUsernameStatus(true);
-        handleShow()
-        setError("Please Enter Username");
-      }
-      // else if(ev.target.value == data.username){
-      //   setUsernameStatus(false)
-      // }
-      else{
-        try {
-          const db = getFirestore();
-         const q = query(collection(db, "users"), where("Username", "==", ev.target.value));
-         const querySnapshot = await getDocs(q);
-         console.log(querySnapshot)
-        if(querySnapshot.size === 0 ){
+  React.useEffect(() => {
+    console.log({ data });
+  }, [data]);
+
+  const checkUsername = async (ev) => {
+    if (ev.target.value == "") {
+      setUsernameStatus(true);
+      handleShow();
+      setError("Please Enter Username");
+    }
+    // else if(ev.target.value == data.username){
+    //   setUsernameStatus(false)
+    // }
+    else {
+      try {
+        const db = getFirestore();
+        const q = query(
+          collection(db, "users"),
+          where("Username", "==", ev.target.value)
+        );
+        const querySnapshot = await getDocs(q);
+        console.log(querySnapshot);
+        if (querySnapshot.size === 0) {
+          setUsernameStatus(false);
+        } else {
+          if (ev.target.value == data.username) {
             setUsernameStatus(false);
-        }
-          else{
-             if(ev.target.value == data.username){
-               setUsernameStatus(false);
-             }
-             else{
-               setUsernameStatus(true);
-             }
+          } else {
+            setUsernameStatus(true);
           }
-          } catch (error) {
-            console.log(error)
-        }       
+        }
+      } catch (error) {
+        console.log(error);
       }
+    }
   };
 
   const onImageChange = async (e) => {
@@ -119,36 +130,26 @@ const checkUsername = async (ev) =>{
     }
   };
   const updateUserProfile = async () => {
-    try { 
+    try {
       const db = getFirestore();
-      const phonevalid ="(0|91)?[7-9][0-9]{9}";
-      if((data.phoneno).match(phonevalid)){
-
-        if(usernameStatus == true){
-          handleShow()
-          setError("Username Taken")
-        }
-      else{
-            const updateStatus= await updateDoc(doc(db, "users", UserData.uid), {
-                        Name: data.name,
-                        Emailid: data.email,
-                        Username: data.username,
-                        Phone: data.phoneno,
-                        Bio: data.bio,
-                        Portfolio: data.portfolio,
-                        Instagram: data.instagram,
-                        Twitter: data.twitter,
-                           });
-                     handleShow();
-                     setError("Profile Updated");
-                    window?.location.reload();
-          }
+      const phonevalid = "(0|91)?[7-9][0-9]{9}";
+      if (data.phoneno?.match(phonevalid)) {
+        const updateStatus = await updateDoc(doc(db, "users", UserData.uid), {
+          Name: data.name,
+          Emailid: data.email,
+          Phone: data.phoneno,
+          Bio: data.bio,
+          Portfolio: data.portfolio,
+          Instagram: data.instagram,
+          Twitter: data.twitter,
+        });
+        handleShow();
+        setError("Profile Updated");
+        window?.location.reload();
+      } else {
+        handleShow();
+        setError("Please Enter a valid Phone Number");
       }
-      else{
-        handleShow()
-        setError("Please Enter a valid Phone Number")
-      }
-
     } catch (error) {
       console.error(error);
       handleShow();
@@ -226,7 +227,7 @@ const checkUsername = async (ev) =>{
                         updateState(e);
                       }}
                       className={styles.field}
-                      defaultValue={data.name}
+                      defaultValue={data?.name}
                       label="Name"
                       name="name"
                       type="text"
@@ -238,7 +239,7 @@ const checkUsername = async (ev) =>{
                         updateState(e);
                       }}
                       className={styles.field}
-                      defaultValue={data.email}
+                      defaultValue={data?.email}
                       label="Email"
                       name="email"
                       type="text"
@@ -251,7 +252,7 @@ const checkUsername = async (ev) =>{
                         updateState(e);
                       }}
                       className={styles.field}
-                      defaultValue={data.phoneno}
+                      defaultValue={data?.phoneno}
                       label="Phone Number"
                       name="phoneno"
                       type="text"
@@ -260,17 +261,17 @@ const checkUsername = async (ev) =>{
                     />
                     <TextInput
                       onChange={(e) => {
-                        
                         updateState(e);
                         // checkUsername(e);
                       }}
-                      onBlur = {(ev) =>{
-                        checkUsername(ev)
-                      }}
+                      // onBlur={(ev) => {
+                      //   checkUsername(ev);
+                      // }}
                       className={styles.field}
-                      defaultValue={data.username}
+                      defaultValue={data?.username}
                       label="Username"
                       name="username"
+                      disabled
                       type="text"
                       placeholder="Enter your username"
                       required
@@ -280,7 +281,7 @@ const checkUsername = async (ev) =>{
                         updateState(e);
                       }}
                       className={styles.field}
-                      defaultValue={data.bio}
+                      defaultValue={data?.bio}
                       label="Bio"
                       name="bio"
                       placeholder="About yourselt in a few words"
@@ -295,7 +296,7 @@ const checkUsername = async (ev) =>{
                         updateState(e);
                       }}
                       className={styles.field}
-                      defaultValue={data.portfolio}
+                      defaultValue={data?.portfolio}
                       label="Portfolio or website"
                       name="portfolio"
                       type="text"
@@ -307,7 +308,7 @@ const checkUsername = async (ev) =>{
                           updateState(e);
                         }}
                         className={styles.field}
-                        defaultValue={data.instagram}
+                        defaultValue={data?.instagram}
                         label="Instagram Username"
                         name="instagram"
                         type="text"
@@ -318,8 +319,8 @@ const checkUsername = async (ev) =>{
                         onChange={(e) => {
                           updateState(e);
                         }}
-                        className={styles.field,styles.field2}
-                        defaultValue={data.twitter}
+                        className={(styles.field, styles.field2)}
+                        defaultValue={data?.twitter}
                         label="Twitter Username"
                         name="twitter"
                         type="text"
@@ -360,10 +361,14 @@ const checkUsername = async (ev) =>{
                 >
                   <Modal.Header closeButton className={styles.mymodal}>
                     <Modal.Title>Notification</Modal.Title>
-                  </Modal.Header >
+                  </Modal.Header>
                   <Modal.Body className={styles.mymodal2}>{error}</Modal.Body>
                   <Modal.Footer>
-                    <Button className={styles.mymodal} variant="secondary" onClick={handleClose}>
+                    <Button
+                      className={styles.mymodal}
+                      variant="secondary"
+                      onClick={handleClose}
+                    >
                       Close
                     </Button>
                     {/* <Button variant="primary">Understood</Button> */}

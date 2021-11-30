@@ -40,14 +40,14 @@ const Discover = () => {
   const [values, setValues] = useState([5]);
 
   const [visible, setVisible] = useState(false);
-  const [sliceIntial, setSliceInitial] = useState(6);
+  const [sliceIntial, setSliceInitial] = useState(4);
 
   const STEP = 0.1;
   const MIN = 0.01;
   const MAX = 10;
 
   const IncreaseSlice = () => {
-    setSliceInitial(sliceIntial + 5);
+    setSliceInitial(sliceIntial + 4);
   };
 
   const settings = {
