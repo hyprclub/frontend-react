@@ -145,8 +145,8 @@ const Item = (props) => {
               </div>
               <img
                 className={styles.imgs}
-                srcSet={`${data.image || "/images/bg-card.png"} 2x`}
-                src={data.image || "/images/bg-card.png"}
+                srcSet={`${data.image || "/images/card.gif"} 2x`}
+                src={data.image || "/images/card.gif"}
                 alt="Item"
               />
             </div>

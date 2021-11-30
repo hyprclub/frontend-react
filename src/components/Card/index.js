@@ -71,8 +71,8 @@ const Card = ({ className, item: itemFromProps }) => {
               openItem(e);
             }}
             className={cn(styles.imagehover, "img-fluid")}
-            srcSet={`${item.image || "/images/bg-card.png"} `}
-            src={item.image || "/images/bg-card.png"}
+            srcSet={`${item.image || "/images/card.gif"} `}
+            src={item.image || "/images/card.gif"}
             alt="Card"
           />
         </div>
