@@ -38,6 +38,8 @@ const Item = (props) => {
   const [data, setData] = useState({ name: "", image: "", description: "" });
   const [owner, setOwner] = useState("");
   const [ownerDp, setOwnerDp] = useState("");
+  const [creator, setCreator] = useState([]);
+  const [CreatorDp, seCreatorDp] = useState([]);
 
   React.useEffect(async () => {
     if (props) {
@@ -143,7 +145,7 @@ const Item = (props) => {
               <div className={styles.counter}>100 in stock</div>
             </div>
             <div className={styles.info}>{data.description}</div>
-            <div className={styles.nav}>
+            {/* <div className={styles.nav}>
               {navLinks.map((x, index) => (
                 <button
                   className={cn(
@@ -156,7 +158,7 @@ const Item = (props) => {
                   {x}
                 </button>
               ))}
-            </div>
+            </div> */}
             <Users className={styles.users} items={users} />
             <div className={styles.buttonFlex}>
               <div className={styles.button1}>

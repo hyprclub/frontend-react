@@ -58,7 +58,7 @@ const ProfileEdit = () => {
   const handleShow = () => setShow(true);
 
   React.useEffect(() => {
-    if (loggedIn != undefined) {
+    if (loggedIn) {
     } else {
       push("/");
     }
