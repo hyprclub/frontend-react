@@ -20,6 +20,11 @@
 //     //  margin: 20px 20px  
 //      &:hover
 //          color: $white   
+// color:linear-gradient (yellow, red)
+// .gradienttext 
+//   background-image: linear-gradient(60deg, #E21143, #FFB03A)
+//   background-clip: text
+//   color: transparent
 
 .container
     
@@ -29,7 +34,7 @@
         display: block
 .imgs
     cursor: pointer
-    box-shadow: 0 5px 10px -2px #e7e5de
+    box-shadow: 0 5px 10px -2px #dfddd7
     background: var(--bg-2)
     border-radius: 25px
     transition: all .2s linear
@@ -48,6 +53,9 @@
         margin: 0 0 32px
 
 .details
+    div
+        font-weight: 700
+    // font-weight: 700
     display: flex
     flex-direction: column
     flex-shrink: 0
@@ -84,6 +92,7 @@
     transform: translateX(-50%)
 
 .title
+    // font-weight: 10000 !important
     margin-bottom: 8px
 
 .cost
