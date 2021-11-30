@@ -137,11 +137,11 @@ const ProfileEdit = () => {
         const updateStatus = await updateDoc(doc(db, "users", UserData.uid), {
           Name: data.name,
           Emailid: data.email,
-          Phone: data.phoneno,
-          Bio: data.bio,
-          Portfolio: data.portfolio,
-          Instagram: data.instagram,
-          Twitter: data.twitter,
+          Phone: data?.phoneno,
+          Bio: data?.bio,
+          Portfolio: data?.portfolio,
+          Instagram: data?.instagram,
+          Twitter: data?.twitter,
         });
         handleShow();
         setError("Profile Updated");

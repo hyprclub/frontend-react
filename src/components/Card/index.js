@@ -49,7 +49,7 @@ const Card = ({ className, item: itemFromProps }) => {
               });
           }
         }
-      }catch (error) {
+      } catch (error) {
         console.error(error);
       }
     };
@@ -68,8 +68,8 @@ const Card = ({ className, item: itemFromProps }) => {
         <div>
           <img
             className={styles.imagehover}
-            srcSet=  {`${item.image || "/images/bg-card.png"} `}
-            src={item.image || "/images/bg-card.png" }
+            srcSet={`${item.image || "/images/bg-card.png"} `}
+            src={item.image || "/images/bg-card.png"}
             alt="Card"
           />
         </div>
@@ -94,16 +94,16 @@ const Card = ({ className, item: itemFromProps }) => {
             }}
             className={cn("button-small", styles.button)}
           >
-            <span>Claim Now</span>
+            <span>Claim NFT</span>
             <Icon name="scatter-up" size="16" />
           </button>
         </div>
       </div>
-      <Link className={styles.link} to={item.url}>
+      <Link className={styles.link} to={item?.url}>
         <div className={styles.body}>
           <div className={styles.line}>
-            <div className={styles.title}>{item.name}</div>
-            <div className={styles.price}>{item.price}</div>
+            <div className={styles.title}>{item?.name}</div>
+            <div className={styles.price}>14999</div>
           </div>
           <div className={styles.line}>
             <div className={styles.users}>
