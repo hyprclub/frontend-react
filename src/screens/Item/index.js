@@ -125,7 +125,7 @@ const Item = (props) => {
                   </div>
                 ))}
               </div>
-              <img
+              <img className={styles.imgs}
                 srcSet={`${data.image || "/images/bg-card.png"} 2x`}
                 src={data.image || "/images/bg-card.png"}
                 alt="Item"
@@ -137,12 +137,12 @@ const Item = (props) => {
             <h1 className={cn("h3", styles.title)}>{data.name}</h1>
             <div className={styles.cost}>
               <div className={cn("status-stroke-green", styles.price)}>
-                1000 INR
+                14999 INR
               </div>
               {/* <div className={cn("status-stroke-black", styles.price)}>
                 $4,429.87
               </div> */}
-              <div className={styles.counter}>100 in stock</div>
+              {/* <div className={styles.counter}>100 in stock</div> */}
             </div>
             <div className={styles.info}>{data.description}</div>
             {/* <div className={styles.nav}>
