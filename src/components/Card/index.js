@@ -49,7 +49,7 @@ const Card = ({ className, item: itemFromProps }) => {
               });
           }
         }
-      }catch (error) {
+      } catch (error) {
         console.error(error);
       }
     };
@@ -67,6 +67,9 @@ const Card = ({ className, item: itemFromProps }) => {
       <div className={styles.preview}>
         <div>
           <img
+            onClick={(e) => {
+              openItem(e);
+            }}
             className={styles.imagehover}
             srcSet={`${item.image} `}
             src={item.image}
@@ -105,7 +108,7 @@ const Card = ({ className, item: itemFromProps }) => {
             <div className={styles.title}>{item.name}</div>
             <div className={styles.price}>{item.price}</div>
           </div>
-            <div>discription(sent me)</div>
+          <div>discription(sent me)</div>
           {/* <div className={styles.line}>
             <div className={styles.users}>
               {item?.users?.map((x, index) => (
