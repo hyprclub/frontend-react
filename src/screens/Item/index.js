@@ -38,8 +38,8 @@ const Item = (props) => {
   const [data, setData] = useState({ name: "", image: "", description: "" });
   const [owner, setOwner] = useState("");
   const [ownerDp, setOwnerDp] = useState("");
-  const [creator, setCreator] = useState([]);
-  const [CreatorDp, seCreatorDp] = useState([]);
+  const [creator, setCreator] = useState("");
+  const [creatorDp, setCreatorDp] = useState("");
 
   React.useEffect(async () => {
     if (props) {
@@ -58,22 +58,37 @@ const Item = (props) => {
             baseURL: process.env.REACT_APP_BASE_URL, // base url
           })
           .then(async (reps) => {
-            const storagePFref = ref(
+            const storageOwnerPFref = ref(
               storage,
               "users/" + nftData.data().OwnerUid + "/profile.jpg"
+            );
+            const storageCreatorPFref = ref(
+              storage,
+              "users/" + nftData.data().CreatorUid + "/profile.jpg"
             );
             const ownerData = await getDoc(
               doc(db, "users", nftData.data().OwnerUid)
             );
-            await getDownloadURL(ref(storagePFref))
+            const creatorData = await getDoc(
+              doc(db, "users", nftData.data().CreatorUid)
+            );
+            await getDownloadURL(ref(storageOwnerPFref))
               .then((url) => {
                 setOwnerDp(url);
               })
               .catch((error) => {
                 console.error("No user data");
               });
+            await getDownloadURL(ref(storageCreatorPFref))
+              .then((url) => {
+                setCreatorDp(url);
+              })
+              .catch((error) => {
+                console.error("No user data");
+              });
             setOwner(ownerData.data());
             setData(reps.data);
+            setCreator(creatorData.data());
           })
           .catch((error) => {
             console.error(error);
@@ -82,7 +97,7 @@ const Item = (props) => {
         console.error(error);
       }
     }
-  }, [props, setData, setOwner, setOwnerDp]);
+  }, [props, setData, setOwner, setOwnerDp, setCreator, setCreatorDp]);
 
   //  React.useEffect(() => {
   //   if (loggedIn !== undefined && loggedIn) {
@@ -102,9 +117,9 @@ const Item = (props) => {
       avatar: ownerDp || "/images/content/avatar-big.jpg",
     },
     {
-      name: "Hypr Club",
+      name: creator?.Name,
       position: "Creator",
-      avatar: "/images/content/1.png",
+      avatar: creatorDp || "/images/content/avatar-big.jpg",
     },
   ];
 
@@ -128,7 +143,8 @@ const Item = (props) => {
                   </div>
                 ))} */}
               </div>
-              <img className={styles.imgs}
+              <img
+                className={styles.imgs}
                 srcSet={`${data.image || "/images/bg-card.png"} 2x`}
                 src={data.image || "/images/bg-card.png"}
                 alt="Item"
@@ -137,9 +153,17 @@ const Item = (props) => {
             {/* <Options className={styles.options} /> */}
           </div>
           <div className={styles.details}>
-            <div className={cn("h2", styles.title)}>BU Alumni Exclusive - {data.name}</div>
+            <div className={cn("h2", styles.title)}>
+              BU Alumni Exclusive - {data.name}
+            </div>
             <div className={styles.cost}>
-              <div className={cn("status-stroke-green", styles.price,styles.gradienttext)}>
+              <div
+                className={cn(
+                  "status-stroke-green",
+                  styles.price,
+                  styles.gradienttext
+                )}
+              >
                 14999 INR
               </div>
               {/* <div className={cn("status-stroke-black", styles.price)}>
