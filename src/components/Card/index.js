@@ -67,7 +67,10 @@ const Card = ({ className, item: itemFromProps }) => {
       <div className={styles.preview}>
         <div>
           <img
-            className={styles.imagehover}
+            onClick={(e) => {
+              openItem(e);
+            }}
+            className={cn(styles.imagehover, "img-fluid")}
             srcSet={`${item.image || "/images/bg-card.png"} `}
             src={item.image || "/images/bg-card.png"}
             alt="Card"
@@ -102,10 +105,19 @@ const Card = ({ className, item: itemFromProps }) => {
       <Link className={styles.link} to={item?.url}>
         <div className={styles.body}>
           <div className={styles.line}>
-            <div className={styles.title}>{item?.name}</div>
-            <div className={styles.price}>14999</div>
+            <div className={styles.title}>
+              <b>BU Alumni Exclusive - </b>
+              {item?.name}
+            </div>
           </div>
+          <div>discription(sent me)</div>
           <div className={styles.line}>
+            <div className={styles.price}>0 INR</div>
+            <div className={styles.cut}>
+              <s>14900</s>
+            </div>
+          </div>
+          {/* <div className={styles.line}>
             <div className={styles.users}>
               {item?.users?.map((x, index) => (
                 <div className={styles.avatar} key={index}>
@@ -114,18 +126,8 @@ const Card = ({ className, item: itemFromProps }) => {
               ))}
             </div>
             <div className={styles.counter}>{item.counter}</div>
-          </div>
+          </div> */}
         </div>
-        {/* <div className={styles.foot}>
-          <div className={styles.status}>
-            <Icon name="candlesticks-up" size="20" />
-            Highest bid <span>{item.highestBid}</span>
-          </div>
-          <div
-            className={styles.bid}
-            dangerouslySetInnerHTML={{ __html: item.bid }}
-          />
-        </div> */}
       </Link>
     </div>
   );
