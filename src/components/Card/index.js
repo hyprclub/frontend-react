@@ -67,12 +67,9 @@ const Card = ({ className, item: itemFromProps }) => {
       <div className={styles.preview}>
         <div>
           <img
-            onClick={(e) => {
-              openItem(e);
-            }}
-            className={cn(styles.imagehover,"img-fluid")}
-            srcSet={`${item.image} `}
-            src={item.image}
+            className={styles.imagehover}
+            srcSet=  {`${item.image || "/images/bg-card.png"} `}
+            src={item.image || "/images/bg-card.png" }
             alt="Card"
           />
         </div>
@@ -107,10 +104,10 @@ const Card = ({ className, item: itemFromProps }) => {
           <div className={styles.line}>
             <div className={styles.title}><b>BU Alumni Exclusive - </b>{item.name}</div>
           </div>
-          <div>discription(sent me)</div> 
+          <div className={styles.df}>discription(sent me)</div> 
           <div className={styles.line}>
-            <div className={styles.price}>0 INR</div>
-            <div className={styles.cut}><s>14900</s></div>
+            {/* <div className={styles.cut}><s>14900 INR</s></div> */}
+            <div className={styles.price}>14999 INR</div>
             </div>
           {/* <div className={styles.line}>
             <div className={styles.users}>

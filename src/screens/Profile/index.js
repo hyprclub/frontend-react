@@ -188,9 +188,9 @@ const Profile = (props) => {
   const loggedIn = useSelector((state) => state.UserData.loggedIn);
 
   React.useEffect(() => {
-    if (loggedIn !== undefined) {
+    if (loggedIn) {
     } else {
-      push("/");
+      push("/login");
     }
   }, [loggedIn, push]);
 
@@ -225,7 +225,7 @@ const Profile = (props) => {
         },
         {
           title: "instagram",
-          url: "https://www.instagram.com/" + UserData.instagram +"/",
+          url: "https://www.instagram.com/" + UserData.instagram + "/",
         },
       ]);
     }
@@ -247,7 +247,7 @@ const Profile = (props) => {
       <div
         className={cn(styles.head, { [styles.active]: visible })}
         style={{
-          backgroundImage: "url(/images/content/bg-profile.jpg)",
+          backgroundImage: "url(/images/content/bg-profile.png)",
         }}
       >
         <div className={cn("container", styles.container)}>

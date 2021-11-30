@@ -1,57 +1,61 @@
 {
-	"name": "hypr-club-nft",
-	"version": "0.1.0",
-	"private": true,
-	"dependencies": {
-		"@reduxjs/toolkit": "^1.6.2",
-		"@rumess/react-flip-countdown": "^1.2.3",
-		"@testing-library/jest-dom": "^5.11.4",
-		"@testing-library/react": "^11.1.0",
-		"@testing-library/user-event": "^12.1.10",
-		"aos": "^3.0.0-beta.6",
-		"axios": "^0.24.0",
-		"body-scroll-lock": "^3.1.5",
-		"bootstrap": "^5.1.3",
-		"classnames": "^2.3.1",
-		"firebase": "^9.4.1",
-		"prettier": "^2.4.1",
-		"react": "^17.0.1",
-		"react-bootstrap": "^2.0.2",
-		"react-dom": "^17.0.1",
-		"react-outside-click-handler": "^1.3.0",
-		"react-range": "^1.8.7",
-		"react-redux": "^7.2.6",
-		"react-router": "^5.2.0",
-		"react-router-dom": "^5.2.0",
-		"react-scripts": "4.0.2",
-		"react-share": "^4.4.0",
-		"react-slick": "^0.28.1",
-		"react-spinners": "^0.11.0",
-		"sass": "^1.43.4",
-		"use-dark-mode": "^2.3.1"
-	},
-	"scripts": {
-		"start": "react-scripts start",
-		"build": "react-scripts build",
-		"test": "react-scripts test",
-		"eject": "react-scripts eject"
-	},
-	"eslintConfig": {
-		"extends": [
-			"react-app",
-			"react-app/jest"
-		]
-	},
-	"browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
-	}
+  "name": "hypr-club-nft",
+  "homepage": "http://test.hyprclub.com/",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.6.2",
+    "@rumess/react-flip-countdown": "^1.2.3",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "aos": "^3.0.0-beta.6",
+    "axios": "^0.24.0",
+    "body-scroll-lock": "^3.1.5",
+    "bootstrap": "^5.1.3",
+    "classnames": "^2.3.1",
+    "firebase": "^9.4.1",
+    "gh-pages": "^3.2.3",
+    "prettier": "^2.4.1",
+    "react": "^17.0.1",
+    "react-bootstrap": "^2.0.2",
+    "react-dom": "^17.0.1",
+    "react-outside-click-handler": "^1.3.0",
+    "react-range": "^1.8.7",
+    "react-redux": "^7.2.6",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.2",
+    "react-share": "^4.4.0",
+    "react-slick": "^0.28.1",
+    "react-spinners": "^0.11.0",
+    "sass": "^1.43.4",
+    "use-dark-mode": "^2.3.1"
+  },
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
