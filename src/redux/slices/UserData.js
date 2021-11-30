@@ -5,9 +5,8 @@ const initialState = {
   email: undefined,
   uid: undefined,
   bio: undefined,
-  facebook: undefined,
-  instagram: undefined,
-  twitter: undefined,
+  instagram: "",
+  twitter: "",
   name: undefined,
   username: undefined,
   phoneno: undefined,
@@ -15,9 +14,8 @@ const initialState = {
   admin: undefined,
   creator: undefined,
   profileDP: undefined,
-  json: undefined,
   nftIds: [],
-  nftIdsLogOut : []
+  nftIdsLogOut: [],
 };
 
 export const userDataSlice = createSlice({
@@ -34,13 +32,14 @@ export const userDataSlice = createSlice({
     },
     updateUserDetails: (state, { payload }) => {
       state.bio = payload?.Bio;
-      state.facebook = payload?.Facebook;
       state.instagram = payload?.Instagram;
       state.twitter = payload?.Twitter;
       state.name = payload?.Name;
       state.username = payload?.Username;
       state.phoneno = payload?.Phone;
       state.portfolio = payload?.Portfolio;
+      state.creator = payload?.creator;
+      state.admin = payload?.admin;
     },
     updateUserDP: (state, { payload }) => {
       state.profileDP = payload?.profileDP;
@@ -48,9 +47,9 @@ export const userDataSlice = createSlice({
     nftData: (state, { payload }) => {
       state.nftIds = payload?.nftIds;
     },
-    nftDataId : (state, {payload}) => {
-      state.nftIdsLogOut = payload?.nftIdsLogOut
-    }
+    nftDataId: (state, { payload }) => {
+      state.nftIdsLogOut = payload?.nftIdsLogOut;
+    },
   },
 });
 

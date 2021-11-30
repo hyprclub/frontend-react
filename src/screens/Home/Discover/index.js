@@ -29,7 +29,6 @@ const Discover = () => {
   let [loading, setLoading] = useState(true);
   let [color, setColor] = useState("#F80764");
 
-
   const [activeIndex, setActiveIndex] = useState(0);
   const [date, setDate] = useState(dateOptions[0]);
   const [price, setPrice] = useState(priceOptions[0]);
@@ -41,15 +40,15 @@ const Discover = () => {
   const [values, setValues] = useState([5]);
 
   const [visible, setVisible] = useState(false);
-  const [sliceIntial, setSliceInitial] = useState(6);
+  const [sliceIntial, setSliceInitial] = useState(4);
 
   const STEP = 0.1;
   const MIN = 0.01;
   const MAX = 10;
 
   const IncreaseSlice = () => {
-    setSliceInitial(sliceIntial + 5);
-  }
+    setSliceInitial(sliceIntial + 4);
+  };
 
   const settings = {
     infinite: true,
@@ -80,152 +79,153 @@ const Discover = () => {
     ],
   };
 
-
-
   return (
     <>
-    {/* <div className="sweet-loading">
+      {/* <div className="sweet-loading">
       <button onClick={() => setLoading(!loading)}>Toggle Loader</button>
       <input value={color} onChange={(input) => setColor(input.target.value)} placeholder="Color of the loader" />
 
       <ClipLoader color={color} loading={loading} size={150} />
     </div> */}
-    <div className ="container">
-    
-    {/* <ClipLoader color={color} loading={loading} size={150} /> */}
-      <div className={cn("section", styles.section)}>
-        <div className={cn("container", styles.container)}>
-          <h3 className={cn("h3", styles.title)}>Discover</h3>
-          <div className={cn(styles.filters, { [styles.active]: visible })}>
-            <div className={styles.sorting}>
-              <div className={styles.cell}>
-                <div className={styles.label}>Price</div>
-                <Dropdown
-                  className={styles.dropdown}
-                  value={price}
-                  setValue={setPrice}
-                  options={priceOptions}
-                />
-              </div>
-              <div className={styles.cell}>
-                <div className={styles.label}>likes</div>
-                <Dropdown
-                  className={styles.dropdown}
-                  value={likes}
-                  setValue={setLikes}
-                  options={likesOptions}
-                />
-              </div>
-              <div className={styles.cell}>
-                <div className={styles.label}>creator</div>
-                <Dropdown
-                  className={styles.dropdown}
-                  value={creator}
-                  setValue={setCreator}
-                  options={creatorOptions}
-                />
-              </div>
-              <div className={styles.cell}>
-                <div className={styles.label}>Price range</div>
-                <Range
-                  values={values}
-                  step={STEP}
-                  min={MIN}
-                  max={MAX}
-                  onChange={(values) => setValues(values)}
-                  renderTrack={({ props, children }) => (
-                    <div
-                      onMouseDown={props.onMouseDown}
-                      onTouchStart={props.onTouchStart}
-                      style={{
-                        ...props.style,
-                        height: "27px",
-                        display: "flex",
-                        width: "100%",
-                      }}
-                    >
+      <div className="container">
+        {/* <ClipLoader color={color} loading={loading} size={150} /> */}
+        <div className={cn("section", styles.section)}>
+          <div className={cn("container", styles.container)}>
+            <h3 className={cn("h3", styles.title)}>Discover</h3>
+            <div className={cn(styles.filters, { [styles.active]: visible })}>
+              <div className={styles.sorting}>
+                <div className={styles.cell}>
+                  <div className={styles.label}>Price</div>
+                  <Dropdown
+                    className={styles.dropdown}
+                    value={price}
+                    setValue={setPrice}
+                    options={priceOptions}
+                  />
+                </div>
+                <div className={styles.cell}>
+                  <div className={styles.label}>likes</div>
+                  <Dropdown
+                    className={styles.dropdown}
+                    value={likes}
+                    setValue={setLikes}
+                    options={likesOptions}
+                  />
+                </div>
+                <div className={styles.cell}>
+                  <div className={styles.label}>creator</div>
+                  <Dropdown
+                    className={styles.dropdown}
+                    value={creator}
+                    setValue={setCreator}
+                    options={creatorOptions}
+                  />
+                </div>
+                <div className={styles.cell}>
+                  <div className={styles.label}>Price range</div>
+                  <Range
+                    values={values}
+                    step={STEP}
+                    min={MIN}
+                    max={MAX}
+                    onChange={(values) => setValues(values)}
+                    renderTrack={({ props, children }) => (
                       <div
-                        ref={props.ref}
+                        onMouseDown={props.onMouseDown}
+                        onTouchStart={props.onTouchStart}
                         style={{
-                          height: "8px",
+                          ...props.style,
+                          height: "27px",
+                          display: "flex",
                           width: "100%",
-                          borderRadius: "4px",
-                          background: getTrackBackground({
-                            values,
-                            colors: ["#ED0090", "#E6E8EC"],
-                            min: MIN,
-                            max: MAX,
-                          }),
-                          alignSelf: "center",
                         }}
                       >
-                        {children}
+                        <div
+                          ref={props.ref}
+                          style={{
+                            height: "8px",
+                            width: "100%",
+                            borderRadius: "4px",
+                            background: getTrackBackground({
+                              values,
+                              colors: ["#ED0090", "#E6E8EC"],
+                              min: MIN,
+                              max: MAX,
+                            }),
+                            alignSelf: "center",
+                          }}
+                        >
+                          {children}
+                        </div>
                       </div>
-                    </div>
-                  )}
-                  renderThumb={({ props, isDragged }) => (
-                    <div
-                      {...props}
-                      style={{
-                        ...props.style,
-                        height: "24px",
-                        width: "24px",
-                        borderRadius: "50%",
-                        backgroundColor: "#ED0090",
-                        border: "4px solid #FCFCFD",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
+                    )}
+                    renderThumb={({ props, isDragged }) => (
                       <div
+                        {...props}
                         style={{
-                          position: "absolute",
-                          top: "-33px",
-                          color: "#fff",
-                          fontWeight: "600",
-                          fontSize: "14px",
-                          lineHeight: "18px",
-                          fontFamily: "Poppins",
-                          padding: "4px 8px",
-                          borderRadius: "8px",
-                          backgroundColor: "#141416",
+                          ...props.style,
+                          height: "24px",
+                          width: "24px",
+                          borderRadius: "50%",
+                          backgroundColor: "#ED0090",
+                          border: "4px solid #FCFCFD",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
                         }}
                       >
-                        {values[0].toFixed(1)}
+                        <div
+                          style={{
+                            position: "absolute",
+                            top: "-33px",
+                            color: "#fff",
+                            fontWeight: "600",
+                            fontSize: "14px",
+                            lineHeight: "18px",
+                            fontFamily: "Poppins",
+                            padding: "4px 8px",
+                            borderRadius: "8px",
+                            backgroundColor: "#141416",
+                          }}
+                        >
+                          {values[0].toFixed(1)}
+                        </div>
                       </div>
-                    </div>
-                  )}
-                />
-                <div className={styles.scale}>
-                  <div className={styles.number}>0.01 ETH</div>
-                  <div className={styles.number}>10 ETH</div>
+                    )}
+                  />
+                  <div className={styles.scale}>
+                    <div className={styles.number}>0.01 ETH</div>
+                    <div className={styles.number}>10 ETH</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <div className={styles.list}>
+            <Slider
+              className={cn("discover-slider", styles.slider)}
+              {...settings}
+            >
+              {
+                <Items
+                  className={styles.items}
+                  items={UserData.nftIdsLogOut.slice(0, sliceIntial)}
+                  buttonclass={true}
+                />
+              }
+            </Slider>
+          </div>
+          <div className={styles.btns}>
+            <button
+              className={cn("button-stroke button-small", styles.button)}
+              onClick={(e) => {
+                IncreaseSlice(e);
+              }}
+            >
+              <span>Load more</span>
+            </button>
+          </div>
         </div>
-        <div className={styles.list}>
-          <Slider
-            className={cn("discover-slider", styles.slider)}
-            {...settings}
-          >
-            {<Items
-                    className={styles.items}
-                    items={UserData.nftIdsLogOut.slice(0, sliceIntial)}
-                    buttonclass = {true}
-                  />}
-          </Slider>
-        </div>
-        <div className={styles.btns}>
-          <button className={cn("button-stroke button-small", styles.button)}
-                  onClick={(e) => {
-                            IncreaseSlice(e)
-                          }}>
-            <span>Load more</span>
-          </button>
-        </div>
-      </div>
       </div>
     </>
   );

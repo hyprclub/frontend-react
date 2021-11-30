@@ -1,23 +1,27 @@
 @import ../../../styles/helpers
-
+body
+    font-family: 'Poppins', sans-serif !important
 .ss
     margin-top: 30px !important
-    margin-bottom: 25px !important
-
+    margin-bottom: 30px !important
+.margin
+    margin-top: 41px !important
 .sse
     margin-top: 40px !important
+    margin-bottom: 25px
     font-weight: 425px
     width: 100%
     text-align: center
-
+.space
+    margin-top: 10px !important
 .creator
     margin-top: 70px !important
     // width: 100%
     text-align: center
 
 .cont
-    text-align: center
-    // background-image: url('./gradient.png') 
+    // text-align: center
+    background-image: url('./gradient.png') 
 
 .lowcont
     width: 100%
@@ -28,16 +32,21 @@
     line-height: 37.5px
 
 .imgcom
+    // text-align: left !important
     margin-top: 2px
-
+// .left
+//     text-align: right
 .video
+    margin-bottom: 40px
     height: 650px !important 
+// .size1
+//     width: 200px
 // .membership
 .text2
     margin-top: 20px !important
 .dd
     margin-top: 50px
-    text-align: center !important
+    text-align: left
     img
         margin-top: 95px !important
 .js
@@ -57,26 +66,49 @@
     margin-top: 50px !important
     margin-bottom: 50px !important
 
+.creator1
+    display: none
+
+@media (max-width: 767px)
+    .cont
+        text-align: center
+        background-image: url('./gradient.png') 
+    .creator2
+        display: none
+    .creator1
+        display: inline
+        margin-bottom: 20px
+    .video
+        height: 400px !important
+    .FlipCount
+        width: 100% !important
+    .imgcom
+        padding: 10px
 
 @media (max-width: 990px)
+    .cont
+        text-align: center !important
+        background-image: url('./gradient.png')
+
     .edit
-        width: 220px
+        margin-top: -20px !important
+        width: 190px
         
     .dd
-        margin-top: -10px !important
+        margin-top: -85px !important
         text-align: center 
         img
             margin-top: 9px 
     .sty
         div
             text-align: center
-            font-weight: 300
-            font-size: 20px
-            line-height: 30.5px
+            font-weight: 500
+            font-size: 14px
+            line-height: 18.5px
+            margin-bottom: 20px
         // text-decoration: underline
     .creator
         margin-top: 33px !important
-        
     .lowcont
         margin-top: 10px
         font-weight: 400

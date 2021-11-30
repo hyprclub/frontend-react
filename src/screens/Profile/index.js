@@ -188,9 +188,9 @@ const Profile = (props) => {
   const loggedIn = useSelector((state) => state.UserData.loggedIn);
 
   React.useEffect(() => {
-    if (loggedIn !== undefined) {
+    if (loggedIn) {
     } else {
-      push("/");
+      push("/login");
     }
   }, [loggedIn, push]);
 
@@ -225,7 +225,7 @@ const Profile = (props) => {
         },
         {
           title: "instagram",
-          url: "https://www.instagram.com/" + UserData.instagram +"/",
+          url: "https://www.instagram.com/" + UserData.instagram + "/",
         },
       ]);
     }
