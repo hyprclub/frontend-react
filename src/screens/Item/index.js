@@ -52,8 +52,11 @@ const Item = (props) => {
         const storage = getStorage();
         const nftData = await getDoc(doc(db, "NFT's", nftToken));
         console.debug(nftData);
+
         axios
-          .get(nftData.data().json)
+          .get(nftToken, {
+            baseURL: process.env.REACT_APP_BASE_URL, // base url
+          })
           .then(async (reps) => {
             const storagePFref = ref(
               storage,
@@ -67,7 +70,7 @@ const Item = (props) => {
                 setOwnerDp(url);
               })
               .catch((error) => {
-                console.error(error);
+                console.error("No user data");
               });
             setOwner(ownerData.data());
             setData(reps.data);
