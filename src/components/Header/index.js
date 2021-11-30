@@ -21,10 +21,10 @@ const nav = [
     url: "/comingsoon",
     title: "Coming soon",
   },
-  {
-    url: "/profile",
-    title: "Profile",
-  },
+  // {
+  // 	url: '/profile',
+  // 	title: 'Profile',
+  // },
 ];
 
 const Headers = () => {

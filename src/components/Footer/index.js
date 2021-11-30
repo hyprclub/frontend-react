@@ -77,7 +77,7 @@ const Footers = () => {
                 alt="HyprClub"
               />
             </Link>
-            <div className={styles.info}>The Next social Revolution.</div>
+            <div className={styles.info}>The Next Social Revolution.</div>
             <div className={styles.logo1}>
               <a
                 className="icons"

@@ -157,7 +157,7 @@ const Login = () => {
 									placeholder='Enter your password'
 									required
 								/>
-								<Button className={cn('button-stroke', styles.button)}><input type='submit' value='Login' /></Button>
+								<Button className={cn('button-stroke', styles.button,styles.button3)}><input type='submit' value='    Login   ' /></Button>
 
 								{/* <Link
 										onClick={(e) => {
@@ -176,13 +176,13 @@ const Login = () => {
 								}}
 							>Forgot Password?</a>
 
-							<Button className={cn('button-stroke', styles.button)}><div> <img class="icons mr-3" src="/google.png" /> <button
+							<Button className={cn('button-stroke', styles.button)}><div>&ensp;&ensp; <img class="icons mr-3" src="/google.png" /> <button
 								className={styles.button2} type="submit"
 								onClick={(e) => {
 									e.preventDefault()
 									googlesignin(e)
 								}}
-							>Sign up with Google</button></div></Button>
+							>Sign up with Google&ensp;&ensp;</button></div></Button>
 							<div></div>
 
 							<Button className={cn('button-stroke', styles.button)}><div><button
@@ -191,7 +191,7 @@ const Login = () => {
 									e.preventDefault()
 									push('/passwordless')
 								}}
-							>Password-Less Sign In</button></div></Button>
+							>&ensp;&ensp;Password-Less Sign In&ensp;&ensp;</button></div></Button>
 
 							<Modal
 								show={show}

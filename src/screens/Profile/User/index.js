@@ -79,12 +79,12 @@ const User = ({ className, item, isOwnProfile }) => {
               <Icon name="report" size="20" />
             </button> */}
 					</div>
-					<button
+					{/* <button
 						className={cn('button-circle-stroke button-small', { [styles.active]: visibleShare }, styles.button)}
 						onClick={() => setVisibleShare(!visibleShare)}
 					>
 						<Icon name='share' size='20' />
-					</button>
+					</button> */}
 					<div className={cn(styles.box, { [styles.active]: visibleShare })}>
 						<div className={styles.stage}>Share link to this page</div>
 
