@@ -79,7 +79,7 @@ const Hero = () => {
         <div className={cn("container", styles.container)}>
           <div className={styles.head}>
             <div className={cn("h1", styles.title)}>
-            Welcome to HyprClub.<br></br> The next big social revolution.
+            Welcome to <span className={styles.hyr}>HyprClub</span>.<br></br> The next big social revolution.
             </div>
             <div className={styles.stage}>
             A platform for the creator, investor and <br></br>supporter inside you.
