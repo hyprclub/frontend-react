@@ -1,30 +1,39 @@
 @import ../../../styles/helpers
-
+// @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap')
+body
 .head
-    max-width: 600px
-    margin: 0 auto 128px
+    font-family: 'Poppins', sans-serif !important 
+    // font-weight: 700
     text-align: center
-    +x
-        margin-bottom: 112px
-    +m
-        margin-bottom: 64px
+.hyr
+    font-weight: 700
+    background: linear-gradient(to right,#8d00fd,#e70d8c,#ed4d6b, #f6a44c)
+    -webkit-text-fill-color: transparent
+    -webkit-background-clip: text
 .section
-    // color: $white
-    background-image: url('./background.png')
-    background-size: cover
-    background-position: center center
+    // font-weight: 700
+    font-family: 'Poppins', sans-serif !important 
+    // background-image: url('./gradient.png')
     // background-repeat: no-repeat
-    // background-size: 1450px 900px !important
+    // background-size: 100% 100% !important
+    // background-size: cover
+    // background-position: center center
+   
 .stage
-    margin-bottom: 8px
-    +hairline-2
-    color: $neutrals4
+    font-family: 'Poppins', sans-serif !important
+    margin-top: 12px
+    background-clip: text
+    margin-bottom: 12px
+    // +hairline-2
+    // color: $neutrals4
 
 .title
+    font-weight: 700
+    // background-image: linear-gradient(60deg, #E21143, #FFB03A)
+    font-family: 'Poppins', sans-serif !important
     margin-bottom: 24px
     font-weight: 700
     font-size: 50px
-    // line-height: 66.5px
     +m
         font-size: 32px
 
@@ -113,19 +122,19 @@
 .text
     font-weight: 500
 
-.wrap
-    margin-bottom: 40px
-    padding: 30px 16px
-    box-shadow: 0px 64px 64px -48px rgba(31, 47, 70, 0.12)
-    border: 2px solid $neutrals6
-    border-radius: 24px
-    text-align: center
-    +d
-        margin-bottom: 32px
-        padding: 24px 16px
-    +dark
-        background: $neutrals2
-        border-color: $neutrals2
+// .wrap
+//     margin-bottom: 40px
+//     padding: 30px 16px
+//     box-shadow: 0px 64px 64px -48px rgba(31, 47, 70, 0.12)
+//     border: 2px solid $neutrals6
+//     border-radius: 24px
+//     text-align: center
+//     +d
+//         margin-bottom: 32px
+//         padding: 24px 16px
+//     +dark
+//         background: $neutrals2
+//         border-color: $neutrals2
 
 .info
     +body-bold-2

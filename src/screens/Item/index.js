@@ -115,7 +115,7 @@ const Item = (props) => {
           <div className={styles.bg}>
             <div className={styles.preview}>
               <div className={styles.categories}>
-                {categories.map((x, index) => (
+                {/* {categories.map((x, index) => (
                   <div
                     className={cn(
                       { "status-black": x.category === "black" },
@@ -126,9 +126,9 @@ const Item = (props) => {
                   >
                     {x.content}
                   </div>
-                ))}
+                ))} */}
               </div>
-              <img
+              <img className={styles.imgs}
                 srcSet={`${data.image || "/images/bg-card.png"} 2x`}
                 src={data.image || "/images/bg-card.png"}
                 alt="Item"
@@ -137,15 +137,15 @@ const Item = (props) => {
             {/* <Options className={styles.options} /> */}
           </div>
           <div className={styles.details}>
-            <h1 className={cn("h3", styles.title)}>{data.name}</h1>
+            <div className={cn("h2", styles.title)}>BU Alumni Exclusive - {data.name}</div>
             <div className={styles.cost}>
-              <div className={cn("status-stroke-green", styles.price)}>
-                1000 INR
+              <div className={cn("status-stroke-green", styles.price,styles.gradienttext)}>
+                14999 INR
               </div>
               {/* <div className={cn("status-stroke-black", styles.price)}>
                 $4,429.87
               </div> */}
-              <div className={styles.counter}>100 in stock</div>
+              {/* <div className={styles.counter}>100 in stock</div> */}
             </div>
             <div className={styles.info}>{data.description}</div>
             {/* <div className={styles.nav}>

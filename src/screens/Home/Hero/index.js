@@ -78,84 +78,16 @@ const Hero = () => {
       <div className={cn("section", styles.section)}>
         <div className={cn("container", styles.container)}>
           <div className={styles.head}>
+            <div className={cn("h1", styles.title)}>
+            Welcome to <span className={styles.hyr}>HyprClub</span>.<br></br> The next big social revolution.
+            </div>
             <div className={styles.stage}>
-              Create, explore, & collect digital art NFTs.
+            A platform for the creator, investor and <br></br>supporter inside you.
             </div>
-            <div className={cn("h3", styles.title)}>
-            The future of the creator <br></br> economy is here.
-            </div>
-            <Link className={cn("button-stroke", styles.button)} to="./Discover">
-              Start your search
+            <Link className={cn("button-stroke", styles.button)} to="./signup">
+              Sign Up
             </Link>
           </div>
-          {/* <div className={styles.wrapper}>
-            <Slider className="creative-slider" {...settings}>
-              {items.map((x, index) => (
-                <div className={styles.slide} key={index}>
-                  <div className={styles.row}>
-                    <Player className={styles.player} item={x} />
-                    <div className={styles.details}>
-                      <div className={cn("h1", styles.subtitle)}>{x.title}</div>
-                      <div className={styles.line}>
-                        <div className={styles.item}>
-                          <div className={styles.avatar}>
-                            <img src={x.avatar} alt="Avatar" />
-                          </div>
-                          <div className={styles.description}>
-                            <div className={styles.category}>Creator</div>
-                            <div className={styles.text}>{x.creator}</div>
-                          </div>
-                        </div>
-                        <div className={styles.item}>
-                          <div className={styles.icon}>
-                            <Icon name="stop" size="24" />
-                          </div>
-                          <div className={styles.description}>
-                            <div className={styles.category}>Instant price</div>
-                            <div className={styles.text}>3.5 ETH</div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className={styles.wrap}>
-                        <div className={styles.info}>Current Bid</div>
-                        <div className={styles.currency}>{x.currency}</div>
-                        <div className={styles.price}>{x.price}</div>
-                        <div className={styles.info}>Auction ending in</div>
-                        <div className={styles.timer}>
-                          <div className={styles.box}>
-                            <div className={styles.number}>19</div>
-                            <div className={styles.time}>Hrs</div>
-                          </div>
-                          <div className={styles.box}>
-                            <div className={styles.number}>24</div>
-                            <div className={styles.time}>mins</div>
-                          </div>
-                          <div className={styles.box}>
-                            <div className={styles.number}>19</div>
-                            <div className={styles.time}>secs</div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className={styles.btns}>
-                        <button
-                          className={cn("button", styles.button)}
-                          onClick={() => setVisibleModalBid(true)}
-                        >
-                          Place a bid
-                        </button>
-                        <Link
-                          className={cn("button-stroke", styles.button)}
-                          to="/item"
-                        >
-                          View item
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </Slider>
-          </div> */}
         </div>
       </div>
       <Modal

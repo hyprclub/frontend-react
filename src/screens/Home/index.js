@@ -6,18 +6,20 @@ import HotBid from "../../components/HotBid";
 import Collections from "./Collections";
 import Discover from "./Discover";
 import Description from "./Description";
-
+import styles from "./Home.module.sass";
 const Home = () => {
   return (
     <>
-      <Hero />
-    {/* <div>hello</div> */}
-      <Selection />
-      {/* <Popular /> */}
-      {/* <HotBid classSection="section" /> */}
-      {/* <Collections /> */}
-      <Discover />
-      {/* <Description /> */}
+      <div className={styles.back}>
+        <Hero />
+        {/* <div>hello</div> */}
+        <Selection />
+        {/* <Popular /> */}
+        {/* <HotBid classSection="section" /> */}
+        {/* <Collections /> */}
+        <Discover />
+        {/* <Description /> */}
+      </div>
     </>
   );
 };

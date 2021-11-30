@@ -112,10 +112,10 @@ const Card = ({ className, item: itemFromProps }) => {
           </div>
           <div>discription(sent me)</div>
           <div className={styles.line}>
-            <div className={styles.price}>0 INR</div>
-            <div className={styles.cut}>
+            <div className={styles.price}>14999 INR</div>
+            {/* <div className={styles.cut}>
               <s>14900</s>
-            </div>
+            </div> */}
           </div>
           {/* <div className={styles.line}>
             <div className={styles.users}>
