@@ -74,14 +74,14 @@ const Card = ({ className, item: itemFromProps }) => {
           />
         </div>
         <div className={styles.control}>
-          <div
+          {/* <div
             className={cn(
               { "status-green": item.category === "green" },
               styles.category
             )}
           >
             {item.categoryText}
-          </div>
+          </div> */}
           {/* <button
             className={cn(styles.favorite, { [styles.active]: visible })}
             onClick={() => setVisible(!visible)}
@@ -95,7 +95,7 @@ const Card = ({ className, item: itemFromProps }) => {
             className={cn("button-small", styles.button)}
           >
             <span>Claim Now</span>
-            <Icon name="scatter-up" size="16" />
+            {/* <Icon name="scatter-up" size="16" /> */}
           </button>
         </div>
       </div>
