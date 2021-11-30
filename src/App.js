@@ -44,7 +44,7 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 
-import Howitworks from "./screens/How";
+import BuAlumni from "./screens/How";
 import ComingSoon from "./screens/Profile/comingsoon";
 import Discover from "./screens/Home/Discover";
 
@@ -254,10 +254,10 @@ function App() {
         />
         <Route
           exact
-          path="/howitworks"
+          path="/BuAlumni"
           render={() => (
             <Page>
-              <Howitworks />
+              <BuAlumni/>
             </Page>
           )}
         />

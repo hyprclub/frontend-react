@@ -14,8 +14,8 @@ const nav = [
   //   title: "Discover",
   // },
   {
-    url: "/Howitworks",
-    title: "How it work",
+    url: "/BuAlumni",
+    title: "Bu Alumni",
   },
   {
     url: "/comingsoon",

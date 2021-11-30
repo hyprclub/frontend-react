@@ -8,7 +8,7 @@ import 'aos/dist/aos.css';
 import Aos from 'aos';
 import { Link } from "react-router-dom";
 
-const Howitworks = () => {
+const BuAlumni = () => {
     useEffect(() => {
         Aos.init({ duration: 2000 })
     }, []);
@@ -16,16 +16,16 @@ const Howitworks = () => {
         <div className={styles.cont}>
             <div className={cn('container-fluid')}>
                 <div className="row">
-                    <div data-aos="fade-left" className={cn("col-xl-7 col-lg-7 col-md-7", styles.start)}>
+                    <div data-aos="fade-left" className={cn("col-xl-12 col-lg-12 col-md-12", styles.start)}>
                         <Image className="img-fluid" src="/bennett.png" srcDark="/joinhypr1.png" />
                     </div>
-                    <div data-aos="fade-right" className={cn("col-xl-5 col-lg-5 col-md-5", styles.start2)}>
+                    {/* <div data-aos="fade-right" className={cn("col-xl-5 col-lg-5 col-md-5", styles.start2)}>
                         <div >
                             <div className={styles.sty}>Unique NFTS,
                                 For Our Very Unique Alumni.</div>
                         </div>
                         <div className={styles.divlow}>Idk some cool alumni wali line daal dete hai yaha pe. that drawing took me so long omg</div>
-                    </div>
+                    </div> */}
                 </div>
                 <div className={cn("row", styles.gg)}>
                     <div data-aos="fade-right" className={cn("col-xl-5 col-lg-5 col-md-5", styles.img)}>
@@ -58,31 +58,26 @@ const Howitworks = () => {
                     <Image className="img-fluid" src="/timesprime.png" srcDark="/joinhypr1.png" />
                 </div>
             </div>
-            <div data-aos="fade-left" className="col-xl-12 col-lg-12 col-md-12">
-                <Image className="img-fluid" src="/hampers1.png" srcDark="/joinhypr1.png"></Image>
-            </div>
-            <div data-aos="fade-left" className={cn("col-xl-12 col-lg-12 col-md-12", styles.perks)}>
-                <div className={styles.sty4}>Thats not all.<br></br>These perks are unlimited.</div>
-                <div>Continue to access Bennett University special perks that keep updating.</div>
-            </div>
-            {/* <div data-aos="fade-left">
-                <div className= {styles.Getstart}>
-               <div className={styles.sty5}>Feeling ready to bring <br></br>something idk im brain ded</div>
-               <div>brthrs pls i just wanna die, sign up karlo aur nft dekh ke khush raho</div>
-               </div>
-            </div> */}
             <div className="row">
-                <div data-aos="fade-left" className={cn("col-xl-12 col-lg-12 col-md-12", styles.creator1)}>
+                <div data-aos="fade-left" className="col-xl-6 col-lg-6 col-md-6">
+                    <Image className="img-fluid" src="/incubate.png" srcDark="/joinhypr1.png" />
+                </div>
+                <div data-aos="fade-right" className="col-xl-6 col-lg-6 col-md-6">
+                    <Image className="img-fluid" src="/timesprime.png" srcDark="/joinhypr1.png" />
+                </div>
+            </div>
+            <div className={cn("row",styles.gap1)}>
+                <div data-aos="fade-left" className={cn("col-xl-12 col-lg-12 col-md-12", styles.creator1, styles.perks)}>
                     <div className={styles.sty6}>Feeling ready to bring<br></br> something idk im brain ded</div>
-                    <div className={styles.sty3}>brthrs pls i just wanna die, sign up karlo aur <br></br> nft dekh ke khush raho</div>
+                    <div className={styles.sty3}>Continue to access Bennett University special perks <br></br>that keep updating.</div>
                     <div><Link className={cn("button-stroke", styles.button)} to="./passwordless">
-              Get Started
-            </Link></div>
-            <Image className="img-fluid" src="/bennett2.png" srcDark="/joinhypr1.png" />
+                        Get Started
+                    </Link>
+                    </div>
                 </div>
             </div>
         </div>
     )
 }
 
-export default Howitworks
+export default BuAlumni
