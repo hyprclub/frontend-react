@@ -8,6 +8,7 @@ import Discover from "./Discover";
 import Description from "./Description";
 import cn from "classnames";
 import styles from "./Home.module.sass";
+import Image from './Image'
 const Home = () => {
   return (
     <>
@@ -36,7 +37,7 @@ const Home = () => {
               {/* </div> */}
             </div>
             <div className="col-xl-6 col-lg-6 col-md-6">
-            <img className="img-fluid" src="/homepage.png" srcDark="/homepage.png" />
+            <Image className="img-fluid" src="/homepage.png" srcDark="/darkmode.png" />
             </div>
           </div>
         </div>
