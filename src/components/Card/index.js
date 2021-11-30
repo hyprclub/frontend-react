@@ -105,7 +105,8 @@ const Card = ({ className, item: itemFromProps }) => {
             <div className={styles.title}>{item.name}</div>
             <div className={styles.price}>{item.price}</div>
           </div>
-          <div className={styles.line}>
+            <div>discription(sent me)</div>
+          {/* <div className={styles.line}>
             <div className={styles.users}>
               {item?.users?.map((x, index) => (
                 <div className={styles.avatar} key={index}>
@@ -114,18 +115,8 @@ const Card = ({ className, item: itemFromProps }) => {
               ))}
             </div>
             <div className={styles.counter}>{item.counter}</div>
-          </div>
+          </div> */}
         </div>
-        {/* <div className={styles.foot}>
-          <div className={styles.status}>
-            <Icon name="candlesticks-up" size="20" />
-            Highest bid <span>{item.highestBid}</span>
-          </div>
-          <div
-            className={styles.bid}
-            dangerouslySetInnerHTML={{ __html: item.bid }}
-          />
-        </div> */}
       </Link>
     </div>
   );

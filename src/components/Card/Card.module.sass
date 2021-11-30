@@ -1,15 +1,22 @@
 @import ../../styles/helpers
 
 .card
+    cursor: pointer
+    box-shadow: 0 5px 10px -2px #e7e5de
+    background: var(--bg-2)
+    border-radius: 22px
+    transition: all .2s linear
     display: flex
-    // width: 80px 
+    padding: 30px
     height: 500px !important 
     flex-direction: column 
     &:hover
         .control
             visibility: visible
             opacity: 1
-
+@media (max-width: 767px)
+    .card
+        height: 440px !important 
 .preview
     position: relative
     border-radius: 8px
