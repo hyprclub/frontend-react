@@ -70,7 +70,7 @@ const Card = ({ className, item: itemFromProps }) => {
             onClick={(e) => {
               openItem(e);
             }}
-            className={styles.imagehover}
+            className={cn(styles.imagehover,"img-fluid")}
             srcSet={`${item.image} `}
             src={item.image}
             alt="Card"
@@ -105,10 +105,13 @@ const Card = ({ className, item: itemFromProps }) => {
       <Link className={styles.link} to={item.url}>
         <div className={styles.body}>
           <div className={styles.line}>
-            <div className={styles.title}>{item.name}</div>
-            <div className={styles.price}>{item.price}</div>
+            <div className={styles.title}><b>BU Alumni Exclusive - </b>{item.name}</div>
           </div>
-          <div>discription(sent me)</div>
+          <div>discription(sent me)</div> 
+          <div className={styles.line}>
+            <div className={styles.price}>0 INR</div>
+            <div className={styles.cut}><s>14900</s></div>
+            </div>
           {/* <div className={styles.line}>
             <div className={styles.users}>
               {item?.users?.map((x, index) => (
