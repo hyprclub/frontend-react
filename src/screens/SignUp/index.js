@@ -48,6 +48,7 @@ const Signup = () => {
     username: "",
     phone: "",
   });
+
   function updateState(e) {
     setData((state) => ({ ...state, [e.target.name]: e.target.value }));
   }
@@ -214,6 +215,12 @@ const Signup = () => {
   };
 
   const { push } = useHistory();
+  useEffect(() => {
+    if (loggedIn) {
+    } else {
+      push("/");
+    }
+  }, [loggedIn, push]);
   useEffect(() => {
     const auth = getAuth();
     if (isSignInWithEmailLink(auth, window.location.href)) {
