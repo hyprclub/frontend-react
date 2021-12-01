@@ -28,6 +28,10 @@ const items = [
         title: "Coming Soon",
         url: "/comingsoon",
       },
+      {
+        url: "/BuAlumni",
+        title: "BU Alumni",
+      },
     ],
   },
   {
