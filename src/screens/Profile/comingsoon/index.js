@@ -17,7 +17,7 @@ const ComingSoon = () => {
 
             <div className={cn('container')}>
                 <section>
-                    <img className={cn("img-fluid",styles.bottom)} src="/head2.png" srcDark="/header1.png" />
+                    <Image className={cn("img-fluid",styles.bottom)} src="/head2.png" srcDark="/img5.png" />
                 </section>
                 <div className={styles.sse}>
                     <Image className={cn("img-fluid",styles.size1)} src="/presenting.png" srcDark="/presenting1.png" />
