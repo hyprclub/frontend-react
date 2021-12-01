@@ -418,13 +418,14 @@ const Signup = () => {
                     backdrop="static"
                     keyboard={false}
                   >
-                    <Modal.Header closeButton className={styles.mymodal}>
+                    <Modal.Header closeButton>
                       <Modal.Title>Error</Modal.Title>
                     </Modal.Header>
                     <Modal.Body className={styles.mymodal2}>
                       <div><img className={cn("img-fluid",styles.size1)} src="/Error.png" /></div>
                       <div className={styles.fit}>{error}</div></Modal.Body>
-                    <Modal.Footer>
+                    <Modal.Footer className={styles.footer}>
+                      <div className={styles.footer}>
                       <Button
                         className={styles.mymodal}
                         variant="secondary"
@@ -432,6 +433,7 @@ const Signup = () => {
                       >
                         Ok
                       </Button>
+                      </div>
                       {/* <Button variant="primary">Understood</Button> */}
                     </Modal.Footer>
                   </Modal>
