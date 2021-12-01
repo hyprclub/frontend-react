@@ -115,7 +115,7 @@ const BuAlumni = () => {
                 </div>
             </div>
             <div className={cn("row", styles.gap1)}>
-                <div data-aos="fade-left" className={cn("col-xl-12 col-lg-12 col-md-12", styles.creator1, styles.perks)}>
+                <div className={cn("col-xl-12 col-lg-12 col-md-12", styles.creator1, styles.perks)}>
                     <div className={styles.sty6}>Feeling ready to bring<br></br> something idk im brain ded</div>
                     <div className={styles.sty3}>Continue to access Bennett University special perks <br></br>that keep updating.</div>
                     <div><Link className={cn("button-stroke", styles.button)} to="./passwordless">

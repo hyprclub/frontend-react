@@ -16,9 +16,9 @@ const ComingSoon = () => {
 
 
             <div className={cn('container')}>
-                <div className={styles.ss}>
-                    <Image className="img-fluid" src="/header.png" srcDark="/header1.png" />
-                </div>
+                <section>
+                    <img className={cn("img-fluid",styles.bottom)} src="/head2.png" srcDark="/header1.png" />
+                </section>
                 <div className={styles.sse}>
                     <Image className={cn("img-fluid",styles.size1)} src="/presenting.png" srcDark="/presenting1.png" />
                     <div className={styles.lowcont}>Bigger and better. More features,<br></br> more rewards more Hypr.</div>

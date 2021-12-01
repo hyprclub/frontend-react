@@ -410,6 +410,7 @@ const Signup = () => {
                     <input type="submit" value="Sign Up" />
                   </Button>
                   <Modal
+                  
                     aria-labelledby="contained-modal-title-vcenter"
                     centered
                     show={show}
@@ -418,9 +419,11 @@ const Signup = () => {
                     keyboard={false}
                   >
                     <Modal.Header closeButton className={styles.mymodal}>
-                      <Modal.Title>Notification</Modal.Title>
+                      <Modal.Title>Error</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body className={styles.mymodal2}>{error}</Modal.Body>
+                    <Modal.Body className={styles.mymodal2}>
+                      <div><img className={cn("img-fluid",styles.size1)} src="/Error.png" /></div>
+                      <div className={styles.fit}>{error}</div></Modal.Body>
                     <Modal.Footer>
                       <Button
                         className={styles.mymodal}
