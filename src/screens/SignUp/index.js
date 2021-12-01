@@ -217,8 +217,8 @@ const Signup = () => {
   const { push } = useHistory();
   useEffect(() => {
     if (loggedIn) {
-    } else {
       push("/");
+    } else {
     }
   }, [loggedIn, push]);
   useEffect(() => {
