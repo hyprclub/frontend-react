@@ -21,6 +21,11 @@ const BuAlumni = () => {
                     <div data-aos="fade-left" className={cn("col-xl-12 col-lg-12 col-md-12", styles.start)}>
                         <div className={styles.text1}>Presenting Unique NFTs for<br></br> Our Unique Alumni.</div>
                         <div className={styles.text2}>Bennett University in collaboration with HyprClub<br></br> presents the world’s first NFT for alumni.</div>
+                        <div className={styles.logos}>
+                            <Image className={cn("img-fluid",styles.Bulogo)} src="/BUlogo.png" srcDark="/Bulogo1.png" />
+                            <Image className={cn("img-fluid",styles.Delete)} src="Delete.png" srcDark="/Delete1.png"/>
+                            <img className={cn("img-fluid",styles.logos1)} src="/logo11.png" />
+                        </div>
                         <div className="row">
                             {/* <Image className={cn("img-fluid",styles.logo)} src="/logo1.png" srcDark="/hero.png" /> */}
 
@@ -40,9 +45,9 @@ const BuAlumni = () => {
                     </div>
                     <div data-aos="fade-left" className={cn("col-xl-7 col-lg-7 col-md-7", styles.creator)}>
                         {/* <div className={style.flex}> */}
-                            <div className={styles.sty1}>Discover over 800 NFTs designed especially for you, capturing the essence of BU.</div>
+                        <div className={styles.sty1}>Discover over 800 NFTs designed especially for you, capturing the essence of BU.</div>
 
-                            <div className={styles.sty3}>Go ahead and grab your exclusive BU alumni NFTs ASAP! NFTs can be claimed on a first come first serve basis only. So get started!</div>
+                        <div className={styles.sty3}>Go ahead and grab your exclusive BU alumni NFTs ASAP! NFTs can be claimed on a first come first serve basis only. So get started!</div>
                         {/* </div> */}
                     </div>
                 </div>
@@ -89,7 +94,7 @@ const BuAlumni = () => {
                             {/* <Image className="img-fluid" src="/alumni.png" srcDark="/joinhypr1.png" /> */}
                         </div>
                     </div>
-                    <div data-aos="fade-left" className={cn("col-xl-6 col-lg-12 col-md-12", styles.border,"mb-5")}>
+                    <div data-aos="fade-left" className={cn("col-xl-6 col-lg-12 col-md-12", styles.border, "mb-5")}>
                         <div className={styles.in}>
                             <h1>Unlimited Perks!</h1>
                             <div className={style.inner}>The list just doesn’t end here, more perks are coming soon!</div>
