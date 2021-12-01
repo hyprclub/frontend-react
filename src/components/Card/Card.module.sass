@@ -1,6 +1,10 @@
 @import ../../styles/helpers
 
 .card
+    // background-color:Gray
+    // filter:alpha(opacity=70)
+    // opacity:0.7
+    background-color: $white !important
     cursor: pointer
     box-shadow: 0 5px 10px -1px #e7e5de
     background: var(--bg-3)
@@ -8,15 +12,19 @@
     transition: all .2s linear
     display: flex
     padding: 30px
-    height: 530px !important 
+    height: 510px !important 
     flex-direction: column 
     &:hover
         .control
             visibility: visible
             opacity: 1
+    +dark
+        background-color: $black !important
+        box-shadow: 0 5px 10px -1px #000000
+
 @media (max-width: 767px)
     .card
-        height: 480px !important 
+        height: 540px !important 
 .preview
     position: relative
     border-radius: 8px
@@ -98,19 +106,20 @@
     left: 50%
     bottom: 16px
     transform: translateX(-50%)
-
+.df
+    margin-top: 10px
 .link
     display: flex
     flex-direction: column
     flex-grow: 1
-    padding: 20px 0
+    padding: 23px 0
     text-decoration: none
     color: $neutrals2
     +dark
         color: $neutrals8
     &:hover
         text-decoration: none
-        color: $black
+        color: $blue
 
 .body
     display: flex
@@ -138,13 +147,11 @@
 
 .price
     flex-shrink: 0
-    // margin-left: 8px
-    margin-top: 5px
-
+    margin-top: 20px
     padding: 0 8px
     border-radius: 4px
     box-shadow: inset 0 0 0 2px $green
-    font-size: 12px
+    font-size: 15px
     line-height: 26px
     font-weight: 700
     text-transform: uppercase

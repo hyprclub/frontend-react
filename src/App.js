@@ -44,9 +44,10 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 
-import Howitworks from "./screens/How";
+import BuAlumni from "./screens/How";
 import ComingSoon from "./screens/Profile/comingsoon";
 import Discover from "./screens/Home/Discover";
+import ContactUs from "./screens/contactus";
 
 function App() {
   const [show, setShow] = useState(false);
@@ -243,6 +244,15 @@ function App() {
             </Page>
           )}
         />
+         <Route
+          exact
+          path="/Contactus"
+          render={() => (
+            <Page>
+              <ContactUs/>
+            </Page>
+          )}
+        />
         <Route
           exact
           path="/Discover"
@@ -254,10 +264,10 @@ function App() {
         />
         <Route
           exact
-          path="/howitworks"
+          path="/BuAlumni"
           render={() => (
             <Page>
-              <Howitworks />
+              <BuAlumni/>
             </Page>
           )}
         />

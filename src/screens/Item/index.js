@@ -38,8 +38,8 @@ const Item = (props) => {
   const [data, setData] = useState({ name: "", image: "", description: "" });
   const [owner, setOwner] = useState("");
   const [ownerDp, setOwnerDp] = useState("");
-  const [creator, setCreator] = useState([]);
-  const [CreatorDp, seCreatorDp] = useState([]);
+  const [creator, setCreator] = useState("");
+  const [creatorDp, setCreatorDp] = useState("");
 
   React.useEffect(async () => {
     if (props) {
@@ -52,25 +52,43 @@ const Item = (props) => {
         const storage = getStorage();
         const nftData = await getDoc(doc(db, "NFT's", nftToken));
         console.debug(nftData);
+
         axios
-          .get(nftData.data().json)
+          .get(nftToken, {
+            baseURL: process.env.REACT_APP_BASE_URL, // base url
+          })
           .then(async (reps) => {
-            const storagePFref = ref(
+            const storageOwnerPFref = ref(
               storage,
               "users/" + nftData.data().OwnerUid + "/profile.jpg"
+            );
+            const storageCreatorPFref = ref(
+              storage,
+              "users/" + nftData.data().CreatorUid + "/profile.jpg"
             );
             const ownerData = await getDoc(
               doc(db, "users", nftData.data().OwnerUid)
             );
-            await getDownloadURL(ref(storagePFref))
+            const creatorData = await getDoc(
+              doc(db, "users", nftData.data().CreatorUid)
+            );
+            await getDownloadURL(ref(storageOwnerPFref))
               .then((url) => {
                 setOwnerDp(url);
               })
               .catch((error) => {
-                console.error(error);
+                console.error("No user data");
+              });
+            await getDownloadURL(ref(storageCreatorPFref))
+              .then((url) => {
+                setCreatorDp(url);
+              })
+              .catch((error) => {
+                console.error("No user data");
               });
             setOwner(ownerData.data());
             setData(reps.data);
+            setCreator(creatorData.data());
           })
           .catch((error) => {
             console.error(error);
@@ -79,7 +97,7 @@ const Item = (props) => {
         console.error(error);
       }
     }
-  }, [props, setData, setOwner, setOwnerDp]);
+  }, [props, setData, setOwner, setOwnerDp, setCreator, setCreatorDp]);
 
   //  React.useEffect(() => {
   //   if (loggedIn !== undefined && loggedIn) {
@@ -99,9 +117,9 @@ const Item = (props) => {
       avatar: ownerDp || "/images/content/avatar-big.jpg",
     },
     {
-      name: "Hypr Club",
+      name: creator?.Name,
       position: "Creator",
-      avatar: "/images/content/1.png",
+      avatar: creatorDp || "/images/content/avatar-big.jpg",
     },
   ];
 
@@ -112,7 +130,7 @@ const Item = (props) => {
           <div className={styles.bg}>
             <div className={styles.preview}>
               <div className={styles.categories}>
-                {categories.map((x, index) => (
+                {/* {categories.map((x, index) => (
                   <div
                     className={cn(
                       { "status-black": x.category === "black" },
@@ -123,26 +141,35 @@ const Item = (props) => {
                   >
                     {x.content}
                   </div>
-                ))}
+                ))} */}
               </div>
               <img
-                srcSet={`${data.image || "/images/bg-card.png"} 2x`}
-                src={data.image || "/images/bg-card.png"}
+                className={styles.imgs}
+                srcSet={`${data.image || "/images/card.gif"} 2x`}
+                src={data.image || "/images/card.gif"}
                 alt="Item"
               />
             </div>
             {/* <Options className={styles.options} /> */}
           </div>
           <div className={styles.details}>
-            <h1 className={cn("h3", styles.title)}>{data.name}</h1>
+            <div className={cn("h2", styles.title)}>
+              BU Alumni Exclusive - {data.name}
+            </div>
             <div className={styles.cost}>
-              <div className={cn("status-stroke-green", styles.price)}>
-                1000 INR
+              <div
+                className={cn(
+                  "status-stroke-green",
+                  styles.price,
+                  styles.gradienttext
+                )}
+              >
+                14999 INR
               </div>
               {/* <div className={cn("status-stroke-black", styles.price)}>
                 $4,429.87
               </div> */}
-              <div className={styles.counter}>100 in stock</div>
+              {/* <div className={styles.counter}>100 in stock</div> */}
             </div>
             <div className={styles.info}>{data.description}</div>
             {/* <div className={styles.nav}>

@@ -108,7 +108,7 @@ const Login = () => {
   useEffect(() => {
     console.log(UserData);
     if (loggedIn) {
-      push("/");
+      push("/profile");
     }
   }, [loggedIn, push]);
 

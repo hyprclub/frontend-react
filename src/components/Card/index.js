@@ -39,7 +39,9 @@ const Card = ({ className, item: itemFromProps }) => {
 
           if (docsnap.exists()) {
             axios
-              .get(docsnap.data().json)
+              .get(itemFromProps, {
+                baseURL: process.env.REACT_APP_BASE_URL, // base url
+              })
               .then((resps) => {
                 console.log(resps.data);
                 setItem(resps.data);
@@ -71,20 +73,20 @@ const Card = ({ className, item: itemFromProps }) => {
               openItem(e);
             }}
             className={cn(styles.imagehover, "img-fluid")}
-            srcSet={`${item.image || "/images/bg-card.png"} `}
-            src={item.image || "/images/bg-card.png"}
+            srcSet={`${item.image || "/images/card.gif"} `}
+            src={item.image || "/images/card.gif"}
             alt="Card"
           />
         </div>
         <div className={styles.control}>
-          <div
+          {/* <div
             className={cn(
               { "status-green": item.category === "green" },
               styles.category
             )}
           >
             {item.categoryText}
-          </div>
+          </div> */}
           {/* <button
             className={cn(styles.favorite, { [styles.active]: visible })}
             onClick={() => setVisible(!visible)}
@@ -97,8 +99,8 @@ const Card = ({ className, item: itemFromProps }) => {
             }}
             className={cn("button-small", styles.button)}
           >
-            <span>Claim NFT</span>
-            <Icon name="scatter-up" size="16" />
+            <span>Claim Now</span>
+            {/* <Icon name="scatter-up" size="16" /> */}
           </button>
         </div>
       </div>
@@ -110,12 +112,12 @@ const Card = ({ className, item: itemFromProps }) => {
               {item?.name}
             </div>
           </div>
-          <div>discription(sent me)</div>
+          <div>{item?.description}</div>
           <div className={styles.line}>
-            <div className={styles.price}>0 INR</div>
-            <div className={styles.cut}>
+            <div className={styles.price}>14999 INR</div>
+            {/* <div className={styles.cut}>
               <s>14900</s>
-            </div>
+            </div> */}
           </div>
           {/* <div className={styles.line}>
             <div className={styles.users}>
