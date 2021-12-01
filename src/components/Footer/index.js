@@ -34,6 +34,10 @@ const items = [
     title: "Info",
     menu: [
       {
+        title:"Contact Us",
+        url:"/ContactUs"
+      },
+      {
         title: "FAQ",
         url: "/faq",
       },

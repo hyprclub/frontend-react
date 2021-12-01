@@ -47,6 +47,7 @@ import {
 import BuAlumni from "./screens/How";
 import ComingSoon from "./screens/Profile/comingsoon";
 import Discover from "./screens/Home/Discover";
+import ContactUs from "./screens/contactus";
 
 function App() {
   const [show, setShow] = useState(false);
@@ -240,6 +241,15 @@ function App() {
           render={() => (
             <Page>
               <ComingSoon />
+            </Page>
+          )}
+        />
+         <Route
+          exact
+          path="/Contactus"
+          render={() => (
+            <Page>
+              <ContactUs/>
             </Page>
           )}
         />
