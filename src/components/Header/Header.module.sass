@@ -1,6 +1,8 @@
 @import ../../styles/helpers
-
+body
+    $font-family-base: "Poppins", Helvetica, Arial, sans-serif !important
 .header
+    font-family: "Poppins" !important
     position: relative
     z-index: 20
     padding: 20px 0
@@ -85,8 +87,10 @@
         border-color: $neutrals3
 
 .link
+    text-decoration: none
+    font-weight: 470
     margin-left: 32px
-    +dm-sans
+    // +dm-sans
     line-height: 40px
     color: $black
     transition: color .2s
