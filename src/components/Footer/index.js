@@ -28,11 +28,19 @@ const items = [
         title: "Coming Soon",
         url: "/comingsoon",
       },
+      {
+        url: "/BuAlumni",
+        title: "BU Alumni",
+      },
     ],
   },
   {
     title: "Info",
     menu: [
+      {
+        title:"Contact Us",
+        url:"/ContactUs"
+      },
       {
         title: "FAQ",
         url: "/faq",

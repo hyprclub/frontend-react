@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import cn from "classnames";
-import styles from "./Signup.module.sass";
+import styles from "./contactUs.module.sass";
 import Control from "../../components/Control";
 import TextInput from "../../components/TextInput";
 import { Button, Modal } from "react-bootstrap";
@@ -37,7 +37,7 @@ const breadcrumbs = [
     title: "Signup",
   },
 ];
-const Signup = () => {
+const ContactUs = () => {
   const loggedIn = useSelector((state) => state.UserData.loggedIn);
   const UserData = useSelector((state) => state.UserData);
   const [data, setData] = useState({
@@ -48,7 +48,6 @@ const Signup = () => {
     username: "",
     phone: "",
   });
-
   function updateState(e) {
     setData((state) => ({ ...state, [e.target.name]: e.target.value }));
   }
@@ -216,12 +215,6 @@ const Signup = () => {
 
   const { push } = useHistory();
   useEffect(() => {
-    if (loggedIn) {
-      push("/profile");
-    } else {
-    }
-  }, [loggedIn, push]);
-  useEffect(() => {
     const auth = getAuth();
     if (isSignInWithEmailLink(auth, window.location.href)) {
       let email = window.localStorage.getItem("emailForSignIn");
@@ -271,8 +264,8 @@ const Signup = () => {
         <div className={cn("section-pt80", styles.section)}>
           <div className={cn("container-fluid", styles.container)}>
             <div className={styles.top}>
-              <h1 className={cn("h2", styles.title)}>Create an Account</h1>
-              Become a part of the social revolution.
+              <h1 className={cn("h2", styles.title)}>Get in Touch With Us</h1>
+              We’ll try and get back to you as soon as possible!
               {/* <div className={styles.info}> */}
               {/* sell one collectible multiple times */}
               {/* </div> */}
@@ -292,18 +285,18 @@ const Signup = () => {
                     <div className="col-xl-6 col-lg-6 col-md-6">
                       <div>
                         <TextInput
-                          onChange={(e) => {
-                            updateState(e);
-                          }}
-                          onBlur={(ev) => {
-                            if (ev.target.value == "") {
-                              console.log("Please Enter Your Name");
-                            }
-                          }}
+                          // onChange={(e) => {
+                          //   updateState(e);
+                          // }}
+                          // onBlur={(ev) => {
+                          //   if (ev.target.value == "") {
+                          //     console.log("Please Enter Your Name");
+                          //   }
+                          // }}
                           className={styles.field}
                           value={data.name}
                           id="validationCustomUsername"
-                          label="Name"
+                          label="Your Name"
                           name="name"
                           type="text"
                           placeholder="Enter your Full Name"
@@ -311,7 +304,7 @@ const Signup = () => {
                         />
                       </div>
                     </div>
-                    <div className="col-xl-6 col-lg-6 col-md-6">
+                    {/* <div className="col-xl-6 col-lg-6 col-md-6">
                       <div>
                         <TextInput
                           onChange={(e) => {
@@ -329,28 +322,7 @@ const Signup = () => {
                           required
                         />
                       </div>
-                    </div>
-                    <div className="col-xl-6 col-lg-6 col-md-6">
-                      <div>
-                        <TextInput
-                          onChange={(e) => {
-                            updateState(e);
-                          }}
-                          onBlur={(ev) => {
-                            if (ev.target.value == "") {
-                              console.log("Please Enter Email Address");
-                            }
-                          }}
-                          className={styles.field}
-                          label="Email Address"
-                          name="email"
-                          type="email"
-                          id="validationCustom03"
-                          placeholder="Enter your email"
-                          required
-                        />
-                      </div>
-                    </div>
+                    </div> */}
                     <div className="col-xl-6 col-lg-6 col-md-6">
                       <div>
                         <TextInput
@@ -370,7 +342,7 @@ const Signup = () => {
                         />
                       </div>
                     </div>
-                    <div className="col-xl-6 col-lg-6 col-md-6">
+                    <div className="col-xl-12 col-lg-12 col-md-12">
                       <div>
                         <TextInput
                           onChange={(e) => {
@@ -378,73 +350,94 @@ const Signup = () => {
                           }}
                           onBlur={(ev) => {
                             if (ev.target.value == "") {
-                              console.log("Password can't be Empty");
+                              console.log("Please Enter Email Address");
                             }
                           }}
-                          className={styles.field}
-                          label="Password"
-                          name="password"
-                          type="password"
-                          id="validationCustom05"
-                          placeholder="Enter your password"
+                          className={styles.field1}
+                          label="Email Address"
+                          name="email"
+                          type="email"
+                          id="validationCustom03"
+                          placeholder="Enter your email"
                           required
                         />
                       </div>
                     </div>
-                    <div className="col-xl-6 col-lg-6 col-md-6">
+                    <div className={cn("col-xl-12 col-lg-12 col-md-12", styles.size)}>
                       <div>
-                        <TextInput
-                          onChange={(e) => {
-                            updateState(e);
-                          }}
-                          onBlur={(ev) => {
-                            if (ev.target.value == "") {
-                              console.log("Please Re-Enter Password");
-                            }
-                          }}
-                          className={styles.field}
-                          label="Confirm Password"
-                          name="cpassword"
+                        <div className={styles.labels}>Your Message:</div>
+                        <textarea
+                          className={styles.field3}
+                          // name="cpassword"
                           id="validationCustom06"
-                          type="password"
-                          placeholder="Re-Enter your password"
+                          type="textarea"
+                          placeholder="Enter Your Message"
                           required
                         />
+                        {/* <Form.Control as="textarea" rows={3} /> */}
                       </div>
                     </div>
                   </div>
                   <Button className={cn("button-stroke", styles.button, "btn")}>
-                    <input type="submit" value="Sign Up" />
+                    <input type="submit" value="Send Message" />
                   </Button>
-                  <Modal
-                  
-                    aria-labelledby="contained-modal-title-vcenter"
-                    centered
-                    show={show}
-                    onHide={handleClose}
-                    backdrop="static"
-                    keyboard={false}
-                  >
-                    <Modal.Header closeButton className={styles.mymodal}>
-                      <Modal.Title>Error</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body className={styles.mymodal2}>
-                      <div><img className={cn("img-fluid",styles.size1)} src="/Error.png" /></div>
-                      <div className={styles.fit}>{error}</div></Modal.Body>
-                    <Modal.Footer>
-                      <Button
-                        className={styles.mymodal}
-                        variant="secondary"
-                        onClick={handleClose}
+                  <div className={styles.text}>You can also reach out to us through our social media handles.</div>
+                  <div className={styles.space}>
+                    <a
+                      className="icons"
+                      href="https://www.instagram.com/hyprclub/"
+                      target="_blank"
+                    >
+                      <img class="icons" src="/instagram.png" />
+                    </a>
+                    <a
+                      className="icons"
+                      href="https://www.facebook.com/hyprclub"
+                      target="_blank"
+                    >
+                      <img class="icons" src="/facebook.png" />
+                    </a>
+                    <a
+                      className="icons"
+                      href="https://www.linkedin.com/company/hyprclub/ "
+                      target="_blank"
+                    >
+                      <img class="icons" src="/linkedin.png" />
+                    </a>
+                    <a
+                      className="icons"
+                      href="https://twitter.com/hyprclub"
+                      target="_blank"
+                    >
+                      <img class="icons" src="/twitter.png" />
+                    </a>
+                    <Modal
+                      aria-labelledby="contained-modal-title-vcenter"
+                      centered
+                      show={show}
+                      onHide={handleClose}
+                      backdrop="static"
+                      keyboard={false}
+                    >
+                  <Modal.Header closeButton className={styles.mymodal}>
+                    <Modal.Title>Notification</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body className={styles.mymodal2}>{error}</Modal.Body>
+                  <Modal.Footer>
+                    <Button
+                      className={styles.mymodal}
+                      variant="secondary"
+                      onClick={handleClose}
                       >
-                        Ok
-                      </Button>
-                      {/* <Button variant="primary">Understood</Button> */}
-                    </Modal.Footer>
-                  </Modal>
-                </form>
-              </div>
-              <div className={cn("button-stroke", styles.button)}>
+                      Ok
+                    </Button>
+                    {/* <Button variant="primary">Understood</Button> */}
+                  </Modal.Footer>
+                </Modal>
+                      </div>
+              </form>
+            </div>
+            {/* <div className={cn("button-stroke", styles.button)}>
                 {" "}
                 <img className="icons mr-3" src="/google.png" />{" "}
                 <button
@@ -460,19 +453,18 @@ const Signup = () => {
               </div>
 
               {/* </div> */}
-            </div>
-            <div className={styles.note}>
-              We do not own your private keys and cannot access your funds
-              without your confirmation.
-            </div>
+          </div>
+          <div className={styles.note}>
+            Still got some questions? Check out our FAQ Page
           </div>
         </div>
       </div>
+    </div>
       {/* <Button variant="primary" onClick={handleShow}>
                 Launch static backdrop modal
             </Button> */}
 
-      {/* <Modal
+  {/* <Modal
                 show={show}
                 onHide={handleClose}
                 backdrop="static"
@@ -495,4 +487,4 @@ const Signup = () => {
     </>
   );
 };
-export default Signup;
+export default ContactUs;

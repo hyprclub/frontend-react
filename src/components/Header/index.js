@@ -15,7 +15,7 @@ const nav = [
   // },
   {
     url: "/BuAlumni",
-    title: "Bu Alumni",
+    title: "BU Alumni",
   },
   {
     url: "/comingsoon",

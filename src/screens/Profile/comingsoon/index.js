@@ -16,9 +16,9 @@ const ComingSoon = () => {
 
 
             <div className={cn('container')}>
-                <div className={styles.ss}>
-                    <Image className="img-fluid" src="/header.png" srcDark="/header1.png" />
-                </div>
+                <section>
+                    <Image className={cn("img-fluid",styles.bottom)} src="/head2.png" srcDark="/img5.png" />
+                </section>
                 <div className={styles.sse}>
                     <Image className={cn("img-fluid",styles.size1)} src="/presenting.png" srcDark="/presenting1.png" />
                     <div className={styles.lowcont}>Bigger and better. More features,<br></br> more rewards more Hypr.</div>
@@ -53,7 +53,7 @@ const ComingSoon = () => {
                             <div className={styles.space}>Purchase any merchandise or digital <br></br>commodity that a creator is offering. </div>
                         </div>
                     </div>
-                    <div data-aos="fade-right" className="col-xl-6 col-lg-6 col-md-6">
+                    <div data-aos="fade-right" className={cn("col-xl-6 col-lg-6 col-md-6",styles.aline)}>
                         <Image className={cn("img-fluid", styles.creator,styles.edit)} srcDark="/thanksbutton.png" src="/saythanksbutton.png" />
                         <div className={styles.sty}>
                             <div>Yes, just like SuperChat extend support to creators with cool customizations. </div>
