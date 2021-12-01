@@ -36,17 +36,20 @@ const BuAlumni = () => {
                 </div>
                 <div className={cn("row", styles.gg)}>
                     <div data-aos="fade-right" className={cn("col-xl-5 col-lg-5 col-md-5", styles.img)}>
-                        <Image className="img-fluid" src="/itemcard.png" srcDark="/addtocart1.png" />
+                        <Image className="img-fluid" src="/img.png" srcDark="/img.png" />
                     </div>
                     <div data-aos="fade-left" className={cn("col-xl-7 col-lg-7 col-md-7", styles.creator)}>
-                        <div className={styles.sty1}>Discover over 800 NFTs designed especially for you, capturing the essence of BU.</div>
+                        {/* <div className={style.flex}> */}
+                            <div className={styles.sty1}>Discover over 800 NFTs designed especially for you, capturing the essence of BU.</div>
 
-                        <div className={styles.sty3}>Go ahead and grab your exclusive BU alumni NFTs ASAP! NFTs can be claimed on a first come first serve basis only. So get started!</div>
+                            <div className={styles.sty3}>Go ahead and grab your exclusive BU alumni NFTs ASAP! NFTs can be claimed on a first come first serve basis only. So get started!</div>
+                        {/* </div> */}
                     </div>
                 </div>
             </div>
             <div data-aos="fade-left" className={styles.sse}>
-                <Image className="img-fluid" src="/perkhead.png" srcDark="/joinhypr1.png" />
+                <Image className="img-fluid" src="/perkhead.png" srcDark="/img2.png" />
+                {/* <div> </div> */}
                 <div className={styles.bottom}>Not just the NFT, with your claim you unlock <br></br>a variety of <b>free perks.</b></div>
             </div>
             <div className="container">
@@ -86,7 +89,7 @@ const BuAlumni = () => {
                             {/* <Image className="img-fluid" src="/alumni.png" srcDark="/joinhypr1.png" /> */}
                         </div>
                     </div>
-                    <div data-aos="fade-left" className={cn("col-xl-6 col-lg-12 col-md-12", styles.border)}>
+                    <div data-aos="fade-left" className={cn("col-xl-6 col-lg-12 col-md-12", styles.border,"mb-5")}>
                         <div className={styles.in}>
                             <h1>Unlimited Perks!</h1>
                             <div className={style.inner}>The list just doesn’t end here, more perks are coming soon!</div>
