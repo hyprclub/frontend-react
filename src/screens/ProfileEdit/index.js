@@ -45,6 +45,7 @@ const ProfileEdit = () => {
     username: "",
     phoneno: "",
     instagram: "",
+    twitter: "",
     bio: "",
   });
   const UserData = useSelector((state) => state.UserData);

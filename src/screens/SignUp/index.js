@@ -198,12 +198,17 @@ const Signup = () => {
       const uid = user.uid;
 
       setDoc(doc(db, "users", uid), {
-        Emailid: email,
-        Name: name,
+        Name: data.name,
+        Emailid: data.email,
+        Phone: data.phone,
+        Username: data.username,
         UserID: uid,
-        Username: email,
         admin: false,
         creator: false,
+        Bio: "",
+        Instagram: "",
+        Portfolio: "",
+        Twitter: "",
       });
     } catch (error) {
       if ((error.code = "auth/popup-closed-by-user")) {
@@ -221,41 +226,6 @@ const Signup = () => {
     } else {
     }
   }, [loggedIn, push]);
-  useEffect(() => {
-    const auth = getAuth();
-    if (isSignInWithEmailLink(auth, window.location.href)) {
-      let email = window.localStorage.getItem("emailForSignIn");
-      if (!email) {
-        // User opened the link on a different device. To prevent session fixation
-        // attacks, ask the user to provide the associated email again. For example:
-        email = window.prompt("Please provide your email for confirmation");
-        signInWithEmailLink(auth, email, window.location.href)
-          .then((result) => {
-            const db = getFirestore();
-            const user = result.user;
-            const uid = user.uid;
-            window.localStorage.removeItem("emailForSignIn");
-
-            setDoc(doc(db, "users", uid), {
-              Name: data.name,
-              Emailid: data.email,
-              Phone: data.phone,
-              Username: data.username,
-              UserID: uid,
-              admin: false,
-              creator: false,
-              Bio: "",
-              Instagram: "",
-              Portfolio: "",
-              Twitter: "",
-            });
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-    }
-  }, []);
 
   // useEffect(() => {
   //   console.log(UserData);
@@ -417,7 +387,6 @@ const Signup = () => {
                     <input type="submit" value="Sign Up" />
                   </Button>
                   <Modal
-                  
                     aria-labelledby="contained-modal-title-vcenter"
                     centered
                     show={show}
@@ -429,8 +398,14 @@ const Signup = () => {
                       <Modal.Title>Error</Modal.Title>
                     </Modal.Header>
                     <Modal.Body className={styles.mymodal2}>
-                      <div><img className={cn("img-fluid",styles.size1)} src="/Error.png" /></div>
-                      <div className={styles.fit}>{error}</div></Modal.Body>
+                      <div>
+                        <img
+                          className={cn("img-fluid", styles.size1)}
+                          src="/Error.png"
+                        />
+                      </div>
+                      <div className={styles.fit}>{error}</div>
+                    </Modal.Body>
                     <Modal.Footer>
                       <Button
                         className={styles.mymodal}
