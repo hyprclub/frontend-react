@@ -217,7 +217,7 @@ const Signup = () => {
   const { push } = useHistory();
   useEffect(() => {
     if (loggedIn) {
-      push("/");
+      push("/profile");
     } else {
     }
   }, [loggedIn, push]);

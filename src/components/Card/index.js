@@ -39,7 +39,9 @@ const Card = ({ className, item: itemFromProps }) => {
 
           if (docsnap.exists()) {
             axios
-              .get(docsnap.data().json)
+              .get(itemFromProps, {
+                baseURL: process.env.REACT_APP_BASE_URL, // base url
+              })
               .then((resps) => {
                 console.log(resps.data);
                 setItem(resps.data);
