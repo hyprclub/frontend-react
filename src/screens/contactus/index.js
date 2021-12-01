@@ -38,14 +38,10 @@ const breadcrumbs = [
   },
 ];
 const ContactUs = () => {
-  const loggedIn = useSelector((state) => state.UserData.loggedIn);
-  const UserData = useSelector((state) => state.UserData);
   const [data, setData] = useState({
     email: "",
-    password: "",
-    cpassword: "",
+    message: "",
     name: "",
-    username: "",
     phone: "",
   });
   function updateState(e) {
@@ -73,189 +69,31 @@ const ContactUs = () => {
     }
   };
 
-  const checkUsername = async (ev) => {
-    if (ev.target.value == "") {
-      setUsernameStatus(false);
-      handleShow();
-      setError("Please Enter Username");
-    } else {
-      try {
-        const db = getFirestore();
-        const q = query(
-          collection(db, "users"),
-          where("Username", "==", ev.target.value)
-        );
-        const querySnapshot = await getDocs(q);
-        if (querySnapshot.size != 0) {
-          setUsernameStatus(true);
-        } else {
-          setUsernameStatus(false);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  };
-
   const handleSubmit = async () => {
-    const auth = getAuth();
     const db = getFirestore();
-    const phonevalid = "(0|91)?[7-9][0-9]{9}";
-
-    if (data.password != data.cpassword) {
-      console.error("password do not match");
-      // handleShow
-      // if((data.phoneno).match(phonevalid)){
-
+    if (phonenumStatus == true) {
       handleShow();
-      setError("Password do not match");
-    } else if (phonenumStatus == true) {
-      setError("Invalid Phone Number");
-      handleShow();
-    } else if (
-      data.phone == "" ||
-      data.email == "" ||
-      data.username == "" ||
-      data.name == "" ||
-      data.cpassword == ""
-    ) {
-      console.error("Some error Occured");
-      setError("Some error Occured");
-      handleShow();
-    } else if (usernameStatus == true) {
-      setError("Please use different Username");
-      handleShow();
+      setError("Enter Valid Phone Number");
     } else {
       try {
-        // const q = query(collection(db, "users"), where("Username", "==", ev.target.value));
-        // const querySnapshot = await getDocs(q);
-        const userCredential = await createUserWithEmailAndPassword(
-          auth,
-          data.email,
-          data.password
-        );
-        const user = userCredential.user;
-        const emailVerified = user.emailVerified;
-        const uid = user.uid;
-        // const nftData = await setDoc(doc(db, "users", "NFT", "JSON"), {
-        //   json: "",
-        // });
-
-        const userData = await setDoc(doc(db, "users", uid), {
+        const userData = await setDoc(doc(db, "ContactUs", data.email), {
           Name: data.name,
           Emailid: data.email,
           Phone: data.phone,
-          Username: data.username,
-          UserID: uid,
-          admin: false,
-          creator: false,
-          Bio: "",
-          Instagram: "",
-          Portfolio: "",
-          Twitter: "",
+          Message: data.message,
         });
-        console.log({ data, userCredential });
+        handleShow();
+        setError(
+          "Your message was successfully sent. It may take up to three business days for us to reply."
+        );
+        console.log({ data });
       } catch (err) {
-        console.error(err.code, err, "failed");
-
-        if (err.code == "auth/invalid-email") {
-          console.error("Please Enter a valid Email");
-          setError("Please Enter a valid Email");
-          handleShow();
-        }
-        if (err.code == "auth/email-already-in-use") {
-          console.error("Account Exists");
-          setError("Account Exists");
-          handleShow();
-        }
-        if (err.code == "auth/invalid-password") {
-          console.error("Password must be atleast 6 characters");
-          setError("Password must be atleast 6 characters");
-          handleShow();
-        }
-        if (err.code == "auth/weak-password") {
-          console.error("Please choose a Strong Password");
-          setError("Please choose a Strong Password");
-          handleShow();
-        }
-        setError("Something went wrong");
+        console.log(err.code);
+        setError("Something went wrong. Please Try Again Later.");
         handleShow();
       }
     }
   };
-  const googlesignin = async () => {
-    const db = getFirestore();
-
-    try {
-      const googleprovider = new GoogleAuthProvider();
-      const auth = getAuth();
-      const google = await signInWithPopup(auth, googleprovider);
-      const credential = GoogleAuthProvider.credentialFromResult(google);
-      const user = google.user;
-      const email = user.email;
-      const name = user.displayName;
-      const uid = user.uid;
-
-      setDoc(doc(db, "users", uid), {
-        Emailid: email,
-        Name: name,
-        UserID: uid,
-        Username: email,
-        admin: false,
-        creator: false,
-      });
-    } catch (error) {
-      if ((error.code = "auth/popup-closed-by-user")) {
-        handleShow();
-        setError("Log-In Cancelled");
-      }
-      console.log(error.code);
-    }
-  };
-
-  const { push } = useHistory();
-  useEffect(() => {
-    const auth = getAuth();
-    if (isSignInWithEmailLink(auth, window.location.href)) {
-      let email = window.localStorage.getItem("emailForSignIn");
-      if (!email) {
-        // User opened the link on a different device. To prevent session fixation
-        // attacks, ask the user to provide the associated email again. For example:
-        email = window.prompt("Please provide your email for confirmation");
-        signInWithEmailLink(auth, email, window.location.href)
-          .then((result) => {
-            const db = getFirestore();
-            const user = result.user;
-            const uid = user.uid;
-            window.localStorage.removeItem("emailForSignIn");
-
-            setDoc(doc(db, "users", uid), {
-              Name: data.name,
-              Emailid: data.email,
-              Phone: data.phone,
-              Username: data.username,
-              UserID: uid,
-              admin: false,
-              creator: false,
-              Bio: "",
-              Instagram: "",
-              Portfolio: "",
-              Twitter: "",
-            });
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-    }
-  }, []);
-
-  // useEffect(() => {
-  //   console.log(UserData);
-  //   if (loggedIn) {
-  //     push("/");
-  //   }
-  // }, [loggedIn, push]);
 
   return (
     <>
@@ -285,17 +123,13 @@ const ContactUs = () => {
                     <div className="col-xl-6 col-lg-6 col-md-6">
                       <div>
                         <TextInput
-                          // onChange={(e) => {
-                          //   updateState(e);
-                          // }}
-                          // onBlur={(ev) => {
-                          //   if (ev.target.value == "") {
-                          //     console.log("Please Enter Your Name");
-                          //   }
-                          // }}
+                          onChange={(e) => {
+                            updateState(e);
+                          }}
                           className={styles.field}
                           value={data.name}
                           id="validationCustomUsername"
+                          value={data.name}
                           label="Your Name"
                           name="name"
                           type="text"
@@ -304,25 +138,6 @@ const ContactUs = () => {
                         />
                       </div>
                     </div>
-                    {/* <div className="col-xl-6 col-lg-6 col-md-6">
-                      <div>
-                        <TextInput
-                          onChange={(e) => {
-                            updateState(e);
-                          }}
-                          onBlur={(ev) => {
-                            checkUsername(ev);
-                          }}
-                          className={styles.field}
-                          label="User Name"
-                          id="validationCustom02"
-                          name="username"
-                          type="text"
-                          placeholder="Enter your Username"
-                          required
-                        />
-                      </div>
-                    </div> */}
                     <div className="col-xl-6 col-lg-6 col-md-6">
                       <div>
                         <TextInput
@@ -334,6 +149,7 @@ const ContactUs = () => {
                           }}
                           className={styles.field}
                           label="Phone Number"
+                          value={data.phone}
                           name="phone"
                           id="validationCustom04"
                           type="text"
@@ -348,13 +164,9 @@ const ContactUs = () => {
                           onChange={(e) => {
                             updateState(e);
                           }}
-                          onBlur={(ev) => {
-                            if (ev.target.value == "") {
-                              console.log("Please Enter Email Address");
-                            }
-                          }}
                           className={styles.field1}
                           label="Email Address"
+                          value={data.email}
                           name="email"
                           type="email"
                           id="validationCustom03"
@@ -363,13 +175,23 @@ const ContactUs = () => {
                         />
                       </div>
                     </div>
-                    <div className={cn("col-xl-12 col-lg-12 col-md-12", styles.size)}>
+                    <div
+                      className={cn(
+                        "col-xl-12 col-lg-12 col-md-12",
+                        styles.size
+                      )}
+                    >
                       <div>
                         <div className={styles.labels}>Your Message:</div>
                         <textarea
                           className={styles.field3}
-                          // name="cpassword"
+                          // name="cpassword"'
+                          onChange={(e) => {
+                            updateState(e);
+                          }}
                           id="validationCustom06"
+                          name="message"
+                          value={data.message}
                           type="textarea"
                           placeholder="Enter Your Message"
                           required
@@ -381,7 +203,10 @@ const ContactUs = () => {
                   <Button className={cn("button-stroke", styles.button, "btn")}>
                     <input type="submit" value="Send Message" />
                   </Button>
-                  <div className={styles.text}>You can also reach out to us through our social media handles.</div>
+                  <div className={styles.text}>
+                    You can also reach out to us through our social media
+                    handles.
+                  </div>
                   <div className={styles.space}>
                     <a
                       className="icons"
@@ -419,71 +244,32 @@ const ContactUs = () => {
                       backdrop="static"
                       keyboard={false}
                     >
-                  <Modal.Header closeButton className={styles.mymodal}>
-                    <Modal.Title>Notification</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body className={styles.mymodal2}>{error}</Modal.Body>
-                  <Modal.Footer>
-                    <Button
-                      className={styles.mymodal}
-                      variant="secondary"
-                      onClick={handleClose}
-                      >
-                      Ok
-                    </Button>
-                    {/* <Button variant="primary">Understood</Button> */}
-                  </Modal.Footer>
-                </Modal>
-                      </div>
-              </form>
-            </div>
-            {/* <div className={cn("button-stroke", styles.button)}>
-                {" "}
-                <img className="icons mr-3" src="/google.png" />{" "}
-                <button
-                  className={styles.button2}
-                  type="submit"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    googlesignin(e);
-                  }}
-                >
-                  Sign up with Google
-                </button>
+                      <Modal.Header closeButton className={styles.mymodal}>
+                        <Modal.Title>Notification</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body className={styles.mymodal2}>
+                        {error}
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button
+                          className={styles.mymodal}
+                          variant="secondary"
+                          onClick={handleClose}
+                        >
+                          Ok
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
+                  </div>
+                </form>
               </div>
-
-              {/* </div> */}
-          </div>
-          <div className={styles.note}>
-            Still got some questions? Check out our FAQ Page
+            </div>
+            <div className={styles.note}>
+              Still got some questions? Check out our FAQ Page
+            </div>
           </div>
         </div>
       </div>
-    </div>
-      {/* <Button variant="primary" onClick={handleShow}>
-                Launch static backdrop modal
-            </Button> */}
-
-  {/* <Modal
-                show={show}
-                onHide={handleClose}
-                backdrop="static"
-                keyboard={false}
-            >
-                <Modal.Header closeButton>
-                    <Modal.Title>Modal title</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    I will not close if you click outside me. Don't even try to press
-                    escape key.
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary">Understood</Button>
-                </Modal.Footer>
-            </Modal> */}
     </>
   );
 };
