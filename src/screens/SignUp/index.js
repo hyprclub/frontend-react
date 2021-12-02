@@ -218,13 +218,6 @@ const Signup = () => {
     }
   }, [loggedIn, push]);
 
-  // useEffect(() => {
-  //   console.log(UserData);
-  //   if (loggedIn) {
-  //     push("/");
-  //   }
-  // }, [loggedIn, push]);
-
   return (
     <>
       <div className={styles.page}>
@@ -255,11 +248,6 @@ const Signup = () => {
                         <TextInput
                           onChange={(e) => {
                             updateState(e);
-                          }}
-                          onBlur={(ev) => {
-                            if (ev.target.value == "") {
-                              console.log("Please Enter Your Name");
-                            }
                           }}
                           className={styles.field}
                           value={data.name}
@@ -297,11 +285,6 @@ const Signup = () => {
                           onChange={(e) => {
                             updateState(e);
                           }}
-                          onBlur={(ev) => {
-                            if (ev.target.value == "") {
-                              console.log("Please Enter Email Address");
-                            }
-                          }}
                           className={styles.field}
                           label="Email Address"
                           name="email"
@@ -317,9 +300,6 @@ const Signup = () => {
                         <TextInput
                           onChange={(e) => {
                             updateState(e);
-                          }}
-                          onBlur={(ev) => {
-                            checkPhonenum(ev);
                           }}
                           className={styles.field}
                           label="Phone Number"
@@ -337,11 +317,6 @@ const Signup = () => {
                           onChange={(e) => {
                             updateState(e);
                           }}
-                          onBlur={(ev) => {
-                            if (ev.target.value == "") {
-                              console.log("Password can't be Empty");
-                            }
-                          }}
                           className={styles.field}
                           label="Password"
                           name="password"
@@ -357,11 +332,6 @@ const Signup = () => {
                         <TextInput
                           onChange={(e) => {
                             updateState(e);
-                          }}
-                          onBlur={(ev) => {
-                            if (ev.target.value == "") {
-                              console.log("Please Re-Enter Password");
-                            }
                           }}
                           className={styles.field}
                           label="Confirm Password"

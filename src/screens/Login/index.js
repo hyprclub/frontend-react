@@ -4,8 +4,10 @@ import styles from "./Login.module.sass";
 import Control from "../../components/Control";
 import TextInput from "../../components/TextInput";
 import { useHistory } from "react-router";
+
 import { firebaseApp } from "../../firebaseConfig";
 import { Button, Modal } from "react-bootstrap";
+
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -219,25 +221,36 @@ const Login = () => {
               </Button>
 
               <Modal
-                show={show}
+                className={styles.modals}
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
+                show={show}
                 onHide={handleClose}
                 backdrop="static"
                 keyboard={false}
               >
-                <Modal.Header closeButton className={styles.mymodal}>
-                  <Modal.Title>Notification</Modal.Title>
+                <Modal.Header closeButton className={styles.title}>
+                  <Modal.Title>Error</Modal.Title>
                 </Modal.Header>
-                <Modal.Body className={styles.mymodal2}>{error}</Modal.Body>
-                <Modal.Footer>
-                  <Button
-                    variant="secondary"
-                    className={styles.mymodal}
-                    onClick={handleClose}
-                  >
-                    Close
-                  </Button>
+                <Modal.Body className={styles.mymodal2}>
+                  <div>
+                    <img
+                      className={cn("img-fluid", styles.size1)}
+                      src="/Error.png"
+                    />
+                  </div>
+                  <div className={styles.fit}>{error}</div>
+                </Modal.Body>
+                <Modal.Footer className={styles.footer}>
+                  <div className={styles.footer}>
+                    <Button
+                      className={styles.mymodal}
+                      variant="secondary"
+                      onClick={handleClose}
+                    >
+                      Ok
+                    </Button>
+                  </div>
                   {/* <Button variant="primary">Understood</Button> */}
                 </Modal.Footer>
               </Modal>

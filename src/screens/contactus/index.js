@@ -213,6 +213,7 @@ const ContactUs = () => {
                       <img class="icons" src="/twitter.png" />
                     </a>
                     <Modal
+                      className={styles.modals}
                       aria-labelledby="contained-modal-title-vcenter"
                       centered
                       show={show}
@@ -220,20 +221,29 @@ const ContactUs = () => {
                       backdrop="static"
                       keyboard={false}
                     >
-                      <Modal.Header closeButton className={styles.mymodal}>
-                        <Modal.Title>Notification</Modal.Title>
+                      <Modal.Header closeButton className={styles.title}>
+                        <Modal.Title>Error</Modal.Title>
                       </Modal.Header>
                       <Modal.Body className={styles.mymodal2}>
-                        {error}
+                        <div>
+                          <img
+                            className={cn("img-fluid", styles.size1)}
+                            src="/Error.png"
+                          />
+                        </div>
+                        <div className={styles.fit}>{error}</div>
                       </Modal.Body>
-                      <Modal.Footer>
-                        <Button
-                          className={styles.mymodal}
-                          variant="secondary"
-                          onClick={handleClose}
-                        >
-                          Ok
-                        </Button>
+                      <Modal.Footer className={styles.footer}>
+                        <div className={styles.footer}>
+                          <Button
+                            className={styles.mymodal}
+                            variant="secondary"
+                            onClick={handleClose}
+                          >
+                            Ok
+                          </Button>
+                        </div>
+                        {/* <Button variant="primary">Understood</Button> */}
                       </Modal.Footer>
                     </Modal>
                   </div>
