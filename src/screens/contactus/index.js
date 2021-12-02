@@ -66,9 +66,7 @@ const ContactUs = () => {
         setError(
           "Your message was successfully sent. It may take up to three business days for us to reply."
         );
-        console.log({ data });
       } catch (err) {
-        console.log(err.code);
         setError("Something went wrong. Please Try Again Later.");
         handleShow();
       }

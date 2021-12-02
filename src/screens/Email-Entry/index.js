@@ -43,10 +43,7 @@ const Passwordless = () => {
   const handleSubmit = async () => {
     const auth = getAuth();
     const actionCodeSettings = {
-      // URL you want to redirect back to. The domain (www.example.com) for this
-      // URL must be in the authorized domains list in the Firebase Console.
       url: window.location.href,
-      // This must be true.
       handleCodeInApp: true,
     };
     try {
@@ -90,7 +87,6 @@ const Passwordless = () => {
             const user = result.user;
             const uid = user.uid;
             if (user.exist()) {
-              console.log("exists");
             } else {
               setDoc(doc(db, "users", uid), {
                 Name: "",
@@ -110,7 +106,6 @@ const Passwordless = () => {
             window.localStorage.removeItem("emailForSignIn");
           })
           .catch((error) => {
-            console.log(error);
             if (error.code == "auth/invalid-email") {
               handleShow();
               setError("Enter A Valid Email");
@@ -125,7 +120,6 @@ const Passwordless = () => {
   };
 
   useEffect(() => {
-    console.log(UserData);
     if (loggedIn) {
       push("/profile");
     }

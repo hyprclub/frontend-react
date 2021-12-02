@@ -174,7 +174,7 @@ const Item = (props) => {
                   className="button-small"
                   href="https://polygonscan.com/token/0xa2624d1931d17632f74d217fe1c1c903b65bf548"
                 >
-                  Polygon Scan
+                  View on Polygon Scan
                 </a>
               </div>
               <div className={styles.button1}>
@@ -183,7 +183,7 @@ const Item = (props) => {
                   target="_blank"
                   href={process.env.REACT_APP_CERTIFICATE_BASE_URL + nftTokenid}
                 >
-                  Open Seas
+                  View on OpenSeas
                 </a>
               </div>
             </div>

@@ -79,8 +79,6 @@ const Login = () => {
         setError("E-Mail Sent!");
       });
     } catch (error) {
-      console.log(error.code);
-
       if (error.code == "auth/missing-email") {
         handleShow();
         setError("Please Enter Email Address");
@@ -100,18 +98,14 @@ const Login = () => {
       );
       const user = userCredential.user;
       const emailVerified = user.emailVerified;
-
-      console.log({ data, userCredential });
     } catch (err) {
       setError("Invalid Credential");
       handleShow();
-      console.error(err);
     }
   };
   const { push } = useHistory();
 
   useEffect(() => {
-    console.log(UserData);
     if (loggedIn) {
       push("/profile");
     }
