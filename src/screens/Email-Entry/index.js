@@ -150,7 +150,7 @@ const Passwordless = () => {
                     onChange={(e) => {
                       updateState(e);
                     }}
-                    className={styles.field}
+                    className={styles.field1}
                     id="validationCustom01"
                     value={data.email}
                     name="email"

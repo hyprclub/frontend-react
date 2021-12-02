@@ -222,14 +222,14 @@ const ContactUs = () => {
                       keyboard={false}
                     >
                       <Modal.Header closeButton className={styles.title}>
-                        <Modal.Title>Thank You!</Modal.Title>
+                        <Modal.Title>Error</Modal.Title>
                       </Modal.Header>
                       <Modal.Body className={styles.mymodal2}>
                         <div>
-                          {/* <img
+                          <img
                             className={cn("img-fluid", styles.size1)}
                             src="/Error.png"
-                          /> */}
+                          />
                         </div>
                         <div className={styles.fit}>{error}</div>
                       </Modal.Body>
