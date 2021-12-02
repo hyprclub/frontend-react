@@ -43,22 +43,26 @@ const Passwordless = () => {
   const handleSubmit = async () => {
     const auth = getAuth();
     const actionCodeSettings = {
+      // URL you want to redirect back to. The domain (www.example.com) for this
+      // URL must be in the authorized domains list in the Firebase Console.
       url: window.location.href,
+      // This must be true.
       handleCodeInApp: true,
     };
     try {
       await sendSignInLinkToEmail(auth, data.email, actionCodeSettings)
         .then((result) => {
+          console.log(result);
+          console.log(window.location.href);
           handleShow();
           setError("E-Mail Sent!");
         })
         .catch((error) => {
-          handleShow();
-          setError(
-            "Some Error Occured. Please Check Email or Network Connection"
-          );
+          console.error(error);
         });
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   };
   const { push } = useHistory();
 
@@ -87,6 +91,7 @@ const Passwordless = () => {
             const user = result.user;
             const uid = user.uid;
             if (user.exist()) {
+              console.log("exists");
             } else {
               setDoc(doc(db, "users", uid), {
                 Name: "",
@@ -107,12 +112,6 @@ const Passwordless = () => {
           })
           .catch((error) => {
             if (error.code == "auth/invalid-email") {
-              handleShow();
-              setError("Enter A Valid Email");
-            }
-            if (error.code == "auth/missing-email") {
-              handleShow();
-              setError("Please Enter Email");
             }
           });
       }
@@ -120,8 +119,9 @@ const Passwordless = () => {
   };
 
   useEffect(() => {
+    console.log(UserData);
     if (loggedIn) {
-      push("/profile");
+      push("/");
     }
   }, [loggedIn, push]);
 
@@ -179,36 +179,59 @@ const Passwordless = () => {
               </form>
 
               <Modal
-                className={styles.modals}
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
                 show={show}
                 onHide={handleClose}
                 backdrop="static"
                 keyboard={false}
               >
-                <Modal.Header closeButton className={styles.title}>
-                  <Modal.Title>Error</Modal.Title>
+                <Modal.Header closeButton className={styles.mymodal}>
+                  <Modal.Title>Notification</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className={styles.mymodal2}>{error}</Modal.Body>
+                <Modal.Footer>
+                  <Button
+                    className={styles.mymodal}
+                    variant="secondary"
+                    onClick={handleClose}
+                  >
+                    Close
+                  </Button>
+                  {/* <Button variant="primary">Understood</Button> */}
+                </Modal.Footer>
+              </Modal>
+              <Modal
+                show={mailShow}
+                onHide={handleMailClose}
+                backdrop="static"
+                keyboard={false}
+              >
+                <Modal.Header closeButton className={styles.mymodal}>
+                  <Modal.Title>Enter Email</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className={styles.mymodal2}>
-                  <div>
-                    <img
-                      className={cn("img-fluid", styles.size1)}
-                      src="/Error.png"
-                    />
-                  </div>
-                  <div className={styles.fit}>{error}</div>
+                  <TextInput
+                    onChange={(e) => {
+                      updateState(e);
+                    }}
+                    className={styles.field}
+                    id="validationCustom01"
+                    value={data.pemail}
+                    name="pemail"
+                    label="Please provide your email for confirmation"
+                    type="email"
+                    placeholder="Enter your email"
+                    required
+                    autocomplete="true"
+                  />
                 </Modal.Body>
-                <Modal.Footer className={styles.footer}>
-                  <div className={styles.footer}>
-                    <Button
-                      className={styles.mymodal}
-                      variant="secondary"
-                      onClick={handleClose}
-                    >
-                      Ok
-                    </Button>
-                  </div>
+                <Modal.Footer>
+                  <Button
+                    className={styles.mymodal}
+                    variant="secondary"
+                    onClick={handleLogin}
+                  >
+                    Login
+                  </Button>
                   {/* <Button variant="primary">Understood</Button> */}
                 </Modal.Footer>
               </Modal>
