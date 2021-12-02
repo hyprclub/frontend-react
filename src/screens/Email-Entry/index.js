@@ -176,83 +176,40 @@ const Passwordless = () => {
 										Login
 									</Link> */}
                 {/* </input> */}
-                <Modal
-                  className={styles.modals}
-                  aria-labelledby="contained-modal-title-vcenter"
-                  centered
-                  show={show}
-                  onHide={handleClose}
-                  backdrop="static"
-                  keyboard={false}
-                >
-                  <Modal.Header closeButton className={styles.title}>
-                    <Modal.Title>Notification</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body className={styles.mymodal2}>
-                    <div>
-                      <img
-                        className={cn("img-fluid", styles.size1)}
-                        src="/Error.png"
-                      />
-                    </div>
-                    <div className={styles.fit}>{error}</div>
-                  </Modal.Body>
-                  <Modal.Footer className={styles.footer}>
-                    <div className={styles.footer}>
-                      <Button
-                        className={styles.mymodal}
-                        variant="secondary"
-                        onClick={handleClose}
-                      >
-                        Ok
-                      </Button>
-                    </div>
-                    {/* <Button variant="primary">Understood</Button> */}
-                  </Modal.Footer>
-                </Modal>
               </form>
 
               <Modal
-                show={mailShow}
-                onHide={handleMailClose}
+                className={styles.modals}
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                show={show}
+                onHide={handleClose}
                 backdrop="static"
                 keyboard={false}
               >
-                <Modal.Header className={styles.mymodal}>
-                  <Modal.Title>Enter Email</Modal.Title>
+                <Modal.Header closeButton className={styles.title}>
+                  <Modal.Title>Error</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className={styles.mymodal2}>
-                  <TextInput
-                    onChange={(e) => {
-                      updateState(e);
-                    }}
-                    className={styles.field}
-                    id="validationCustom01"
-                    value={data.pemail}
-                    name="pemail"
-                    label="Please provide your email for confirmation"
-                    type="email"
-                    placeholder="Enter your email"
-                    required
-                    autocomplete="true"
-                  />
+                  <div>
+                    <img
+                      className={cn("img-fluid", styles.size1)}
+                      src="/Error.png"
+                    />
+                  </div>
+                  <div className={styles.fit}>{error}</div>
                 </Modal.Body>
-                <Modal.Footer>
-                  <Button
-                    className={styles.mymodal}
-                    variant="primary"
-                    onClick={handleLogin}
-                  >
-                    Login
-                  </Button>
-                  {/* <Button
-                    onClick={(e) => {
-                    
-                    }}
-                    variant="primary"
-                  >
-                    Understood
-                  </Button> */}
+                <Modal.Footer className={styles.footer}>
+                  <div className={styles.footer}>
+                    <Button
+                      className={styles.mymodal}
+                      variant="secondary"
+                      onClick={handleClose}
+                    >
+                      Ok
+                    </Button>
+                  </div>
+                  {/* <Button variant="primary">Understood</Button> */}
                 </Modal.Footer>
               </Modal>
             </div>

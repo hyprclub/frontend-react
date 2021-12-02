@@ -219,7 +219,6 @@ const Login = () => {
                   </button>
                 </div>
               </Button>
-
               <Modal
                 className={styles.modals}
                 aria-labelledby="contained-modal-title-vcenter"
