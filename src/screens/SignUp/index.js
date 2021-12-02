@@ -93,7 +93,8 @@ const Signup = () => {
           setUsernameStatus(false);
         }
       } catch (error) {
-        console.log(error);
+        setError("Something went wrong");
+        handleShow();
       }
     }
   };
@@ -104,7 +105,6 @@ const Signup = () => {
     const phonevalid = "(0|91)?[7-9][0-9]{9}";
 
     if (data.password != data.cpassword) {
-      console.error("password do not match");
       // handleShow
       // if((data.phoneno).match(phonevalid)){
 
@@ -120,7 +120,6 @@ const Signup = () => {
       data.name == "" ||
       data.cpassword == ""
     ) {
-      console.error("Some error Occured");
       setError("Some error Occured");
       handleShow();
     } else if (usernameStatus == true) {
@@ -155,27 +154,20 @@ const Signup = () => {
           Portfolio: "",
           Twitter: "",
         });
-        console.log({ data, userCredential });
       } catch (err) {
-        console.error(err.code, err, "failed");
-
         if (err.code == "auth/invalid-email") {
-          console.error("Please Enter a valid Email");
           setError("Please Enter a valid Email");
           handleShow();
         }
         if (err.code == "auth/email-already-in-use") {
-          console.error("Account Exists");
           setError("Account Exists");
           handleShow();
         }
         if (err.code == "auth/invalid-password") {
-          console.error("Password must be atleast 6 characters");
           setError("Password must be atleast 6 characters");
           handleShow();
         }
         if (err.code == "auth/weak-password") {
-          console.error("Please choose a Strong Password");
           setError("Please choose a Strong Password");
           handleShow();
         }
@@ -215,7 +207,6 @@ const Signup = () => {
         handleShow();
         setError("Log-In Cancelled");
       }
-      console.log(error.code);
     }
   };
 
