@@ -410,7 +410,7 @@ const Signup = () => {
                     <input type="submit" value="Sign Up" />
                   </Button>
                   <Modal
-                  
+                  className={styles.modals}
                     aria-labelledby="contained-modal-title-vcenter"
                     centered
                     show={show}
@@ -418,7 +418,7 @@ const Signup = () => {
                     backdrop="static"
                     keyboard={false}
                   >
-                    <Modal.Header closeButton>
+                    <Modal.Header closeButton className={styles.title}>
                       <Modal.Title>Error</Modal.Title>
                     </Modal.Header>
                     <Modal.Body className={styles.mymodal2}>
