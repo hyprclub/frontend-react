@@ -355,6 +355,7 @@ const Signup = () => {
                   <Button className={cn("button-stroke", styles.button, "btn")}>
                     <input type="submit" value="Sign Up" />
                   </Button>
+
                   <Modal
                     className={styles.modals}
                     aria-labelledby="contained-modal-title-vcenter"
@@ -365,7 +366,7 @@ const Signup = () => {
                     keyboard={false}
                   >
                     <Modal.Header closeButton className={styles.title}>
-                      <Modal.Title>Error</Modal.Title>
+                      <Modal.Title>Notification</Modal.Title>
                     </Modal.Header>
                     <Modal.Body className={styles.mymodal2}>
                       <div>
