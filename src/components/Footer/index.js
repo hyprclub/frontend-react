@@ -82,28 +82,28 @@ const Footers = () => {
                 href="https://www.instagram.com/hyprclub/"
                 target="_blank"
               >
-                <img class="icons" src="/instagram.png" />
+                <img className={styles.imgss} src="/instagram.png" />
               </a>
               <a
                 className="icons"
                 href="https://www.facebook.com/hyprclub"
                 target="_blank"
               >
-                <img class="icons" src="/facebook.png" />
+                <img className={styles.imgss}  src="/facebook.png" />
               </a>
               <a
                 className="icons"
                 href="https://www.linkedin.com/company/hyprclub/ "
                 target="_blank"
               >
-                <img class="icons" src="/linkedin.png" />
+                <img className={styles.imgss}  src="/linkedin.png" />
               </a>
               <a
                 className="icons"
                 href="https://twitter.com/hyprclub"
                 target="_blank"
               >
-                <img class="icons" src="/twitter.png" />
+                <img className={styles.imgss}  src="/twitter.png" />
               </a>
             </div>
             <div className={styles.details}>Dark theme</div>
