@@ -187,32 +187,32 @@ const ContactUs = () => {
                   </div>
                   <div className={styles.space}>
                     <a
-                      className="icons"
+                      // className="icons"
                       href="https://www.instagram.com/hyprclub/"
                       target="_blank"
                     >
-                      <img className={styles.imgss} class="icons" src="/instagram.png" />
+                      <img className={styles.imgss} src="/instagram.png" />
                     </a>
                     <a
-                      className="icons"
+                      // className="icons"
                       href="https://www.facebook.com/hyprclub"
                       target="_blank"
                     >
-                      <img className={styles.imgss} class="icons" src="/facebook.png" />
+                      <img className={styles.imgss}  src="/facebook.png" />
                     </a>
                     <a
                       className="icons"
                       href="https://www.linkedin.com/company/hyprclub/ "
                       target="_blank"
                     >
-                      <img className={styles.imgss} class="icons" src="/linkedin.png" />
+                      <img className={styles.imgss}  src="/linkedin.png" />
                     </a>
                     <a
                       className="icons"
                       href="https://twitter.com/hyprclub"
                       target="_blank"
                     >
-                      <img className={styles.imgss} class="icons" src="/twitter.png" />
+                      <img className={styles.imgss}  src="/twitter.png" />
                     </a>
                     <Modal
                       aria-labelledby="contained-modal-title-vcenter"
