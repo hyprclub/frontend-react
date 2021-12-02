@@ -74,7 +74,7 @@ function App() {
               // );
               handleShow();
               setError(
-                " Verification has been sent to " +
+                " Verification  Email has been sent to " +
                   user.email +
                   ". Please Verify to continue"
               );

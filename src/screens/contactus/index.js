@@ -196,21 +196,21 @@ const ContactUs = () => {
                       href="https://www.facebook.com/hyprclub"
                       target="_blank"
                     >
-                      <img className={styles.imgss}  src="/facebook.png" />
+                      <img className={styles.imgss} src="/facebook.png" />
                     </a>
                     <a
                       className="icons"
                       href="https://www.linkedin.com/company/hyprclub/ "
                       target="_blank"
                     >
-                      <img className={styles.imgss}  src="/linkedin.png" />
+                      <img className={styles.imgss} src="/linkedin.png" />
                     </a>
                     <a
                       className="icons"
                       href="https://twitter.com/hyprclub"
                       target="_blank"
                     >
-                      <img className={styles.imgss}  src="/twitter.png" />
+                      <img className={styles.imgss} src="/twitter.png" />
                     </a>
                     <Modal
                       className={styles.modals}
@@ -222,14 +222,14 @@ const ContactUs = () => {
                       keyboard={false}
                     >
                       <Modal.Header closeButton className={styles.title}>
-                        <Modal.Title>Error</Modal.Title>
+                        <Modal.Title>Thank You!</Modal.Title>
                       </Modal.Header>
                       <Modal.Body className={styles.mymodal2}>
                         <div>
-                          <img
+                          {/* <img
                             className={cn("img-fluid", styles.size1)}
                             src="/Error.png"
-                          />
+                          /> */}
                         </div>
                         <div className={styles.fit}>{error}</div>
                       </Modal.Body>

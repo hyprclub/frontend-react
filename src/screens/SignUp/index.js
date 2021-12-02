@@ -38,6 +38,7 @@ const breadcrumbs = [
   },
 ];
 const Signup = () => {
+  const { push } = useHistory();
   const loggedIn = useSelector((state) => state.UserData.loggedIn);
   const UserData = useSelector((state) => state.UserData);
   const [data, setData] = useState({
@@ -101,8 +102,8 @@ const Signup = () => {
 
   React.useEffect(() => {
     if (loggedIn) {
+      push("/profile");
     } else {
-      push("/");
     }
   }, [loggedIn, push]);
 
@@ -215,7 +216,6 @@ const Signup = () => {
     }
   };
 
-  const { push } = useHistory();
   useEffect(() => {
     if (loggedIn) {
       push("/profile");
@@ -305,6 +305,9 @@ const Signup = () => {
                         <TextInput
                           onChange={(e) => {
                             updateState(e);
+                          }}
+                          onBlur={(ev) => {
+                            checkPhonenum(ev);
                           }}
                           className={styles.field}
                           label="Phone Number"

@@ -66,24 +66,7 @@ const Headers = () => {
               </Link>
             ))}
           </nav>
-          {/* <form
-            className={styles.search}
-            action=""
-            onSubmit={() => handleSubmit()}
-          >
-            <input
-              className={styles.input}
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              name="search"
-              placeholder="Search"
-              required
-            />
-            <button className={styles.result}>
-              <Icon name="search" size="20" />
-            </button>
-          </form> */}
+
           {loggedIn}
           {loggedIn === false && (
             <>
