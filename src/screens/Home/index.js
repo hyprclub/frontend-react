@@ -5,10 +5,11 @@ import Popular from "./Popular";
 import HotBid from "../../components/HotBid";
 import Collections from "./Collections";
 import Discover from "./Discover";
+import { Link } from "react-router-dom";
 import Description from "./Description";
 import cn from "classnames";
 import styles from "./Home.module.sass";
-import Image from './Image'
+import Image from "./Image";
 const Home = () => {
   return (
     <>
@@ -24,20 +25,32 @@ const Home = () => {
         <div className="container">
           <div className="row">
             <div className="col-xl-6 col-lg-6 col-md-6">
-              <div className={styles.h1}>Unique NFTs for our unique BU Alumni.</div>
+              <div className={styles.h1}>
+                Unique NFTs for our unique BU Alumni.
+              </div>
               <div>
-                <div className={styles.h2}>Some placeholder text jo waha bhi dala tha. pls saksham soch lo kuchh. huihuihui Lorem ipsum dolor sit amet. dogs are cooler than cats.</div>
+                <div className={styles.h2}>
+                  Some placeholder text jo waha bhi dala tha. pls saksham soch
+                  lo kuchh. huihuihui Lorem ipsum dolor sit amet. dogs are
+                  cooler than cats.
+                </div>
                 <div className={styles.center}>
-                <button
-                  className={cn("button-stroke button-small", styles.button)}>
-                  <span>Learn More</span>
-                </button>
+                  <Link
+                    className={cn("button-small", styles.button)}
+                    to="/BuAlumni"
+                  >
+                    Learn More
+                  </Link>
                 </div>
               </div>
               {/* </div> */}
             </div>
             <div className="col-xl-6 col-lg-6 col-md-6">
-            <Image className="img-fluid" src="/homepage.png" srcDark="/darkmode.png" />
+              <Image
+                className="img-fluid"
+                src="/homepage.png"
+                srcDark="/darkmode.png"
+              />
             </div>
           </div>
         </div>

@@ -52,17 +52,16 @@ const Passwordless = () => {
     try {
       await sendSignInLinkToEmail(auth, data.email, actionCodeSettings)
         .then((result) => {
-          console.log(result);
-          console.log(window.location.href);
           handleShow();
           setError("E-Mail Sent!");
         })
         .catch((error) => {
-          console.error(error);
+          handleShow();
+          setError(
+            "Some Error Occured. Please Check Email or Network Connection"
+          );
         });
-    } catch (error) {
-      console.error(error);
-    }
+    } catch (error) {}
   };
   const { push } = useHistory();
 

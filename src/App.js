@@ -244,12 +244,12 @@ function App() {
             </Page>
           )}
         />
-         <Route
+        <Route
           exact
           path="/Contactus"
           render={() => (
             <Page>
-              <ContactUs/>
+              <ContactUs />
             </Page>
           )}
         />
@@ -267,7 +267,7 @@ function App() {
           path="/BuAlumni"
           render={() => (
             <Page>
-              <BuAlumni/>
+              <BuAlumni />
             </Page>
           )}
         />

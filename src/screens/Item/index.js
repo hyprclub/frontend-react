@@ -48,12 +48,10 @@ const Item = (props) => {
         "idToken"
       );
       setNftTokenid(nftToken);
-      console.debug({ nftToken });
       try {
         const db = getFirestore();
         const storage = getStorage();
         const nftData = await getDoc(doc(db, "NFT's", nftToken));
-        console.debug(nftData);
 
         axios
           .get(nftToken, {
@@ -78,39 +76,20 @@ const Item = (props) => {
               .then((url) => {
                 setOwnerDp(url);
               })
-              .catch((error) => {
-                console.error("No user data");
-              });
+              .catch((error) => {});
             await getDownloadURL(ref(storageCreatorPFref))
               .then((url) => {
                 setCreatorDp(url);
               })
-              .catch((error) => {
-                console.error("No user data");
-              });
+              .catch((error) => {});
             setOwner(ownerData.data());
             setData(reps.data);
             setCreator(creatorData.data());
           })
-          .catch((error) => {
-            console.error(error);
-          });
-      } catch (error) {
-        console.error(error);
-      }
+          .catch((error) => {});
+      } catch (error) {}
     }
   }, [props, setData, setOwner, setOwnerDp, setCreator, setCreatorDp]);
-
-  //  React.useEffect(() => {
-  //   if (loggedIn !== undefined && loggedIn) {
-  //   } else {
-  //     push("/login");
-  //   }
-  // }, [loggedIn, push]);
-
-  React.useEffect(() => {
-    console.log({ owner });
-  }, [owner]);
 
   const users = [
     {

@@ -59,9 +59,7 @@ const Footers = () => {
         handleShow();
         setError("Thank You for Subscribing to our newsletter.");
       })
-      .catch((err) => {
-        console.error(err);
-      });
+      .catch((err) => {});
   };
 
   return (
