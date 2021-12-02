@@ -394,7 +394,7 @@ const Signup = () => {
                     backdrop="static"
                     keyboard={false}
                   >
-                    <Modal.Header closeButton className={styles.mymodal}>
+                    <Modal.Header closeButton>
                       <Modal.Title>Error</Modal.Title>
                     </Modal.Header>
                     <Modal.Body className={styles.mymodal2}>
@@ -406,14 +406,16 @@ const Signup = () => {
                       </div>
                       <div className={styles.fit}>{error}</div>
                     </Modal.Body>
-                    <Modal.Footer>
-                      <Button
-                        className={styles.mymodal}
-                        variant="secondary"
-                        onClick={handleClose}
-                      >
-                        Ok
-                      </Button>
+                    <Modal.Footer className={styles.footer}>
+                      <div className={styles.footer}>
+                        <Button
+                          className={styles.mymodal}
+                          variant="secondary"
+                          onClick={handleClose}
+                        >
+                          Ok
+                        </Button>
+                      </div>
                       {/* <Button variant="primary">Understood</Button> */}
                     </Modal.Footer>
                   </Modal>

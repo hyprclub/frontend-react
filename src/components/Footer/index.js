@@ -18,7 +18,7 @@ import {
 
 const items = [
   {
-    title: "Hypr",
+    title: "HyprClub",
     menu: [
       {
         title: "Discover",
