@@ -40,12 +40,14 @@ const Item = (props) => {
   const [ownerDp, setOwnerDp] = useState("");
   const [creator, setCreator] = useState("");
   const [creatorDp, setCreatorDp] = useState("");
+  const [nftTokenid, setNftTokenid] = useState("");
 
   React.useEffect(async () => {
     if (props) {
       const nftToken = new URLSearchParams(props?.location?.search).get(
         "idToken"
       );
+      setNftTokenid(nftToken);
       console.debug({ nftToken });
       try {
         const db = getFirestore();
@@ -194,7 +196,10 @@ const Item = (props) => {
                 </a>
               </div>
               <div className={styles.button1}>
-                <a className="button-small" href="/upload-variants">
+                <a
+                  className="button-small"
+                  href={process.env.REACT_APP_CERTIFICATE_BASE_URL + nftTokenid}
+                >
                   Certificate
                 </a>
               </div>
