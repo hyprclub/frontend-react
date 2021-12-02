@@ -84,7 +84,6 @@ const Discover = () => {
       {/* <div className="sweet-loading">
       <button onClick={() => setLoading(!loading)}>Toggle Loader</button>
       <input value={color} onChange={(input) => setColor(input.target.value)} placeholder="Color of the loader" />
-
       <ClipLoader color={color} loading={loading} size={150} />
     </div> */}
       <div className="container">

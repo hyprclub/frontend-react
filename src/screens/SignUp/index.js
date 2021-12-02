@@ -99,6 +99,13 @@ const Signup = () => {
     }
   };
 
+  React.useEffect(() => {
+    if (loggedIn) {
+    } else {
+      push("/");
+    }
+  }, [loggedIn, push]);
+
   const handleSubmit = async () => {
     const auth = getAuth();
     const db = getFirestore();
@@ -171,8 +178,6 @@ const Signup = () => {
           setError("Please choose a Strong Password");
           handleShow();
         }
-        setError("Something went wrong");
-        handleShow();
       }
     }
   };
