@@ -26,13 +26,13 @@ const Home = () => {
           <div className="row">
             <div className="col-xl-6 col-lg-6 col-md-6">
               <div className={styles.h1}>
-                Unique NFTs for our unique BU Alumni.
+                Bennett University presents the World's First Alumni NFTs.
               </div>
               <div>
                 <div className={styles.h2}>
-                  Some placeholder text jo waha bhi dala tha. pls saksham soch
-                  lo kuchh. huihuihui Lorem ipsum dolor sit amet. dogs are
-                  cooler than cats.
+                  HyprClub, in collaboration with Bennett University (Times of
+                  India Group) has developed the World's First NFTs in an
+                  academic space, specifically, Alumni Relations.
                 </div>
                 <div className={styles.center}>
                   <Link

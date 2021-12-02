@@ -171,19 +171,36 @@ const Item = (props) => {
             <div className={styles.buttonFlex}>
               <div className={styles.button1}>
                 <a
+                  target="_blank"
+                  href="https://polygonscan.com/token/0xa2624d1931d17632f74d217fe1c1c903b65bf548"
+                >
+                  <button className={styles.opensea}>
+                    <img
+                      className={cn("img-fluid", styles.edit, styles.creator)}
+                      src="/poly.png"
+                      srcDark="/membershipbutton.png"
+                    />
+                  </button>
+                </a>
+                {/* <a
                   className="button-small"
                   href="https://polygonscan.com/token/0xa2624d1931d17632f74d217fe1c1c903b65bf548"
                 >
-                  View on Polygon Scan
-                </a>
+                  Polygon Scan
+                </a> */}
               </div>
               <div className={styles.button1}>
                 <a
-                  className="button-small"
                   target="_blank"
                   href={process.env.REACT_APP_CERTIFICATE_BASE_URL + nftTokenid}
                 >
-                  View on OpenSeas
+                  <button className={styles.opensea}>
+                    <img
+                      className={cn("img-fluid", styles.edit, styles.creator)}
+                      src="/opensea.png"
+                      srcDark="/membershipbutton.png"
+                    />
+                  </button>
                 </a>
               </div>
             </div>
