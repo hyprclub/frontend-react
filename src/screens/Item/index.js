@@ -191,16 +191,20 @@ const Item = (props) => {
             <Users className={styles.users} items={users} />
             <div className={styles.buttonFlex}>
               <div className={styles.button1}>
-                <a className="button-small" href="/upload-variants">
-                  Claim Now
+                <a
+                  className="button-small"
+                  href="https://polygonscan.com/token/0xa2624d1931d17632f74d217fe1c1c903b65bf548"
+                >
+                  Polygon Scan
                 </a>
               </div>
               <div className={styles.button1}>
                 <a
                   className="button-small"
+                  target="_blank"
                   href={process.env.REACT_APP_CERTIFICATE_BASE_URL + nftTokenid}
                 >
-                  Certificate
+                  Open Seas
                 </a>
               </div>
             </div>
