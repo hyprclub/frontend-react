@@ -8,6 +8,7 @@ import Player from "../../../components/Player";
 import Modal from "../../../components/Modal";
 import Connect from "../../../components/Connect";
 import Bid from "../../../components/Bid";
+import { useSelector } from "react-redux";
 // const items = [
 //   {
 //     title: "the creator network®",
@@ -48,11 +49,13 @@ import Bid from "../../../components/Bid";
 // ];
 
 const SlickArrow = ({ currentSlide, slideCount, children, ...props }) => (
- <></>
+  <></>
   // <button {...props}>{children}</button>
 );
 
 const Hero = () => {
+  const [visibleNav, setVisibleNav] = useState(false);
+  const loggedIn = useSelector((state) => state.UserData.loggedIn);
   const settings = {
     infinite: false,
     speed: 500,
@@ -79,14 +82,28 @@ const Hero = () => {
         <div className={cn("container", styles.container)}>
           <div className={styles.head}>
             <div className={cn("h1", styles.title)}>
-            Welcome to <span className={styles.hyr}>HyprClub</span>.<br></br> The next big social revolution.
+              Welcome to <span className={styles.hyr}>HyprClub</span>.<br></br>{" "}
+              The next big social revolution.
             </div>
             <div className={styles.stage}>
-            A platform for the creator, investor and <br></br>supporter inside you.
+              A platform for the creator, investor and <br></br>supporter inside
+              you.
             </div>
-            <Link className={cn("button-stroke", styles.button)} to="./signup">
-              Sign Up
-            </Link>
+            {loggedIn}
+            {loggedIn === false && (
+              <>
+                <Link
+                  className={cn("button-small", styles.button)}
+                  onClick={() => {
+                    setVisibleNav(!visibleNav);
+                  }}
+                  to="/signup"
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
+            {loggedIn && <></>}
           </div>
         </div>
       </div>

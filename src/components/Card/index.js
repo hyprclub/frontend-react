@@ -39,7 +39,9 @@ const Card = ({ className, item: itemFromProps }) => {
 
           if (docsnap.exists()) {
             axios
-              .get(docsnap.data().json)
+              .get(itemFromProps, {
+                baseURL: process.env.REACT_APP_BASE_URL, // base url
+              })
               .then((resps) => {
                 console.log(resps.data);
                 setItem(resps.data);
@@ -67,9 +69,12 @@ const Card = ({ className, item: itemFromProps }) => {
       <div className={styles.preview}>
         <div>
           <img
-            className={styles.imagehover}
-            srcSet=  {`${item.image || "/images/bg-card.png"} `}
-            src={item.image || "/images/bg-card.png" }
+            onClick={(e) => {
+              openItem(e);
+            }}
+            className={cn(styles.imagehover, "img-fluid")}
+            srcSet={`${item.image || "/images/card.gif"} `}
+            src={item.image || "/images/card.gif"}
             alt="Card"
           />
         </div>
@@ -99,16 +104,21 @@ const Card = ({ className, item: itemFromProps }) => {
           </button>
         </div>
       </div>
-      <Link className={styles.link} to={item.url}>
+      <Link className={styles.link} to={item?.url}>
         <div className={styles.body}>
           <div className={styles.line}>
-            <div className={styles.title}><b>BU Alumni Exclusive - </b>{item.name}</div>
-          </div>
-          <div className={styles.df}>discription(sent me)</div> 
-          <div className={styles.line}>
-            {/* <div className={styles.cut}><s>14900 INR</s></div> */}
-            <div className={styles.price}>14999 INR</div>
+            <div className={styles.title}>
+              <b>BU Alumni Exclusive - </b>
+              {item?.name}
             </div>
+          </div>
+          <div>{item?.description}</div>
+          <div className={styles.line}>
+            <div className={styles.price}>14999 INR</div>
+            {/* <div className={styles.cut}>
+              <s>14900</s>
+            </div> */}
+          </div>
           {/* <div className={styles.line}>
             <div className={styles.users}>
               {item?.users?.map((x, index) => (

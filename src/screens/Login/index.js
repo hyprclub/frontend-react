@@ -52,12 +52,17 @@ const Login = () => {
       const uid = user.uid;
 
       setDoc(doc(db, "users", uid), {
-        Emailid: email,
         Name: name,
-        UserID: uid,
+        Emailid: email,
+        Phone: "",
         Username: email,
+        UserID: uid,
         admin: false,
         creator: false,
+        Bio: "",
+        Instagram: "",
+        Portfolio: "",
+        Twitter: "",
       });
     } catch (error) {
       if ((error.code = "auth/popup-closed-by-user")) {
@@ -108,7 +113,7 @@ const Login = () => {
   useEffect(() => {
     console.log(UserData);
     if (loggedIn) {
-      push("/");
+      push("/profile");
     }
   }, [loggedIn, push]);
 

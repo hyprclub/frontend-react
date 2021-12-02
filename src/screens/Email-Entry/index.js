@@ -111,7 +111,14 @@ const Passwordless = () => {
             window.localStorage.removeItem("emailForSignIn");
           })
           .catch((error) => {
+            console.log(error);
             if (error.code == "auth/invalid-email") {
+              handleShow();
+              setError("Enter A Valid Email");
+            }
+            if (error.code == "auth/missing-email") {
+              handleShow();
+              setError("Please Enter Email");
             }
           });
       }
@@ -121,7 +128,7 @@ const Passwordless = () => {
   useEffect(() => {
     console.log(UserData);
     if (loggedIn) {
-      push("/");
+      push("/profile");
     }
   }, [loggedIn, push]);
 
@@ -176,36 +183,36 @@ const Passwordless = () => {
 										Login
 									</Link> */}
                 {/* </input> */}
+                <Modal
+                  show={show}
+                  onHide={handleClose}
+                  backdrop="static"
+                  keyboard={false}
+                >
+                  <Modal.Header closeButton className={styles.mymodal}>
+                    <Modal.Title>Notification</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body className={styles.mymodal2}>{error}</Modal.Body>
+                  <Modal.Footer>
+                    <Button
+                      className={styles.mymodal}
+                      variant="secondary"
+                      onClick={handleClose}
+                    >
+                      Close
+                    </Button>
+                    {/* <Button variant="primary">Understood</Button> */}
+                  </Modal.Footer>
+                </Modal>
               </form>
 
-              <Modal
-                show={show}
-                onHide={handleClose}
-                backdrop="static"
-                keyboard={false}
-              >
-                <Modal.Header closeButton className={styles.mymodal}>
-                  <Modal.Title>Notification</Modal.Title>
-                </Modal.Header>
-                <Modal.Body className={styles.mymodal2}>{error}</Modal.Body>
-                <Modal.Footer>
-                  <Button
-                    className={styles.mymodal}
-                    variant="secondary"
-                    onClick={handleClose}
-                  >
-                    Close
-                  </Button>
-                  {/* <Button variant="primary">Understood</Button> */}
-                </Modal.Footer>
-              </Modal>
               <Modal
                 show={mailShow}
                 onHide={handleMailClose}
                 backdrop="static"
                 keyboard={false}
               >
-                <Modal.Header closeButton className={styles.mymodal}>
+                <Modal.Header className={styles.mymodal}>
                   <Modal.Title>Enter Email</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className={styles.mymodal2}>
@@ -227,12 +234,19 @@ const Passwordless = () => {
                 <Modal.Footer>
                   <Button
                     className={styles.mymodal}
-                    variant="secondary"
+                    variant="primary"
                     onClick={handleLogin}
                   >
                     Login
                   </Button>
-                  {/* <Button variant="primary">Understood</Button> */}
+                  {/* <Button
+                    onClick={(e) => {
+                    
+                    }}
+                    variant="primary"
+                  >
+                    Understood
+                  </Button> */}
                 </Modal.Footer>
               </Modal>
             </div>

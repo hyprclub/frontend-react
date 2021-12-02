@@ -28,26 +28,18 @@ const items = [
         title: "Coming Soon",
         url: "/comingsoon",
       },
-      {
-        url: "/BuAlumni",
-        title: "BU Alumni",
-      },
     ],
   },
   {
     title: "Info",
     menu: [
       {
-        title:"Contact Us",
-        url:"/ContactUs"
+        title: "Contact Us",
+        url: "/ContactUs",
       },
       {
         title: "FAQ",
         url: "/faq",
-      },
-      {
-        title: "How it works",
-        url: "/Howitworks",
       },
     ],
   },
@@ -129,8 +121,7 @@ const Footers = () => {
           <div className={styles.col}>
             <div className={styles.category}>Join Newsletter</div>
             <div className={styles.text}>
-              Subscribe our newsletter to get more free design course and
-              resource
+              Subscribe our newsletter to get regular updates and exiting offers
             </div>
             <Form
               className={styles.form}

@@ -45,6 +45,7 @@ const ProfileEdit = () => {
     username: "",
     phoneno: "",
     instagram: "",
+    twitter: "",
     bio: "",
   });
   const UserData = useSelector((state) => state.UserData);
@@ -60,7 +61,7 @@ const ProfileEdit = () => {
   React.useEffect(() => {
     if (loggedIn) {
     } else {
-      push("/");
+      push("/login");
     }
   }, [loggedIn, push]);
 
@@ -137,11 +138,11 @@ const ProfileEdit = () => {
         const updateStatus = await updateDoc(doc(db, "users", UserData.uid), {
           Name: data.name,
           Emailid: data.email,
-          Phone: data.phoneno,
-          Bio: data.bio,
-          Portfolio: data.portfolio,
-          Instagram: data.instagram,
-          Twitter: data.twitter,
+          Phone: data?.phoneno,
+          Bio: data?.bio,
+          Portfolio: data?.portfolio,
+          Instagram: data?.instagram,
+          Twitter: data?.twitter,
         });
         handleShow();
         setError("Profile Updated");
