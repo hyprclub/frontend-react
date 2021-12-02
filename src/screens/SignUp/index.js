@@ -38,6 +38,7 @@ const breadcrumbs = [
   },
 ];
 const Signup = () => {
+  const { push } = useHistory();
   const loggedIn = useSelector((state) => state.UserData.loggedIn);
   const UserData = useSelector((state) => state.UserData);
   const [data, setData] = useState({
@@ -93,10 +94,19 @@ const Signup = () => {
           setUsernameStatus(false);
         }
       } catch (error) {
-        console.log(error);
+        setError("Something went wrong");
+        handleShow();
       }
     }
   };
+
+  React.useEffect(() => {
+    if (loggedIn) {
+      push("/profile");
+    } else {
+      
+    }
+  }, [loggedIn, push]);
 
   const handleSubmit = async () => {
     const auth = getAuth();
@@ -104,7 +114,6 @@ const Signup = () => {
     const phonevalid = "(0|91)?[7-9][0-9]{9}";
 
     if (data.password != data.cpassword) {
-      console.error("password do not match");
       // handleShow
       // if((data.phoneno).match(phonevalid)){
 
@@ -120,7 +129,6 @@ const Signup = () => {
       data.name == "" ||
       data.cpassword == ""
     ) {
-      console.error("Some error Occured");
       setError("Some error Occured");
       handleShow();
     } else if (usernameStatus == true) {
@@ -155,32 +163,23 @@ const Signup = () => {
           Portfolio: "",
           Twitter: "",
         });
-        console.log({ data, userCredential });
       } catch (err) {
-        console.error(err.code, err, "failed");
-
         if (err.code == "auth/invalid-email") {
-          console.error("Please Enter a valid Email");
           setError("Please Enter a valid Email");
           handleShow();
         }
         if (err.code == "auth/email-already-in-use") {
-          console.error("Account Exists");
           setError("Account Exists");
           handleShow();
         }
         if (err.code == "auth/invalid-password") {
-          console.error("Password must be atleast 6 characters");
           setError("Password must be atleast 6 characters");
           handleShow();
         }
         if (err.code == "auth/weak-password") {
-          console.error("Please choose a Strong Password");
           setError("Please choose a Strong Password");
           handleShow();
         }
-        setError("Something went wrong");
-        handleShow();
       }
     }
   };
@@ -215,24 +214,16 @@ const Signup = () => {
         handleShow();
         setError("Log-In Cancelled");
       }
-      console.log(error.code);
     }
   };
 
-  const { push } = useHistory();
+  
   useEffect(() => {
     if (loggedIn) {
       push("/profile");
     } else {
     }
   }, [loggedIn, push]);
-
-  // useEffect(() => {
-  //   console.log(UserData);
-  //   if (loggedIn) {
-  //     push("/");
-  //   }
-  // }, [loggedIn, push]);
 
   return (
     <>
@@ -264,11 +255,6 @@ const Signup = () => {
                         <TextInput
                           onChange={(e) => {
                             updateState(e);
-                          }}
-                          onBlur={(ev) => {
-                            if (ev.target.value == "") {
-                              console.log("Please Enter Your Name");
-                            }
                           }}
                           className={styles.field}
                           value={data.name}
@@ -306,11 +292,6 @@ const Signup = () => {
                           onChange={(e) => {
                             updateState(e);
                           }}
-                          onBlur={(ev) => {
-                            if (ev.target.value == "") {
-                              console.log("Please Enter Email Address");
-                            }
-                          }}
                           className={styles.field}
                           label="Email Address"
                           name="email"
@@ -326,9 +307,6 @@ const Signup = () => {
                         <TextInput
                           onChange={(e) => {
                             updateState(e);
-                          }}
-                          onBlur={(ev) => {
-                            checkPhonenum(ev);
                           }}
                           className={styles.field}
                           label="Phone Number"
@@ -346,11 +324,6 @@ const Signup = () => {
                           onChange={(e) => {
                             updateState(e);
                           }}
-                          onBlur={(ev) => {
-                            if (ev.target.value == "") {
-                              console.log("Password can't be Empty");
-                            }
-                          }}
                           className={styles.field}
                           label="Password"
                           name="password"
@@ -367,11 +340,6 @@ const Signup = () => {
                           onChange={(e) => {
                             updateState(e);
                           }}
-                          onBlur={(ev) => {
-                            if (ev.target.value == "") {
-                              console.log("Please Re-Enter Password");
-                            }
-                          }}
                           className={styles.field}
                           label="Confirm Password"
                           name="cpassword"
@@ -387,7 +355,7 @@ const Signup = () => {
                     <input type="submit" value="Sign Up" />
                   </Button>
                   <Modal
-                  className={styles.modals}
+                    className={styles.modals}
                     aria-labelledby="contained-modal-title-vcenter"
                     centered
                     show={show}
@@ -399,17 +367,23 @@ const Signup = () => {
                       <Modal.Title>Error</Modal.Title>
                     </Modal.Header>
                     <Modal.Body className={styles.mymodal2}>
-                      <div><img className={cn("img-fluid",styles.size1)} src="/Error.png" /></div>
-                      <div className={styles.fit}>{error}</div></Modal.Body>
+                      <div>
+                        <img
+                          className={cn("img-fluid", styles.size1)}
+                          src="/Error.png"
+                        />
+                      </div>
+                      <div className={styles.fit}>{error}</div>
+                    </Modal.Body>
                     <Modal.Footer className={styles.footer}>
                       <div className={styles.footer}>
-                      <Button
-                        className={styles.mymodal}
-                        variant="secondary"
-                        onClick={handleClose}
-                      >
-                        Ok
-                      </Button>
+                        <Button
+                          className={styles.mymodal}
+                          variant="secondary"
+                          onClick={handleClose}
+                        >
+                          Ok
+                        </Button>
                       </div>
                       {/* <Button variant="primary">Understood</Button> */}
                     </Modal.Footer>

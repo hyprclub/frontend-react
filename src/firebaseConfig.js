@@ -8,8 +8,9 @@ const firebaseConfig = {
   storageBucket: "hypr-development.appspot.com",
   messagingSenderId: "374610008134",
   appId: "1:374610008134:web:13068ff5c3393002089247",
-  measurementId: "G-G02F146GTY"
+  measurementId: "G-G02F146GTY",
 };
+
 export const firebaseApp = initializeApp(firebaseConfig);
 
 export const logOut = async () => {

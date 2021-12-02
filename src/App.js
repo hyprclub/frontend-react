@@ -6,6 +6,7 @@ import UploadDetails from "./screens/UploadDetails";
 import ConnectWallet from "./screens/ConnectWallet";
 import Faq from "./screens/Faq";
 import Activity from "./screens/Activity";
+import cn from "classnames";
 import Search01 from "./screens/Search01";
 import Search02 from "./screens/Search02";
 import styles from "./screens/SignUp/Signup.module.sass";
@@ -102,13 +103,10 @@ function App() {
           getDoc(doc(db, "users", uid)).then((docSnap) => {
             if (docSnap.exists()) {
               if (docSnap.data().admin) {
-                console.log("true");
               } else {
-                console.log("false");
               }
               dispatch(UserDataActions.updateUserDetails(docSnap.data()));
             } else {
-              console.log("no data");
             }
           });
         } catch (e) {
@@ -154,7 +152,6 @@ function App() {
         const nftIdsLogOut = [];
         nftQuerySnapshot.forEach((elem) => {
           nftIdsLogOut.push(elem.id);
-          console.log(nftIdsLogOut);
         });
 
         dispatch(UserDataActions.nftDataId({ nftIdsLogOut }));
@@ -194,23 +191,34 @@ function App() {
   return (
     <Router>
       <Modal
+        className={styles.modals}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
         show={show}
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header closeButton className={styles.mymodal}>
-          <Modal.Title>Notification</Modal.Title>
+        <Modal.Header closeButton className={styles.title}>
+          <Modal.Title>Error</Modal.Title>
         </Modal.Header>
-        <Modal.Body className={styles.mymodal2}>{error}</Modal.Body>
-        <Modal.Footer>
-          <Button
-            className={styles.mymodal}
-            variant="secondary"
-            onClick={handleClose}
-          >
-            Ok
-          </Button>
+        <Modal.Body className={styles.mymodal2}>
+          <div>
+            <img className={cn("img-fluid", styles.size1)} src="/Error.png" />
+          </div>
+          <div className={styles.fit}>{error}</div>
+        </Modal.Body>
+        <Modal.Footer className={styles.footer}>
+          <div className={styles.footer}>
+            <Button
+              className={styles.mymodal}
+              variant="secondary"
+              onClick={handleClose}
+            >
+              Ok
+            </Button>
+          </div>
+          {/* <Button variant="primary">Understood</Button> */}
         </Modal.Footer>
       </Modal>
       <Switch>
@@ -244,12 +252,12 @@ function App() {
             </Page>
           )}
         />
-         <Route
+        <Route
           exact
           path="/Contactus"
           render={() => (
             <Page>
-              <ContactUs/>
+              <ContactUs />
             </Page>
           )}
         />
@@ -267,7 +275,7 @@ function App() {
           path="/BuAlumni"
           render={() => (
             <Page>
-              <BuAlumni/>
+              <BuAlumni />
             </Page>
           )}
         />

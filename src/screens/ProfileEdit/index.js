@@ -69,10 +69,6 @@ const ProfileEdit = () => {
     setData((state) => ({ ...state, [e.target.name]: e.target.value }));
   }
 
-  React.useEffect(() => {
-    console.log({ data });
-  }, [data]);
-
   const checkUsername = async (ev) => {
     if (ev.target.value == "") {
       setUsernameStatus(true);
@@ -90,7 +86,6 @@ const ProfileEdit = () => {
           where("Username", "==", ev.target.value)
         );
         const querySnapshot = await getDocs(q);
-        console.log(querySnapshot);
         if (querySnapshot.size === 0) {
           setUsernameStatus(false);
         } else {
@@ -100,17 +95,13 @@ const ProfileEdit = () => {
             setUsernameStatus(true);
           }
         }
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     }
   };
 
   const onImageChange = async (e) => {
     if (e.target.files && e.target.files[0]) {
       setImage(URL.createObjectURL(e.target.files[0]));
-
-      console.log(e.target.files[0]);
       const storage = getStorage();
 
       const storagePFref = ref(
@@ -125,9 +116,7 @@ const ProfileEdit = () => {
         handleShow();
         setError("Profile Image Updated");
         window?.location.reload();
-      } catch (error) {
-        console.error(error);
-      }
+      } catch (error) {}
     }
   };
   const updateUserProfile = async () => {
@@ -152,7 +141,6 @@ const ProfileEdit = () => {
         setError("Please Enter a valid Phone Number");
       }
     } catch (error) {
-      console.error(error);
       handleShow();
       setError("Some error Occured");
     }
@@ -356,21 +344,27 @@ const ProfileEdit = () => {
                 </button> */}
                 <Modal
                   className={styles.modals}
-                    aria-labelledby="contained-modal-title-vcenter"
-                    centered
-                    show={show}
-                    onHide={handleClose}
-                    backdrop="static"
-                    keyboard={false}
-                  >
-                    <Modal.Header closeButton className={styles.title}>
-                      <Modal.Title>Error</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body className={styles.mymodal2}>
-                      {/* <div><img className={cn("img-fluid",styles.size1)} src="/Error.png" /></div> */}
-                      <div className={styles.fit}>{error}</div></Modal.Body>
-                    <Modal.Footer className={styles.footer}>
-                      <div className={styles.footer}>
+                  aria-labelledby="contained-modal-title-vcenter"
+                  centered
+                  show={show}
+                  onHide={handleClose}
+                  backdrop="static"
+                  keyboard={false}
+                >
+                  <Modal.Header closeButton className={styles.title}>
+                    <Modal.Title>Error</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body className={styles.mymodal2}>
+                    <div>
+                      <img
+                        className={cn("img-fluid", styles.size1)}
+                        src="/Error.png"
+                      />
+                    </div>
+                    <div className={styles.fit}>{error}</div>
+                  </Modal.Body>
+                  <Modal.Footer className={styles.footer}>
+                    <div className={styles.footer}>
                       <Button
                         className={styles.mymodal}
                         variant="secondary"
@@ -378,10 +372,10 @@ const ProfileEdit = () => {
                       >
                         Ok
                       </Button>
-                      </div>
-                      {/* <Button variant="primary">Understood</Button> */}
-                    </Modal.Footer>
-                  </Modal>
+                    </div>
+                    {/* <Button variant="primary">Understood</Button> */}
+                  </Modal.Footer>
+                </Modal>
               </div>
             </div>
           </div>

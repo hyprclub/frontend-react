@@ -111,14 +111,7 @@ const Passwordless = () => {
             window.localStorage.removeItem("emailForSignIn");
           })
           .catch((error) => {
-            console.log(error);
             if (error.code == "auth/invalid-email") {
-              handleShow();
-              setError("Enter A Valid Email");
-            }
-            if (error.code == "auth/missing-email") {
-              handleShow();
-              setError("Please Enter Email");
             }
           });
       }
@@ -128,7 +121,7 @@ const Passwordless = () => {
   useEffect(() => {
     console.log(UserData);
     if (loggedIn) {
-      push("/profile");
+      push("/");
     }
   }, [loggedIn, push]);
 
@@ -186,33 +179,62 @@ const Passwordless = () => {
               </form>
 
               <Modal
-                  className={styles.modals}
-                    aria-labelledby="contained-modal-title-vcenter"
-                    centered
-                    show={show}
-                    onHide={handleClose}
-                    backdrop="static"
-                    keyboard={false}
+                show={show}
+                onHide={handleClose}
+                backdrop="static"
+                keyboard={false}
+              >
+                <Modal.Header closeButton className={styles.mymodal}>
+                  <Modal.Title>Notification</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className={styles.mymodal2}>{error}</Modal.Body>
+                <Modal.Footer>
+                  <Button
+                    className={styles.mymodal}
+                    variant="secondary"
+                    onClick={handleClose}
                   >
-                    <Modal.Header closeButton className={styles.title}>
-                      <Modal.Title>Notification</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body className={styles.mymodal2}>
-                      {/* <div><img className={cn("img-fluid",styles.size1)} src="/Error.png" /></div> */}
-                      <div className={styles.fit}>{error}</div></Modal.Body>
-                    <Modal.Footer className={styles.footer}>
-                      <div className={styles.footer}>
-                      <Button
-                        className={styles.mymodal}
-                        variant="secondary"
-                        onClick={handleClose}
-                      >
-                        Ok
-                      </Button>
-                      </div>
-                      {/* <Button variant="primary">Understood</Button> */}
-                    </Modal.Footer>
-                  </Modal>
+                    Close
+                  </Button>
+                  {/* <Button variant="primary">Understood</Button> */}
+                </Modal.Footer>
+              </Modal>
+              <Modal
+                show={mailShow}
+                onHide={handleMailClose}
+                backdrop="static"
+                keyboard={false}
+              >
+                <Modal.Header closeButton className={styles.mymodal}>
+                  <Modal.Title>Enter Email</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className={styles.mymodal2}>
+                  <TextInput
+                    onChange={(e) => {
+                      updateState(e);
+                    }}
+                    className={styles.field}
+                    id="validationCustom01"
+                    value={data.pemail}
+                    name="pemail"
+                    label="Please provide your email for confirmation"
+                    type="email"
+                    placeholder="Enter your email"
+                    required
+                    autocomplete="true"
+                  />
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button
+                    className={styles.mymodal}
+                    variant="secondary"
+                    onClick={handleLogin}
+                  >
+                    Login
+                  </Button>
+                  {/* <Button variant="primary">Understood</Button> */}
+                </Modal.Footer>
+              </Modal>
             </div>
           </div>
           <div className={styles.note}>

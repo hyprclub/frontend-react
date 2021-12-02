@@ -34,7 +34,6 @@ const Card = ({ className, item: itemFromProps }) => {
         const db = getFirestore();
         const storage = getStorage();
         if (itemFromProps) {
-          console.log({ itemFromProps });
           const docsnap = await getDoc(doc(db, "NFT's", itemFromProps));
 
           if (docsnap.exists()) {
@@ -43,17 +42,12 @@ const Card = ({ className, item: itemFromProps }) => {
                 baseURL: process.env.REACT_APP_BASE_URL, // base url
               })
               .then((resps) => {
-                console.log(resps.data);
                 setItem(resps.data);
               })
-              .catch((error) => {
-                console.error({ error });
-              });
+              .catch((error) => {});
           }
         }
-      } catch (error) {
-        console.error(error);
-      }
+      } catch (error) {}
     };
     run();
   }, [setItem, itemFromProps]);

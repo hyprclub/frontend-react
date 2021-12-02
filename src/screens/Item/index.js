@@ -48,12 +48,10 @@ const Item = (props) => {
         "idToken"
       );
       setNftTokenid(nftToken);
-      console.debug({ nftToken });
       try {
         const db = getFirestore();
         const storage = getStorage();
         const nftData = await getDoc(doc(db, "NFT's", nftToken));
-        console.debug(nftData);
 
         axios
           .get(nftToken, {
@@ -78,39 +76,20 @@ const Item = (props) => {
               .then((url) => {
                 setOwnerDp(url);
               })
-              .catch((error) => {
-                console.error("No user data");
-              });
+              .catch((error) => {});
             await getDownloadURL(ref(storageCreatorPFref))
               .then((url) => {
                 setCreatorDp(url);
               })
-              .catch((error) => {
-                console.error("No user data");
-              });
+              .catch((error) => {});
             setOwner(ownerData.data());
             setData(reps.data);
             setCreator(creatorData.data());
           })
-          .catch((error) => {
-            console.error(error);
-          });
-      } catch (error) {
-        console.error(error);
-      }
+          .catch((error) => {});
+      } catch (error) {}
     }
   }, [props, setData, setOwner, setOwnerDp, setCreator, setCreatorDp]);
-
-  //  React.useEffect(() => {
-  //   if (loggedIn !== undefined && loggedIn) {
-  //   } else {
-  //     push("/login");
-  //   }
-  // }, [loggedIn, push]);
-
-  React.useEffect(() => {
-    console.log({ owner });
-  }, [owner]);
 
   const users = [
     {
@@ -191,8 +170,18 @@ const Item = (props) => {
             <Users className={styles.users} items={users} />
             <div className={styles.buttonFlex}>
               <div className={styles.button1}>
-              <a target="_blank"
-                  href="https://polygonscan.com/token/0xa2624d1931d17632f74d217fe1c1c903b65bf548"><button className={styles.opensea} ><img className={cn("img-fluid",styles.edit,styles.creator)} src="/poly.png" srcDark="/membershipbutton.png" /></button></a>
+                <a
+                  target="_blank"
+                  href="https://polygonscan.com/token/0xa2624d1931d17632f74d217fe1c1c903b65bf548"
+                >
+                  <button className={styles.opensea}>
+                    <img
+                      className={cn("img-fluid", styles.edit, styles.creator)}
+                      src="/poly.png"
+                      srcDark="/membershipbutton.png"
+                    />
+                  </button>
+                </a>
                 {/* <a
                   className="button-small"
                   href="https://polygonscan.com/token/0xa2624d1931d17632f74d217fe1c1c903b65bf548"
@@ -201,9 +190,18 @@ const Item = (props) => {
                 </a> */}
               </div>
               <div className={styles.button1}>
-              <a  target="_blank"
-                  href={process.env.REACT_APP_CERTIFICATE_BASE_URL + nftTokenid}><button  className={styles.opensea}><img className={cn("img-fluid",styles.edit,styles.creator)} src="/opensea.png" srcDark="/membershipbutton.png" /></button></a>
-              
+                <a
+                  target="_blank"
+                  href={process.env.REACT_APP_CERTIFICATE_BASE_URL + nftTokenid}
+                >
+                  <button className={styles.opensea}>
+                    <img
+                      className={cn("img-fluid", styles.edit, styles.creator)}
+                      src="/opensea.png"
+                      srcDark="/membershipbutton.png"
+                    />
+                  </button>
+                </a>
               </div>
             </div>
             {/* <Control className={styles.control} /> */}

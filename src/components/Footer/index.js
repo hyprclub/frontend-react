@@ -59,9 +59,7 @@ const Footers = () => {
         handleShow();
         setError("Thank You for Subscribing to our newsletter.");
       })
-      .catch((err) => {
-        console.error(err);
-      });
+      .catch((err) => {});
   };
 
   return (
@@ -91,21 +89,21 @@ const Footers = () => {
                 href="https://www.facebook.com/hyprclub"
                 target="_blank"
               >
-                <img className={styles.imgss}  src="/facebook.png" />
+                <img className={styles.imgss} src="/facebook.png" />
               </a>
               <a
                 className="icons"
                 href="https://www.linkedin.com/company/hyprclub/ "
                 target="_blank"
               >
-                <img className={styles.imgss}  src="/linkedin.png" />
+                <img className={styles.imgss} src="/linkedin.png" />
               </a>
               <a
                 className="icons"
                 href="https://twitter.com/hyprclub"
                 target="_blank"
               >
-                <img className={styles.imgss}  src="/twitter.png" />
+                <img className={styles.imgss} src="/twitter.png" />
               </a>
             </div>
             <div className={styles.details}>Dark theme</div>

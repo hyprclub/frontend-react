@@ -4,8 +4,10 @@ import styles from "./Login.module.sass";
 import Control from "../../components/Control";
 import TextInput from "../../components/TextInput";
 import { useHistory } from "react-router";
+
 import { firebaseApp } from "../../firebaseConfig";
 import { Button, Modal } from "react-bootstrap";
+
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -79,8 +81,6 @@ const Login = () => {
         setError("E-Mail Sent!");
       });
     } catch (error) {
-      console.log(error.code);
-
       if (error.code == "auth/missing-email") {
         handleShow();
         setError("Please Enter Email Address");
@@ -100,18 +100,14 @@ const Login = () => {
       );
       const user = userCredential.user;
       const emailVerified = user.emailVerified;
-
-      console.log({ data, userCredential });
     } catch (err) {
       setError("Invalid Credential");
       handleShow();
-      console.error(err);
     }
   };
   const { push } = useHistory();
 
   useEffect(() => {
-    console.log(UserData);
     if (loggedIn) {
       push("/profile");
     }
@@ -224,33 +220,39 @@ const Login = () => {
                 </div>
               </Button>
               <Modal
-                  className={styles.modals}
-                    aria-labelledby="contained-modal-title-vcenter"
-                    centered
-                    show={show}
-                    onHide={handleClose}
-                    backdrop="static"
-                    keyboard={false}
-                  >
-                    <Modal.Header closeButton className={styles.title}>
-                      <Modal.Title>Error</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body className={styles.mymodal2}>
-                      <div><img className={cn("img-fluid",styles.size1)} src="/Error.png" /></div>
-                      <div className={styles.fit}>{error}</div></Modal.Body>
-                    <Modal.Footer className={styles.footer}>
-                      <div className={styles.footer}>
-                      <Button
-                        className={styles.mymodal}
-                        variant="secondary"
-                        onClick={handleClose}
-                      >
-                        Ok
-                      </Button>
-                      </div>
-                      {/* <Button variant="primary">Understood</Button> */}
-                    </Modal.Footer>
-                  </Modal>
+                className={styles.modals}
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                show={show}
+                onHide={handleClose}
+                backdrop="static"
+                keyboard={false}
+              >
+                <Modal.Header closeButton className={styles.title}>
+                  <Modal.Title>Error</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className={styles.mymodal2}>
+                  <div>
+                    <img
+                      className={cn("img-fluid", styles.size1)}
+                      src="/Error.png"
+                    />
+                  </div>
+                  <div className={styles.fit}>{error}</div>
+                </Modal.Body>
+                <Modal.Footer className={styles.footer}>
+                  <div className={styles.footer}>
+                    <Button
+                      className={styles.mymodal}
+                      variant="secondary"
+                      onClick={handleClose}
+                    >
+                      Ok
+                    </Button>
+                  </div>
+                  {/* <Button variant="primary">Understood</Button> */}
+                </Modal.Footer>
+              </Modal>
             </div>
           </div>
           <div className={styles.note}>
