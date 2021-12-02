@@ -5,27 +5,8 @@ import Control from "../../components/Control";
 import TextInput from "../../components/TextInput";
 import { Button, Modal } from "react-bootstrap";
 // import { firebaseApp } from '../../firebaseConfig'
-import { useHistory } from "react-router";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-  sendEmailVerification,
-  sendSignInLinkToEmail,
-  isSignInWithEmailLink,
-  signInWithEmailLink,
-} from "firebase/auth";
-import {
-  doc,
-  updateDoc,
-  setDoc,
-  getFirestore,
-  getDocs,
-  collection,
-  where,
-  query,
-} from "firebase/firestore";
+
+import { doc, setDoc, getFirestore } from "firebase/firestore";
 import { useSelector } from "react-redux";
 
 const breadcrumbs = [
@@ -34,7 +15,7 @@ const breadcrumbs = [
     url: "/",
   },
   {
-    title: "Signup",
+    title: "Contact Us",
   },
 ];
 const ContactUs = () => {
@@ -49,7 +30,6 @@ const ContactUs = () => {
   }
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
-  const [usernameStatus, setUsernameStatus] = useState(true);
   const [phonenumStatus, setPhonenumStatus] = useState(true);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -185,7 +165,6 @@ const ContactUs = () => {
                         <div className={styles.labels}>Your Message:</div>
                         <textarea
                           className={styles.field3}
-                          // name="cpassword"'
                           onChange={(e) => {
                             updateState(e);
                           }}
@@ -196,7 +175,6 @@ const ContactUs = () => {
                           placeholder="Enter Your Message"
                           required
                         />
-                        {/* <Form.Control as="textarea" rows={3} /> */}
                       </div>
                     </div>
                   </div>

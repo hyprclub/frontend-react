@@ -147,7 +147,7 @@ const Footers = () => {
           <div className={styles.copyright}>
             <a
               target="_blank"
-              href="https://firebasestorage.googleapis.com/v0/b/hypr-development.appspot.com/o/Documents%2Ftermandcond%2Ftnc.pdf?alt=media&token=01abf26a-b4c8-402f-bf13-5caf74615250"
+              href="https://firebasestorage.googleapis.com/v0/b/hyprclub-7ebf6.appspot.com/o/Documents%2FTermsandCondition%2Ftnc.pdf?alt=media&token=348c43fd-e7a0-49ab-abb4-4c9bb6296f07"
             >
               Terms and Conditions{" "}
             </a>
