@@ -99,7 +99,7 @@ const Card = ({ className, item: itemFromProps }) => {
             }}
             className={cn("button-small", styles.button)}
           >
-            <span>Claim Now</span>
+            <span>View NFT</span>
             {/* <Icon name="scatter-up" size="16" /> */}
           </button>
         </div>
