@@ -228,7 +228,7 @@ const Login = () => {
                 backdrop="static"
                 keyboard={false}
               >
-                <Modal.Header closeButton className={styles.title}>
+                <Modal.Header closeButton className={styles.titlemo}>
                   <Modal.Title>Error</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className={styles.mymodal2}>

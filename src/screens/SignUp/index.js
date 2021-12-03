@@ -365,8 +365,8 @@ const Signup = () => {
                     backdrop="static"
                     keyboard={false}
                   >
-                    <Modal.Header closeButton className={styles.title}>
-                      <Modal.Title>Notification</Modal.Title>
+                    <Modal.Header closeButton className={styles.titlemo}>
+                      <Modal.Title>Error</Modal.Title>
                     </Modal.Header>
                     <Modal.Body className={styles.mymodal2}>
                       <div>

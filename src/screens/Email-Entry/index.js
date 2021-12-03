@@ -179,15 +179,16 @@ const Passwordless = () => {
               </form>
 
               <Modal
+              className={styles.mode}
                 show={show}
                 onHide={handleClose}
                 backdrop="static"
                 keyboard={false}
               >
-                <Modal.Header closeButton className={styles.mymodal}>
+                <Modal.Header closeButton>
                   <Modal.Title>Notification</Modal.Title>
                 </Modal.Header>
-                <Modal.Body className={styles.mymodal2}>{error}</Modal.Body>
+                <Modal.Body>{error}</Modal.Body>
                 <Modal.Footer>
                   <Button
                     className={styles.mymodal}

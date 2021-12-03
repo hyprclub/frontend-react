@@ -106,9 +106,11 @@ const Footers = () => {
                 <img className={styles.imgss} src="/twitter.png" />
               </a>
             </div>
-            <div className={styles.details}>Dark theme</div>
-            <div className={styles.version}>
-              <Theme setDark={true} className="theme-big" />
+            <div className={styles.flex1}>
+              <div className={styles.details}>Dark theme</div>
+              <div className={styles.version}>
+                <Theme setDark={true} className="theme-big" />
+              </div>
             </div>
           </div>
           <div className={styles.col}>
@@ -164,7 +166,7 @@ const Footers = () => {
         <Modal.Header closeButton className={styles.title}>
           <Modal.Title>Notification</Modal.Title>
         </Modal.Header>
-        <Modal.Body className={styles.mymodal2}>
+        <Modal.Body>
           {/* <div></div> */}
           <div className={styles.fit}>{error}</div>
         </Modal.Body>
