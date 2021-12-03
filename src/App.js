@@ -57,6 +57,12 @@ function App() {
   const handleShow = () => setShow(true);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (localStorage.getItem("override") === null) {
+      localStorage.setItem("darkMode", "false");
+    }
+  }, []);
+
   const { loggedIn, uid } = useSelector((state) => state.UserData);
 
   useEffect(() => {
@@ -272,7 +278,7 @@ function App() {
         />
         <Route
           exact
-          path="/BuAlumni"
+          path="/BU-Alumni"
           render={() => (
             <Page>
               <BuAlumni />

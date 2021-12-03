@@ -8,6 +8,7 @@ import { Button, Modal } from "react-bootstrap";
 
 import { doc, setDoc, getFirestore } from "firebase/firestore";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const breadcrumbs = [
   {
@@ -221,7 +222,7 @@ const ContactUs = () => {
                       backdrop="static"
                       keyboard={false}
                     >
-                      <Modal.Header closeButton className={styles.title}>
+                      <Modal.Header closeButton className={styles.title1}>
                         <Modal.Title>Notification</Modal.Title>
                       </Modal.Header>
                       <Modal.Body className={styles.mymodal2}>
@@ -246,7 +247,8 @@ const ContactUs = () => {
               </div>
             </div>
             <div className={styles.note}>
-              Still got some questions? Check out our FAQ Page
+              Still got some questions? Check out our <Link to="/faq">FAQ</Link>{" "}
+              Page
             </div>
           </div>
         </div>
