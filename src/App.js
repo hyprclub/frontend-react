@@ -81,8 +81,8 @@ function App() {
               handleShow();
               setError(
                 " Verification  Email has been sent to " +
-                  user.email +
-                  ". Please Verify to continue"
+                user.email +
+                ". Please Verify to continue"
               );
               sendEmailVerification(user).catch((error) => {
                 if (error.code == "auth/too-many-requests") {
@@ -200,19 +200,23 @@ function App() {
         className={styles.modals}
         aria-labelledby="contained-modal-title-vcenter"
         centered
+        dialogClassName="modal-custom"
         show={show}
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
       >
         <Modal.Header closeButton className={styles.titless}>
-          <Modal.Title>Notification</Modal.Title>
+          {/* <Modal.Title>Notification</Modal.Title> */}
         </Modal.Header>
         <Modal.Body className={styles.mymodal2}>
-          <div>
-            {/* <img className={cn("img-fluid", styles.size1)} src="/Error.png" /> */}
-          </div>
-          <div className={styles.fit}>{error}</div>
+          <>
+            <div className={styles.innerHead}>
+              <img className={cn("img-fluid", styles.size1)} src="/Error.png" />
+              <h2 className={styles.head}>Notification</h2>
+            </div>
+            <div className={styles.fit}>{error}</div>
+          </>
         </Modal.Body>
         <Modal.Footer className={styles.footer}>
           <div className={styles.footer}>
@@ -221,7 +225,7 @@ function App() {
               variant="secondary"
               onClick={handleClose}
             >
-              Ok
+              OK
             </Button>
           </div>
           {/* <Button variant="primary">Understood</Button> */}
