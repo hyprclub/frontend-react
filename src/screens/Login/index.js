@@ -163,12 +163,19 @@ const Login = () => {
                   placeholder="Enter your password"
                   required
                 />
+                <a
+                className={cn(styles.link)}
+                onClick={(e) => {
+                  forgotpassword(e);
+                }}
+              >
+                Forgot Password?
+              </a>
                 <Button
                   className={cn("button-stroke", styles.button, styles.button3)}
                 >
                   <input type="submit" value="    Login   " />
                 </Button>
-
                 {/* <Link
 										onClick={(e) => {
 											e.preventDefault()
@@ -178,15 +185,8 @@ const Login = () => {
 										Login
 									</Link> */}
                 {/* </input> */}
+                
               </form>
-              <a
-                className={cn(styles.link)}
-                onClick={(e) => {
-                  forgotpassword(e);
-                }}
-              >
-                Forgot Password?
-              </a>
 
               <Button className={cn("button-stroke", styles.button)}>
                 <div>
