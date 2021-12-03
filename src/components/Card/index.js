@@ -102,7 +102,7 @@ const Card = ({ className, item: itemFromProps }) => {
         <div className={styles.body}>
           <div className={styles.line}>
             <div className={styles.title}>
-              <b>BU Alumni Exclusive - </b>
+              <b>BU Exclusive - </b>
               {item?.name}
             </div>
           </div>
