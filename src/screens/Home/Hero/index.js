@@ -99,7 +99,7 @@ const Hero = () => {
                   }}
                   to="/signup"
                 >
-                  Sign Up
+                  Get Started
                 </Link>
               </>
             )}

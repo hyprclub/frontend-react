@@ -60,6 +60,7 @@ const ProfileEdit = () => {
 
   React.useEffect(() => {
     if (loggedIn) {
+      push("/profile-edit");
     } else {
       push("/login");
     }
