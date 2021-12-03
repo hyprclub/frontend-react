@@ -23,15 +23,19 @@ body
     +dark
         border-color: $neutrals3
 .mymodal
-    background-color: $pinkm
+    background-color: $pinkm !important
+// .flex1
+//     display: flex
+//     flex-direction: 
 .mymodal2
     color: $black
     // border-radius: 15px !important
     display: flex
     flex-direction: row
     text-align: center
-// .fit
-//     margin-top: 20px
+.fit
+    color: $black
+    // margin-top: 20px
     // margin-left: 20px
 .title
     color: $black
@@ -191,3 +195,10 @@ body
         transition: color .2s
         &:hover
             color: darken($blue, 10)   
+
+@media (max-width: 768px)
+    .details
+        margin-left: 271px
+        margin-top: -125px
+    .theme-big
+        margin-right: 10px !important
