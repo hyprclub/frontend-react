@@ -151,6 +151,10 @@ const Footers = () => {
             >
               Terms and Conditions{" "}
             </a>
+            &nbsp;
+            <a target="_blank" href="https://forms.gle/PK6ctGyYjoYPUDfx5">
+              Report A Bug
+            </a>
           </div>
         </div>
       </div>
