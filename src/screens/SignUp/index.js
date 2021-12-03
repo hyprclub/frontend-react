@@ -308,6 +308,9 @@ const Signup = () => {
                           onChange={(e) => {
                             updateState(e);
                           }}
+                          onBlur={(ev) => {
+                            checkPhonenum(ev);
+                          }}
                           className={styles.field}
                           label="Phone Number"
                           name="phone"
@@ -363,7 +366,7 @@ const Signup = () => {
                     backdrop="static"
                     keyboard={false}
                   >
-                    <Modal.Header closeButton className={styles.title}>
+                    <Modal.Header closeButton className={styles.titlemo}>
                       <Modal.Title>Error</Modal.Title>
                     </Modal.Header>
                     <Modal.Body className={styles.mymodal2}>
