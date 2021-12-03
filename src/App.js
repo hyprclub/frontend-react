@@ -258,7 +258,7 @@ function App() {
         />
         <Route
           exact
-          path="/comingsoon"
+          path="/coming-soon"
           render={() => (
             <Page>
               <ComingSoon />

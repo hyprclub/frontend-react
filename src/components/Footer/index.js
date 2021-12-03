@@ -26,7 +26,7 @@ const items = [
       },
       {
         title: "Coming Soon",
-        url: "/comingsoon",
+        url: "/coming-soon",
       },
     ],
   },
@@ -150,6 +150,10 @@ const Footers = () => {
               href="https://firebasestorage.googleapis.com/v0/b/hyprclub-7ebf6.appspot.com/o/Documents%2FTermsandCondition%2Ftnc.pdf?alt=media&token=348c43fd-e7a0-49ab-abb4-4c9bb6296f07"
             >
               Terms and Conditions{" "}
+            </a>
+            &nbsp;
+            <a target="_blank" href="https://forms.gle/PK6ctGyYjoYPUDfx5">
+              Report A Bug
             </a>
           </div>
         </div>

@@ -18,8 +18,8 @@ const nav = [
     title: "BU Alumni",
   },
   {
-    url: "/comingsoon",
-    title: "Coming soon",
+    url: "/coming-soon",
+    title: "Coming Soon",
   },
   // {
   // 	url: '/profile',

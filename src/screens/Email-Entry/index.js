@@ -112,6 +112,8 @@ const Passwordless = () => {
           })
           .catch((error) => {
             if (error.code == "auth/invalid-email") {
+              handleShow();
+              setError("Email entered does not match");
             }
           });
       }
