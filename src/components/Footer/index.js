@@ -26,7 +26,7 @@ const items = [
       },
       {
         title: "Coming Soon",
-        url: "/comingsoon",
+        url: "/coming-soon",
       },
     ],
   },

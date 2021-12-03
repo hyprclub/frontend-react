@@ -75,8 +75,8 @@ function App() {
               handleShow();
               setError(
                 " Verification  Email has been sent to " +
-                  user.email +
-                  ". Please Verify to continue"
+                user.email +
+                ". Please Verify to continue"
               );
               sendEmailVerification(user).catch((error) => {
                 if (error.code == "auth/too-many-requests") {
@@ -245,7 +245,7 @@ function App() {
         />
         <Route
           exact
-          path="/comingsoon"
+          path="/coming-soon"
           render={() => (
             <Page>
               <ComingSoon />
@@ -272,7 +272,7 @@ function App() {
         />
         <Route
           exact
-          path="/BuAlumni"
+          path="/BU-Alumni"
           render={() => (
             <Page>
               <BuAlumni />

@@ -37,7 +37,7 @@ const Home = () => {
                 <div className={styles.center}>
                   <Link
                     className={cn("button-small", styles.button)}
-                    to="/BuAlumni"
+                    to="/BU-Alumni"
                   >
                     Learn More
                   </Link>
