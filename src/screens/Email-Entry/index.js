@@ -112,6 +112,8 @@ const Passwordless = () => {
           })
           .catch((error) => {
             if (error.code == "auth/invalid-email") {
+              handleShow();
+              setError("Email entered does not match");
             }
           });
       }
@@ -179,7 +181,7 @@ const Passwordless = () => {
               </form>
 
               <Modal
-              className={styles.mode}
+                className={styles.mode}
                 show={show}
                 onHide={handleClose}
                 backdrop="static"
