@@ -40,9 +40,9 @@ const User = ({ className, item, isOwnProfile }) => {
 				<div className={styles.name}>{UserData.name}</div>
 				<div className={styles.code}>
 					<div className={styles.number}>{UserData.username}</div>
-					<button className={styles.copy}>
+					{/* <button className={styles.copy}>
 						<Icon name='copy' size='16' />
-					</button>
+					</button> */}
 				</div>
 				<div className={styles.info}>{UserData.bio}</div>
 				<a className={styles.site} href='https://ui8.net' target='_blank' rel='noopener noreferrer'>
