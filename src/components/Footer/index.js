@@ -107,7 +107,7 @@ const Footers = () => {
               </a>
             </div>
             <div className={styles.flex1}>
-              <div className={styles.details}>Dark theme</div>
+              <div className={styles.details}></div>
               <div className={styles.version}>
                 <Theme setDark={true} className="theme-big" />
               </div>
