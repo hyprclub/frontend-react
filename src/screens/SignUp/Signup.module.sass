@@ -22,15 +22,14 @@ body
         background-color: $black !important
 .modals
     border-radius: 40px !important
-.amodal
-    // border-radius: 15px !important
 .mymodal
+    // color: pi
     border-radius: 20px
     width: 80px
-    background-color: $pinkm 
+    background-color: $pink !important
 .fit
-    margin-top: 31px
-    margin-left: 20px
+    // margin-top: 31px
+    margin-left: 15px
 .mymodal2
     color: $black
     // border-radius: 15px !important
@@ -60,7 +59,10 @@ body
         margin-bottom: 64px
     +m
         margin-bottom: 32px
-
+.border
+    padding-top: 10px !important
+    border-radius: 20px
+    background-color: $pink !important
 .titlemo
     margin-bottom: 16px
     +dark
@@ -113,7 +115,17 @@ body
 .note
     +caption-2
     color: $neutrals4
+.innerHead
+    display: flex
+    align-items: center
+    width:50%
+    flex-direction: column
+    justify-content: center
 @media (max-width: 768px)
     .fit
         margin-top: 10px
-        margin-left: 20px
+        margin-left: 20p
+    .innerHead
+        width:70%
+
+    // margin: 0 auto

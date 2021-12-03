@@ -12,7 +12,8 @@ body
         border: none
     +dark
         border-color: $neutrals3
-        
+.user
+    margin-right: 40px
 .container
     display: flex
     align-items: center
@@ -188,3 +189,7 @@ body
             transform: translateY(-4px)
         &:after
             transform: translateY(3px)
+
+@media (max-width: 768px)
+.user
+    margin-right: 0px

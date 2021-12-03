@@ -181,34 +181,50 @@ const Passwordless = () => {
               </form>
 
               <Modal
-                className={styles.mode}
-                show={show}
-                onHide={handleClose}
-                backdrop="static"
-                keyboard={false}
+        className={styles.modals}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        dialogClassName="modal-custom"
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <div className={styles.border}>
+          <Modal.Header closeButton className={styles.titless}>
+            {/* <Modal.Title>Notification</Modal.Title> */}
+                <h2 className={styles.head1}>Notification</h2>
+          </Modal.Header>
+          <Modal.Body className={styles.mymodal2}>
+            <>
+                {/* <img className={cn("img-fluid", styles.size1)} src="/Error.png" /> */}
+              <div>
+                <div>{error}</div>
+              </div>
+            </>
+          </Modal.Body>
+          <Modal.Footer className={styles.footer}>
+            <div className={styles.footer}>
+              <Button
+                className={styles.mymodal}
+                variant="secondary"
+                onClick={handleClose}
               >
-                <Modal.Header closeButton>
-                  <Modal.Title>Notification</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>{error}</Modal.Body>
-                <Modal.Footer>
-                  <Button
-                    className={styles.mymodal}
-                    variant="secondary"
-                    onClick={handleClose}
-                  >
-                    Close
-                  </Button>
-                  {/* <Button variant="primary">Understood</Button> */}
-                </Modal.Footer>
-              </Modal>
+                OK
+              </Button>
+            </div>
+            {/* <Button variant="primary">Understood</Button> */}
+          </Modal.Footer>
+        </div>
+      </Modal>
               <Modal
                 show={mailShow}
                 onHide={handleMailClose}
                 backdrop="static"
                 keyboard={false}
               >
-                <Modal.Header closeButton className={styles.mymodal}>
+                <div className={styles.border}>
+                <Modal.Header className={styles.mymodal}>
                   <Modal.Title>Enter Email</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className={styles.mymodal2}>
@@ -237,6 +253,7 @@ const Passwordless = () => {
                   </Button>
                   {/* <Button variant="primary">Understood</Button> */}
                 </Modal.Footer>
+                </div>
               </Modal>
             </div>
           </div>

@@ -8,6 +8,7 @@ import { Button, Modal } from "react-bootstrap";
 
 import { doc, setDoc, getFirestore } from "firebase/firestore";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const breadcrumbs = [
   {
@@ -213,40 +214,49 @@ const ContactUs = () => {
                       <img className={styles.imgss} src="/twitter.png" />
                     </a>
                     <Modal
-                      className={styles.modals}
-                      aria-labelledby="contained-modal-title-vcenter"
-                      centered
-                      show={show}
-                      onHide={handleClose}
-                      backdrop="static"
-                      keyboard={false}
-                    >
-                      <Modal.Header closeButton className={styles.title}>
-                        <Modal.Title>Notification</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body className={styles.mymodal2}>
-                        <div></div>
-                        <div className={styles.fit}>{error}</div>
-                      </Modal.Body>
-                      <Modal.Footer className={styles.footer}>
-                        <div className={styles.footer}>
-                          <Button
-                            className={styles.mymodal}
-                            variant="secondary"
-                            onClick={handleClose}
-                          >
-                            Ok
-                          </Button>
-                        </div>
-                        {/* <Button variant="primary">Understood</Button> */}
-                      </Modal.Footer>
-                    </Modal>
+        className={styles.modals}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        dialogClassName="modal-custom"
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <div className={styles.border}>
+          <Modal.Header closeButton className={styles.titless}>
+            {/* <Modal.Title>Notification</Modal.Title> */}
+                <h2 className={styles.head2}>Notification</h2>
+          </Modal.Header>
+          <Modal.Body className={styles.mymodal2}>
+            <>
+                {/* <img className={cn("img-fluid", styles.size1)} src="/Error.png" /> */}
+              <div>
+                <div>{error}</div>
+              </div>
+            </>
+          </Modal.Body>
+          <Modal.Footer className={styles.footer}>
+            <div className={styles.footer}>
+              <Button
+                className={styles.mymodal}
+                variant="secondary"
+                onClick={handleClose}
+              >
+                OK
+              </Button>
+            </div>
+            {/* <Button variant="primary">Understood</Button> */}
+          </Modal.Footer>
+        </div>
+      </Modal>
                   </div>
                 </form>
               </div>
             </div>
             <div className={styles.note}>
-              Still got some questions? Check out our FAQ Page
+              Still got some questions? Check out our <Link to="/faq">FAQ</Link>{" "}
+              Page
             </div>
           </div>
         </div>
