@@ -162,7 +162,7 @@ function App() {
           nftIdsLogOut.push(elem.id);
         });
         dispatch(UserDataActions.nftDataId({
-          nftIdsLogOut: nftIdsLogOut.map(elem => parseInt(elem)).sort((a, b) => b - a).map(elem => elem.toString())
+          nftIdsLogOut: nftIdsLogOut.map(elem => parseInt(elem)).sort((a, b) => a - b).map(elem => elem.toString())
         }));
       } catch (err) {
         console.error(err);
