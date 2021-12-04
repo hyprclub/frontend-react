@@ -304,10 +304,6 @@ const Profile = (props) => {
                   <>
                     <Items
                       className={styles.items}
-                      items={UserData.nftSpIds.slice(0, 7)}
-                    />
-                    <Items
-                      className={styles.items}
                       items={UserData.nftIds.slice(0, 7)}
                     />
                   </>
