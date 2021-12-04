@@ -164,13 +164,13 @@ const Login = () => {
                   required
                 />
                 <a
-                className={cn(styles.link)}
-                onClick={(e) => {
-                  forgotpassword(e);
-                }}
-              >
-                Forgot Password?
-              </a>
+                  className={cn(styles.link)}
+                  onClick={(e) => {
+                    forgotpassword(e);
+                  }}
+                >
+                  Forgot Password?
+                </a>
                 <Button
                   className={cn("button-stroke", styles.button, styles.button3)}
                 >
@@ -185,7 +185,6 @@ const Login = () => {
 										Login
 									</Link> */}
                 {/* </input> */}
-                
               </form>
 
               <Button className={cn("button-stroke", styles.button)}>
@@ -215,83 +214,90 @@ const Login = () => {
                       push("/passwordless");
                     }}
                   >
-                    &ensp;&ensp;Password-Less Sign In&ensp;&ensp;
+                    &ensp;&ensp; BU Alumni Sign In&ensp;&ensp;
                   </button>
                 </div>
               </Button>
               <Modal
-        className={styles.modals}
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-        dialogClassName="modal-custom"
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <div className={styles.border}>
-          <Modal.Header closeButton className={styles.titless}>
-            {/* <Modal.Title>Notification</Modal.Title> */}
-          </Modal.Header>
-          <Modal.Body className={styles.mymodal2}>
-            <>
-                <img className={cn("img-fluid", styles.size1)} src="/Error.png" />
-              <div className={styles.innerHead}>
-                <h2 className={styles.head}>Notification</h2>
-                <div className={styles.fit}>{error}</div>
-              </div>
-            </>
-          </Modal.Body>
-          <Modal.Footer className={styles.footer}>
-            <div className={styles.footer}>
-              <Button
-                className={styles.mymodal}
-                variant="secondary"
-                onClick={handleClose}
+                className={styles.modals}
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                dialogClassName="modal-custom"
+                show={show}
+                onHide={handleClose}
+                backdrop="static"
+                keyboard={false}
               >
-                OK
-              </Button>
-            </div>
-            {/* <Button variant="primary">Understood</Button> */}
-          </Modal.Footer>
-        </div>
-      </Modal><Modal
-        className={styles.modals}
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-        dialogClassName="modal-custom"
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <div className={styles.border}>
-          <Modal.Header closeButton className={styles.titless}>
-            {/* <Modal.Title>Notification</Modal.Title> */}
-          </Modal.Header>
-          <Modal.Body className={styles.mymodal2}>
-            <>
-                <img className={cn("img-fluid", styles.size1)} src="/Error.png" />
-              <div className={styles.innerHead}>
-                <h2 className={styles.head}>Notification</h2>
-                <div className={styles.fit}>{error}</div>
-              </div>
-            </>
-          </Modal.Body>
-          <Modal.Footer className={styles.footer}>
-            <div className={styles.footer}>
-              <Button
-                className={styles.mymodal}
-                variant="secondary"
-                onClick={handleClose}
+                <div className={styles.border}>
+                  <Modal.Header closeButton className={styles.titless}>
+                    {/* <Modal.Title>Notification</Modal.Title> */}
+                  </Modal.Header>
+                  <Modal.Body className={styles.mymodal2}>
+                    <>
+                      <img
+                        className={cn("img-fluid", styles.size1)}
+                        src="/Error.png"
+                      />
+                      <div className={styles.innerHead}>
+                        <h2 className={styles.head}>Notification</h2>
+                        <div className={styles.fit}>{error}</div>
+                      </div>
+                    </>
+                  </Modal.Body>
+                  <Modal.Footer className={styles.footer}>
+                    <div className={styles.footer}>
+                      <Button
+                        className={styles.mymodal}
+                        variant="secondary"
+                        onClick={handleClose}
+                      >
+                        OK
+                      </Button>
+                    </div>
+                    {/* <Button variant="primary">Understood</Button> */}
+                  </Modal.Footer>
+                </div>
+              </Modal>
+              <Modal
+                className={styles.modals}
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                dialogClassName="modal-custom"
+                show={show}
+                onHide={handleClose}
+                backdrop="static"
+                keyboard={false}
               >
-                OK
-              </Button>
-            </div>
-            {/* <Button variant="primary">Understood</Button> */}
-          </Modal.Footer>
-        </div>
-      </Modal>
+                <div className={styles.border}>
+                  <Modal.Header closeButton className={styles.titless}>
+                    {/* <Modal.Title>Notification</Modal.Title> */}
+                  </Modal.Header>
+                  <Modal.Body className={styles.mymodal2}>
+                    <>
+                      <img
+                        className={cn("img-fluid", styles.size1)}
+                        src="/Error.png"
+                      />
+                      <div className={styles.innerHead}>
+                        <h2 className={styles.head}>Notification</h2>
+                        <div className={styles.fit}>{error}</div>
+                      </div>
+                    </>
+                  </Modal.Body>
+                  <Modal.Footer className={styles.footer}>
+                    <div className={styles.footer}>
+                      <Button
+                        className={styles.mymodal}
+                        variant="secondary"
+                        onClick={handleClose}
+                      >
+                        OK
+                      </Button>
+                    </div>
+                    {/* <Button variant="primary">Understood</Button> */}
+                  </Modal.Footer>
+                </div>
+              </Modal>
             </div>
           </div>
           <div className={styles.note}>
