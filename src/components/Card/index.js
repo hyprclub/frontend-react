@@ -25,9 +25,10 @@ import {
 
 const Card = ({ className, item: itemFromProps }) => {
   const [visible, setVisible] = useState(false);
+  const [tags, setTags] = useState("");
   const [item, setItem] = useState({});
   const { push } = useHistory();
-
+  
   React.useEffect(() => {
     const run = async () => {
       try {
@@ -43,6 +44,7 @@ const Card = ({ className, item: itemFromProps }) => {
               })
               .then((resps) => {
                 setItem(resps.data);
+                setTags("BU Exclusive");
               })
               .catch((error) => {});
           }
@@ -67,8 +69,8 @@ const Card = ({ className, item: itemFromProps }) => {
               openItem(e);
             }}
             className={cn(styles.imagehover, "img-fluid")}
-            srcSet={`${item.image || "/images/card.gif"} `}
-            src={item.image || "/images/card.gif"}
+            srcSet={`${item?.image || "/images/card.gif"} `}
+            src={item?.image || "/images/card.gif"}
             alt="Card"
           />
         </div>
@@ -102,7 +104,7 @@ const Card = ({ className, item: itemFromProps }) => {
         <div className={styles.body}>
           <div className={styles.line}>
             <div className={styles.title}>
-              <b>BU Exclusive - </b>
+              <b>{tags}</b>
               {item?.name}
             </div>
           </div>

@@ -9,7 +9,9 @@ const Items = ({ className, items }) => {
     <div className={cn(styles.items, className)}>
       <div className={styles.list}>
         {items.map((x, index) => (
-          <Card className={styles.card} item={x} key={index} />
+          <>
+            <Card className={styles.card} item={x} key={index} />
+          </>
         ))}
       </div>
     </div>

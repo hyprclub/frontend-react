@@ -172,7 +172,7 @@ const Item = (props) => {
               <div className={styles.button1}>
                 <a
                   target="_blank"
-                  href="https://polygonscan.com/token/0xa2624d1931d17632f74d217fe1c1c903b65bf548"
+                  href=  {process.env.REACT_APP_POLYGON_SCAN_URL + nftTokenid}
                 >
                   <button className={styles.opensea}>
                     <img

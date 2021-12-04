@@ -36,7 +36,10 @@ import {
   getDocs,
   collection,
   getFirestore,
+  documentId,
   query,
+  orderBy,
+  limit
 } from "firebase/firestore";
 import {
   getStorage,
@@ -152,15 +155,15 @@ function App() {
         //   collection(db, "NFT's"),
         //   where("OwnerUid", "==", uid)
         // );
-        // const nftQuerySnapshot = await getDocs(q);
-        const nftQuerySnapshot = await getDocs(collection(db, "NFT's"));
-
+        const nftRef = collection(db, "NFT's");
+        const nftQuerySnapshot = await getDocs(nftRef);
         const nftIdsLogOut = [];
         nftQuerySnapshot.forEach((elem) => {
           nftIdsLogOut.push(elem.id);
         });
-
-        dispatch(UserDataActions.nftDataId({ nftIdsLogOut }));
+        dispatch(UserDataActions.nftDataId({
+          nftIdsLogOut: nftIdsLogOut.map(elem => parseInt(elem)).sort((a, b) => b - a).map(elem => elem.toString())
+        }));
       } catch (err) {
         console.error(err);
       }
@@ -194,6 +197,7 @@ function App() {
     run();
   }, [loggedIn, uid, dispatch]);
 
+
   return (
     <Router>
 
@@ -210,11 +214,11 @@ function App() {
         <div className={styles.border}>
           <Modal.Header closeButton className={styles.titless}>
             {/* <Modal.Title>Notification</Modal.Title> */}
-                <h2 className={styles.head}>Notification</h2>
+            <h2 className={styles.head}>Notification</h2>
           </Modal.Header>
           <Modal.Body className={styles.mymodal2}>
             <>
-                {/* <img className={cn("img-fluid", styles.size1)} src="/Error.png" /> */}
+              {/* <img className={cn("img-fluid", styles.size1)} src="/Error.png" /> */}
               <div>
                 <div>{error}</div>
               </div>

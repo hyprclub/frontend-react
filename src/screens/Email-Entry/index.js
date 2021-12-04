@@ -133,7 +133,7 @@ const Passwordless = () => {
       <div className={cn("section-pt80", styles.section)}>
         <div className={cn("container", styles.container)}>
           <div className={styles.top}>
-            <h1 className={cn("h2", styles.title)}>Password Less Sign-In</h1>
+            <h1 className={cn("h2", styles.title)}>BU Alumini Sign In</h1>
             Become a part of the social revolution.
           </div>
           <div className={styles.list}>
@@ -156,9 +156,9 @@ const Passwordless = () => {
                     id="validationCustom01"
                     value={data.email}
                     name="email"
-                    label="Email"
+                    label="Bennett Email Address"
                     type="email"
-                    placeholder="Enter your email"
+                    placeholder="Enter your Bennett Email Address"
                     required
                   />
                   {/* <div class="invalid-feedback">
@@ -181,42 +181,42 @@ const Passwordless = () => {
               </form>
 
               <Modal
-        className={styles.modals}
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-        dialogClassName="modal-custom"
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <div className={styles.border}>
-          <Modal.Header closeButton className={styles.titless}>
-            {/* <Modal.Title>Notification</Modal.Title> */}
-                <h2 className={styles.head1}>Notification</h2>
-          </Modal.Header>
-          <Modal.Body className={styles.mymodal2}>
-            <>
-                {/* <img className={cn("img-fluid", styles.size1)} src="/Error.png" /> */}
-              <div>
-                <div>{error}</div>
-              </div>
-            </>
-          </Modal.Body>
-          <Modal.Footer className={styles.footer}>
-            <div className={styles.footer}>
-              <Button
-                className={styles.mymodal}
-                variant="secondary"
-                onClick={handleClose}
+                className={styles.modals}
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                dialogClassName="modal-custom"
+                show={show}
+                onHide={handleClose}
+                backdrop="static"
+                keyboard={false}
               >
-                OK
-              </Button>
-            </div>
-            {/* <Button variant="primary">Understood</Button> */}
-          </Modal.Footer>
-        </div>
-      </Modal>
+                <div className={styles.border}>
+                  <Modal.Header closeButton className={styles.titless}>
+                    {/* <Modal.Title>Notification</Modal.Title> */}
+                    <h2 className={styles.head1}>Notification</h2>
+                  </Modal.Header>
+                  <Modal.Body className={styles.mymodal2}>
+                    <>
+                      {/* <img className={cn("img-fluid", styles.size1)} src="/Error.png" /> */}
+                      <div>
+                        <div>{error}</div>
+                      </div>
+                    </>
+                  </Modal.Body>
+                  <Modal.Footer className={styles.footer}>
+                    <div className={styles.footer}>
+                      <Button
+                        className={styles.mymodal}
+                        variant="secondary"
+                        onClick={handleClose}
+                      >
+                        OK
+                      </Button>
+                    </div>
+                    {/* <Button variant="primary">Understood</Button> */}
+                  </Modal.Footer>
+                </div>
+              </Modal>
               <Modal
                 show={mailShow}
                 onHide={handleMailClose}
@@ -224,42 +224,42 @@ const Passwordless = () => {
                 keyboard={false}
               >
                 <div className={styles.border}>
-                <Modal.Header className={styles.mymodal}>
-                  <Modal.Title>Enter Email</Modal.Title>
-                </Modal.Header>
-                <Modal.Body className={styles.mymodal2}>
-                  <TextInput
-                    onChange={(e) => {
-                      updateState(e);
-                    }}
-                    className={styles.field}
-                    id="validationCustom01"
-                    value={data.pemail}
-                    name="pemail"
-                    label="Please provide your email for confirmation"
-                    type="email"
-                    placeholder="Enter your email"
-                    required
-                    autocomplete="true"
-                  />
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button
-                    className={styles.mymodal}
-                    variant="secondary"
-                    onClick={handleLogin}
-                  >
-                    Login
-                  </Button>
-                  {/* <Button variant="primary">Understood</Button> */}
-                </Modal.Footer>
+                  <Modal.Header className={styles.mymodal}>
+                    <Modal.Title>Enter Email</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body className={styles.mymodal2}>
+                    <TextInput
+                      onChange={(e) => {
+                        updateState(e);
+                      }}
+                      className={styles.field}
+                      id="validationCustom01"
+                      value={data.pemail}
+                      name="pemail"
+                      label="Please provide your bennett email for confirmation"
+                      type="email"
+                      placeholder="Enter your email"
+                      required
+                      autocomplete="true"
+                    />
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button
+                      className={styles.mymodal}
+                      variant="secondary"
+                      onClick={handleLogin}
+                    >
+                      Login
+                    </Button>
+                    {/* <Button variant="primary">Understood</Button> */}
+                  </Modal.Footer>
                 </div>
               </Modal>
             </div>
           </div>
           <div className={styles.note}>
             We do not own your private keys and cannot access your funds without
-            your confirmation.
+            your confirmation. For any queries contact <b>team@hyprclub.com</b>
           </div>
         </div>
       </div>

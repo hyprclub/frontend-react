@@ -301,10 +301,16 @@ const Profile = (props) => {
             <div className={styles.group}>
               <div className={styles.item}>
                 {activeIndex === 0 && (
-                  <Items
-                    className={styles.items}
-                    items={UserData.nftIds.slice(0, 7)}
-                  />
+                  <>
+                    <Items
+                      className={styles.items}
+                      items={UserData.nftSpIds.slice(0, 7)}
+                    />
+                    <Items
+                      className={styles.items}
+                      items={UserData.nftIds.slice(0, 7)}
+                    />
+                  </>
                 )}
               </div>
             </div>

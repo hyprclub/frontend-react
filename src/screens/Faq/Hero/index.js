@@ -24,7 +24,13 @@ const items = [
         question:
           "I don’t have a lot of knowledge about cryptocurrency, can I still sell my NFTs?",
         answer:
-          "Of course you can! Here at Hypr Club, we make the process as easy as buying and selling on Amazon. ",
+          "Of course you can! Here at HyprClub, we make the process as easy as buying and selling on Amazon. ",
+      },
+      {
+        question:
+          "Hi, I am a Bennett University Alumini. Where can I sell my NFT?",
+        answer:
+          "This is a private collaboration and you are being gifted this NFT for being an alumnus,thus you can essentially trade your identiy as an alumnus. This will guarantee you perks for life but will remain non transferable for appropriate concerns raised by the university",
       },
     ],
   },
