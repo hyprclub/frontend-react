@@ -23,7 +23,7 @@ const breadcrumbs = [
     url: "/",
   },
   {
-    title: "Password Less Sign In",
+    title: "BU Alumni Sign In",
   },
 ];
 
@@ -134,7 +134,7 @@ const Passwordless = () => {
       <div className={cn("section-pt80", styles.section)}>
         <div className={cn("container", styles.container)}>
           <div className={styles.top}>
-            <h1 className={cn("h2", styles.title)}>BU Alumini Sign In</h1>
+            <h1 className={cn("h2", styles.title)}>BU Alumni Sign In</h1>
             Become a part of the social revolution.
           </div>
           <div className={styles.list}>
@@ -260,9 +260,19 @@ const Passwordless = () => {
           </div>
           <div className={styles.note}>
             We do not own your private keys and cannot access your funds without
-            your confirmation. For any queries contact <b>
-              <a target="_blank" href={"https://mail.google.com/mail/u/0/?fs=1&tf=cm&to=team@hyprclub.com"}> team@hyprclub.com</a></b>
-              {/* <Link to={}> */}
+            your confirmation. For any queries contact{" "}
+            <b>
+              <a
+                target="_blank"
+                href={
+                  "https://mail.google.com/mail/u/0/?fs=1&tf=cm&to=team@hyprclub.com"
+                }
+              >
+                {" "}
+                team@hyprclub.com
+              </a>
+            </b>
+            {/* <Link to={}> */}
           </div>
         </div>
       </div>
