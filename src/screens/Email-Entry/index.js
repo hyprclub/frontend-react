@@ -15,6 +15,7 @@ import {
 } from "firebase/auth";
 import { getFirestore, setDoc, doc } from "firebase/firestore";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const breadcrumbs = [
   {
@@ -259,7 +260,9 @@ const Passwordless = () => {
           </div>
           <div className={styles.note}>
             We do not own your private keys and cannot access your funds without
-            your confirmation. For any queries contact <b>team@hyprclub.com</b>
+            your confirmation. For any queries contact <b>
+              <a target="_blank" href={"https://mail.google.com/mail/u/0/?fs=1&tf=cm&to=team@hyprclub.com"}> team@hyprclub.com</a></b>
+              {/* <Link to={}> */}
           </div>
         </div>
       </div>
