@@ -225,6 +225,7 @@ const Signup = () => {
 
   return (
     <>
+    
       <div className={styles.page}>
         <Control className={styles.control} item={breadcrumbs} />
         <div className={cn("section-pt80", styles.section)}>
@@ -438,8 +439,9 @@ const Signup = () => {
                   className={styles.button2}
                   type="submit"
                   onClick={(e) => {
-                    e.preventDefault();
-                    googlesignin(e);
+                    // e.preventDefault();
+                    // googlesignin(e);
+                    throw new Error("hello test error");
                   }}
                 >
                   Sign up with Google
