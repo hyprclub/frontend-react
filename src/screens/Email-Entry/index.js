@@ -140,7 +140,7 @@ const Passwordless = () => {
           <div className={styles.list}>
             <div className={styles.item}>
               <form
-                className="needs-validation"
+              className="needs-validation"
                 novalidate
                 onSubmit={(e) => {
                   e.preventDefault();

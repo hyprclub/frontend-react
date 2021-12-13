@@ -225,7 +225,6 @@ const Signup = () => {
 
   return (
     <>
-    
       <div className={styles.page}>
         <Control className={styles.control} item={breadcrumbs} />
         <div className={cn("section-pt80", styles.section)}>
@@ -358,78 +357,85 @@ const Signup = () => {
                   </Button>
 
                   <Modal
-        className={styles.modals}
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-        dialogClassName="modal-custom"
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <div className={styles.border}>
-          <Modal.Header closeButton className={styles.titless}>
-            {/* <Modal.Title>Notification</Modal.Title> */}
-          </Modal.Header>
-          <Modal.Body className={styles.mymodal2}>
-            <>
-                <img className={cn("img-fluid", styles.size1)} src="/Error.png" />
-              <div className={styles.innerHead}>
-                <h2 className={styles.head}>Notification</h2>
-                <div className={styles.fit}>{error}</div>
-              </div>
-            </>
-          </Modal.Body>
-          <Modal.Footer className={styles.footer}>
-            <div className={styles.footer}>
-              <Button
-                className={styles.mymodal}
-                variant="secondary"
-                onClick={handleClose}
-              >
-                OK
-              </Button>
-            </div>
-            {/* <Button variant="primary">Understood</Button> */}
-          </Modal.Footer>
-        </div>
-      </Modal><Modal
-        className={styles.modals}
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-        dialogClassName="modal-custom"
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <div className={styles.border}>
-          <Modal.Header closeButton className={styles.titless}>
-            {/* <Modal.Title>Notification</Modal.Title> */}
-          </Modal.Header>
-          <Modal.Body className={styles.mymodal2}>
-            <>
-                <img className={cn("img-fluid", styles.size1)} src="/Error.png" />
-              <div className={styles.innerHead}>
-                <h2 className={styles.head}>Notification</h2>
-                <div className={styles.fit}>{error}</div>
-              </div>
-            </>
-          </Modal.Body>
-          <Modal.Footer className={styles.footer}>
-            <div className={styles.footer}>
-              <Button
-                className={styles.mymodal}
-                variant="secondary"
-                onClick={handleClose}
-              >
-                OK
-              </Button>
-            </div>
-            {/* <Button variant="primary">Understood</Button> */}
-          </Modal.Footer>
-        </div>
-      </Modal>
+                    className={styles.modals}
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                    dialogClassName="modal-custom"
+                    show={show}
+                    onHide={handleClose}
+                    backdrop="static"
+                    keyboard={false}
+                  >
+                    <div className={styles.border}>
+                      <Modal.Header closeButton className={styles.titless}>
+                        {/* <Modal.Title>Notification</Modal.Title> */}
+                      </Modal.Header>
+                      <Modal.Body className={styles.mymodal2}>
+                        <>
+                          <img
+                            className={cn("img-fluid", styles.size1)}
+                            src="/Error.png"
+                          />
+                          <div className={styles.innerHead}>
+                            <h2 className={styles.head}>Notification</h2>
+                            <div className={styles.fit}>{error}</div>
+                          </div>
+                        </>
+                      </Modal.Body>
+                      <Modal.Footer className={styles.footer}>
+                        <div className={styles.footer}>
+                          <Button
+                            className={styles.mymodal}
+                            variant="secondary"
+                            onClick={handleClose}
+                          >
+                            OK
+                          </Button>
+                        </div>
+                        {/* <Button variant="primary">Understood</Button> */}
+                      </Modal.Footer>
+                    </div>
+                  </Modal>
+                  <Modal
+                    className={styles.modals}
+                    aria-labelledby="contained-modal-title-vcenter"
+                    centered
+                    dialogClassName="modal-custom"
+                    show={show}
+                    onHide={handleClose}
+                    backdrop="static"
+                    keyboard={false}
+                  >
+                    <div className={styles.border}>
+                      <Modal.Header closeButton className={styles.titless}>
+                        {/* <Modal.Title>Notification</Modal.Title> */}
+                      </Modal.Header>
+                      <Modal.Body className={styles.mymodal2}>
+                        <>
+                          <img
+                            className={cn("img-fluid", styles.size1)}
+                            src="/Error.png"
+                          />
+                          <div className={styles.innerHead}>
+                            <h2 className={styles.head}>Notification</h2>
+                            <div className={styles.fit}>{error}</div>
+                          </div>
+                        </>
+                      </Modal.Body>
+                      <Modal.Footer className={styles.footer}>
+                        <div className={styles.footer}>
+                          <Button
+                            className={styles.mymodal}
+                            variant="secondary"
+                            onClick={handleClose}
+                          >
+                            OK
+                          </Button>
+                        </div>
+                        {/* <Button variant="primary">Understood</Button> */}
+                      </Modal.Footer>
+                    </div>
+                  </Modal>
                 </form>
               </div>
               <div className={cn("button-stroke", styles.button)}>
@@ -439,9 +445,8 @@ const Signup = () => {
                   className={styles.button2}
                   type="submit"
                   onClick={(e) => {
-                    // e.preventDefault();
-                    // googlesignin(e);
-                    throw new Error("hello test error");
+                    e.preventDefault();
+                    googlesignin(e);
                   }}
                 >
                   Sign up with Google

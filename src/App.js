@@ -53,6 +53,7 @@ import ComingSoon from "./screens/Profile/comingsoon";
 import Discover from "./screens/Home/Discover";
 import ContactUs from "./screens/contactus";
 
+
 function App() {
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
